@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "GFT Design System"
 include(":example-compose")
+include(":tokens")
