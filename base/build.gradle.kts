@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.gft.designsystem.compose"
+    namespace = "com.gft.designsystem.base"
     compileSdk = 34
 
     defaultConfig {

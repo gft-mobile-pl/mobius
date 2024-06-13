@@ -9,8 +9,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/base" />
             <option value="$PROJECT_DIR$/example-compose" />
-            <option value="$PROJECT_DIR$/tokens" />
+            <option value="$PROJECT_DIR$/white-label" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

@@ -1,23 +1,17 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
 }
 
 android {
-    namespace = "com.gft.designsystem"
+    namespace = "com.gft.designsystem.whitelabel"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.gft.designsystem"
         minSdk = 29
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -47,19 +41,13 @@ android {
 }
 
 dependencies {
-    implementation(project(":white-label"))
+    api(project(":base"))
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.activity.compose)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.foundation)
-    implementation(libs.androidx.foundation.layout)
     implementation(libs.androidx.material3)
-
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 }
