@@ -3,11 +3,17 @@ package com.gft.designsystem
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -18,108 +24,127 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         // enableEdgeToEdge()
         setContent {
-            AppDesignSystem(
-                remember { AppDesignSystem() }
-            ) {
+            AppDesignSystem {
                 Column {
-                    Text(
-                        text = "AppDesignSystem.colors.primaryColor",
-                        color = AppDesignSystem.colors.primaryColor
+                    Text(text = "Direct WhiteLabel (grey theme)")
+                    ColorSample(
+                        text = "WhiteLabelDesignSystem color11 (overriden)" ,
+                        color = WhiteLabelDesignSystem.colors.color11
                     )
-                    Text(
-                        text = "AppDesignSystem.colors.secondaryColor",
-                        color = AppDesignSystem.colors.secondaryColor
+                    ColorSample(
+                        text = "WhiteLabelDesignSystem color12",
+                        color = WhiteLabelDesignSystem.colors.color12
                     )
-                    Text(
-                        text = "AppDesignSystem.colors.tertiaryColor",
-                        color = AppDesignSystem.colors.tertiaryColor
+                    ColorSample(
+                        text = "WhiteLabelDesignSystem color13",
+                        color = WhiteLabelDesignSystem.colors.color13
                     )
+
+
                     HorizontalDivider()
-                    Text(
-                        text = "WhiteLabelDesignSystem.colors.primaryColor",
-                        color = WhiteLabelDesignSystem.colors.primaryColor
+                    Text(text = "App Theme (green theme)")
+                    ColorSample(
+                        text = "AppDesignSystem color11 (overriden)",
+                        color = AppDesignSystem.colors.color11
                     )
-                    Text(
-                        text = "WhiteLabelDesignSystem.colors.secondaryColor",
-                        color = WhiteLabelDesignSystem.colors.secondaryColor
+                    ColorSample(
+                        text = "AppDesignSystem color12",
+                        color = AppDesignSystem.colors.color12
+                    )
+                    ColorSample(
+                        text = "AppDesignSystem color13",
+                        color = AppDesignSystem.colors.color13
+                    )
+                    ColorSample(
+                        text = "AppDesignSystem color21 (new)",
+                        color = AppDesignSystem.colors.color21
                     )
 
 
                     HorizontalDivider()
                     AppDesignSystem(
-                        designSystem = remember {
-                            object : AppDesignSystem() {
-                                override val colors: AppColorScheme = object : AppColorScheme() {
-                                    override val primaryColor: Color = Color.Cyan
-                                }
-                            }
+                        colors = object : AppColorScheme() {
+                            override val color11: Color = Color(0xff1133bb)
                         }
                     ) {
+                        Text(text = "App Theme locally overridden (blue theme)")
                         Column(
-                            Modifier.padding(start = 40.dp)
+                            Modifier.padding(start = 16.dp)
                         ) {
-                            Text(
-                                text = "AppDesignSystem.colors.primaryColor",
-                                color = AppDesignSystem.colors.primaryColor
+                            ColorSample(
+                                text = "AppDesignSystem color11 (locally overridden)",
+                                color = AppDesignSystem.colors.color11
                             )
-                            Text(
-                                text = "AppDesignSystem.colors.secondaryColor",
-                                color = AppDesignSystem.colors.secondaryColor
+                            ColorSample(
+                                text = "AppDesignSystem color12",
+                                color = AppDesignSystem.colors.color12
                             )
-                            Text(
-                                text = "AppDesignSystem.colors.tertiaryColor",
-                                color = AppDesignSystem.colors.tertiaryColor
+                            ColorSample(
+                                text = "AppDesignSystem color21",
+                                color = AppDesignSystem.colors.color13
+                            )
+                            ColorSample(
+                                text = "AppDesignSystem color21 (new)",
+                                color = AppDesignSystem.colors.color21
                             )
                         }
 
 
                         HorizontalDivider()
                         AppDesignSystem(
-                            // MAJOR DRAWBACK - anonymous overrides do not sum up!
-                            designSystem = remember {
-                                object : AppDesignSystem() {
-                                    override val colors: AppColorScheme = object : AppColorScheme() {
-                                        override val tertiaryColor: Color = Color.Red
-                                    }
-                                }
+                            colors = object : AppColorScheme() {
+                                override val color21: Color = Color.Red
                             }
                         ) {
+                            Text(text = "App Theme locally overridden AGAIN (red theme)")
                             Column(
-                                Modifier.padding(start = 80.dp)
+                                Modifier.padding(start = 32.dp)
                             ) {
-                                Text(
-                                    text = "AppDesignSystem.colors.primaryColor",
-                                    color = AppDesignSystem.colors.primaryColor
+                                ColorSample(
+                                    text = "AppDesignSystem color11 (local override lost!)",
+                                    color = AppDesignSystem.colors.color11
                                 )
-                                Text(
-                                    text = "AppDesignSystem.colors.secondaryColor",
-                                    color = AppDesignSystem.colors.secondaryColor
+                                ColorSample(
+                                    text = "AppDesignSystem color12",
+                                    color = AppDesignSystem.colors.color12
                                 )
-                                Text(
-                                    text = "AppDesignSystem.colors.tertiaryColor",
-                                    color = AppDesignSystem.colors.tertiaryColor
+                                ColorSample(
+                                    text = "AppDesignSystem color21",
+                                    color = AppDesignSystem.colors.color13
                                 )
+                                ColorSample(
+                                    text = "AppDesignSystem color21 (overridden)",
+                                    color = AppDesignSystem.colors.color21
+                                )
+
+                                Text(text = "⚠ As you can't inherit from an anonymous object, local overrides cannot sum up.")
                             }
                         }
 
                     }
-
-
-                    HorizontalDivider()
-                    Text(
-                        text = "AppDesignSystem.colors.primaryColor",
-                        color = AppDesignSystem.colors.primaryColor
-                    )
-                    Text(
-                        text = "AppDesignSystem.colors.secondaryColor",
-                        color = AppDesignSystem.colors.secondaryColor
-                    )
-                    Text(
-                        text = "AppDesignSystem.colors.tertiaryColor",
-                        color = AppDesignSystem.colors.tertiaryColor
-                    )
                 }
             }
         }
+    }
+}
+
+@Composable
+fun ColorSample(
+    text: String,
+    color: Color
+) {
+    Row(
+        modifier = Modifier.padding(4.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .background(color)
+                .size(16.dp)
+        ) {}
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = text,
+            color = color
+        )
     }
 }

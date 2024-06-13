@@ -1,24 +1,19 @@
 package com.gft.designsystem.base
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.Stable
 
 // models
-interface ColorScheme
-interface Typography
-interface Shapes
-interface Dimens
-interface Components
-
-open class DesignSystem {
-    open val colors: ColorScheme = object : ColorScheme {}
-    open val typography: Typography = object : Typography {}
-    open val shapes: Shapes = object : Shapes {}
-    open val dimens: Dimens = object : Dimens {}
-    open val components: Components = object : Components {}
-}
+@Immutable interface ColorScheme
+@Immutable interface Typography
+@Immutable interface Shapes
+@Immutable interface Dimens
+@Immutable interface Components
 
 // local composition
+@Immutable
 class DesignSystemElements<ColorSchemeType : ColorScheme, TypographyType : Typography, ShapesType : Shapes, DimensType : Dimens, ComponentsType : Components>(
     val colors: ColorSchemeType,
     val typography: TypographyType,
