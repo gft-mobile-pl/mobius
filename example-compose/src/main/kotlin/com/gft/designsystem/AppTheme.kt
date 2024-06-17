@@ -12,6 +12,7 @@ import com.gft.designsystem.base.DesignSystemElementsProvider
 import com.gft.designsystem.base.Dimens
 import com.gft.designsystem.base.Shapes
 import com.gft.designsystem.base.Typography
+import com.gft.designsystem.whitelabel.LightWhiteLabelColorScheme
 import com.gft.designsystem.whitelabel.WhiteLabelColorScheme
 import com.gft.designsystem.whitelabel.WhiteLabelDesignSystem
 
@@ -22,14 +23,14 @@ import com.gft.designsystem.whitelabel.WhiteLabelDesignSystem
  */
 
 @Immutable
-open class AppColorScheme : WhiteLabelColorScheme() {
-    override val color11: Color = Color(0xff11bb33) // <-- overridden color
-    open val color21: Color = Color(0xff99ddaa) // <-- new color
+interface AppColorScheme : WhiteLabelColorScheme {
+    val color21: Color // <-- new color
 }
 
-
-
-
+class LightAppColorScheme : AppColorScheme, WhiteLabelColorScheme by LightWhiteLabelColorScheme() {
+    override val color11: Color = Color(0xff11bb33) // <-- overridden color
+    override val color21: Color = Color(0xff99ddaa) // <-- new color
+}
 
 // never changing part
 @Stable
@@ -37,7 +38,7 @@ object AppDesignSystem : DesignSystemElementsProvider<AppColorScheme, Typography
 
 val LocalAppDesignSystem = staticCompositionLocalOf {
     DesignSystemElements(
-        AppColorScheme(),
+        LightAppColorScheme() as AppColorScheme,
         object : Typography {} as Typography,
         object : Shapes {} as Shapes,
         object : Dimens {} as Dimens,

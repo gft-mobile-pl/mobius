@@ -17,16 +17,25 @@ import com.gft.designsystem.base.Typography
 
 // customization
 @Immutable
-open class WhiteLabelColorScheme : ColorScheme {
-    open val color11: Color = Color(0xff222222) // <-- new color
-    open val color12: Color = Color(0xff444444) // <-- new color
-    open val color13: Color = Color(0xff666666) // <-- new color
-    open val color14: Color = Color(0xff888888) // <-- new color
-    open val color15: Color = Color(0xffaaaaaa) // <-- new color
-    open val color16: Color = Color(0xffcccccc) // <-- new color
-    open val color17: Color = Color(0xffeeeeee) // <-- new color
+interface WhiteLabelColorScheme : ColorScheme {
+    val color11: Color // <-- new color
+    val color12: Color // <-- new color
+    val color13: Color // <-- new color
+    val color14: Color // <-- new color
+    val color15: Color // <-- new color
+    val color16: Color // <-- new color
+    val color17: Color // <-- new color
 }
 
+class LightWhiteLabelColorScheme : WhiteLabelColorScheme {
+    override val color11: Color = Color(0xff222222)
+    override val color12: Color = Color(0xff444444)
+    override val color13: Color = Color(0xff666666)
+    override val color14: Color = Color(0xff888888)
+    override val color15: Color = Color(0xffaaaaaa)
+    override val color16: Color = Color(0xffcccccc)
+    override val color17: Color = Color(0xffeeeeee)
+}
 
 // never changing part
 @Stable
@@ -34,7 +43,7 @@ object WhiteLabelDesignSystem : DesignSystemElementsProvider<WhiteLabelColorSche
 
 val LocalWhiteLabelSystem = staticCompositionLocalOf {
     DesignSystemElements(
-        WhiteLabelColorScheme(),
+        LightWhiteLabelColorScheme() as WhiteLabelColorScheme,
         object : Typography {} as Typography,
         object : Shapes {} as Shapes,
         object : Dimens {} as Dimens,

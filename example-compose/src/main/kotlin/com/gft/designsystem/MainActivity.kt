@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
 
                     HorizontalDivider()
                     AppDesignSystem(
-                        colors = object : AppColorScheme() {
+                        colors = object : AppColorScheme by LocalAppDesignSystem.current.colors {
                             override val color11: Color = Color(0xff1133bb)
                         }
                     ) {
@@ -92,7 +92,7 @@ class MainActivity : ComponentActivity() {
 
                         HorizontalDivider()
                         AppDesignSystem(
-                            colors = object : AppColorScheme() {
+                            colors = object : AppColorScheme by LocalAppDesignSystem.current.colors {
                                 override val color21: Color = Color.Red
                             }
                         ) {
@@ -101,7 +101,7 @@ class MainActivity : ComponentActivity() {
                                 Modifier.padding(start = 32.dp)
                             ) {
                                 ColorSample(
-                                    text = "AppDesignSystem color11 (local override lost!)",
+                                    text = "AppDesignSystem color11 (still overridden)",
                                     color = AppDesignSystem.colors.color11
                                 )
                                 ColorSample(
@@ -116,16 +116,89 @@ class MainActivity : ComponentActivity() {
                                     text = "AppDesignSystem color21 (overridden)",
                                     color = AppDesignSystem.colors.color21
                                 )
-
-                                Text(text = "⚠ As you can't inherit from an anonymous object, local overrides cannot sum up.")
                             }
                         }
 
+
+                        HorizontalDivider()
+                        AppDesignSystemWithColor1Blue {
+                            Text(text = "App Theme locally overridden (blue theme)")
+                            Column(
+                                Modifier.padding(start = 16.dp)
+                            ) {
+                                ColorSample(
+                                    text = "AppDesignSystem color11 (locally overridden)",
+                                    color = AppDesignSystem.colors.color11
+                                )
+                                ColorSample(
+                                    text = "AppDesignSystem color12",
+                                    color = AppDesignSystem.colors.color12
+                                )
+                                ColorSample(
+                                    text = "AppDesignSystem color21",
+                                    color = AppDesignSystem.colors.color13
+                                )
+                                ColorSample(
+                                    text = "AppDesignSystem color21 (new)",
+                                    color = AppDesignSystem.colors.color21
+                                )
+                            }
+
+
+                            HorizontalDivider()
+                            AppDesignSystemWithColor21Red {
+                                Text(text = "App Theme locally overridden AGAIN (red theme)")
+                                Column(
+                                    Modifier.padding(start = 32.dp)
+                                ) {
+                                    ColorSample(
+                                        text = "AppDesignSystem color11 (still overridden)",
+                                        color = AppDesignSystem.colors.color11
+                                    )
+                                    ColorSample(
+                                        text = "AppDesignSystem color12",
+                                        color = AppDesignSystem.colors.color12
+                                    )
+                                    ColorSample(
+                                        text = "AppDesignSystem color21",
+                                        color = AppDesignSystem.colors.color13
+                                    )
+                                    ColorSample(
+                                        text = "AppDesignSystem color21 (overridden)",
+                                        color = AppDesignSystem.colors.color21
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
     }
+}
+
+@Composable
+fun AppDesignSystemWithColor1Blue(
+    content: @Composable () -> Unit,
+) {
+    AppDesignSystem(
+        colors = object : AppColorScheme by LocalAppDesignSystem.current.colors {
+            override val color11: Color = Color(0xff1133bb)
+        },
+        content = content
+    )
+}
+
+@Composable
+fun AppDesignSystemWithColor21Red(
+    content: @Composable () -> Unit,
+) {
+    AppDesignSystem(
+        colors = object : AppColorScheme by LocalAppDesignSystem.current.colors {
+            override val color21: Color = Color.Red
+        },
+        content = content
+    )
 }
 
 @Composable
