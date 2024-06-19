@@ -16,20 +16,10 @@ import com.gft.designsystem.whitelabel.LightWhiteLabelColorScheme
 import com.gft.designsystem.whitelabel.WhiteLabelColorScheme
 import com.gft.designsystem.whitelabel.WhiteLabelDesignSystem
 
-/**
- * #####################################
- * SOME APPLICATION THEME
- * #####################################
- */
-
+// definition
 @Immutable
 interface AppColorScheme : WhiteLabelColorScheme {
     val color21: Color // <-- new color
-}
-
-class LightAppColorScheme : AppColorScheme, WhiteLabelColorScheme by LightWhiteLabelColorScheme() {
-    override val color11: Color = Color(0xff11bb33) // <-- overridden color
-    override val color21: Color = Color(0xff99ddaa) // <-- new color
 }
 
 // never changing part
