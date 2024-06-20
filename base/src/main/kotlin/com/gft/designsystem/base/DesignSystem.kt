@@ -14,7 +14,7 @@ import androidx.compose.runtime.Stable
 
 // local composition
 @Immutable
-class DesignSystemElements<ColorSchemeType : ColorScheme, TypographyType : Typography, ShapesType : Shapes, DimensType : Dimens, ComponentsType : Components>(
+open class DesignSystemElements<ColorSchemeType : ColorScheme, TypographyType : Typography, ShapesType : Shapes, DimensType : Dimens, ComponentsType : Components>(
     val colors: ColorSchemeType,
     val typography: TypographyType,
     val shapes: ShapesType,
