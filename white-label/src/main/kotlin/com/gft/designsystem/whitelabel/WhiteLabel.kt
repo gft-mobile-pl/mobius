@@ -43,11 +43,11 @@ val LocalWhiteLabelSystem = staticCompositionLocalOf {
 
 @Composable
 fun WhiteLabelDesignSystem(
-    colors: WhiteLabelColorScheme = LocalWhiteLabelSystem.current.colors,
-    typography: Typography = LocalWhiteLabelSystem.current.typography,
-    shapes: Shapes = LocalWhiteLabelSystem.current.shapes,
-    dimens: Dimens = LocalWhiteLabelSystem.current.dimens,
-    components: Components = LocalWhiteLabelSystem.current.components,
+    colors: WhiteLabelColorScheme = WhiteLabelDesignSystem.colors,
+    typography: Typography = WhiteLabelDesignSystem.typography,
+    shapes: Shapes = WhiteLabelDesignSystem.shapes,
+    dimens: Dimens = WhiteLabelDesignSystem.dimens,
+    components: Components = WhiteLabelDesignSystem.components,
 
     content: @Composable () -> Unit,
 ) {

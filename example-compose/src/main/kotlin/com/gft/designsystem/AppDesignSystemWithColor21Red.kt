@@ -8,7 +8,7 @@ fun AppDesignSystemWithColor21Red(
     content: @Composable () -> Unit,
 ) {
     AppDesignSystem(
-        colors = object : AppColorScheme by LocalAppDesignSystem.current.colors {
+        colors = object : AppColorScheme by AppDesignSystem.colors {
             override val color21: Color = Color.Red
         },
         content = content

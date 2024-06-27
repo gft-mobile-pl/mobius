@@ -56,12 +56,12 @@ val LocalAppDesignSystem = staticCompositionLocalOf {
 
 @Composable
 fun AppDesignSystem(
-    colors: AppColorScheme = LocalAppDesignSystem.current.colors,
-    typography: Typography = LocalAppDesignSystem.current.typography,
-    shapes: Shapes = LocalAppDesignSystem.current.shapes,
-    dimens: Dimens = LocalAppDesignSystem.current.dimens,
-    components: Components = LocalAppDesignSystem.current.components,
-    gradients: Gradients = LocalAppDesignSystem.current.gradients,
+    colors: AppColorScheme = AppDesignSystem.colors,
+    typography: Typography = AppDesignSystem.typography,
+    shapes: Shapes = AppDesignSystem.shapes,
+    dimens: Dimens = AppDesignSystem.dimens,
+    components: Components = AppDesignSystem.components,
+    gradients: Gradients = AppDesignSystem.gradients,
     content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(
