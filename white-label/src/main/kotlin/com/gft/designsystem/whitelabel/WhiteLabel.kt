@@ -7,7 +7,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import com.gft.designsystem.base.ColorScheme
-import com.gft.designsystem.base.Components
+import com.gft.designsystem.base.Styles
 
 import com.gft.designsystem.base.DesignSystemElements
 import com.gft.designsystem.base.DesignSystemElementsProvider
@@ -28,14 +28,14 @@ interface WhiteLabelColorScheme : ColorScheme {
 
 // copy-paste-replace-forget part
 @Stable
-object WhiteLabelDesignSystem : DesignSystemElementsProvider<WhiteLabelColorScheme, Typography, Shapes, Components>(LocalWhiteLabelSystem)
+object WhiteLabelDesignSystem : DesignSystemElementsProvider<WhiteLabelColorScheme, Typography, Shapes, Styles>(LocalWhiteLabelSystem)
 
 val LocalWhiteLabelSystem = staticCompositionLocalOf {
     DesignSystemElements(
         LightWhiteLabelColorScheme() as WhiteLabelColorScheme,
         object : Typography {} as Typography,
         object : Shapes {} as Shapes,
-        object : Components {} as Components
+        object : Styles {} as Styles
     )
 }
 
@@ -44,12 +44,11 @@ fun WhiteLabelDesignSystem(
     colors: WhiteLabelColorScheme = WhiteLabelDesignSystem.colors,
     typography: Typography = WhiteLabelDesignSystem.typography,
     shapes: Shapes = WhiteLabelDesignSystem.shapes,
-    components: Components = WhiteLabelDesignSystem.components,
-
+    styles: Styles = WhiteLabelDesignSystem.styles,
     content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalWhiteLabelSystem provides DesignSystemElements(colors, typography, shapes, components),
+        LocalWhiteLabelSystem provides DesignSystemElements(colors, typography, shapes, styles),
         content = content
     )
 }

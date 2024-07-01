@@ -8,19 +8,19 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 @Immutable interface ColorScheme
 @Immutable interface Typography
 @Immutable interface Shapes
-@Immutable interface Components
+@Immutable interface Styles
 
 // local composition
 @Immutable
-open class DesignSystemElements<ColorSchemeType : ColorScheme, TypographyType : Typography, ShapesType : Shapes, ComponentsType : Components>(
+open class DesignSystemElements<ColorSchemeType : ColorScheme, TypographyType : Typography, ShapesType : Shapes, StylesType : Styles>(
     val colors: ColorSchemeType,
     val typography: TypographyType,
     val shapes: ShapesType,
-    val components: ComponentsType,
+    val styles: StylesType,
 )
 
-open class DesignSystemElementsProvider<ColorSchemeType : ColorScheme, TypographyType : Typography, ShapesType : Shapes, ComponentsType : Components>(
-    private val localComposition: ProvidableCompositionLocal<out DesignSystemElements<ColorSchemeType, TypographyType, ShapesType, ComponentsType>>,
+open class DesignSystemElementsProvider<ColorSchemeType : ColorScheme, TypographyType : Typography, ShapesType : Shapes, StylesType : Styles>(
+    private val localComposition: ProvidableCompositionLocal<out DesignSystemElements<ColorSchemeType, TypographyType, ShapesType, StylesType>>,
 ) {
     val colors: ColorSchemeType
         @Composable get() = localComposition.current.colors
@@ -28,6 +28,6 @@ open class DesignSystemElementsProvider<ColorSchemeType : ColorScheme, Typograph
         @Composable get() = localComposition.current.typography
     val shapes: ShapesType
         @Composable get() = localComposition.current.shapes
-    val components: ComponentsType
-        @Composable get() = localComposition.current.components
+    val styles: StylesType
+        @Composable get() = localComposition.current.styles
 }
