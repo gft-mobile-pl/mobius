@@ -11,7 +11,6 @@ import com.gft.designsystem.base.Components
 
 import com.gft.designsystem.base.DesignSystemElements
 import com.gft.designsystem.base.DesignSystemElementsProvider
-import com.gft.designsystem.base.Dimens
 import com.gft.designsystem.base.Shapes
 import com.gft.designsystem.base.Typography
 
@@ -29,14 +28,13 @@ interface WhiteLabelColorScheme : ColorScheme {
 
 // copy-paste-replace-forget part
 @Stable
-object WhiteLabelDesignSystem : DesignSystemElementsProvider<WhiteLabelColorScheme, Typography, Shapes, Dimens, Components>(LocalWhiteLabelSystem)
+object WhiteLabelDesignSystem : DesignSystemElementsProvider<WhiteLabelColorScheme, Typography, Shapes, Components>(LocalWhiteLabelSystem)
 
 val LocalWhiteLabelSystem = staticCompositionLocalOf {
     DesignSystemElements(
         LightWhiteLabelColorScheme() as WhiteLabelColorScheme,
         object : Typography {} as Typography,
         object : Shapes {} as Shapes,
-        object : Dimens {} as Dimens,
         object : Components {} as Components
     )
 }
@@ -46,13 +44,12 @@ fun WhiteLabelDesignSystem(
     colors: WhiteLabelColorScheme = WhiteLabelDesignSystem.colors,
     typography: Typography = WhiteLabelDesignSystem.typography,
     shapes: Shapes = WhiteLabelDesignSystem.shapes,
-    dimens: Dimens = WhiteLabelDesignSystem.dimens,
     components: Components = WhiteLabelDesignSystem.components,
 
     content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(
-        LocalWhiteLabelSystem provides DesignSystemElements(colors, typography, shapes, dimens, components),
+        LocalWhiteLabelSystem provides DesignSystemElements(colors, typography, shapes, components),
         content = content
     )
 }
