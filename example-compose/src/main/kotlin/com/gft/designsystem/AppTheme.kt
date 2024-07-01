@@ -7,11 +7,6 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import com.gft.designsystem.base.ColorScheme
-import com.gft.designsystem.base.Styles
-import com.gft.designsystem.base.DesignSystemElements
-import com.gft.designsystem.base.Shapes
-import com.gft.designsystem.base.Typography
 import com.gft.designsystem.whitelabel.WhiteLabelColorScheme
 import com.gft.designsystem.whitelabel.WhiteLabelDesignSystem
 

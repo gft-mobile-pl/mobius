@@ -1,4 +1,4 @@
-package com.gft.designsystem.base
+package com.gft.designsystem
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
