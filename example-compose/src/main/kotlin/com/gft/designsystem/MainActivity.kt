@@ -17,6 +17,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.gft.designsystem.whitelabel.Button
+import com.gft.designsystem.whitelabel.LighterButton
 import com.gft.designsystem.whitelabel.LightWhiteLabelColorScheme
 import com.gft.designsystem.whitelabel.LocalWhiteLabelSystem
 import com.gft.designsystem.whitelabel.WhiteLabelColorScheme
@@ -58,6 +60,7 @@ fun AppDesignSystemTest() {
     AppDesignSystem {
         Column {
             Text(text = "Direct WhiteLabel (grey theme)")
+
             ColorSample(
                 text = "WhiteLabelDesignSystem color11 (overriden)",
                 color = WhiteLabelDesignSystem.colors.color11
@@ -74,6 +77,15 @@ fun AppDesignSystemTest() {
 
             HorizontalDivider()
             Text(text = "App Theme (green theme)")
+
+            Button(onClick = {} ) {
+                Text("Button 1")
+            }
+            LighterButton(onClick = {}) {
+                Text("Button 1")
+            }
+
+
             ColorSample(
                 text = "AppDesignSystem color11 (overriden)",
                 color = AppDesignSystem.colors.color11
@@ -92,6 +104,8 @@ fun AppDesignSystemTest() {
             )
 
 
+
+
             HorizontalDivider()
             AppDesignSystem(
                 colors = object : AppColorScheme by LocalAppDesignSystem.current.colors {
@@ -102,6 +116,13 @@ fun AppDesignSystemTest() {
                 Column(
                     Modifier.padding(start = 16.dp)
                 ) {
+                    Button(onClick = {}) {
+                        Text("Button 2")
+                    }
+                    LighterButton(onClick = {}) {
+                        Text("Button 2")
+                    }
+
                     ColorSample(
                         text = "AppDesignSystem color11 (locally overridden)",
                         color = AppDesignSystem.colors.color11
@@ -147,6 +168,13 @@ fun AppDesignSystemTest() {
                             text = "AppDesignSystem color21 (overridden)",
                             color = AppDesignSystem.colors.color21
                         )
+
+                        Button(onClick = {}) {
+                            Text("Button 3")
+                        }
+                        LighterButton(onClick = {}) {
+                            Text("Button 3")
+                        }
                     }
                 }
 

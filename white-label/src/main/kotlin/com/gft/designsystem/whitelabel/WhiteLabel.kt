@@ -7,11 +7,11 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import com.gft.designsystem.ColorScheme
-import com.gft.designsystem.Styles
-
+import com.gft.designsystem.DesignSystem
 import com.gft.designsystem.DesignSystemElements
 import com.gft.designsystem.DesignSystemElementsProvider
 import com.gft.designsystem.Shapes
+import com.gft.designsystem.Styles
 import com.gft.designsystem.Typography
 
 // definition
@@ -26,16 +26,21 @@ interface WhiteLabelColorScheme : ColorScheme {
     val color17: Color // <-- new color
 }
 
+interface WhiteLabelStyles : Styles {
+    val button: ButtonStyle
+    val lighterButton: ButtonStyle
+}
+
 // copy-paste-replace-forget part
 @Stable
-object WhiteLabelDesignSystem : DesignSystemElementsProvider<WhiteLabelColorScheme, Typography, Shapes, Styles>(LocalWhiteLabelSystem)
+object WhiteLabelDesignSystem : DesignSystemElementsProvider<WhiteLabelColorScheme, Typography, Shapes, WhiteLabelStyles>(LocalWhiteLabelSystem)
 
 val LocalWhiteLabelSystem = staticCompositionLocalOf {
     DesignSystemElements(
         LightWhiteLabelColorScheme() as WhiteLabelColorScheme,
         object : Typography {} as Typography,
         object : Shapes {} as Shapes,
-        object : Styles {} as Styles
+        DefaultWhiteLabelStyles() as WhiteLabelStyles
     )
 }
 
@@ -44,11 +49,16 @@ fun WhiteLabelDesignSystem(
     colors: WhiteLabelColorScheme = WhiteLabelDesignSystem.colors,
     typography: Typography = WhiteLabelDesignSystem.typography,
     shapes: Shapes = WhiteLabelDesignSystem.shapes,
-    styles: Styles = WhiteLabelDesignSystem.styles,
+    styles: WhiteLabelStyles = WhiteLabelDesignSystem.styles,
+    content: @Composable () -> Unit,
+) = WhiteLabelDesignSystem(DesignSystemElements(colors, typography, shapes, styles), content)
+
+@Composable
+fun WhiteLabelDesignSystem(
+    elements: DesignSystemElements<WhiteLabelColorScheme, Typography, Shapes, WhiteLabelStyles>,
     content: @Composable () -> Unit,
 ) {
-    CompositionLocalProvider(
-        LocalWhiteLabelSystem provides DesignSystemElements(colors, typography, shapes, styles),
-        content = content
-    )
+    CompositionLocalProvider(LocalWhiteLabelSystem provides elements) {
+        DesignSystem(content = content)
+    }
 }

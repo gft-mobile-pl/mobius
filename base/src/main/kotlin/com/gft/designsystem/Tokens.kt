@@ -12,9 +12,7 @@ sealed interface Token<T> {
     fun resolve(): T
 }
 
-interface TokenReference<T> : Token<T> {
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): TokenReference<T> = this
-}
+interface TokenReference<T> : Token<T>
 
 @Stable
 internal class ValueToken<T>(
@@ -56,4 +54,4 @@ fun <T> Token(value: T): Token<T> = ValueToken(value)
 fun <T> Token(valueResolver: @Composable () -> T): Token<T> = ReferenceToValue(valueResolver)
 
 @Stable
-fun <T> tokenReference(tokenProvider: @Composable () -> Token<T>): TokenReference<T> = ReferenceToValue { tokenProvider().resolve() }
+fun <T> TokenReference(tokenProvider: @Composable () -> Token<T>): TokenReference<T> = ReferenceToValue { tokenProvider().resolve() }
