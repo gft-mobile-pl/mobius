@@ -47,8 +47,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":white-label"))
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
 
