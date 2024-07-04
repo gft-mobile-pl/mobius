@@ -12,6 +12,8 @@ interface StyleValues
 @Stable
 interface Style
 
+interface DynamicStyle
+
 @PublishedApi
 internal class StylesCache : MutableMap<Class<*>, Any> by ConcurrentHashMap()
 
@@ -23,7 +25,7 @@ inline fun <reified T : StyleValues> Style.produceStyle(
     useCache: Boolean = true,
     styleProducer: @Composable () -> T,
 ): T {
-    return if (useCache) {
+    return if (useCache && this !is DynamicStyle) {
         val cache = LocalStylesCache.current
         val cachedStyle = cache[this::class.java]
         if (cachedStyle != null && cachedStyle is T) {
