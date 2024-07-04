@@ -12,7 +12,9 @@ sealed interface Token<T> {
     fun resolve(): T
 }
 
-interface TokenReference<T> : Token<T>
+interface ReferencingToken<T> : Token<T> {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): ReferencingToken<T> = this
+}
 
 @Stable
 internal class ValueToken<T>(
@@ -41,17 +43,24 @@ internal class ValueToken<T>(
 @Stable
 internal class ReferenceToValue<T>(
     private val valueResolver: @Composable () -> T,
-) : TokenReference<T> {
+) : ReferencingToken<T> {
 
     @Composable
     override fun resolve(): T = valueResolver.invoke()
 }
 
 @Stable
+@ReadOnlyComposable
 fun <T> Token(value: T): Token<T> = ValueToken(value)
 
 @Stable
 fun <T> Token(valueResolver: @Composable () -> T): Token<T> = ReferenceToValue(valueResolver)
 
 @Stable
-fun <T> TokenReference(tokenProvider: @Composable () -> Token<T>): TokenReference<T> = ReferenceToValue { tokenProvider().resolve() }
+fun <T> Style.valueReference(valueProvider: @Composable () -> T): ReferencingToken<T> = ReferenceToValue(valueProvider)
+
+@Stable
+fun <T> TokenReference(tokenProvider: @Composable () -> Token<T>): ReferencingToken<T> = ReferenceToValue { tokenProvider().resolve() }
+
+@Stable
+fun <T> Style.tokenReference(tokenProvider: @Composable () -> Token<T>): ReferencingToken<T> = ReferenceToValue { tokenProvider().resolve() }
