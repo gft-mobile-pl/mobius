@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "GFT Design System"
 include(":example-compose")
-include(":base")
+include(":design-system")
