@@ -7,7 +7,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.Stable
 
 @Immutable
-interface ColorScheme
+interface Colors
 
 @Immutable
 interface Typography
@@ -16,13 +16,13 @@ interface Typography
 interface Styles
 
 @Immutable
-open class DesignSystemElements<out ColorSchemeType : ColorScheme, out TypographyType : Typography, out StylesType : Styles>(
+open class DesignSystemElements<out ColorSchemeType : Colors, out TypographyType : Typography, out StylesType : Styles>(
     val colors: ColorSchemeType,
     val typography: TypographyType,
     val styles: StylesType,
 )
 
-open class DesignSystemElementsProvider<ColorSchemeType : ColorScheme, TypographyType : Typography, StylesType : Styles>(
+open class DesignSystemElementsProvider<ColorSchemeType : Colors, TypographyType : Typography, StylesType : Styles>(
     private val localComposition: ProvidableCompositionLocal<out DesignSystemElements<ColorSchemeType, TypographyType, StylesType>>,
 ) {
     val colors: ColorSchemeType

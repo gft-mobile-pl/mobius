@@ -2,9 +2,10 @@ package com.gft.mobius.colors
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
+import com.gft.designsystem.Colors
 
 @Immutable
-interface MobiusColors {
+interface MobiusColors : Colors {
     // defining colors
     val primary: Color
     val inversePrimary: Color
