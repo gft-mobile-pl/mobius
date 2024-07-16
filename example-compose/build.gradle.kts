@@ -47,6 +47,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":mobius"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
 
@@ -57,6 +59,7 @@ dependencies {
     implementation(libs.androidx.foundation)
     implementation(libs.androidx.foundation.layout)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
