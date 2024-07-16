@@ -1,8 +1,8 @@
-package com.gft.mobius.referencetokens
+package com.gft.mobius.references
 
 import androidx.compose.ui.unit.dp
 
-internal object ReferenceDimensionTokens {
+internal object MobiusReferenceDimensions {
     val Dimension0 = 0.dp
     val Dimension2 = 2.dp
     val Dimension4 = 4.dp

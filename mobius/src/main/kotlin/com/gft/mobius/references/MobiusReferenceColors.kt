@@ -1,8 +1,8 @@
-package com.gft.mobius.referencetokens
+package com.gft.mobius.references
 
 import androidx.compose.ui.graphics.Color
 
-internal object ReferenceColorTokens {
+internal object MobiusReferenceColors {
     val Black = Color(0xff000000)
     val White = Color(0xffffffff)
 
