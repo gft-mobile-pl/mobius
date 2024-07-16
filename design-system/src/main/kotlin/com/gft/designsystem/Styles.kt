@@ -1,10 +1,11 @@
 package com.gft.designsystem
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
-import java.util.concurrent.ConcurrentHashMap
+import java.util.WeakHashMap
+import java.util.concurrent.atomic.AtomicReference
 
 @Stable
 interface StyleValues
@@ -12,30 +13,38 @@ interface StyleValues
 @Stable
 interface Style
 
-interface DynamicStyle
-
 @PublishedApi
-internal class StylesCache : MutableMap<Class<*>, Any> by ConcurrentHashMap()
+internal class StylesCache : MutableMap<Any, Any> by WeakHashMap()
 
 @PublishedApi
 internal val LocalStylesCache = staticCompositionLocalOf { StylesCache() }
 
 @Composable
 inline fun <reified T : StyleValues> Style.produceStyle(
-    useCache: Boolean = true,
     styleProducer: @Composable () -> T,
 ): T {
-    return if (useCache && this !is DynamicStyle) {
-        val cache = LocalStylesCache.current
-        val cachedStyle = cache[this::class.java]
+    val cache = LocalStylesCache.current
+    return synchronized(cache) {
+        val cachedStyle = cache[this]
         if (cachedStyle != null && cachedStyle is T) {
             cachedStyle
         } else {
             val newStyle = styleProducer()
-            cache[this::class.java] = newStyle
+            cache[this] = newStyle
             newStyle
         }
-    } else {
-        styleProducer()
+    }
+}
+
+@Composable
+fun <T : Style> rememberStyle(
+    vararg keys: Any?,
+    styleProducer: @Composable () -> T
+): T {
+    val styleReference = remember(*keys) {
+        AtomicReference<T?>(null)
+    }
+    return styleReference.get() ?: synchronized(styleReference) {
+        styleReference.get() ?: styleProducer().apply { styleReference.set(this) }
     }
 }
