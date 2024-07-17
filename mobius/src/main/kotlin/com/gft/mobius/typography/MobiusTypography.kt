@@ -2,9 +2,10 @@ package com.gft.mobius.typography
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.text.TextStyle
+import com.gft.designsystem.Typography
 
 @Immutable
-interface MobiusTypography {
+interface MobiusTypography : Typography {
     val displayLarge: TextStyle
     val displayMedium: TextStyle
     val displaySmall: TextStyle

@@ -8,17 +8,18 @@ import com.gft.designsystem.DesignSystem
 import com.gft.designsystem.DesignSystemElements
 import com.gft.designsystem.DesignSystemElementsProvider
 import com.gft.designsystem.Styles
-import com.gft.designsystem.Typography
 import com.gft.mobius.colors.MobiusColors
 import com.gft.mobius.colors.MobiusLightColors
+import com.gft.mobius.typography.DefaultMobiusTypography
+import com.gft.mobius.typography.MobiusTypography
 
 @Stable
-object Mobius : DesignSystemElementsProvider<MobiusColors, Typography, Styles>(LocalMobius)
+object Mobius : DesignSystemElementsProvider<MobiusColors, MobiusTypography, Styles>(LocalMobius)
 
 val LocalMobius = staticCompositionLocalOf {
     DesignSystemElements(
         MobiusLightColors() as MobiusColors,
-        object : Typography {} as Typography,
+        DefaultMobiusTypography() as MobiusTypography,
         object : Styles {} as Styles
     )
 }
@@ -26,14 +27,14 @@ val LocalMobius = staticCompositionLocalOf {
 @Composable
 fun Mobius(
     colors: MobiusColors = Mobius.colors,
-    typography: Typography = Mobius.typography,
+    typography: MobiusTypography = Mobius.typography,
     styles: Styles = Mobius.styles,
     content: @Composable () -> Unit,
 ) = Mobius(DesignSystemElements(colors, typography, styles), content)
 
 @Composable
 fun Mobius(
-    elements: DesignSystemElements<MobiusColors, Typography, Styles>,
+    elements: DesignSystemElements<MobiusColors, MobiusTypography, Styles>,
     content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(LocalMobius provides elements) {
