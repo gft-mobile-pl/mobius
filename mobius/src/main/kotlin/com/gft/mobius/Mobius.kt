@@ -8,21 +8,22 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import com.gft.designsystem.DesignSystem
 import com.gft.designsystem.DesignSystemElements
 import com.gft.designsystem.DesignSystemElementsProvider
-import com.gft.designsystem.Styles
 import com.gft.mobius.colors.MobiusColors
 import com.gft.mobius.colors.MobiusLightColors
+import com.gft.mobius.components.DefaultMobiusStyles
+import com.gft.mobius.components.MobiusStyles
 import com.gft.mobius.materialdesign.toMaterialDesign
 import com.gft.mobius.typography.DefaultMobiusTypography
 import com.gft.mobius.typography.MobiusTypography
 
 @Stable
-object Mobius : DesignSystemElementsProvider<MobiusColors, MobiusTypography, Styles>(LocalMobius)
+object Mobius : DesignSystemElementsProvider<MobiusColors, MobiusTypography, MobiusStyles>(LocalMobius)
 
 val LocalMobius = staticCompositionLocalOf {
     DesignSystemElements(
         MobiusLightColors() as MobiusColors,
         DefaultMobiusTypography() as MobiusTypography,
-        object : Styles {} as Styles
+        DefaultMobiusStyles() as MobiusStyles
     )
 }
 
@@ -30,13 +31,13 @@ val LocalMobius = staticCompositionLocalOf {
 fun Mobius(
     colors: MobiusColors = Mobius.colors,
     typography: MobiusTypography = Mobius.typography,
-    styles: Styles = Mobius.styles,
+    styles: MobiusStyles = Mobius.styles,
     content: @Composable () -> Unit,
 ) = Mobius(DesignSystemElements(colors, typography, styles), content)
 
 @Composable
 fun Mobius(
-    elements: DesignSystemElements<MobiusColors, MobiusTypography, Styles>,
+    elements: DesignSystemElements<MobiusColors, MobiusTypography, MobiusStyles>,
     content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(LocalMobius provides elements) {
