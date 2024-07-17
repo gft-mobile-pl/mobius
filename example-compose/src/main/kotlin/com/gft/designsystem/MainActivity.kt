@@ -25,6 +25,7 @@ import com.gft.mobius.colors.MobiusDarkColors
 private const val startDestination = "startDestination"
 private const val lightColorsDestination = "lightColorsDestination"
 private const val darkColorsDestination = "darkColorsDestination"
+private const val typographyDestination = "typographyDestination"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +50,10 @@ class MainActivity : ComponentActivity() {
                             text = "Dark Colors",
                             onClick = { navController.navigate(darkColorsDestination) }
                         )
+                        TextButton(
+                            text = "Typography",
+                            onClick = { navController.navigate(typographyDestination) }
+                        )
                     }
                 }
 
@@ -64,6 +69,10 @@ class MainActivity : ComponentActivity() {
                     ) {
                         MobiusColorsPresentation()
                     }
+                }
+
+                composable(typographyDestination) {
+                    MobiusTypographyPresentation()
                 }
             }
 
