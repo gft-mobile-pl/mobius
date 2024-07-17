@@ -1,7 +1,9 @@
 package com.gft.designsystem
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import java.util.WeakHashMap
@@ -13,6 +15,8 @@ interface StyleValues
 @Stable
 interface Style
 
+interface DynamicStyle : Style
+
 @PublishedApi
 internal class StylesCache : MutableMap<Any, Any> by WeakHashMap()
 
@@ -21,19 +25,36 @@ internal val LocalStylesCache = staticCompositionLocalOf { StylesCache() }
 
 @Composable
 inline fun <reified T : StyleValues> Style.produceStyle(
-    styleProducer: @Composable () -> T,
+    noinline styleProducer: @Composable () -> T,
 ): T {
-    val cache = LocalStylesCache.current
-    return synchronized(cache) {
-        val cachedStyle = cache[this]
-        if (cachedStyle != null && cachedStyle is T) {
-            cachedStyle
-        } else {
-            val newStyle = styleProducer()
-            cache[this] = newStyle
-            newStyle
+    return if (this is DynamicStyle) {
+        val localStyleCache = remember(this) {
+            mutableStateOf<T?>(null)
+        }
+        UpdateLocalStyleCache(localStyleCache, styleProducer)
+        localStyleCache.value!!
+    } else {
+        val cache = LocalStylesCache.current
+        synchronized(cache) {
+            val cachedStyle = cache[this]
+            if (cachedStyle != null && cachedStyle is T) {
+                cachedStyle
+            } else {
+                val newStyle = styleProducer()
+                cache[this] = newStyle
+                newStyle
+            }
         }
     }
+}
+
+@PublishedApi
+@Composable
+internal fun <T : StyleValues> UpdateLocalStyleCache(
+    localStyleCache: MutableState<T?>,
+    styleProducer: @Composable () -> T,
+) {
+    localStyleCache.value = styleProducer()
 }
 
 @Composable
