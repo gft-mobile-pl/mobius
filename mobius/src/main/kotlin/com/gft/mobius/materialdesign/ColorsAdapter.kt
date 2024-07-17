@@ -3,7 +3,7 @@ package com.gft.mobius.materialdesign
 import androidx.compose.material3.ColorScheme
 import com.gft.mobius.colors.MobiusColors
 
-fun MobiusColors.toMaterialDesign(): ColorScheme = ColorScheme(
+internal fun MobiusColors.toMaterialDesign(): ColorScheme = ColorScheme(
     primary = primary,
     onPrimary = onPrimary,
     primaryContainer = primaryContainer,

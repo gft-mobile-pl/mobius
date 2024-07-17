@@ -44,6 +44,7 @@ fun Mobius(
         DesignSystem {
             MaterialTheme(
                 colorScheme = elements.colors.toMaterialDesign(),
+                typography = elements.typography.toMaterialDesign(),
                 content = content
             )
         }
