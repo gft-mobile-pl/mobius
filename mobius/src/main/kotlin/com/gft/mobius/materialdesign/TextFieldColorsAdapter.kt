@@ -1,0 +1,54 @@
+package com.gft.mobius.materialdesign
+
+import androidx.compose.foundation.text.selection.TextSelectionColors
+import androidx.compose.material3.TextFieldColors
+import com.gft.mobius.components.styles.TextFieldStyleValues
+
+fun TextFieldStyleValues.toTextFieldColors() = TextFieldColors(
+    textSelectionColors = TextSelectionColors(
+        handleColor = selectionHandleColor,
+        backgroundColor = selectionBackgroundColor
+    ),
+    focusedTextColor = focusedTextColor,
+    unfocusedTextColor = unfocusedTextColor,
+    disabledTextColor = disabledTextColor,
+    errorTextColor = errorTextColor,
+    focusedContainerColor = focusedContainerColor,
+    unfocusedContainerColor = unfocusedContainerColor,
+    disabledContainerColor = disabledContainerColor,
+    errorContainerColor = errorContainerColor,
+    cursorColor = cursorColor,
+    errorCursorColor = errorCursorColor,
+    focusedIndicatorColor = focusedIndicatorColor,
+    unfocusedIndicatorColor = unfocusedIndicatorColor,
+    disabledIndicatorColor = disabledIndicatorColor,
+    errorIndicatorColor = errorIndicatorColor,
+    focusedLeadingIconColor = focusedLeadingIconColor,
+    unfocusedLeadingIconColor = unfocusedLeadingIconColor,
+    disabledLeadingIconColor = disabledLeadingIconColor,
+    errorLeadingIconColor = errorLeadingIconColor,
+    focusedTrailingIconColor = focusedTrailingIconColor,
+    unfocusedTrailingIconColor = unfocusedTrailingIconColor,
+    disabledTrailingIconColor = disabledTrailingIconColor,
+    errorTrailingIconColor = errorTrailingIconColor,
+    focusedLabelColor = focusedLabelColor,
+    unfocusedLabelColor = unfocusedLabelColor,
+    disabledLabelColor = disabledLabelColor,
+    errorLabelColor = errorLabelColor,
+    focusedPlaceholderColor = focusedPlaceholderColor,
+    unfocusedPlaceholderColor = unfocusedPlaceholderColor,
+    disabledPlaceholderColor = disabledPlaceholderColor,
+    errorPlaceholderColor = errorPlaceholderColor,
+    focusedSupportingTextColor = focusedSupportingTextColor,
+    unfocusedSupportingTextColor = unfocusedSupportingTextColor,
+    disabledSupportingTextColor = disabledSupportingTextColor,
+    errorSupportingTextColor = errorSupportingTextColor,
+    focusedPrefixColor = focusedPrefixColor,
+    unfocusedPrefixColor = unfocusedPrefixColor,
+    disabledPrefixColor = disabledPrefixColor,
+    errorPrefixColor = errorPrefixColor,
+    focusedSuffixColor = focusedSuffixColor,
+    unfocusedSuffixColor = unfocusedSuffixColor,
+    disabledSuffixColor = disabledSuffixColor,
+    errorSuffixColor = errorSuffixColor,
+)

@@ -26,10 +26,10 @@ open class MobiusLightColors : MobiusColors {
     override val surfaceDim: Color = MobiusReferenceColors.WarmGray80
     override val inverseSurface: Color = MobiusReferenceColors.WarmGray20
     override val surfaceContainer: Color = MobiusReferenceColors.WarmGray95
-    override val surfaceContainerLow: Color = MobiusReferenceColors.WarmGray90
-    override val surfaceContainerLowest: Color = MobiusReferenceColors.WarmGray80
-    override val surfaceContainerHigh: Color = MobiusReferenceColors.WarmGray99
-    override val surfaceContainerHighest: Color = MobiusReferenceColors.WarmGray100
+    override val surfaceContainerLow: Color = MobiusReferenceColors.WarmGray99
+    override val surfaceContainerLowest: Color = MobiusReferenceColors.WarmGray100
+    override val surfaceContainerHigh: Color = MobiusReferenceColors.WarmGray90
+    override val surfaceContainerHighest: Color = MobiusReferenceColors.WarmGray80
     override val onSurface: Color = MobiusReferenceColors.WarmGray10
     override val inverseOnSurface: Color = MobiusReferenceColors.WarmGray95
     override val surfaceVariant: Color = Color.Magenta // TODO: ask UX team for missing colors

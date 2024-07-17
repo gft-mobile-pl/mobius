@@ -2,19 +2,23 @@ package com.gft.designsystem
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.gft.mobius.Mobius
+import com.gft.mobius.components.Text
+import com.gft.mobius.components.styles.ProvideTextStyle
 
 @Composable
 internal fun MobiusTypographyPresentation() {
@@ -28,6 +32,32 @@ internal fun MobiusTypographyPresentation() {
                 alignment = Alignment.CenterVertically
             )
         ) {
+            Box(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp),
+            ) {
+                Text(
+                    text = "Default Text"
+                )
+            }
+
+            Box(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp),
+            ) {
+                ProvideTextStyle(
+                    style = TextStyle(
+                        fontFamily = FontFamily.Cursive,
+                        fontSize = 24.sp
+                    )
+                ) {
+                    Text(
+                        text = "Overridden Text Style"
+                    )
+                }
+
+            }
+
             TextItem(
                 text = "Display Large",
                 style = Mobius.typography.displayLarge,
@@ -117,7 +147,7 @@ private fun TextItem(
     style: TextStyle,
     backgroundColor: Color
 ) {
-    BasicText(
+    Text(
         modifier = Modifier
             .background(backgroundColor)
             .padding(horizontal = 8.dp)

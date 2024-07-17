@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,6 +18,7 @@ import com.gft.mobius.Mobius
 import com.gft.mobius.Mobius.colors
 import com.gft.mobius.colors.MobiusDarkColors
 import com.gft.mobius.colors.MobiusLightColors
+import com.gft.mobius.components.Text
 
 enum class MobiusColorsMode {
     Light,
