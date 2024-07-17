@@ -20,7 +20,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gft.mobius.Mobius
-import com.gft.mobius.colors.MobiusDarkColors
 
 private const val startDestination = "startDestination"
 private const val lightColorsDestination = "lightColorsDestination"
@@ -39,7 +38,10 @@ class MainActivity : ComponentActivity() {
                 composable(startDestination) {
                     Column(
                         modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+                        verticalArrangement = Arrangement.spacedBy(
+                            16.dp,
+                            Alignment.CenterVertically
+                        ),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         TextButton(
@@ -58,17 +60,11 @@ class MainActivity : ComponentActivity() {
                 }
 
                 composable(lightColorsDestination) {
-                    Mobius {
-                        MobiusColorsPresentation()
-                    }
+                    MobiusColorsPresentation(MobiusColorsMode.Light)
                 }
 
                 composable(darkColorsDestination) {
-                    Mobius(
-                        colors = MobiusDarkColors()
-                    ) {
-                        MobiusColorsPresentation()
-                    }
+                    MobiusColorsPresentation(MobiusColorsMode.Dark)
                 }
 
                 composable(typographyDestination) {

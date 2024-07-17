@@ -15,19 +15,33 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.gft.mobius.Mobius
 import com.gft.mobius.Mobius.colors
+import com.gft.mobius.colors.MobiusDarkColors
+import com.gft.mobius.colors.MobiusLightColors
+
+enum class MobiusColorsMode {
+    Light,
+    Dark
+}
 
 @Composable
-fun MobiusColorsPresentation() {
-    val colorsToDisplay = colorItems()
-    LazyVerticalGrid(
-        modifier = Modifier.padding(4.dp),
-        columns = GridCells.Adaptive(minSize = 160.dp),
-        verticalArrangement = Arrangement.spacedBy(4.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
+fun MobiusColorsPresentation(
+    colorsMode: MobiusColorsMode
+) {
+    Mobius(
+        colors = if (colorsMode == MobiusColorsMode.Light) MobiusLightColors() else MobiusDarkColors()
     ) {
-        items(colorsToDisplay) { colorItem ->
-            ColorView(colorItem)
+        val colorsToDisplay = colorItems()
+        LazyVerticalGrid(
+            modifier = Modifier.padding(4.dp),
+            columns = GridCells.Adaptive(minSize = 160.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            items(colorsToDisplay) { colorItem ->
+                ColorView(colorItem)
+            }
         }
     }
 }
