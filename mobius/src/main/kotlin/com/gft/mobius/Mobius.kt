@@ -1,5 +1,6 @@
 package com.gft.mobius
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Stable
@@ -38,6 +39,10 @@ fun Mobius(
     content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(LocalMobius provides elements) {
-        DesignSystem(content = content)
+        DesignSystem {
+            MaterialTheme(
+                content = content
+            )
+        }
     }
 }
