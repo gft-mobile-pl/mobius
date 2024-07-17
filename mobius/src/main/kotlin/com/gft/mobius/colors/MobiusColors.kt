@@ -27,6 +27,10 @@ interface MobiusColors : Colors {
     val errorContainer: Color
     val onErrorContainer: Color
 
+    // background
+    val background: Color
+    val onBackground: Color
+
     // surfaces
     val surface: Color
     val surfaceBright: Color
@@ -39,6 +43,7 @@ interface MobiusColors : Colors {
     val surfaceContainerHighest: Color
     val onSurface: Color
     val inverseOnSurface: Color
+    val surfaceVariant: Color
     val onSurfaceVariant: Color
 
     // outlines

@@ -11,6 +11,7 @@ import com.gft.designsystem.DesignSystemElementsProvider
 import com.gft.designsystem.Styles
 import com.gft.mobius.colors.MobiusColors
 import com.gft.mobius.colors.MobiusLightColors
+import com.gft.mobius.materialdesign.toMaterialDesign
 import com.gft.mobius.typography.DefaultMobiusTypography
 import com.gft.mobius.typography.MobiusTypography
 
@@ -41,6 +42,7 @@ fun Mobius(
     CompositionLocalProvider(LocalMobius provides elements) {
         DesignSystem {
             MaterialTheme(
+                colorScheme = elements.colors.toMaterialDesign(),
                 content = content
             )
         }
