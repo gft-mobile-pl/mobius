@@ -26,6 +26,7 @@ private const val lightColorsDestination = "lightColorsDestination"
 private const val darkColorsDestination = "darkColorsDestination"
 private const val typographyDestination = "typographyDestination"
 private const val textFieldsDestination = "textFieldsDestination"
+private const val surfaceDestination = "surfaceDestination"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +59,10 @@ class MainActivity : ComponentActivity() {
                             onClick = { navController.navigate(typographyDestination) }
                         )
                         TextButton(
+                            text = "Surface",
+                            onClick = { navController.navigate(surfaceDestination) }
+                        )
+                        TextButton(
                             text = "TextFields",
                             onClick = { navController.navigate(textFieldsDestination) }
                         )
@@ -78,6 +83,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(textFieldsDestination) {
                     MobiusTextFields()
+                }
+
+                composable(surfaceDestination) {
+                    MobiusSurfacePresentation()
                 }
             }
 

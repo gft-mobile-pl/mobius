@@ -1,8 +1,13 @@
 package com.gft.mobius.colors
 
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.takeOrElse
 import com.gft.designsystem.Colors
+import com.gft.mobius.Mobius
 
 @Immutable
 interface MobiusColors : Colors {
@@ -53,4 +58,33 @@ interface MobiusColors : Colors {
     // other
     val scrim: Color
     val shadow: Color
+}
+
+@Composable
+@ReadOnlyComposable
+fun contentColorFor(color: Color) = with(Mobius.colors) {
+    when (color) {
+        primary -> onPrimary
+        secondary -> onSecondary
+        tertiary -> onTertiary
+        background -> onBackground
+        error -> onError
+        primaryContainer -> onPrimaryContainer
+        secondaryContainer -> onSecondaryContainer
+        tertiaryContainer -> onTertiaryContainer
+        errorContainer -> onErrorContainer
+        inverseSurface -> inverseOnSurface
+        surface -> onSurface
+        surfaceVariant -> onSurfaceVariant
+        surfaceDim -> onSurface
+        surfaceBright -> onSurface
+        surfaceContainer -> onSurface
+        surfaceContainerHigh -> onSurface
+        surfaceContainerHighest -> onSurface
+        surfaceContainerLow -> onSurface
+        surfaceContainerLowest -> onSurface
+        else -> Color.Unspecified
+    }
+}.takeOrElse {
+    LocalContentColor.current
 }
