@@ -10,58 +10,59 @@ import com.gft.designsystem.Style
 import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
 import com.gft.designsystem.TokenReference
+import com.gft.designsystem.produceStyle
 import com.gft.mobius.Mobius
 
-open class TextFieldStyleValues(
-    val textStyle: TextStyle,
-    val labelsTextStyle: TextStyle,
-    val expandedLabelStyle: TextStyle,
-    val shape: Shape,
-    val selectionHandleColor: Color,
-    val selectionBackgroundColor: Color,
-    val focusedTextColor: Color,
-    val unfocusedTextColor: Color,
-    val disabledTextColor: Color,
-    val errorTextColor: Color,
-    val focusedContainerColor: Color,
-    val unfocusedContainerColor: Color,
-    val disabledContainerColor: Color,
-    val errorContainerColor: Color,
-    val cursorColor: Color,
-    val errorCursorColor: Color,
-    val focusedIndicatorColor: Color,
-    val unfocusedIndicatorColor: Color,
-    val disabledIndicatorColor: Color,
-    val errorIndicatorColor: Color,
-    val focusedLeadingIconColor: Color,
-    val unfocusedLeadingIconColor: Color,
-    val disabledLeadingIconColor: Color,
-    val errorLeadingIconColor: Color,
-    val focusedTrailingIconColor: Color,
-    val unfocusedTrailingIconColor: Color,
-    val disabledTrailingIconColor: Color,
-    val errorTrailingIconColor: Color,
-    val focusedLabelColor: Color,
-    val unfocusedLabelColor: Color,
-    val disabledLabelColor: Color,
-    val errorLabelColor: Color,
-    val focusedPlaceholderColor: Color,
-    val unfocusedPlaceholderColor: Color,
-    val disabledPlaceholderColor: Color,
-    val errorPlaceholderColor: Color,
-    val focusedSupportingTextColor: Color,
-    val unfocusedSupportingTextColor: Color,
-    val disabledSupportingTextColor: Color,
-    val errorSupportingTextColor: Color,
-    val focusedPrefixColor: Color,
-    val unfocusedPrefixColor: Color,
-    val disabledPrefixColor: Color,
-    val errorPrefixColor: Color,
-    val focusedSuffixColor: Color,
-    val unfocusedSuffixColor: Color,
-    val disabledSuffixColor: Color,
-    val errorSuffixColor: Color,
-) : StyleValues
+interface TextFieldStyleValues : StyleValues {
+    val textStyle: TextStyle
+    val labelsTextStyle: TextStyle
+    val expandedLabelStyle: TextStyle
+    val shape: Shape
+    val selectionHandleColor: Color
+    val selectionBackgroundColor: Color
+    val focusedTextColor: Color
+    val unfocusedTextColor: Color
+    val disabledTextColor: Color
+    val errorTextColor: Color
+    val focusedContainerColor: Color
+    val unfocusedContainerColor: Color
+    val disabledContainerColor: Color
+    val errorContainerColor: Color
+    val cursorColor: Color
+    val errorCursorColor: Color
+    val focusedIndicatorColor: Color
+    val unfocusedIndicatorColor: Color
+    val disabledIndicatorColor: Color
+    val errorIndicatorColor: Color
+    val focusedLeadingIconColor: Color
+    val unfocusedLeadingIconColor: Color
+    val disabledLeadingIconColor: Color
+    val errorLeadingIconColor: Color
+    val focusedTrailingIconColor: Color
+    val unfocusedTrailingIconColor: Color
+    val disabledTrailingIconColor: Color
+    val errorTrailingIconColor: Color
+    val focusedLabelColor: Color
+    val unfocusedLabelColor: Color
+    val disabledLabelColor: Color
+    val errorLabelColor: Color
+    val focusedPlaceholderColor: Color
+    val unfocusedPlaceholderColor: Color
+    val disabledPlaceholderColor: Color
+    val errorPlaceholderColor: Color
+    val focusedSupportingTextColor: Color
+    val unfocusedSupportingTextColor: Color
+    val disabledSupportingTextColor: Color
+    val errorSupportingTextColor: Color
+    val focusedPrefixColor: Color
+    val unfocusedPrefixColor: Color
+    val disabledPrefixColor: Color
+    val errorPrefixColor: Color
+    val focusedSuffixColor: Color
+    val unfocusedSuffixColor: Color
+    val disabledSuffixColor: Color
+    val errorSuffixColor: Color
+}
 
 interface TextFieldStyle : Style {
     val textStyle: Token<TextStyle>
@@ -116,58 +117,59 @@ interface TextFieldStyle : Style {
 }
 
 @Composable
-fun TextFieldStyle.resolve() = TextFieldStyleValues(
-    textStyle = textStyle.resolve(),
-    labelsTextStyle = labelsTextStyle.resolve(),
-    expandedLabelStyle = expandedLabelStyle.resolve(),
-    shape = shape.resolve(),
-    selectionHandleColor = selectionHandleColor.resolve(),
-    selectionBackgroundColor = selectionBackgroundColor.resolve().copy(
-        alpha = selectionBackgroundOpacity.resolve()
-    ),
-    focusedTextColor = focusedTextColor.resolve(),
-    unfocusedTextColor = unfocusedTextColor.resolve(),
-    disabledTextColor = disabledTextColor.resolve(),
-    errorTextColor = errorTextColor.resolve(),
-    focusedContainerColor = focusedContainerColor.resolve(),
-    unfocusedContainerColor = unfocusedContainerColor.resolve(),
-    disabledContainerColor = disabledContainerColor.resolve(),
-    errorContainerColor = errorContainerColor.resolve(),
-    cursorColor = cursorColor.resolve(),
-    errorCursorColor = errorCursorColor.resolve(),
-    focusedIndicatorColor = focusedIndicatorColor.resolve(),
-    unfocusedIndicatorColor = unfocusedIndicatorColor.resolve(),
-    disabledIndicatorColor = disabledIndicatorColor.resolve(),
-    errorIndicatorColor = errorIndicatorColor.resolve(),
-    focusedLeadingIconColor = focusedLeadingIconColor.resolve(),
-    unfocusedLeadingIconColor = unfocusedLeadingIconColor.resolve(),
-    disabledLeadingIconColor = disabledLeadingIconColor.resolve(),
-    errorLeadingIconColor = errorLeadingIconColor.resolve(),
-    focusedTrailingIconColor = focusedTrailingIconColor.resolve(),
-    unfocusedTrailingIconColor = unfocusedTrailingIconColor.resolve(),
-    disabledTrailingIconColor = disabledTrailingIconColor.resolve(),
-    errorTrailingIconColor = errorTrailingIconColor.resolve(),
-    focusedLabelColor = focusedLabelColor.resolve(),
-    unfocusedLabelColor = unfocusedLabelColor.resolve(),
-    disabledLabelColor = disabledLabelColor.resolve(),
-    errorLabelColor = errorLabelColor.resolve(),
-    focusedPlaceholderColor = focusedPlaceholderColor.resolve(),
-    unfocusedPlaceholderColor = unfocusedPlaceholderColor.resolve(),
-    disabledPlaceholderColor = disabledPlaceholderColor.resolve(),
-    errorPlaceholderColor = errorPlaceholderColor.resolve(),
-    focusedSupportingTextColor = focusedSupportingTextColor.resolve(),
-    unfocusedSupportingTextColor = unfocusedSupportingTextColor.resolve(),
-    disabledSupportingTextColor = disabledSupportingTextColor.resolve(),
-    errorSupportingTextColor = errorSupportingTextColor.resolve(),
-    focusedPrefixColor = focusedPrefixColor.resolve(),
-    unfocusedPrefixColor = unfocusedPrefixColor.resolve(),
-    disabledPrefixColor = disabledPrefixColor.resolve(),
-    errorPrefixColor = errorPrefixColor.resolve(),
-    focusedSuffixColor = focusedSuffixColor.resolve(),
-    unfocusedSuffixColor = unfocusedSuffixColor.resolve(),
-    disabledSuffixColor = disabledSuffixColor.resolve(),
-    errorSuffixColor = errorSuffixColor.resolve(),
-)
+fun TextFieldStyle.resolve() = produceStyle {
+    object : TextFieldStyleValues {
+        override val textStyle = this@resolve.textStyle.resolve()
+        override val labelsTextStyle = this@resolve.labelsTextStyle.resolve()
+        override val expandedLabelStyle = this@resolve.expandedLabelStyle.resolve()
+        override val shape = this@resolve.shape.resolve()
+        override val selectionHandleColor = this@resolve.selectionHandleColor.resolve()
+        override val selectionBackgroundColor = this@resolve.selectionBackgroundColor.resolve()
+            .copy(alpha = selectionBackgroundOpacity.resolve())
+        override val focusedTextColor = this@resolve.focusedTextColor.resolve()
+        override val unfocusedTextColor = this@resolve.unfocusedTextColor.resolve()
+        override val disabledTextColor = this@resolve.disabledTextColor.resolve()
+        override val errorTextColor = this@resolve.errorTextColor.resolve()
+        override val focusedContainerColor = this@resolve.focusedContainerColor.resolve()
+        override val unfocusedContainerColor = this@resolve.unfocusedContainerColor.resolve()
+        override val disabledContainerColor = this@resolve.disabledContainerColor.resolve()
+        override val errorContainerColor = this@resolve.errorContainerColor.resolve()
+        override val cursorColor = this@resolve.cursorColor.resolve()
+        override val errorCursorColor = this@resolve.errorCursorColor.resolve()
+        override val focusedIndicatorColor = this@resolve.focusedIndicatorColor.resolve()
+        override val unfocusedIndicatorColor = this@resolve.unfocusedIndicatorColor.resolve()
+        override val disabledIndicatorColor = this@resolve.disabledIndicatorColor.resolve()
+        override val errorIndicatorColor = this@resolve.errorIndicatorColor.resolve()
+        override val focusedLeadingIconColor = this@resolve.focusedLeadingIconColor.resolve()
+        override val unfocusedLeadingIconColor = this@resolve.unfocusedLeadingIconColor.resolve()
+        override val disabledLeadingIconColor = this@resolve.disabledLeadingIconColor.resolve()
+        override val errorLeadingIconColor = this@resolve.errorLeadingIconColor.resolve()
+        override val focusedTrailingIconColor = this@resolve.focusedTrailingIconColor.resolve()
+        override val unfocusedTrailingIconColor = this@resolve.unfocusedTrailingIconColor.resolve()
+        override val disabledTrailingIconColor = this@resolve.disabledTrailingIconColor.resolve()
+        override val errorTrailingIconColor = this@resolve.errorTrailingIconColor.resolve()
+        override val focusedLabelColor = this@resolve.focusedLabelColor.resolve()
+        override val unfocusedLabelColor = this@resolve.unfocusedLabelColor.resolve()
+        override val disabledLabelColor = this@resolve.disabledLabelColor.resolve()
+        override val errorLabelColor = this@resolve.errorLabelColor.resolve()
+        override val focusedPlaceholderColor = this@resolve.focusedPlaceholderColor.resolve()
+        override val unfocusedPlaceholderColor = this@resolve.unfocusedPlaceholderColor.resolve()
+        override val disabledPlaceholderColor = this@resolve.disabledPlaceholderColor.resolve()
+        override val errorPlaceholderColor = this@resolve.errorPlaceholderColor.resolve()
+        override val focusedSupportingTextColor = this@resolve.focusedSupportingTextColor.resolve()
+        override val unfocusedSupportingTextColor = this@resolve.unfocusedSupportingTextColor.resolve()
+        override val disabledSupportingTextColor = this@resolve.disabledSupportingTextColor.resolve()
+        override val errorSupportingTextColor = this@resolve.errorSupportingTextColor.resolve()
+        override val focusedPrefixColor = this@resolve.focusedPrefixColor.resolve()
+        override val unfocusedPrefixColor = this@resolve.unfocusedPrefixColor.resolve()
+        override val disabledPrefixColor = this@resolve.disabledPrefixColor.resolve()
+        override val errorPrefixColor = this@resolve.errorPrefixColor.resolve()
+        override val focusedSuffixColor = this@resolve.focusedSuffixColor.resolve()
+        override val unfocusedSuffixColor = this@resolve.unfocusedSuffixColor.resolve()
+        override val disabledSuffixColor = this@resolve.disabledSuffixColor.resolve()
+        override val errorSuffixColor = this@resolve.errorSuffixColor.resolve()
+    }
+}
 
 open class DefaultTextFieldStyle : TextFieldStyle {
     override val textStyle: Token<TextStyle> = TokenReference { Mobius.styles.text }
