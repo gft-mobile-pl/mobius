@@ -24,14 +24,14 @@ internal class StylesCache : MutableMap<Any, Any> by WeakHashMap()
 internal val LocalStylesCache = staticCompositionLocalOf { StylesCache() }
 
 @Composable
-inline fun <reified T : StyleValues> Style.produceStyle(
-    noinline styleProducer: @Composable () -> T,
+inline fun <reified T : StyleValues, R : Style> R.produceStyleValues(
+    noinline styleProducer: @Composable (R) -> T,
 ): T {
     return if (this is DynamicStyle) {
         val localStyleCache = remember(this) {
             mutableStateOf<T?>(null)
         }
-        UpdateLocalStyleCache(localStyleCache, styleProducer)
+        UpdateLocalStyleCache(localStyleCache) { styleProducer(this) }
         localStyleCache.value!!
     } else {
         val cache = LocalStylesCache.current
@@ -40,7 +40,7 @@ inline fun <reified T : StyleValues> Style.produceStyle(
             if (cachedStyle != null && cachedStyle is T) {
                 cachedStyle
             } else {
-                val newStyle = styleProducer()
+                val newStyle = styleProducer(this)
                 cache[this] = newStyle
                 newStyle
             }
