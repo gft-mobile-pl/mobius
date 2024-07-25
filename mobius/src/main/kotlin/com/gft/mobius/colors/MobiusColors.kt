@@ -88,3 +88,5 @@ fun contentColorFor(color: Color) = with(Mobius.colors) {
 }.takeOrElse {
     LocalContentColor.current
 }
+
+val LocalContentColor = LocalContentColor
