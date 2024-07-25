@@ -16,7 +16,6 @@ import com.gft.mobius.Mobius
 interface TextFieldStyleValues : StyleValues {
     val textStyle: TextStyle
     val labelsTextStyle: TextStyle
-    val expandedLabelStyle: TextStyle
     val shape: Shape
     val selectionHandleColor: Color
     val selectionBackgroundColor: Color
@@ -67,7 +66,6 @@ interface TextFieldStyleValues : StyleValues {
 interface TextFieldStyle : Style {
     val textStyle: Token<TextStyle>
     val labelsTextStyle: Token<TextStyle>
-    val expandedLabelStyle: Token<TextStyle>
     val focusedTextColor: Token<Color>
     val unfocusedTextColor: Token<Color>
     val disabledTextColor: Token<Color>
@@ -121,7 +119,6 @@ fun TextFieldStyle.resolve() = produceStyle {
     object : TextFieldStyleValues {
         override val textStyle = this@resolve.textStyle.resolve()
         override val labelsTextStyle = this@resolve.labelsTextStyle.resolve()
-        override val expandedLabelStyle = this@resolve.expandedLabelStyle.resolve()
         override val shape = this@resolve.shape.resolve()
         override val selectionHandleColor = this@resolve.selectionHandleColor.resolve()
         override val selectionBackgroundColor = this@resolve.selectionBackgroundColor.resolve()
@@ -174,7 +171,6 @@ fun TextFieldStyle.resolve() = produceStyle {
 open class DefaultTextFieldStyle : TextFieldStyle {
     override val textStyle: Token<TextStyle> = TokenReference { Mobius.styles.text }
     override val labelsTextStyle: Token<TextStyle> = Token { Mobius.typography.bodySmall }
-    override val expandedLabelStyle: Token<TextStyle> = TokenReference { Mobius.styles.textField.textStyle }
     override val focusedTextColor: Token<Color> = Token { Mobius.colors.onSurface }
     override val unfocusedTextColor: Token<Color> = Token { Mobius.colors.onSurface }
     override val disabledTextColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
@@ -233,7 +229,6 @@ open class DefaultTextFieldStyle : TextFieldStyle {
 open class DefaultOutlinedTextFieldStyle : TextFieldStyle {
     override val textStyle: Token<TextStyle> = TokenReference { Mobius.styles.textField.textStyle }
     override val labelsTextStyle: Token<TextStyle> = TokenReference { Mobius.styles.textField.labelsTextStyle }
-    override val expandedLabelStyle: Token<TextStyle> = TokenReference { Mobius.styles.textField.expandedLabelStyle }
     override val focusedTextColor: Token<Color> = TokenReference { Mobius.styles.textField.focusedTextColor }
     override val unfocusedTextColor: Token<Color> = TokenReference { Mobius.styles.textField.unfocusedTextColor }
     override val disabledTextColor: Token<Color> = TokenReference { Mobius.styles.textField.disabledTextColor }

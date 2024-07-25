@@ -46,7 +46,7 @@ fun TextField(
     val styleValues = style.resolve()
     ProvideLabelsTextStyle(
         labelTextStyle = styleValues.labelsTextStyle,
-        expandedLabelTextStyle = styleValues.expandedLabelStyle
+        expandedLabelTextStyle = styleValues.textStyle
     ) {
         androidx.compose.material3.TextField(
             value = value,
@@ -104,7 +104,7 @@ fun TextField(
     val styleValues = style.resolve()
     ProvideLabelsTextStyle(
         labelTextStyle = styleValues.labelsTextStyle,
-        expandedLabelTextStyle = styleValues.expandedLabelStyle
+        expandedLabelTextStyle = styleValues.textStyle
     ) {
         androidx.compose.material3.TextField(
             value = value,
@@ -161,7 +161,7 @@ fun OutlinedTextField(
     val styleValues = style.resolve()
     ProvideLabelsTextStyle(
         labelTextStyle = styleValues.labelsTextStyle,
-        expandedLabelTextStyle = styleValues.expandedLabelStyle
+        expandedLabelTextStyle = styleValues.textStyle
     ) {
         androidx.compose.material3.OutlinedTextField(
             value = value,
@@ -219,7 +219,7 @@ fun OutlinedTextField(
     val styleValues = style.resolve()
     ProvideLabelsTextStyle(
         labelTextStyle = styleValues.labelsTextStyle,
-        expandedLabelTextStyle = styleValues.expandedLabelStyle
+        expandedLabelTextStyle = styleValues.textStyle
     ) {
         androidx.compose.material3.OutlinedTextField(
             value = value,
