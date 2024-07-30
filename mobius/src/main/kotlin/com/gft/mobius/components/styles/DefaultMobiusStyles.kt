@@ -7,4 +7,5 @@ open class DefaultMobiusStyles : MobiusStyles {
     override val text: Token<TextStyle> = DefaultTextStyle
     override val textField: TextFieldStyle = DefaultTextFieldStyle()
     override val outlinedTextField: TextFieldStyle = DefaultOutlinedTextFieldStyle()
+    override val horizontalDivider: HorizontalDividerStyle = DefaultHorizontalDividerStyle()
 }

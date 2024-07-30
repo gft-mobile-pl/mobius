@@ -8,4 +8,5 @@ interface MobiusStyles : Styles {
     val text: Token<TextStyle>
     val textField: TextFieldStyle
     val outlinedTextField: TextFieldStyle
+    val horizontalDivider: HorizontalDividerStyle
 }
