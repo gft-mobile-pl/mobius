@@ -3,13 +3,9 @@ package com.gft.designsystem
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,16 +14,17 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.gft.mobius.Mobius
+import com.gft.mobius.components.Button
 import com.gft.mobius.components.Text
 
-private const val startDestination = "startDestination"
+private const val menuDestination = "menuDestination"
 private const val lightColorsDestination = "lightColorsDestination"
 private const val darkColorsDestination = "darkColorsDestination"
 private const val typographyDestination = "typographyDestination"
 private const val textFieldsDestination = "textFieldsDestination"
 private const val surfaceDestination = "surfaceDestination"
 private const val tabsDestination = "tabsDestination"
+private const val buttonsDestination = "buttonsDestination"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,9 +33,9 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             NavHost(
                 navController = navController,
-                startDestination = tabsDestination
+                startDestination = menuDestination
             ) {
-                composable(startDestination) {
+                composable(menuDestination) {
                     Column(
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.spacedBy(
@@ -47,29 +44,33 @@ class MainActivity : ComponentActivity() {
                         ),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        TextButton(
+                        MenuButton(
                             text = "Light Colors",
                             onClick = { navController.navigate(lightColorsDestination) }
                         )
-                        TextButton(
+                        MenuButton(
                             text = "Dark Colors",
                             onClick = { navController.navigate(darkColorsDestination) }
                         )
-                        TextButton(
+                        MenuButton(
                             text = "Typography",
                             onClick = { navController.navigate(typographyDestination) }
                         )
-                        TextButton(
+                        MenuButton(
                             text = "Surface",
                             onClick = { navController.navigate(surfaceDestination) }
                         )
-                        TextButton(
+                        MenuButton(
                             text = "TextFields",
                             onClick = { navController.navigate(textFieldsDestination) }
                         )
-                        TextButton(
+                        MenuButton(
                             text = "Tabs",
                             onClick = { navController.navigate(tabsDestination) }
+                        )
+                        MenuButton(
+                            text = "Buttons",
+                            onClick = { navController.navigate(buttonsDestination) }
                         )
                     }
                 }
@@ -97,6 +98,10 @@ class MainActivity : ComponentActivity() {
                 composable(tabsDestination) {
                     MobiusTabsPresentation()
                 }
+
+                composable(buttonsDestination) {
+                    MobiusButtonsPresentation()
+                }
             }
 
         }
@@ -104,21 +109,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun TextButton(
+private fun MenuButton(
     text: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
-    Box(
-        modifier = Modifier
-            .background(Mobius.colors.primary)
-            .padding(16.dp)
-            .width(200.dp)
-            .clickable(onClick = onClick)
+    Button(
+        onClick = onClick,
+        modifier = Modifier.width(160.dp)
     ) {
-        Text(
-            text = text,
-            color = Mobius.colors.onPrimary
-        )
+        Text(text)
     }
-
 }

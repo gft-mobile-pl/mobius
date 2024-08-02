@@ -5,6 +5,11 @@ import com.gft.designsystem.Styles
 import com.gft.designsystem.Token
 
 interface MobiusStyles : Styles {
+    val buttonStyle: ButtonStyle
+    val outlinedButtonStyle: ButtonStyle
+    val elevatedButtonStyle: ButtonStyle
+    val filledTonalButtonStyle: ButtonStyle
+    val textButtonStyle: ButtonStyle
     val iconSizeStyle: IconSizeStyle
     val tab: TabStyle
     val primaryTabRow: TabRowStyle

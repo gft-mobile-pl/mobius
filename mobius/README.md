@@ -6,7 +6,7 @@
 | AppBar                                      | create style and aliases                 | TODO   |
 | Badge                                       | create style                             | TODO   |
 | BottomSheetScaffold                         | create style and aliases                 | TODO   |
-| Button                                      | create style (with variants)             | TODO   |
+| Button                                      | create style (with variants)             | ✔ Done |
 | Card                                        | create style (with variants)             | TODO   |
 | Checkbox                                    | create style                             | TODO   |
 | DatePicker                                  | create style                             | TODO   |
