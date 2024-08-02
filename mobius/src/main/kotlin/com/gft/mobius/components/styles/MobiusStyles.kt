@@ -5,6 +5,7 @@ import com.gft.designsystem.Styles
 import com.gft.designsystem.Token
 
 interface MobiusStyles : Styles {
+    val iconSizeStyle: IconSizeStyle
     val tab: TabStyle
     val primaryTabRow: TabRowStyle
     val secondaryTabRow: TabRowStyle

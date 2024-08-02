@@ -4,6 +4,7 @@ import androidx.compose.ui.text.TextStyle
 import com.gft.designsystem.Token
 
 open class DefaultMobiusStyles : MobiusStyles {
+    override val iconSizeStyle: IconSizeStyle = DefaultIconSizeStyle()
     override val tab: TabStyle = DefaultTabStyle()
     override val primaryTabRow: TabRowStyle = PrimaryTabRowStyle()
     override val secondaryTabRow: TabRowStyle = SecondaryTabRowStyle()
