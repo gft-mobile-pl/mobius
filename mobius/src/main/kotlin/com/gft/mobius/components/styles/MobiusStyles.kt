@@ -10,6 +10,7 @@ interface MobiusStyles : Styles {
     val elevatedButtonStyle: ButtonStyle
     val filledTonalButtonStyle: ButtonStyle
     val textButtonStyle: ButtonStyle
+    val radioButtonStyle: RadioButtonStyle
     val iconSizeStyle: IconSizeStyle
     val tab: TabStyle
     val primaryTabRow: TabRowStyle

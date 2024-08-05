@@ -25,6 +25,7 @@ private const val textFieldsDestination = "textFieldsDestination"
 private const val surfaceDestination = "surfaceDestination"
 private const val tabsDestination = "tabsDestination"
 private const val buttonsDestination = "buttonsDestination"
+private const val radioButtonsDestination = "radioButtonsDestination"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +73,10 @@ class MainActivity : ComponentActivity() {
                             text = "Buttons",
                             onClick = { navController.navigate(buttonsDestination) }
                         )
+                        MenuButton(
+                            text = "Radio Buttons",
+                            onClick = { navController.navigate(radioButtonsDestination) }
+                        )
                     }
                 }
 
@@ -101,6 +106,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(buttonsDestination) {
                     MobiusButtonsPresentation()
+                }
+
+                composable(radioButtonsDestination) {
+                    MobiusRadioButtonsPresentation()
                 }
             }
 

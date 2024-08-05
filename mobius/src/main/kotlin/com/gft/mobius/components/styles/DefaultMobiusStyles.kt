@@ -9,6 +9,7 @@ open class DefaultMobiusStyles : MobiusStyles {
     override val elevatedButtonStyle: ButtonStyle = ElevatedButtonStyle()
     override val filledTonalButtonStyle: ButtonStyle = FilledTonalButtonStyle()
     override val textButtonStyle: ButtonStyle = TextButtonStyle()
+    override val radioButtonStyle: RadioButtonStyle = DefaultRadioButtonStyle()
     override val iconSizeStyle: IconSizeStyle = DefaultIconSizeStyle()
     override val tab: TabStyle = DefaultTabStyle()
     override val primaryTabRow: TabRowStyle = PrimaryTabRowStyle()

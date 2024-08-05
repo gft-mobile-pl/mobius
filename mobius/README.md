@@ -25,7 +25,7 @@
 | NavigationRail                              | create style and aliases                 | TODO   |
 | OutlinedTextField                           | create style                             | ✔ Done |
 | ProgressIndicator                           | create style (with variants?)            | TODO   |
-| RadioButton                                 | create style                             | TODO   |
+| RadioButton                                 | create style                             | ✔ Done |
 | Scaffold                                    | wrap / create aliases (like Surface)     | TODO   |
 | SegmentedButton                             | Create style OR get custom one from Salt | TODO   |
 | Slider                                      | Create style and aliases                 | TODO   |
