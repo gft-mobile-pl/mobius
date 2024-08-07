@@ -20,4 +20,5 @@ open class DefaultMobiusStyles : MobiusStyles {
     override val textField: TextFieldStyle = DefaultTextFieldStyle()
     override val outlinedTextField: TextFieldStyle = DefaultOutlinedTextFieldStyle()
     override val horizontalDivider: HorizontalDividerStyle = DefaultHorizontalDividerStyle()
+    override val switchStyle: SwitchStyle = DefaultSwitchStyle()
 }

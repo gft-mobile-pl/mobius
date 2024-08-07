@@ -32,7 +32,7 @@
 | Snackbar                                    | Create style OR get custom one from Salt | TODO   |
 | Surface                                     | wrap                                     | ✔ Done |
 | SwipeToDismissBox                           | wrap                                     | TODO   |
-| Switch                                      | create style                             | TODO   |
+| Switch                                      | create style                             | ✔ Done |
 | Tab                                         | create style                             | ✔ Done |
 | TabRow                                      | create style                             | ✔ Done |
 | Text                                        | create style                             | ✔ Done |

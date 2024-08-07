@@ -21,4 +21,5 @@ interface MobiusStyles : Styles {
     val textField: TextFieldStyle
     val outlinedTextField: TextFieldStyle
     val horizontalDivider: HorizontalDividerStyle
+    val switchStyle: SwitchStyle
 }
