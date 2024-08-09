@@ -8,7 +8,7 @@
 | BottomSheetScaffold                         | create style and aliases                 | TODO   |
 | Button                                      | create style (with variants)             | ✔ Done |
 | Card                                        | create style (with variants)             | TODO   |
-| Checkbox                                    | create style                             | TODO   |
+| Checkbox                                    | create style                             | ✔ Done |
 | DatePicker                                  | create style                             | TODO   |
 | DateRangePicker                             | create style and aliases                 | TODO   |
 | HorizontalDivider                           | create style                             | ✔ Done |

@@ -27,6 +27,7 @@ private const val tabsDestination = "tabsDestination"
 private const val buttonsDestination = "buttonsDestination"
 private const val radioButtonsDestination = "radioButtonsDestination"
 private const val switchDestination = "switchDestination"
+private const val checkboxDestination = "checkboxDestination"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,6 +83,11 @@ class MainActivity : ComponentActivity() {
                             text = "Switch",
                             onClick = { navController.navigate(switchDestination) }
                         )
+
+                        MenuButton(
+                            text = "Checkbox",
+                            onClick = { navController.navigate(checkboxDestination) }
+                        )
                     }
                 }
 
@@ -119,6 +125,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(switchDestination) {
                     MobiusSwitchPresentation()
+                }
+
+                composable(checkboxDestination) {
+                    MobiusCheckboxPresentation()
                 }
             }
 
