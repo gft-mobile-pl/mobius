@@ -44,6 +44,7 @@ dependencies {
     api(project(":design-system"))
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.gft.mobile.compose)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
