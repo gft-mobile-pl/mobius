@@ -22,4 +22,5 @@ open class DefaultMobiusStyles : MobiusStyles {
     override val horizontalDivider: HorizontalDividerStyle = DefaultHorizontalDividerStyle()
     override val switchStyle: SwitchStyle = DefaultSwitchStyle()
     override val checkboxStyle: CheckboxStyle = DefaultCheckboxStyle()
+    override val timePickerStyle: TimePickerStyle = DefaultTimePickerStyle()
 }

@@ -23,4 +23,5 @@ interface MobiusStyles : Styles {
     val horizontalDivider: HorizontalDividerStyle
     val switchStyle: SwitchStyle
     val checkboxStyle: CheckboxStyle
+    val timePickerStyle: TimePickerStyle
 }

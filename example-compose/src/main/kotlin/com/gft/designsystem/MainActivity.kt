@@ -28,6 +28,7 @@ private const val buttonsDestination = "buttonsDestination"
 private const val radioButtonsDestination = "radioButtonsDestination"
 private const val switchDestination = "switchDestination"
 private const val checkboxDestination = "checkboxDestination"
+private const val timePickerDestination = "timePickerDestination"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,10 +84,13 @@ class MainActivity : ComponentActivity() {
                             text = "Switch",
                             onClick = { navController.navigate(switchDestination) }
                         )
-
                         MenuButton(
                             text = "Checkbox",
                             onClick = { navController.navigate(checkboxDestination) }
+                        )
+                        MenuButton(
+                            text = "TimePicker",
+                            onClick = { navController.navigate(timePickerDestination) }
                         )
                     }
                 }
@@ -129,6 +133,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(checkboxDestination) {
                     MobiusCheckboxPresentation()
+                }
+
+                composable(timePickerDestination) {
+                    MobiusTimePickerPresentation()
                 }
             }
 
