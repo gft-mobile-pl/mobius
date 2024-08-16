@@ -13,12 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.Text
-import com.gft.mobius.components.TimePicker
+import com.gft.mobius.components.TimeInput
 import com.gft.mobius.components.TimeInputState
 import com.gft.mobius.components.rememberTimeInputState
 
 @Composable
-fun MobiusTimePickerPresentation() {
+fun MobiusTimeInputPresentation() {
     Mobius {
         Column(
             modifier = Modifier
@@ -29,11 +29,11 @@ fun MobiusTimePickerPresentation() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             val timeInputState = rememberTimeInputState(is24Hour = true)
-            TimePicker(state = timeInputState)
+            TimeInput(state = timeInputState)
             Text(text = "Selected time is: ${timeInputState.getFormattedTime()}")
 
             val timeInput12HState = rememberTimeInputState(is24Hour = false)
-            TimePicker(state = timeInput12HState)
+            TimeInput(state = timeInput12HState)
             Text(text = "Selected time is: ${timeInput12HState.getFormattedTime()}")
         }
     }

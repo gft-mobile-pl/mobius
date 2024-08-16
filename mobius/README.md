@@ -37,5 +37,6 @@
 | TabRow                                      | create style                             | ✔ Done |
 | Text                                        | create style                             | ✔ Done |
 | TextField                                   | create style                             | ✔ Done |
-| TimePicker                                  | create style and aliases                 | TODO   |
+| TimePicker                                  | create style and aliases                 | ✔ Done |
+| TimeInput                                   | create style and aliases                 | ✔ Done |
 | Tooltip                                     | create style and aliases                 | TODO   |

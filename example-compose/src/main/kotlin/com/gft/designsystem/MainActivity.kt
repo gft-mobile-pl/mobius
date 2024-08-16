@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +31,7 @@ private const val radioButtonsDestination = "radioButtonsDestination"
 private const val switchDestination = "switchDestination"
 private const val checkboxDestination = "checkboxDestination"
 private const val timePickerDestination = "timePickerDestination"
+private const val timeInputDestination = "timeInputDestination"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +44,9 @@ class MainActivity : ComponentActivity() {
             ) {
                 composable(menuDestination) {
                     Column(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .verticalScroll(rememberScrollState()),
                         verticalArrangement = Arrangement.spacedBy(
                             16.dp,
                             Alignment.CenterVertically
@@ -92,6 +97,10 @@ class MainActivity : ComponentActivity() {
                             text = "TimePicker",
                             onClick = { navController.navigate(timePickerDestination) }
                         )
+                        MenuButton(
+                            text = "TimeInput",
+                            onClick = { navController.navigate(timeInputDestination) }
+                        )
                     }
                 }
 
@@ -137,6 +146,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(timePickerDestination) {
                     MobiusTimePickerPresentation()
+                }
+
+                composable(timeInputDestination) {
+                    MobiusTimeInputPresentation()
                 }
             }
 
