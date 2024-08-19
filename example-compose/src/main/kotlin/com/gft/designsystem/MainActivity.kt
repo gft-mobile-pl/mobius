@@ -20,6 +20,7 @@ import com.gft.mobius.components.Button
 import com.gft.mobius.components.Text
 
 private const val menuDestination = "menuDestination"
+private const val containersDestination = "containersDestination"
 private const val lightColorsDestination = "lightColorsDestination"
 private const val darkColorsDestination = "darkColorsDestination"
 private const val typographyDestination = "typographyDestination"
@@ -64,6 +65,10 @@ class MainActivity : ComponentActivity() {
                         MenuButton(
                             text = "Typography",
                             onClick = { navController.navigate(typographyDestination) }
+                        )
+                        MenuButton(
+                            text = "Containers",
+                            onClick = { navController.navigate(containersDestination) }
                         )
                         MenuButton(
                             text = "Surface",
@@ -114,6 +119,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(typographyDestination) {
                     MobiusTypographyPresentation()
+                }
+
+                composable(containersDestination) {
+                    MobiusContainersPresentation()
                 }
 
                 composable(textFieldsDestination) {

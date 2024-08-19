@@ -5,6 +5,7 @@ import com.gft.designsystem.Styles
 import com.gft.designsystem.Token
 
 interface MobiusStyles : Styles {
+    val screenStyle: ScreenStyle
     val buttonStyle: ButtonStyle
     val outlinedButtonStyle: ButtonStyle
     val elevatedButtonStyle: ButtonStyle

@@ -4,6 +4,7 @@ import androidx.compose.ui.text.TextStyle
 import com.gft.designsystem.Token
 
 open class DefaultMobiusStyles : MobiusStyles {
+    override val screenStyle: ScreenStyle = DefaultScreenStyle()
     override val buttonStyle: ButtonStyle = DefaultButtonStyle()
     override val outlinedButtonStyle: ButtonStyle = OutlinedButtonStyle()
     override val elevatedButtonStyle: ButtonStyle = ElevatedButtonStyle()
