@@ -28,7 +28,7 @@
 | RadioButton                                 | create style                             | ✔ Done |
 | Scaffold                                    | wrap / create aliases (like Surface)     | TODO   |
 | SegmentedButton                             | Create style OR get custom one from Salt | TODO   |
-| Slider                                      | Create style and aliases                 | TODO   |
+| Slider                                      | Create style and aliases                 | ✔ Done |
 | Snackbar                                    | Create style OR get custom one from Salt | TODO   |
 | Surface                                     | wrap                                     | ✔ Done |
 | SwipeToDismissBox                           | wrap                                     | TODO   |

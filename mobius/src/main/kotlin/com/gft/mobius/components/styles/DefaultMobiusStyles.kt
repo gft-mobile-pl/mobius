@@ -37,4 +37,7 @@ open class DefaultMobiusStyles : MobiusStyles {
     override val tooltipStyle: TooltipStyle = DefaultTooltipStyle()
     override val infoBoxStyle: InfoBoxStyle = DefaultInfoBoxStyle()
     override val infoBoxPositionProviderStyle: InfoBoxPositionProviderStyle = DefaultInfoBoxPositionProviderStyle()
+    override val sliderThumbStyle: SliderThumbStyle = DefaultSliderThumbStyle()
+    override val sliderTooltipStyle: TooltipStyle = SliderTooltipStyle()
+    override val sliderTrackStyle: SliderTrackStyle = DefaultSliderTrackStyle()
 }

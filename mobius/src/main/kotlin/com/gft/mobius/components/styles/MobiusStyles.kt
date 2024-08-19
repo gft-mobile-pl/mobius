@@ -38,4 +38,7 @@ interface MobiusStyles : Styles {
     val tooltipStyle: TooltipStyle
     val infoBoxStyle: InfoBoxStyle
     val infoBoxPositionProviderStyle: InfoBoxPositionProviderStyle
+    val sliderThumbStyle: SliderThumbStyle
+    val sliderTrackStyle: SliderTrackStyle
+    val sliderTooltipStyle: TooltipStyle
 }
