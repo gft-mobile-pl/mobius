@@ -8,18 +8,29 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.dp
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.Button
 import com.gft.mobius.components.Content
 import com.gft.mobius.components.ContentElementsSpacer
+import com.gft.mobius.components.Group
+import com.gft.mobius.components.GroupElementSpacer
 import com.gft.mobius.components.LargeContentElementsSpacer
+import com.gft.mobius.components.LargeGroupElementSpacer
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.SmallContentElementsSpacer
+import com.gft.mobius.components.SmallGroupElementSpacer
 import com.gft.mobius.components.Text
+import com.gft.mobius.components.styles.GroupStyle
 
 @Composable
 fun MobiusContainersPresentation() {
@@ -54,14 +65,44 @@ fun MobiusContainersPresentation() {
                     )
                 }
 
+                LargeContentElementsSpacer()
+
+                Group(
+                    style = customGroupStyle()
+                ) {
+                    Text(text = "This is a Group container with a custom style.")
+                    GroupElementSpacer()
+
+                    HorizontalBoxWithMessage("Below is a small group element spacer.")
+                    SmallGroupElementSpacer()
+                    HorizontalBoxWithMessage("Below is a default/medium group element spacer.")
+                    GroupElementSpacer()
+                    HorizontalBoxWithMessage("Below is a large group element spacer.")
+                    LargeGroupElementSpacer()
+
+                    Row {
+                        VerticalBox()
+                        SmallGroupElementSpacer()
+                        VerticalBox()
+                        GroupElementSpacer()
+                        VerticalBox()
+                        LargeGroupElementSpacer()
+                        VerticalBox()
+                        SmallGroupElementSpacer()
+                        Text(
+                            text = "On the left \nsmall, medium, and large group element spacers are displayed, respectively.",
+                            style = Mobius.typography.bodySmall
+                        )
+                    }
+
+                }
+
 
                 Spacer(modifier = Modifier.weight(1.0f))
                 Button(onClick = { }) {
                     Text(text = "Bottom button")
                 }
             }
-
-
         }
     }
 }
@@ -86,3 +127,20 @@ private fun VerticalBox() = Box(
         .width(32.dp)
         .background(Mobius.colors.primary),
 )
+
+@Composable
+fun customGroupStyle(): GroupStyle {
+    val defaultStyle = Mobius.styles.groupStyle
+    return remember(defaultStyle) {
+        object : GroupStyle by defaultStyle {
+            override val background: Token<Brush?> = Token {
+                Brush.linearGradient(
+                    0.0f to Mobius.colors.secondary,
+                    1.0f to Mobius.colors.tertiary
+                )
+            }
+            override val shape: Token<Shape?> = Token(RoundedCornerShape(16.dp))
+            override val contentColor: Token<Color> = Token { Mobius.colors.onSecondary }
+        }
+    }
+}

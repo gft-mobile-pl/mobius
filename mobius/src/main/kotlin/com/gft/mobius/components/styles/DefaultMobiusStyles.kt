@@ -8,6 +8,8 @@ open class DefaultMobiusStyles : MobiusStyles {
     override val contentStyle: ContentStyle = DefaultContentStyle()
     override val contentElementSpacerStyle: ContentElementSpacerStyle = DefaultContentElementSpacerStyle()
     override val scrollableContentStyle: ContentStyle = DefaultContentStyle()
+    override val groupStyle: GroupStyle = DefaultGroupStyle()
+    override val groupElementSpacerStyle: GroupElementSpacerStyle = DefaultGroupElementSpacerStyle()
     override val buttonStyle: ButtonStyle = DefaultButtonStyle()
     override val outlinedButtonStyle: ButtonStyle = OutlinedButtonStyle()
     override val elevatedButtonStyle: ButtonStyle = ElevatedButtonStyle()
