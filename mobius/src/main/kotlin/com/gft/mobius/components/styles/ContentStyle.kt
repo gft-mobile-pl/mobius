@@ -1,0 +1,55 @@
+package com.gft.mobius.components.styles
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import com.gft.designsystem.Style
+import com.gft.designsystem.StyleValues
+import com.gft.designsystem.Token
+import com.gft.designsystem.produceStyleValues
+import com.gft.mobius.references.MobiusReferenceDimensions
+
+interface ContentStyleValues : StyleValues {
+    val padding: PaddingValues
+    val background: Brush?
+    val contentColor: Color
+    val verticalArrangement: Arrangement.Vertical
+    val horizontalAlignment: Alignment.Horizontal
+}
+
+interface ContentStyle : Style {
+    val padding: Token<PaddingValues>
+    val background: Token<Brush?>
+    val contentColor: Token<Color>
+    val verticalArrangement: Token<Arrangement.Vertical>
+    val horizontalAlignment: Token<Alignment.Horizontal>
+}
+
+@Composable
+fun ContentStyle.resolve() = produceStyleValues { style ->
+    object : ContentStyleValues {
+        override val padding = style.padding.resolve()
+        override val background = style.background.resolve()
+        override val contentColor = style.contentColor.resolve()
+        override val verticalArrangement = style.verticalArrangement.resolve()
+        override val horizontalAlignment = style.horizontalAlignment.resolve()
+    }
+}
+
+open class DefaultContentStyle : ContentStyle {
+    override val padding = Token(
+        PaddingValues(
+            start = MobiusReferenceDimensions.Dimension16,
+            end = MobiusReferenceDimensions.Dimension16,
+            top = MobiusReferenceDimensions.Dimension16,
+            bottom = MobiusReferenceDimensions.Dimension16,
+        )
+    )
+    override val background = Token(null as Brush?)
+    override val contentColor = Token(Color.Unspecified)
+    override val verticalArrangement = Token(Arrangement.Top)
+    override val horizontalAlignment = Token(Alignment.Start)
+}

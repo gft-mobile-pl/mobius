@@ -5,6 +5,9 @@ import com.gft.designsystem.Token
 
 open class DefaultMobiusStyles : MobiusStyles {
     override val screenStyle: ScreenStyle = DefaultScreenStyle()
+    override val contentStyle: ContentStyle = DefaultContentStyle()
+    override val contentElementSpacerStyle: ContentElementSpacerStyle = DefaultContentElementSpacerStyle()
+    override val scrollableContentStyle: ContentStyle = DefaultContentStyle()
     override val buttonStyle: ButtonStyle = DefaultButtonStyle()
     override val outlinedButtonStyle: ButtonStyle = OutlinedButtonStyle()
     override val elevatedButtonStyle: ButtonStyle = ElevatedButtonStyle()
