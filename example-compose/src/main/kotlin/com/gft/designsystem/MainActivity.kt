@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -21,6 +22,7 @@ import com.gft.mobius.components.Text
 
 private const val menuDestination = "menuDestination"
 private const val containersDestination = "containersDestination"
+private const val cardsDestination = "cardsDestination"
 private const val lightColorsDestination = "lightColorsDestination"
 private const val darkColorsDestination = "darkColorsDestination"
 private const val typographyDestination = "typographyDestination"
@@ -46,6 +48,7 @@ class MainActivity : ComponentActivity() {
                 composable(menuDestination) {
                     Column(
                         modifier = Modifier
+                            .padding(16.dp)
                             .fillMaxSize()
                             .verticalScroll(rememberScrollState()),
                         verticalArrangement = Arrangement.spacedBy(
@@ -69,6 +72,10 @@ class MainActivity : ComponentActivity() {
                         MenuButton(
                             text = "Containers",
                             onClick = { navController.navigate(containersDestination) }
+                        )
+                        MenuButton(
+                            text = "Cards",
+                            onClick = { navController.navigate(cardsDestination) }
                         )
                         MenuButton(
                             text = "Surface",
@@ -123,6 +130,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(containersDestination) {
                     MobiusContainersPresentation()
+                }
+
+                composable(cardsDestination) {
+                    MobiusCardsPresentation()
                 }
 
                 composable(textFieldsDestination) {

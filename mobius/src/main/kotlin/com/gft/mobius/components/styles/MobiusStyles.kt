@@ -11,6 +11,9 @@ interface MobiusStyles : Styles {
     val scrollableContentStyle: ContentStyle
     val groupStyle: GroupStyle
     val groupElementSpacerStyle: GroupElementSpacerStyle
+    val cardStyle: CardStyle
+    val outlinedCardStyle: CardStyle
+    val elevatedCardStyle: CardStyle
     val buttonStyle: ButtonStyle
     val outlinedButtonStyle: ButtonStyle
     val elevatedButtonStyle: ButtonStyle
