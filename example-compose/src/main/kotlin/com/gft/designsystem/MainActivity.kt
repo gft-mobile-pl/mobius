@@ -35,6 +35,7 @@ private const val switchDestination = "switchDestination"
 private const val checkboxDestination = "checkboxDestination"
 private const val timePickerDestination = "timePickerDestination"
 private const val timeInputDestination = "timeInputDestination"
+private const val tooltipDestination = "tooltipDestination"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,6 +114,10 @@ class MainActivity : ComponentActivity() {
                             text = "TimeInput",
                             onClick = { navController.navigate(timeInputDestination) }
                         )
+                        MenuButton(
+                            text = "Tooltip",
+                            onClick = { navController.navigate(tooltipDestination) }
+                        )
                     }
                 }
 
@@ -170,6 +175,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(timeInputDestination) {
                     MobiusTimeInputPresentation()
+                }
+
+                composable(tooltipDestination) {
+                    MobiusTooltipPresentation()
                 }
             }
 
