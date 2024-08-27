@@ -1,5 +1,8 @@
 package com.gft.mobius.components
 
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.PlainTooltip
 import androidx.compose.runtime.Composable
@@ -28,7 +31,13 @@ fun TooltipScope.Tooltip(
             shadowElevation = styleValues.shadowElevation,
         ) {
             ProvideTextStyle(style = styleValues.contentTextStyle) {
-                Text(message)
+                Text(
+                    message,
+                    Modifier
+                        .padding(styleValues.padding)
+                        .defaultMinSize(styleValues.minWidth)
+                        .wrapContentSize()
+                )
             }
         }
     }
