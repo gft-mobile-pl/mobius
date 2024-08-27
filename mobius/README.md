@@ -7,7 +7,7 @@
 | Badge                                       | create style                             | TODO   |
 | BottomSheetScaffold                         | create style and aliases                 | TODO   |
 | Button                                      | create style (with variants)             | ✔ Done |
-| Card                                        | create style (with variants)             | TODO   |
+| Card                                        | create style (with variants)             | ✔ Done |
 | Checkbox                                    | create style                             | ✔ Done |
 | DatePicker                                  | create style                             | TODO   |
 | DateRangePicker                             | create style and aliases                 | TODO   |
@@ -17,7 +17,7 @@
 | Icon                                        | wrap                                     | ✔ Done |
 | IconButton                                  | create style (with variants) or Skip?    | TODO   |
 | LocalMinimumInteractiveComponentEnforcement | create alias                             | TODO   |
-| Label                                       | wrap                                     | TODO   |
+| Label                                       | wrap                                     | ✔ Done |
 | ListItem                                    | create style                             | TODO   |
 | Menu                                        | create style                             | TODO   |
 | NavigationBar                               | create style                             | TODO   |
@@ -39,4 +39,4 @@
 | TextField                                   | create style                             | ✔ Done |
 | TimePicker                                  | create style and aliases                 | ✔ Done |
 | TimeInput                                   | create style and aliases                 | ✔ Done |
-| Tooltip                                     | create style and aliases                 | TODO   |
+| Tooltip                                     | create style and aliases                 | ✔ Done |
