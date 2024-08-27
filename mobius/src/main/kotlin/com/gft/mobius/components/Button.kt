@@ -26,7 +26,7 @@ fun Button(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.buttonStyle,
     content: @Composable RowScope.() -> Unit,
 ) {
@@ -76,7 +76,7 @@ fun OutlinedButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.outlinedButtonStyle,
     content: @Composable RowScope.() -> Unit,
 ) = Button(
@@ -93,7 +93,7 @@ fun ElevatedButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.elevatedButtonStyle,
     content: @Composable RowScope.() -> Unit,
 ) = Button(
@@ -110,7 +110,7 @@ fun FilledTonalButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.filledTonalButtonStyle,
     content: @Composable RowScope.() -> Unit,
 ) = Button(
@@ -127,7 +127,7 @@ fun TextButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.textButtonStyle,
     content: @Composable RowScope.() -> Unit,
 ) = Button(
