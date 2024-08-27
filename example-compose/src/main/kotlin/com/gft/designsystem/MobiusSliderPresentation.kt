@@ -41,7 +41,7 @@ fun MobiusSliderPresentation() {
 
             Slider(
                 value = sliderValue,
-                tooltipVisibility = Slider.TooltipVisibility.Visible { value -> "${value.toInt()}" },
+                tooltipVisibility = Slider.TooltipVisibility.VisibleOnInteraction { value -> "${value.toInt()}" },
                 valueRange = 0f..100f,
                 onValueChange = { value -> sliderValue = value },
             )

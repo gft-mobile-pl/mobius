@@ -29,6 +29,7 @@
 | Scaffold                                    | wrap / create aliases (like Surface)     | TODO   |
 | SegmentedButton                             | Create style OR get custom one from Salt | TODO   |
 | Slider                                      | Create style and aliases                 | ✔ Done |
+| RangeSlider                                 | Create style and aliases                 | ✔ Done |
 | Snackbar                                    | Create style OR get custom one from Salt | TODO   |
 | Surface                                     | wrap                                     | ✔ Done |
 | SwipeToDismissBox                           | wrap                                     | TODO   |

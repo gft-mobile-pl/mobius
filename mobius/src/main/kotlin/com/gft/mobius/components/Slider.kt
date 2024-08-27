@@ -15,7 +15,7 @@ fun Slider(
     onValueChange: (Float) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    tooltipVisibility: Slider.TooltipVisibility = Slider.TooltipVisibility.Visible(),
+    tooltipVisibility: Slider.TooltipVisibility = Slider.TooltipVisibility.VisibleOnInteraction(),
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
     @IntRange(from = 0) steps: Int = 0,
     onValueChangeFinished: (() -> Unit)? = null,
@@ -23,10 +23,7 @@ fun Slider(
 ) {
     @Suppress("NAME_SHADOWING")
     val interactionSource = interactionSource ?: remember { MutableInteractionSource() }
-    val tooltipFormatter = when(tooltipVisibility) {
-        is Slider.TooltipVisibility.Visible -> tooltipVisibility.formatter
-        else -> null
-    }
+    val tooltipFormatter = tooltipVisibility.resolveFormatter()
     @OptIn(ExperimentalMaterial3Api::class)
     androidx.compose.material3.Slider(
         value = value,
@@ -66,7 +63,7 @@ fun Slider(
     onValueChangeFinished: (() -> Unit)? = null,
     thumb: @Composable (SliderState, MutableInteractionSource) -> Unit = { sliderState, interactionSource ->
         SliderThumb(
-            tooltip = Slider.TooltipVisibility.Visible().formatter(sliderState.value),
+            tooltip = Slider.TooltipVisibility.VisibleOnInteraction().formatter(sliderState.value),
             enabled = enabled,
             interactionSource = interactionSource
         )
@@ -125,6 +122,12 @@ interface Slider {
     @Stable
     sealed interface TooltipVisibility {
         data object Invisible : TooltipVisibility
-        data class Visible(val formatter: (Float) -> String = { sliderValue -> "%.2f".format(sliderValue) }) : TooltipVisibility
+        data class VisibleOnInteraction(val formatter: (Float) -> String = { sliderValue -> "%.2f".format(sliderValue) }) : TooltipVisibility
     }
+}
+
+@Composable
+internal fun Slider.TooltipVisibility.resolveFormatter() = when (this) {
+    is Slider.TooltipVisibility.VisibleOnInteraction -> formatter
+    else -> null
 }

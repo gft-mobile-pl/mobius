@@ -39,6 +39,7 @@ private const val timePickerDestination = "timePickerDestination"
 private const val timeInputDestination = "timeInputDestination"
 private const val tooltipDestination = "tooltipDestination"
 private const val sliderDestination = "sliderDestination"
+private const val rangeSliderDestination = "rangeSliderDestination"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -129,6 +130,10 @@ class MainActivity : ComponentActivity() {
                             text = "Slider",
                             onClick = { navController.navigate(sliderDestination) }
                         )
+                        MenuButton(
+                            text = "RangeSlider",
+                            onClick = { navController.navigate(rangeSliderDestination) }
+                        )
                     }
                 }
 
@@ -200,6 +205,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(sliderDestination) {
                     MobiusSliderPresentation()
+                }
+
+                composable(rangeSliderDestination) {
+                    MobiusRangeSliderPresentation()
                 }
             }
 
