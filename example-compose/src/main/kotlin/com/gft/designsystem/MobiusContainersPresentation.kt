@@ -36,7 +36,6 @@ import com.gft.mobius.components.styles.GroupStyle
 fun MobiusContainersPresentation() {
     Mobius {
         Screen {
-
             Content {
                 Text(text = "The whole page is wrapped in Content container.")
                 ContentElementsSpacer()

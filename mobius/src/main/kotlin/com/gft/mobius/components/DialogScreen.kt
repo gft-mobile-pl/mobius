@@ -35,7 +35,7 @@ fun DialogScreen(
     minActiveState: Lifecycle.State = Lifecycle.State.RESUMED,
     clearFocusOnClick: Boolean = true,
     style: DialogScreenStyle = Mobius.styles.dialogScreenStyle,
-    content: @Composable ColumnScope.() -> Unit,
+    content: @Composable DialogScreenScope.() -> Unit,
 ) {
     val styleValues = style.resolve()
     val contentColor = styleValues.contentColor.takeOrElse { LocalContentColor.current }
@@ -73,8 +73,14 @@ fun DialogScreen(
                     .width(IntrinsicSize.Max)
                     .height(IntrinsicSize.Max)
                     .then(modifier),
-                content = content
+                content = {
+                    DialogScreenScope(this).content()
+                }
             )
         }
     }
 }
+
+interface DialogScreenScope : ColumnScope
+
+private fun DialogScreenScope(columnScope: ColumnScope) = object : DialogScreenScope, ColumnScope by columnScope {}

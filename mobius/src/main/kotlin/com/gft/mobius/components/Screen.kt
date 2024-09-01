@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -30,7 +29,7 @@ fun Screen(
     minActiveState: Lifecycle.State = Lifecycle.State.RESUMED,
     clearFocusOnClick: Boolean = true,
     style: ScreenStyle = Mobius.styles.screenStyle,
-    content: @Composable ColumnScope.() -> Unit,
+    content: @Composable ScreenScope.() -> Unit,
 ) {
     InteractionFilter(
         minActiveState = minActiveState
@@ -52,7 +51,6 @@ fun Screen(
                 .modifyIf(styleValues.navigationBarOverlappingPolicy == NEVER_DISPLAY_BEHIND_SYSTEM_BAR) {
                     navigationBarsPadding()
                 }
-                .padding(styleValues.paddingValues)
                 .then(modifier),
         ) {
             val contentColor = styleValues.contentColor.takeOrElse { LocalContentColor.current }
@@ -67,9 +65,15 @@ fun Screen(
                         .modifyIf(styleValues.navigationBarOverlappingPolicy == ALLOW_DISPLAYING_BACKGROUND_BEHIND_SYSTEM_BAR) {
                             navigationBarsPadding()
                         },
-                    content = content
+                    content = {
+                        ScreenScope(this).content()
+                    }
                 )
             }
         }
     }
 }
+
+interface ScreenScope : ColumnScope
+
+private fun ScreenScope(columnScope: ColumnScope) = object : ScreenScope, ColumnScope by columnScope {}

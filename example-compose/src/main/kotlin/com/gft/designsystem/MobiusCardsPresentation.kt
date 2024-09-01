@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,83 +13,88 @@ import com.gft.mobius.Mobius
 import com.gft.mobius.components.Card
 import com.gft.mobius.components.ElevatedCard
 import com.gft.mobius.components.OutlinedCard
+import com.gft.mobius.components.Screen
 import com.gft.mobius.components.ScrollableContent
 import com.gft.mobius.components.Text
 
 @Composable
 fun MobiusCardsPresentation() {
     Mobius {
-        ScrollableContent {
-            val cardModifier = Modifier.fillMaxWidth().height(100.dp)
-
-            Column(
-                modifier = Modifier
+        Screen {
+            ScrollableContent {
+                val cardModifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Card(
-                    modifier = cardModifier
-                ) {
-                    Text(text = "Card")
-                }
+                    .height(100.dp)
 
-                Card(
-                    onClick = {},
-                    modifier = cardModifier
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    Text(text = "Clickable card")
-                }
+                    Card(
+                        modifier = cardModifier
+                    ) {
+                        Text(text = "Card")
+                    }
 
-                Card(
-                    onClick = {},
-                    enabled = false,
-                    modifier = cardModifier
-                ) {
-                    Text(text = "Disabled card")
-                }
+                    Card(
+                        onClick = {},
+                        modifier = cardModifier
+                    ) {
+                        Text(text = "Clickable card")
+                    }
 
-                OutlinedCard(
-                    modifier = cardModifier
-                ) {
-                    Text(text = "Outlined card")
-                }
+                    Card(
+                        onClick = {},
+                        enabled = false,
+                        modifier = cardModifier
+                    ) {
+                        Text(text = "Disabled card")
+                    }
 
-                OutlinedCard(
-                    onClick = {},
-                    modifier = cardModifier
-                ) {
-                    Text(text = "Outlined clickable card")
-                }
+                    OutlinedCard(
+                        modifier = cardModifier
+                    ) {
+                        Text(text = "Outlined card")
+                    }
 
-                OutlinedCard(
-                    onClick = {},
-                    enabled = false,
-                    modifier = cardModifier
-                ) {
-                    Text(text = "Outlined disabled card")
-                }
+                    OutlinedCard(
+                        onClick = {},
+                        modifier = cardModifier
+                    ) {
+                        Text(text = "Outlined clickable card")
+                    }
 
-                ElevatedCard(
-                    modifier = cardModifier
-                ) {
-                    Text(text = "Elevated card")
-                }
+                    OutlinedCard(
+                        onClick = {},
+                        enabled = false,
+                        modifier = cardModifier
+                    ) {
+                        Text(text = "Outlined disabled card")
+                    }
 
-                ElevatedCard(
-                    onClick = {},
-                    modifier = cardModifier
-                ) {
-                    Text(text = "Elevated clickable card")
-                }
+                    ElevatedCard(
+                        modifier = cardModifier
+                    ) {
+                        Text(text = "Elevated card")
+                    }
 
-                ElevatedCard(
-                    onClick = {},
-                    enabled = false,
-                    modifier = cardModifier
-                ) {
-                    Text(text = "Elevated disabled card")
+                    ElevatedCard(
+                        onClick = {},
+                        modifier = cardModifier
+                    ) {
+                        Text(text = "Elevated clickable card")
+                    }
+
+                    ElevatedCard(
+                        onClick = {},
+                        enabled = false,
+                        modifier = cardModifier
+                    ) {
+                        Text(text = "Elevated disabled card")
+                    }
                 }
             }
         }

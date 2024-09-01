@@ -8,8 +8,10 @@ interface MobiusStyles : Styles {
     val screenStyle: ScreenStyle
     val dialogScreenStyle: DialogScreenStyle
     val contentStyle: ContentStyle
-    val contentElementSpacerStyle: ContentElementSpacerStyle
     val scrollableContentStyle: ContentStyle
+    val dialogContentStyle: ContentStyle
+    val dialogScrollableContentStyle: ContentStyle
+    val contentElementSpacerStyle: ContentElementSpacerStyle
     val groupStyle: GroupStyle
     val groupElementSpacerStyle: GroupElementSpacerStyle
     val cardStyle: CardStyle

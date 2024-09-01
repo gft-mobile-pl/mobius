@@ -6,10 +6,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import com.gft.designsystem.Style
 import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
 import com.gft.designsystem.produceStyleValues
+import com.gft.mobius.Mobius
 import com.gft.mobius.references.MobiusReferenceDimensions
 
 interface ContentStyleValues : StyleValues {
@@ -50,6 +52,16 @@ open class DefaultContentStyle : ContentStyle {
     )
     override val background = Token(null as Brush?)
     override val contentColor = Token(Color.Unspecified)
+    override val verticalArrangement = Token(Arrangement.Top)
+    override val horizontalAlignment = Token(Alignment.Start)
+}
+
+open class DefaultDialogContentStyle : ContentStyle {
+    override val padding = Token(
+        PaddingValues(all = MobiusReferenceDimensions.Dimension24)
+    )
+    override val background: Token<Brush?> = Token { SolidColor(Mobius.colors.surfaceContainerHigh) }
+    override val contentColor = Token { Mobius.colors.onSurfaceVariant }
     override val verticalArrangement = Token(Arrangement.Top)
     override val horizontalAlignment = Token(Alignment.Start)
 }

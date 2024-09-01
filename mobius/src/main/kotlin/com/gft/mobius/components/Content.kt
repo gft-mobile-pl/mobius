@@ -19,17 +19,32 @@ import com.gft.mobius.components.styles.ContentStyle
 import com.gft.mobius.components.styles.resolve
 
 @Composable
-fun Content(
+fun ScreenScope.Content(
     modifier: Modifier = Modifier,
     style: ContentStyle = Mobius.styles.contentStyle,
     content: @Composable ColumnScope.() -> Unit,
 ) = ContentImplementation(modifier, null, style, content)
 
 @Composable
-fun ScrollableContent(
+fun ScreenScope.ScrollableContent(
     modifier: Modifier = Modifier,
     scrollState: ScrollState = rememberScrollState(),
     style: ContentStyle = Mobius.styles.scrollableContentStyle,
+    content: @Composable ColumnScope.() -> Unit,
+) = ContentImplementation(modifier, scrollState, style, content)
+
+@Composable
+fun DialogScreenScope.Content(
+    modifier: Modifier = Modifier,
+    style: ContentStyle = Mobius.styles.dialogContentStyle,
+    content: @Composable ColumnScope.() -> Unit,
+) = ContentImplementation(modifier, null, style, content)
+
+@Composable
+fun DialogScreenScope.ScrollableContent(
+    modifier: Modifier = Modifier,
+    scrollState: ScrollState = rememberScrollState(),
+    style: ContentStyle = Mobius.styles.dialogScrollableContentStyle,
     content: @Composable ColumnScope.() -> Unit,
 ) = ContentImplementation(modifier, scrollState, style, content)
 
