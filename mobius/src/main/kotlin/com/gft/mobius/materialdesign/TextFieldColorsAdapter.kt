@@ -1,10 +1,9 @@
 package com.gft.mobius.materialdesign
 
 import androidx.compose.foundation.text.selection.TextSelectionColors
-import androidx.compose.material3.TextFieldColors
-import com.gft.mobius.components.styles.TextFieldStyleValues
+import com.gft.mobius.components.styles.TextFieldColors
 
-fun TextFieldStyleValues.toTextFieldColors() = TextFieldColors(
+internal fun TextFieldColors.toTextFieldColors() = androidx.compose.material3.TextFieldColors(
     textSelectionColors = TextSelectionColors(
         handleColor = selectionHandleColor,
         backgroundColor = selectionBackgroundColor

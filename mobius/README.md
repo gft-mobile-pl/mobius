@@ -9,7 +9,7 @@
 | Button                                      | create style (with variants)             | ✔ Done |
 | Card                                        | create style (with variants)             | ✔ Done |
 | Checkbox                                    | create style                             | ✔ Done |
-| DatePicker                                  | create style                             | TODO   |
+| DatePicker                                  | create style                             | ✔ Done |
 | DateRangePicker                             | create style and aliases                 | TODO   |
 | HorizontalDivider                           | create style                             | ✔ Done |
 | VerticalDivider                             | mimic HorizontalDivider                  | TODO   |

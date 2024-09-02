@@ -13,10 +13,13 @@ import com.gft.designsystem.TokenReference
 import com.gft.designsystem.produceStyleValues
 import com.gft.mobius.Mobius
 
-interface TextFieldStyleValues : StyleValues {
+interface TextFieldStyleValues : StyleValues, TextFieldColors {
     val textStyle: TextStyle
     val labelsTextStyle: TextStyle
     val shape: Shape
+}
+
+interface TextFieldColors {
     val selectionHandleColor: Color
     val selectionBackgroundColor: Color
     val focusedTextColor: Color
@@ -63,9 +66,14 @@ interface TextFieldStyleValues : StyleValues {
     val errorSuffixColor: Color
 }
 
-interface TextFieldStyle : Style {
+interface TextFieldStyle : Style, TextFieldColorTokens {
     val textStyle: Token<TextStyle>
     val labelsTextStyle: Token<TextStyle>
+    val shape: Token<Shape>
+    val selectionBackgroundOpacity: Token<Float>
+}
+
+interface TextFieldColorTokens {
     val focusedTextColor: Token<Color>
     val unfocusedTextColor: Token<Color>
     val disabledTextColor: Token<Color>
@@ -108,11 +116,10 @@ interface TextFieldStyle : Style {
     val unfocusedSuffixColor: Token<Color>
     val disabledSuffixColor: Token<Color>
     val errorSuffixColor: Token<Color>
-    val shape: Token<Shape>
     val selectionHandleColor: Token<Color>
     val selectionBackgroundColor: Token<Color>
-    val selectionBackgroundOpacity: Token<Float>
 }
+
 
 @Composable
 fun TextFieldStyle.resolve() = produceStyleValues { style ->

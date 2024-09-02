@@ -34,6 +34,7 @@ open class DefaultMobiusStyles : MobiusStyles {
     override val checkboxStyle: CheckboxStyle = DefaultCheckboxStyle()
     override val timePickerStyle: TimePickerStyle = DefaultTimePickerStyle()
     override val timeInputStyle: TimeInputStyle = DefaultTimeInputStyle()
+    override val datePickerStyle: DatePickerStyle = DefaultDatePickerStyle()
     override val tooltipStyle: TooltipStyle = DefaultTooltipStyle()
     override val infoBoxStyle: InfoBoxStyle = DefaultInfoBoxStyle()
     override val infoBoxPositionProviderStyle: InfoBoxPositionProviderStyle = DefaultInfoBoxPositionProviderStyle()

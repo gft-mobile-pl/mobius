@@ -37,6 +37,7 @@ private const val switchDestination = "switchDestination"
 private const val checkboxDestination = "checkboxDestination"
 private const val timePickerDestination = "timePickerDestination"
 private const val timeInputDestination = "timeInputDestination"
+private const val datePickerDestination = "datePickerDestination"
 private const val tooltipDestination = "tooltipDestination"
 private const val sliderDestination = "sliderDestination"
 private const val rangeSliderDestination = "rangeSliderDestination"
@@ -123,6 +124,10 @@ class MainActivity : ComponentActivity() {
                             onClick = { navController.navigate(timeInputDestination) }
                         )
                         MenuButton(
+                            text = "DatePicker",
+                            onClick = { navController.navigate(datePickerDestination) }
+                        )
+                        MenuButton(
                             text = "Tooltip",
                             onClick = { navController.navigate(tooltipDestination) }
                         )
@@ -197,6 +202,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(timeInputDestination) {
                     MobiusTimeInputPresentation()
+                }
+
+                composable(datePickerDestination) {
+                    MobiusDatePickerPresentation()
                 }
 
                 composable(tooltipDestination) {

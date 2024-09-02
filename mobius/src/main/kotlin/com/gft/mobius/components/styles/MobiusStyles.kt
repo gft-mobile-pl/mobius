@@ -35,6 +35,7 @@ interface MobiusStyles : Styles {
     val checkboxStyle: CheckboxStyle
     val timePickerStyle: TimePickerStyle
     val timeInputStyle: TimeInputStyle
+    val datePickerStyle: DatePickerStyle
     val tooltipStyle: TooltipStyle
     val infoBoxStyle: InfoBoxStyle
     val infoBoxPositionProviderStyle: InfoBoxPositionProviderStyle
