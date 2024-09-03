@@ -42,7 +42,7 @@ fun ContentStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultContentStyle : ContentStyle {
-    override val padding = Token(
+    override val padding: Token<PaddingValues> = Token(
         PaddingValues(
             start = MobiusReferenceDimensions.Dimension16,
             end = MobiusReferenceDimensions.Dimension16,
@@ -50,18 +50,18 @@ open class DefaultContentStyle : ContentStyle {
             bottom = MobiusReferenceDimensions.Dimension16,
         )
     )
-    override val background = Token(null as Brush?)
-    override val contentColor = Token(Color.Unspecified)
-    override val verticalArrangement = Token(Arrangement.Top)
-    override val horizontalAlignment = Token(Alignment.Start)
+    override val background: Token<Brush?> = Token { SolidColor(Mobius.colors.background) }
+    override val contentColor: Token<Color> = Token { Mobius.colors.onBackground }
+    override val verticalArrangement: Token<Arrangement.Vertical> = Token(Arrangement.Top)
+    override val horizontalAlignment: Token<Alignment.Horizontal> = Token(Alignment.Start)
 }
 
 open class DefaultDialogContentStyle : ContentStyle {
-    override val padding = Token(
+    override val padding: Token<PaddingValues> = Token(
         PaddingValues(all = MobiusReferenceDimensions.Dimension24)
     )
     override val background: Token<Brush?> = Token { SolidColor(Mobius.colors.surfaceContainerHigh) }
-    override val contentColor = Token { Mobius.colors.onSurfaceVariant }
-    override val verticalArrangement = Token(Arrangement.Top)
-    override val horizontalAlignment = Token(Alignment.Start)
+    override val contentColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val verticalArrangement: Token<Arrangement.Vertical> = Token(Arrangement.Top)
+    override val horizontalAlignment: Token<Alignment.Horizontal> = Token(Alignment.Start)
 }

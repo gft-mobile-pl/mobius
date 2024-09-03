@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
 import com.gft.mobius.components.Button
 import com.gft.mobius.components.Text
@@ -162,10 +161,8 @@ class MainActivity : ComponentActivity() {
                     MobiusCardsPresentation()
                 }
 
-                dialog(dialogScreenDestination) {
-                    MobiusDialogScreenPresentation {
-                        navController.popBackStack()
-                    }
+                composable(dialogScreenDestination) {
+                    MobiusDialogScreenPresentation()
                 }
 
                 composable(textFieldsDestination) {
