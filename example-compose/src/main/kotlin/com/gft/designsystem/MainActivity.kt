@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             NavHost(
                 navController = navController,
-                startDestination = menuDestination
+                startDestination = dialogScreenDestination
             ) {
                 composable(menuDestination) {
                     Column(
