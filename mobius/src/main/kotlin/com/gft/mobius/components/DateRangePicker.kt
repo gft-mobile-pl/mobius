@@ -2,20 +2,19 @@ package com.gft.mobius.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DatePickerColors
-import androidx.compose.material3.DatePickerDefaults.DatePickerHeadline
-import androidx.compose.material3.DatePickerDefaults.DatePickerTitle
+import androidx.compose.material3.DateRangePickerDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SelectableDates
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.gft.mobius.Mobius
+import com.gft.mobius.components.DateRangePicker.DisplayMode
 import com.gft.mobius.components.styles.DatePickerHeadlineStyle
-import com.gft.mobius.components.styles.DatePickerStyle
-import com.gft.mobius.components.styles.DatePickerStyleValues
 import com.gft.mobius.components.styles.DatePickerTitleStyle
+import com.gft.mobius.components.styles.DateRangePickerStyle
+import com.gft.mobius.components.styles.DateRangePickerStyleValues
 import com.gft.mobius.components.styles.ProvideTextStyle
 import com.gft.mobius.components.styles.resolve
 import com.gft.mobius.materialdesign.toTextFieldColors
@@ -26,23 +25,24 @@ import java.time.YearMonth
 
 @Suppress("NAME_SHADOWING")
 @Composable
-fun DatePicker(
-    state: DatePickerState,
+fun DateRangePicker(
+    state: DateRangePickerState,
     modifier: Modifier = Modifier,
-    title: @Composable ((DatePickerState) -> Unit)? = { state ->
-        DatePicker.Title(displayMode = state.displayMode)
+    title: @Composable ((DateRangePickerState) -> Unit)? = { state ->
+        DateRangePicker.Title(displayMode = state.displayMode)
     },
-    headline: @Composable ((DatePickerState) -> Unit)? = { state ->
-        DatePicker.Headline(
-            selectedDate = state.selectedDate,
+    headline: @Composable ((DateRangePickerState) -> Unit)? = { state ->
+        DateRangePicker.Headline(
+            selectedStartDate = state.selectedStartDate,
+            selectedEndDate = state.selectedEndDate,
             displayMode = state.displayMode
         )
     },
-    style: DatePickerStyle = Mobius.styles.datePickerStyle
+    style: DateRangePickerStyle = Mobius.styles.dateRangePickerStyle
 ) {
     val styleValues = style.resolve()
     @OptIn(ExperimentalMaterial3Api::class)
-    androidx.compose.material3.DatePicker(
+    androidx.compose.material3.DateRangePicker(
         state = state.state,
         modifier = modifier,
         dateFormatter = styleValues.dateFormatter.toMaterial3(),
@@ -66,17 +66,19 @@ fun DatePicker(
 }
 
 @Composable
-fun rememberDatePickerState(
+fun rememberDateRangePickerState(
     initialDisplayedMonth: YearMonth = YearMonth.now(),
-    initialSelectedDate: LocalDate? = null,
+    initialSelectedStartDate: LocalDate? = null,
+    initialSelectedEndDate: LocalDate? = null,
     initialDisplayMode: DatePicker.DisplayMode = DatePicker.DisplayMode.Picker,
     yearRange: IntRange = IntRange(1900, 2100),
     yearFilter: (year: Int) -> Boolean = { true },
     dateFilter: (LocalDate) -> Boolean = { true }
-): DatePickerState {
+): DateRangePickerState {
     @OptIn(ExperimentalMaterial3Api::class)
-    val state = androidx.compose.material3.rememberDatePickerState(
-        initialSelectedDateMillis = initialSelectedDate?.toUTCMillis(),
+    val state = androidx.compose.material3.rememberDateRangePickerState(
+        initialSelectedStartDateMillis = initialSelectedStartDate?.toUTCMillis(),
+        initialSelectedEndDateMillis = initialSelectedEndDate?.toUTCMillis(),
         initialDisplayedMonthMillis = initialDisplayedMonth.atEndOfMonth().toUTCMillis(),
         yearRange = yearRange,
         initialDisplayMode = initialDisplayMode.toMaterial3(),
@@ -87,20 +89,20 @@ fun rememberDatePickerState(
     )
     @OptIn(ExperimentalMaterial3Api::class)
     return remember(state) {
-        DatePickerState(state)
+        DateRangePickerState(state)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun datePickerColors(
-    styleValues: DatePickerStyleValues
+    styleValues: DateRangePickerStyleValues
 ) = DatePickerColors(
     containerColor = styleValues.containerColor,
     titleContentColor = styleValues.titleColor,
     headlineContentColor = styleValues.headlineContentColor,
     weekdayContentColor = styleValues.weekdayContentColor,
-    subheadContentColor = Color.Unspecified,
+    subheadContentColor = styleValues.subheadContentColor,
     navigationContentColor = styleValues.navigationContentColor,
     yearContentColor = styleValues.yearContentColor,
     disabledYearContentColor = styleValues.disabledYearContentColor,
@@ -117,16 +119,16 @@ private fun datePickerColors(
     disabledSelectedDayContainerColor = styleValues.disabledSelectedDayContainerColor,
     todayContentColor = styleValues.todayContentColor,
     todayDateBorderColor = styleValues.todayDateBorderColor,
-    dayInSelectionRangeContentColor = Color.Unspecified,
-    dayInSelectionRangeContainerColor = Color.Unspecified,
+    dayInSelectionRangeContentColor = styleValues.dayInSelectionRangeContentColor,
+    dayInSelectionRangeContainerColor = styleValues.dayInSelectionRangeContainerColor,
     dividerColor = styleValues.dividerColor,
     dateTextFieldColors = styleValues.dateTextFieldColors.toTextFieldColors()
 )
 
 @Stable
-class DatePickerState(
+class DateRangePickerState(
     @OptIn(ExperimentalMaterial3Api::class)
-    internal val state: androidx.compose.material3.DatePickerState
+    internal val state: androidx.compose.material3.DateRangePickerState
 ) {
     var displayedMonth: YearMonth
         get() {
@@ -138,17 +140,33 @@ class DatePickerState(
             state.displayedMonthMillis = value.atEndOfMonth().toUTCMillis()
         }
 
-    var selectedDate: LocalDate?
+    var selectedStartDate: LocalDate?
         get() {
             @OptIn(ExperimentalMaterial3Api::class)
-            return state.selectedDateMillis?.toLocalDate()
+            return state.selectedStartDateMillis?.toLocalDate()
         }
         set(value) {
             @OptIn(ExperimentalMaterial3Api::class)
-            state.selectedDateMillis = value?.toUTCMillis()
+            state.setSelection(
+                startDateMillis = value?.toUTCMillis(),
+                endDateMillis = state.selectedEndDateMillis
+            )
         }
 
-    var displayMode: DatePicker.DisplayMode
+    var selectedEndDate: LocalDate?
+        get() {
+            @OptIn(ExperimentalMaterial3Api::class)
+            return state.selectedEndDateMillis?.toLocalDate()
+        }
+        set(value) {
+            @OptIn(ExperimentalMaterial3Api::class)
+            state.setSelection(
+                startDateMillis = state.selectedStartDateMillis,
+                endDateMillis = value?.toUTCMillis()
+            )
+        }
+
+    var displayMode: DisplayMode
         get() {
             @OptIn(ExperimentalMaterial3Api::class)
             return state.displayMode.toDisplayMode()
@@ -159,7 +177,7 @@ class DatePickerState(
         }
 }
 
-open class DatePicker {
+open class DateRangePicker {
     enum class DisplayMode {
         Picker, Input;
 
@@ -175,12 +193,12 @@ open class DatePicker {
     fun Title(
         modifier: Modifier = Modifier,
         displayMode: DisplayMode,
-        style: DatePickerTitleStyle = Mobius.styles.datePickerTitleStyle
+        style: DatePickerTitleStyle = Mobius.styles.dateRangePickerTitleStyle
     ) {
         val styleValues = style.resolve()
         ProvideTextStyle(styleValues.textStyle) {
             @OptIn(ExperimentalMaterial3Api::class)
-            DatePickerTitle(
+            DateRangePickerDefaults.DateRangePickerTitle(
                 modifier = modifier.padding(styleValues.padding),
                 displayMode = displayMode.toMaterial3()
             )
@@ -190,15 +208,17 @@ open class DatePicker {
     @Composable
     fun Headline(
         modifier: Modifier = Modifier,
-        selectedDate: LocalDate?,
+        selectedStartDate: LocalDate?,
+        selectedEndDate: LocalDate?,
         displayMode: DisplayMode,
-        style: DatePickerHeadlineStyle = Mobius.styles.datePickerHeadlineStyle
+        style: DatePickerHeadlineStyle = Mobius.styles.dateRangePickerHeadlineStyle
     ) {
         val styleValues = style.resolve()
         ProvideTextStyle(styleValues.textStyle) {
             @OptIn(ExperimentalMaterial3Api::class)
-            DatePickerHeadline(
-                selectedDateMillis = selectedDate?.toUTCMillis(),
+            DateRangePickerDefaults.DateRangePickerHeadline(
+                selectedStartDateMillis = selectedStartDate?.toUTCMillis(),
+                selectedEndDateMillis = selectedEndDate?.toUTCMillis(),
                 displayMode = displayMode.toMaterial3(),
                 dateFormatter = styleValues.dateFormatter.toMaterial3(),
                 modifier = modifier.padding(styleValues.padding)
@@ -206,13 +226,13 @@ open class DatePicker {
         }
     }
 
-    companion object : DatePicker()
+    companion object : DateRangePicker()
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 private fun androidx.compose.material3.DisplayMode.toDisplayMode() =
     when (this) {
-        androidx.compose.material3.DisplayMode.Picker -> DatePicker.DisplayMode.Picker
-        androidx.compose.material3.DisplayMode.Input -> DatePicker.DisplayMode.Input
-        else -> DatePicker.DisplayMode.Picker
+        androidx.compose.material3.DisplayMode.Picker -> DisplayMode.Picker
+        androidx.compose.material3.DisplayMode.Input -> DisplayMode.Input
+        else -> DisplayMode.Picker
     }

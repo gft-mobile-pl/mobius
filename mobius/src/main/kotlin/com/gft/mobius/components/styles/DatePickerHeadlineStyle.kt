@@ -45,3 +45,15 @@ open class DefaultDatePickerHeadlineStyle : DatePickerHeadlineStyle {
     )
     override val dateFormatter: Token<DatePickerFormatter> = Token(DefaultDatePickerFormatter())
 }
+
+open class DefaultDateRangePickerHeadlineStyle : DatePickerHeadlineStyle {
+    override val textStyle = TokenReference { Mobius.styles.dateRangePickerStyle.headlineTextStyle }
+    override val padding = Token(
+        PaddingValues(
+            start = MobiusReferenceDimensions.Dimension64,
+            end = MobiusReferenceDimensions.Dimension12,
+            bottom = MobiusReferenceDimensions.Dimension12
+        )
+    )
+    override val dateFormatter: Token<DatePickerFormatter> = Token(DefaultDatePickerFormatter())
+}

@@ -39,3 +39,13 @@ open class DefaultDatePickerTitleStyle : DatePickerTitleStyle {
         )
     )
 }
+
+open class DefaultDateRangePickerTitleStyle : DatePickerTitleStyle {
+    override val textStyle = TokenReference { Mobius.styles.dateRangePickerStyle.titleTextStyle }
+    override val padding = Token(
+        PaddingValues(
+            start = MobiusReferenceDimensions.Dimension64,
+            end = MobiusReferenceDimensions.Dimension12
+        )
+    )
+}
