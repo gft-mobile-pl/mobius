@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -41,6 +40,7 @@ fun ScreenScope.Content(
     val styleValues = style.resolve()
     ContentImplementation(
         modifier = modifier,
+        fillMaxSize = true,
         scrollState = null,
         styleValues = styleValues,
         contentScopeProvider = { ContentScopeImpl(this, styleValues, LocalLayoutDirection.current) },
@@ -58,6 +58,7 @@ fun ScreenScope.ScrollableContent(
     val styleValues = style.resolve()
     ContentImplementation(
         modifier = modifier,
+        fillMaxSize = true,
         scrollState = scrollState,
         styleValues = styleValues,
         contentScopeProvider = { ContentScopeImpl(this, styleValues, LocalLayoutDirection.current) },
@@ -74,6 +75,7 @@ fun DialogScreenScope.Content(
     val styleValues = style.resolve()
     ContentImplementation(
         modifier = modifier,
+        fillMaxSize = false,
         scrollState = null,
         styleValues = styleValues,
         contentScopeProvider = { DialogContentScopeImpl(this, styleValues, LocalLayoutDirection.current) },
@@ -91,6 +93,7 @@ fun DialogScreenScope.ScrollableContent(
     val styleValues = style.resolve()
     ContentImplementation(
         modifier = modifier,
+        fillMaxSize = false,
         scrollState = scrollState,
         styleValues = styleValues,
         contentScopeProvider = { DialogContentScopeImpl(this, styleValues, LocalLayoutDirection.current) },
@@ -101,6 +104,7 @@ fun DialogScreenScope.ScrollableContent(
 @Composable
 private fun <T : ContentScope> ContentImplementation(
     modifier: Modifier,
+    fillMaxSize: Boolean,
     scrollState: ScrollState?,
     styleValues: ContentStyleValues,
     contentScopeProvider: @Composable ColumnScope.() -> T,
@@ -112,7 +116,9 @@ private fun <T : ContentScope> ContentImplementation(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .modifyIf(fillMaxSize) {
+                    fillMaxSize()
+                }
                 .modifyIf(scrollState != null) {
                     verticalScroll(scrollState!!)
                 }
@@ -149,29 +155,27 @@ private open class ContentScopeImpl(
 
     override fun Modifier.fillContentContainerWidth() = this
         .layout { measurable, constraints ->
+            val paddingLeft = contentStyle.padding
+                .calculateLeftPadding(layoutDirection)
+                .roundToPx()
+            val paddingRight = contentStyle.padding
+                .calculateRightPadding(layoutDirection)
+                .roundToPx()
             if (constraints.hasBoundedWidth) {
-                val paddingLeft = contentStyle.padding
-                    .calculateLeftPadding(layoutDirection)
-                    .roundToPx()
-                val paddingRight = contentStyle.padding
-                    .calculateRightPadding(layoutDirection)
-                    .roundToPx()
-                val maxWidth: Int = max(constraints.maxWidth + paddingLeft + paddingRight, 0)
                 val placeable = measurable.measure(
-                    constraints.copy(maxWidth = maxWidth)
-                )
-                layout(placeable.width, placeable.height) {
-                    placeable.place(
-                        x = (paddingRight - paddingLeft) / 2,
-                        y = 0
+                    constraints.copy(
+                        minWidth = constraints.maxWidth + paddingLeft + paddingRight,
+                        maxWidth = constraints.maxWidth + paddingLeft + paddingRight
                     )
-                }
+                )
+                layout(placeable.width, placeable.height) { placeable.place(0, 0) }
             } else {
                 val placeable = measurable.measure(constraints)
-                layout(placeable.width, placeable.height) { placeable.place(0, 0) }
+                layout(max(placeable.width - paddingLeft - paddingRight, 0), placeable.height) {
+                    placeable.place(0, 0)
+                }
             }
         }
-        .fillMaxWidth()
 
     override fun Modifier.ignoreContentContainerTopPadding() = this
         .layout { measurable, constraints ->
@@ -234,7 +238,8 @@ private open class ContentScopeImpl(
 
     override fun Modifier.align(alignment: Alignment.Horizontal) = with(columnScope) { align(alignment) }
 
-    override fun Modifier.alignBy(alignmentLineBlock: (Measured) -> Int) = with(columnScope) { alignBy(alignmentLineBlock) }
+    override fun Modifier.alignBy(alignmentLineBlock: (Measured) -> Int) =
+        with(columnScope) { alignBy(alignmentLineBlock) }
 
     override fun Modifier.alignBy(alignmentLine: VerticalAlignmentLine) = with(columnScope) { alignBy(alignmentLine) }
 

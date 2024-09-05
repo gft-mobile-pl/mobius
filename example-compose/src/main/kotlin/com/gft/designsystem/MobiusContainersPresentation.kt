@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.dp
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.Button
@@ -48,6 +47,12 @@ fun MobiusContainersPresentation() {
                     HorizontalBoxWithMessage("Below is a large content elements spacer.")
                     LargeContentElementsSpacer()
                 }
+
+                HorizontalBoxWithMessage(
+                    message = "This message takes the whole screen width, ignoring content padding.",
+                    modifier = Modifier.fillContentContainerWidth()
+                )
+                LargeContentElementsSpacer()
 
                 Row {
                     VerticalBox()
@@ -109,8 +114,9 @@ fun MobiusContainersPresentation() {
 @Composable
 private fun HorizontalBoxWithMessage(
     message: String,
+    modifier: Modifier = Modifier,
 ) = Box(
-    modifier = Modifier
+    modifier = modifier
         .fillMaxWidth()
         .height(32.dp)
         .background(Mobius.colors.primary),
@@ -128,7 +134,7 @@ private fun VerticalBox() = Box(
 )
 
 @Composable
-fun customGroupStyle(): GroupStyle {
+private fun customGroupStyle(): GroupStyle {
     val defaultStyle = Mobius.styles.groupStyle
     return remember(defaultStyle) {
         object : GroupStyle by defaultStyle {

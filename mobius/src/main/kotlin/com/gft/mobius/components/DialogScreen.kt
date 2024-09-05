@@ -5,7 +5,6 @@ import android.view.WindowManager
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -58,7 +57,6 @@ fun DialogScreen(
                     clip(styleValues.shape!!)
                 }
                 .width(IntrinsicSize.Max)
-                .height(IntrinsicSize.Max)
                 .then(modifier),
             content = {
                 DialogScreenScope(this).content()
