@@ -40,7 +40,6 @@ import com.gft.mobius.components.DialogScreen
 import com.gft.mobius.components.DialogScreenContentScope
 import com.gft.mobius.components.Group
 import com.gft.mobius.components.GroupElementSpacer
-import com.gft.mobius.components.LargeContentElementsSpacer
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.ScrollableContent
 import com.gft.mobius.components.SmallGroupElementSpacer
@@ -56,8 +55,6 @@ fun MobiusDialogScreenPresentation() {
             ScrollableContent {
                 val shortDialogVisible = remember { mutableStateOf(false) }
                 val scrollableDialogVisible = remember { mutableStateOf(false) }
-                val dialogWithFixedHeaderVisible = remember { mutableStateOf(false) }
-                val dialogWithScrollableHeaderVisible = remember { mutableStateOf(false) }
 
                 Button(
                     modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -75,24 +72,6 @@ fun MobiusDialogScreenPresentation() {
                     Text("Scrollable dialog")
                 }
 
-                ContentElementsSpacer()
-
-                Button(
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                    onClick = { dialogWithFixedHeaderVisible.value = true }
-                ) {
-                    Text("Dialog with fixed header")
-                }
-
-                ContentElementsSpacer()
-
-                Button(
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                    onClick = { dialogWithScrollableHeaderVisible.value = true }
-                ) {
-                    Text("Dialog with scrollable header")
-                }
-
                 if (shortDialogVisible.value) {
                     TestDialog(
                         numberOfBlocks = 10,
@@ -107,23 +86,6 @@ fun MobiusDialogScreenPresentation() {
                         numberOfBlocks = 30,
                         onDismissRequest = {
                             scrollableDialogVisible.value = false
-                        }
-                    )
-                }
-
-                if (dialogWithFixedHeaderVisible.value) {
-                    DialogWithFixedHeader(
-                        onDismissRequest = {
-                            dialogWithFixedHeaderVisible.value = false
-                        }
-                    )
-                }
-
-                if (dialogWithScrollableHeaderVisible.value) {
-                    DialogWithScrollableHeader(
-                        numberOfBlocks = 30,
-                        onDismissRequest = {
-                            dialogWithScrollableHeaderVisible.value = false
                         }
                     )
                 }
@@ -345,7 +307,7 @@ private fun TestDialog(
                         .fillContentContainerWidth()
                         .contentContainerHorizontalPaddings()
                 ) {
-                    Text("This is text which background expands to a full width of the Content element.")
+                    Text("This is text which background\nexpands to a full width\nof the Content element.")
                 }
                 ContentElementsSpacer()
                 repeat(numberOfBlocks) {
@@ -371,109 +333,6 @@ private fun TestDialog(
         }
     }
 }
-
-@Composable
-private fun DialogWithFixedHeader(
-    onDismissRequest: () -> Unit,
-) {
-    Dialog(
-        onDismissRequest = onDismissRequest
-    ) {
-        DialogScreen {
-            // Tip: If you need a header, create a DialogHeader component and DialogHeaderStyle
-            // instead of repeating this code for each dialog. Remember that you can reference ContentStyle fields (like padding)
-            // inside your DialogHeaderStyle.
-            Box(
-                modifier = Modifier
-                    .background(Mobius.colors.primary)
-                    .padding(all = 24.dp)
-                    .fillMaxWidth(),
-            ) {
-                Text(
-                    text = "Dialog screen",
-                    style = Mobius.typography.titleLarge,
-                    color = Mobius.colors.onPrimary
-                )
-            }
-            ScrollableContent {
-                Text(text = "Dialog screen message")
-                ContentElementsSpacer()
-                Box(
-                    modifier = Modifier
-                        .background(Color.LightGray)
-                        .fillContentContainerWidth()
-                        .contentContainerHorizontalPaddings()
-                ) {
-                    Text("This is text which background expands to a full width of the Content element.")
-                }
-                LargeContentElementsSpacer()
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Button(
-                        onClick = onDismissRequest
-                    ) {
-                        Text(text = "Close me")
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun DialogWithScrollableHeader(
-    numberOfBlocks: Int,
-    onDismissRequest: () -> Unit,
-) {
-    Dialog(
-        onDismissRequest = onDismissRequest
-    ) {
-        DialogScreen {
-            ScrollableContent {
-                Box(
-                    modifier = Modifier
-                        .ignoreContentContainerTopPadding()
-                        .fillContentContainerWidth()
-                        .background(Mobius.colors.primary)
-                        .contentContainerPaddings()
-
-//                        Other options are:
-//                        .contentContainerHorizontalPaddings()
-//                        .contentContainerVerticalPaddings()
-//                        .contentContainerTopPadding()
-//                        .contentContainerBottomPadding()
-                ) {
-                    Text(text = "Dialog screen", style = Mobius.typography.titleLarge, color = Mobius.colors.onPrimary)
-                }
-                ContentElementsSpacer()
-                Text(text = "Dialog screen message")
-                ContentElementsSpacer()
-                repeat(numberOfBlocks) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(30.dp)
-                            .background(Color(0xff000000 + Random.nextInt(0xffffff)))
-                    )
-                }
-                ContentElementsSpacer()
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Button(
-                        onClick = onDismissRequest
-                    ) {
-                        Text(text = "Close me")
-                    }
-                }
-            }
-        }
-    }
-}
-
 
 @Composable
 private fun ColumnScope.TestCase(

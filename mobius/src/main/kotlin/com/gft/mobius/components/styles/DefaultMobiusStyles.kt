@@ -11,6 +11,8 @@ open class DefaultMobiusStyles : MobiusStyles {
     override val scrollableContentStyle: ContentStyle = DefaultContentStyle()
     override val dialogContentStyle: ContentStyle = DefaultDialogContentStyle()
     override val dialogScrollableContentStyle: ContentStyle = DefaultDialogContentStyle()
+    override val headerContentStyle: ContentStyle = DefaultHeaderContentStyle()
+    override val dialogHeaderContentStyle: ContentStyle = DefaultDialogHeaderContentStyle()
     override val contentElementSpacerStyle: ContentElementSpacerStyle = DefaultContentElementSpacerStyle()
     override val groupStyle: GroupStyle = DefaultGroupStyle()
     override val groupElementSpacerStyle: GroupElementSpacerStyle = DefaultGroupElementSpacerStyle()
