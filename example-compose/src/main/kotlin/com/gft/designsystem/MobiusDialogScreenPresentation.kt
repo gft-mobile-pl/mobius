@@ -36,8 +36,8 @@ import com.gft.mobius.components.Button
 import com.gft.mobius.components.Checkbox
 import com.gft.mobius.components.Content
 import com.gft.mobius.components.ContentElementsSpacer
-import com.gft.mobius.components.DialogContentScope
 import com.gft.mobius.components.DialogScreen
+import com.gft.mobius.components.DialogScreenContentScope
 import com.gft.mobius.components.Group
 import com.gft.mobius.components.GroupElementSpacer
 import com.gft.mobius.components.LargeContentElementsSpacer
@@ -538,7 +538,7 @@ private fun TestDialog(
 }
 
 @Composable
-private fun DialogContentScope.TestDialogContent(
+private fun DialogScreenContentScope.TestDialogContent(
     message1Width: MessageWidth,
     message2Width: MessageWidth,
     message2Padding: MessagePadding,

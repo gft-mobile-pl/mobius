@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -21,94 +20,19 @@ import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.layout.Measured
 import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.layout.layout
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import com.gft.compose.common.modifyIf
-import com.gft.mobius.Mobius
 import com.gft.mobius.colors.LocalContentColor
-import com.gft.mobius.components.styles.ContentStyle
 import com.gft.mobius.components.styles.ContentStyleValues
-import com.gft.mobius.components.styles.resolve
 import kotlin.math.max
 
 @Composable
-fun ScreenScope.Content(
-    modifier: Modifier = Modifier,
-    style: ContentStyle = Mobius.styles.contentStyle,
-    content: @Composable ContentScope.() -> Unit,
-) {
-    val styleValues = style.resolve()
-    ContentImplementation(
-        modifier = modifier,
-        fillMaxSize = true,
-        scrollState = null,
-        styleValues = styleValues,
-        contentScopeProvider = { ContentScopeImpl(this, styleValues, LocalLayoutDirection.current) },
-        content = content
-    )
-}
-
-@Composable
-fun ScreenScope.ScrollableContent(
-    modifier: Modifier = Modifier,
-    scrollState: ScrollState = rememberScrollState(),
-    style: ContentStyle = Mobius.styles.scrollableContentStyle,
-    content: @Composable ContentScope.() -> Unit,
-) {
-    val styleValues = style.resolve()
-    ContentImplementation(
-        modifier = modifier,
-        fillMaxSize = true,
-        scrollState = scrollState,
-        styleValues = styleValues,
-        contentScopeProvider = { ContentScopeImpl(this, styleValues, LocalLayoutDirection.current) },
-        content = content
-    )
-}
-
-@Composable
-fun DialogScreenScope.Content(
-    modifier: Modifier = Modifier,
-    style: ContentStyle = Mobius.styles.dialogContentStyle,
-    content: @Composable DialogContentScope.() -> Unit,
-) {
-    val styleValues = style.resolve()
-    ContentImplementation(
-        modifier = modifier,
-        fillMaxSize = false,
-        scrollState = null,
-        styleValues = styleValues,
-        contentScopeProvider = { DialogContentScopeImpl(this, styleValues, LocalLayoutDirection.current) },
-        content = content
-    )
-}
-
-@Composable
-fun DialogScreenScope.ScrollableContent(
-    modifier: Modifier = Modifier,
-    scrollState: ScrollState = rememberScrollState(),
-    style: ContentStyle = Mobius.styles.dialogScrollableContentStyle,
-    content: @Composable DialogContentScope.() -> Unit,
-) {
-    val styleValues = style.resolve()
-    ContentImplementation(
-        modifier = modifier,
-        fillMaxSize = false,
-        scrollState = scrollState,
-        styleValues = styleValues,
-        contentScopeProvider = { DialogContentScopeImpl(this, styleValues, LocalLayoutDirection.current) },
-        content = content
-    )
-}
-
-@Composable
-private fun <T : ContentScope> ContentImplementation(
+internal fun Content(
     modifier: Modifier,
     fillMaxSize: Boolean,
     scrollState: ScrollState?,
     styleValues: ContentStyleValues,
-    contentScopeProvider: @Composable ColumnScope.() -> T,
-    content: @Composable T.() -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     val contentColor = styleValues.contentColor.takeOrElse { LocalContentColor.current }
     CompositionLocalProvider(
@@ -129,9 +53,7 @@ private fun <T : ContentScope> ContentImplementation(
                 .then(modifier),
             verticalArrangement = styleValues.verticalArrangement,
             horizontalAlignment = styleValues.horizontalAlignment,
-            content = {
-                contentScopeProvider(this).content()
-            }
+            content = content
         )
     }
 }
@@ -147,10 +69,10 @@ interface ContentScope : ColumnScope {
     fun Modifier.contentContainerBottomPadding(): Modifier
 }
 
-private open class ContentScopeImpl(
-    val columnScope: ColumnScope,
-    val contentStyle: ContentStyleValues,
-    val layoutDirection: LayoutDirection,
+internal open class ContentScopeImpl(
+    private val columnScope: ColumnScope,
+    private val contentStyle: ContentStyleValues,
+    private val layoutDirection: LayoutDirection,
 ) : ContentScope, ColumnScope {
 
     override fun Modifier.fillContentContainerWidth() = this
@@ -247,11 +169,3 @@ private open class ContentScopeImpl(
         weight(weight, fill).fillMaxHeight()
     }
 }
-
-interface DialogContentScope : ContentScope
-
-private class DialogContentScopeImpl(
-    columnScope: ColumnScope,
-    contentStyle: ContentStyleValues,
-    layoutDirection: LayoutDirection,
-) : ContentScopeImpl(columnScope, contentStyle, layoutDirection), DialogContentScope
