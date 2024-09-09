@@ -38,6 +38,8 @@ interface MobiusStyles : Styles {
     val timePickerStyle: TimePickerStyle
     val timeInputStyle: TimeInputStyle
     val datePickerStyle: DatePickerStyle
+    val datePickerTitleStyle: DatePickerTitleStyle
+    val datePickerHeadlineStyle: DatePickerHeadlineStyle
     val tooltipStyle: TooltipStyle
     val infoBoxStyle: InfoBoxStyle
     val infoBoxPositionProviderStyle: InfoBoxPositionProviderStyle

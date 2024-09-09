@@ -1,6 +1,5 @@
 package com.gft.mobius.components
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DatePickerColors
 import androidx.compose.material3.DatePickerDefaults.DatePickerHeadline
@@ -13,8 +12,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.gft.mobius.Mobius
+import com.gft.mobius.components.styles.DatePickerHeadlineStyle
 import com.gft.mobius.components.styles.DatePickerStyle
 import com.gft.mobius.components.styles.DatePickerStyleValues
+import com.gft.mobius.components.styles.DatePickerTitleStyle
 import com.gft.mobius.components.styles.ProvideTextStyle
 import com.gft.mobius.components.styles.resolve
 import com.gft.mobius.materialdesign.toTextFieldColors
@@ -37,22 +38,15 @@ fun DatePicker(
         dateFormatter = styleValues.dateFormatter.toMaterial3(),
         showModeToggle = styleValues.modeToggleVisible,
         title = {
-            ProvideTextStyle(styleValues.titleTextStyle) {
-                DatePicker.Title(
-                    Modifier.padding(styleValues.titlePadding),
-                    displayMode = state.displayMode
-                )
-            }
+            DatePicker.Title(
+                displayMode = state.displayMode
+            )
         },
         headline = {
-            ProvideTextStyle(styleValues.headlineTextStyle) {
-                DatePicker.Headline(
-                    Modifier.padding(styleValues.headlinePadding),
-                    selectedDate = state.selectedDate,
-                    displayMode = state.displayMode,
-                    dateFormatter = styleValues.dateFormatter
-                )
-            }
+            DatePicker.Headline(
+                selectedDate = state.selectedDate,
+                displayMode = state.displayMode,
+            )
         },
         colors = datePickerColors(styleValues)
     )
@@ -66,10 +60,9 @@ fun DatePicker(
     title: @Composable ((DatePickerState) -> Unit)? = { state ->
         DatePicker.Title(displayMode = state.displayMode)
     },
-    headline: @Composable ((DatePickerState, DatePickerFormatter) -> Unit)? = { state, formatter ->
+    headline: @Composable ((DatePickerState) -> Unit)? = { state ->
         DatePicker.Headline(
             selectedDate = state.selectedDate,
-            dateFormatter = formatter,
             displayMode = state.displayMode
         )
     },
@@ -85,20 +78,17 @@ fun DatePicker(
         title = title?.let {
             {
                 ProvideTextStyle(styleValues.titleTextStyle) {
-                    Box(Modifier.padding(styleValues.titlePadding)) {
-                        title(state)
-                    }
+                    title(state)
                 }
             }
         },
         headline = headline?.let { headline ->
             {
                 ProvideTextStyle(styleValues.headlineTextStyle) {
-                    Box(Modifier.padding(styleValues.headlinePadding)) {
-                        headline(state, styleValues.dateFormatter)
-                    }
+                    headline(state)
                 }
             }
+
         },
         colors = datePickerColors(styleValues)
     )
@@ -213,13 +203,17 @@ open class DatePicker {
     @Composable
     fun Title(
         modifier: Modifier = Modifier,
-        displayMode: DisplayMode
+        displayMode: DisplayMode,
+        style: DatePickerTitleStyle = Mobius.styles.datePickerTitleStyle
     ) {
-        @OptIn(ExperimentalMaterial3Api::class)
-        DatePickerTitle(
-            modifier = modifier,
-            displayMode = displayMode.toMaterial3()
-        )
+        val styleValues = style.resolve()
+        ProvideTextStyle(styleValues.textStyle) {
+            @OptIn(ExperimentalMaterial3Api::class)
+            DatePickerTitle(
+                modifier = modifier.padding(styleValues.padding),
+                displayMode = displayMode.toMaterial3()
+            )
+        }
     }
 
     @Composable
@@ -227,15 +221,18 @@ open class DatePicker {
         modifier: Modifier = Modifier,
         selectedDate: LocalDate?,
         displayMode: DisplayMode,
-        dateFormatter: DatePickerFormatter
+        style: DatePickerHeadlineStyle = Mobius.styles.datePickerHeadlineStyle
     ) {
-        @OptIn(ExperimentalMaterial3Api::class)
-        DatePickerHeadline(
-            selectedDateMillis = selectedDate?.toUTCMillis(),
-            displayMode = displayMode.toMaterial3(),
-            dateFormatter = dateFormatter.toMaterial3(),
-            modifier = modifier
-        )
+        val styleValues = style.resolve()
+        ProvideTextStyle(styleValues.textStyle) {
+            @OptIn(ExperimentalMaterial3Api::class)
+            DatePickerHeadline(
+                selectedDateMillis = selectedDate?.toUTCMillis(),
+                displayMode = displayMode.toMaterial3(),
+                dateFormatter = styleValues.dateFormatter.toMaterial3(),
+                modifier = modifier.padding(styleValues.padding)
+            )
+        }
     }
 
     companion object : DatePicker()

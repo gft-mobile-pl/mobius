@@ -1,6 +1,5 @@
 package com.gft.mobius.components.styles
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -11,16 +10,13 @@ import com.gft.designsystem.produceStyleValues
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.DatePickerFormatter
 import com.gft.mobius.components.DefaultDatePickerFormatter
-import com.gft.mobius.references.MobiusReferenceDimensions
 
 interface DatePickerStyleValues : StyleValues {
     val containerColor: Color
     val titleColor: Color
     val titleTextStyle: TextStyle
-    val titlePadding: PaddingValues
     val headlineContentColor: Color
     val headlineTextStyle: TextStyle
-    val headlinePadding: PaddingValues
     val weekdayContentColor: Color
     val navigationContentColor: Color
     val yearContentColor: Color
@@ -48,10 +44,8 @@ interface DatePickerStyle : Style {
     val containerColor: Token<Color>
     val titleColor: Token<Color>
     val titleTextStyle: Token<TextStyle>
-    val titlePadding: Token<PaddingValues>
     val headlineContentColor: Token<Color>
     val headlineTextStyle: Token<TextStyle>
-    val headlinePadding: Token<PaddingValues>
     val weekdayContentColor: Token<Color>
     val navigationContentColor: Token<Color>
     val yearContentColor: Token<Color>
@@ -81,10 +75,8 @@ fun DatePickerStyle.resolve() = produceStyleValues { style ->
         override val containerColor = style.containerColor.resolve()
         override val titleColor = style.titleColor.resolve()
         override val titleTextStyle = style.titleTextStyle.resolve()
-        override val titlePadding = style.titlePadding.resolve()
         override val headlineContentColor = style.headlineContentColor.resolve()
         override val headlineTextStyle = style.headlineTextStyle.resolve()
-        override val headlinePadding = style.headlinePadding.resolve()
         override val weekdayContentColor = style.weekdayContentColor.resolve()
         override val navigationContentColor = style.navigationContentColor.resolve()
         override val yearContentColor = style.yearContentColor.resolve()
@@ -159,22 +151,8 @@ open class DefaultDatePickerStyle : DatePickerStyle {
     override val containerColor = Token { Mobius.colors.surfaceContainerHigh }
     override val titleColor = Token { Mobius.colors.onSurfaceVariant }
     override val titleTextStyle = Token { Mobius.typography.labelLarge }
-    override val titlePadding = Token(
-        PaddingValues(
-            start = MobiusReferenceDimensions.Dimension24,
-            end = MobiusReferenceDimensions.Dimension12,
-            top = MobiusReferenceDimensions.Dimension16
-        )
-    )
     override val headlineContentColor = Token { Mobius.colors.onSurface }
     override val headlineTextStyle = Token { Mobius.typography.headlineLarge }
-    override val headlinePadding = Token(
-        PaddingValues(
-            start = MobiusReferenceDimensions.Dimension24,
-            end = MobiusReferenceDimensions.Dimension12,
-            bottom = MobiusReferenceDimensions.Dimension12
-        )
-    )
     override val weekdayContentColor = Token { Mobius.colors.onSurface }
     override val navigationContentColor = Token { Mobius.colors.onSurfaceVariant }
     override val yearContentColor = Token { Mobius.colors.onSurfaceVariant }
