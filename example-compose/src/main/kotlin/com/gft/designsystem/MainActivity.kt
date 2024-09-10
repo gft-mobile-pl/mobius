@@ -41,6 +41,7 @@ private const val dateRangePickerDestination = "dateRangePickerDestination"
 private const val tooltipDestination = "tooltipDestination"
 private const val sliderDestination = "sliderDestination"
 private const val rangeSliderDestination = "rangeSliderDestination"
+private const val swipeToDismissBoxDestination = "swipeToDismissBoxDestination"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +50,7 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             NavHost(
                 navController = navController,
-                startDestination = dialogScreenDestination
+                startDestination = menuDestination
             ) {
                 composable(menuDestination) {
                     Column(
@@ -143,6 +144,10 @@ class MainActivity : ComponentActivity() {
                             text = "RangeSlider",
                             onClick = { navController.navigate(rangeSliderDestination) }
                         )
+                        MenuButton(
+                            text = "SwipeToDismissBox",
+                            onClick = { navController.navigate(swipeToDismissBoxDestination) }
+                        )
                     }
                 }
 
@@ -225,6 +230,10 @@ class MainActivity : ComponentActivity() {
                 composable(rangeSliderDestination) {
                     MobiusRangeSliderPresentation()
                 }
+
+                composable(swipeToDismissBoxDestination) {
+                    MobiusSwipeToDismissBoxPresentation()
+                }
             }
 
         }
@@ -238,7 +247,7 @@ private fun MenuButton(
 ) {
     Button(
         onClick = onClick,
-        modifier = Modifier.width(160.dp)
+        modifier = Modifier.width(180.dp)
     ) {
         Text(text)
     }
