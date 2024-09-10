@@ -37,7 +37,16 @@ fun ScreenScope.Content(
     modifier: Modifier = Modifier,
     style: ContentStyle = Mobius.styles.contentStyle,
     content: @Composable ContentScope.() -> Unit,
-) = ContentImplementation(modifier, null, style, content)
+) {
+    val styleValues = style.resolve()
+    ContentImplementation(
+        modifier = modifier,
+        scrollState = null,
+        styleValues = styleValues,
+        contentScopeProvider = { ContentScopeImpl(this, styleValues, LocalLayoutDirection.current) },
+        content = content
+    )
+}
 
 @Composable
 fun ScreenScope.ScrollableContent(
@@ -45,31 +54,58 @@ fun ScreenScope.ScrollableContent(
     scrollState: ScrollState = rememberScrollState(),
     style: ContentStyle = Mobius.styles.scrollableContentStyle,
     content: @Composable ContentScope.() -> Unit,
-) = ContentImplementation(modifier, scrollState, style, content)
+) {
+    val styleValues = style.resolve()
+    ContentImplementation(
+        modifier = modifier,
+        scrollState = scrollState,
+        styleValues = styleValues,
+        contentScopeProvider = { ContentScopeImpl(this, styleValues, LocalLayoutDirection.current) },
+        content = content
+    )
+}
 
 @Composable
 fun DialogScreenScope.Content(
     modifier: Modifier = Modifier,
     style: ContentStyle = Mobius.styles.dialogContentStyle,
-    content: @Composable ContentScope.() -> Unit,
-) = ContentImplementation(modifier, null, style, content)
+    content: @Composable DialogContentScope.() -> Unit,
+) {
+    val styleValues = style.resolve()
+    ContentImplementation(
+        modifier = modifier,
+        scrollState = null,
+        styleValues = styleValues,
+        contentScopeProvider = { DialogContentScopeImpl(this, styleValues, LocalLayoutDirection.current) },
+        content = content
+    )
+}
 
 @Composable
 fun DialogScreenScope.ScrollableContent(
     modifier: Modifier = Modifier,
     scrollState: ScrollState = rememberScrollState(),
     style: ContentStyle = Mobius.styles.dialogScrollableContentStyle,
-    content: @Composable ContentScope.() -> Unit,
-) = ContentImplementation(modifier, scrollState, style, content)
-
-@Composable
-private fun ContentImplementation(
-    modifier: Modifier,
-    scrollState: ScrollState?,
-    style: ContentStyle = Mobius.styles.contentStyle,
-    content: @Composable ContentScope.() -> Unit,
+    content: @Composable DialogContentScope.() -> Unit,
 ) {
     val styleValues = style.resolve()
+    ContentImplementation(
+        modifier = modifier,
+        scrollState = scrollState,
+        styleValues = styleValues,
+        contentScopeProvider = { DialogContentScopeImpl(this, styleValues, LocalLayoutDirection.current) },
+        content = content
+    )
+}
+
+@Composable
+private fun <T : ContentScope> ContentImplementation(
+    modifier: Modifier,
+    scrollState: ScrollState?,
+    styleValues: ContentStyleValues,
+    contentScopeProvider: @Composable ColumnScope.() -> T,
+    content: @Composable T.() -> Unit,
+) {
     val contentColor = styleValues.contentColor.takeOrElse { LocalContentColor.current }
     CompositionLocalProvider(
         LocalContentColor provides contentColor
@@ -88,7 +124,7 @@ private fun ContentImplementation(
             verticalArrangement = styleValues.verticalArrangement,
             horizontalAlignment = styleValues.horizontalAlignment,
             content = {
-                ContentScope(this, styleValues, LocalLayoutDirection.current).content()
+                contentScopeProvider(this).content()
             }
         )
     }
@@ -105,104 +141,112 @@ interface ContentScope : ColumnScope {
     fun Modifier.contentContainerBottomPadding(): Modifier
 }
 
-private fun ContentScope(columnScope: ColumnScope, contentStyle: ContentStyleValues, layoutDirection: LayoutDirection) =
-    object : ContentScope, ColumnScope {
+private open class ContentScopeImpl(
+    val columnScope: ColumnScope,
+    val contentStyle: ContentStyleValues,
+    val layoutDirection: LayoutDirection,
+) : ContentScope, ColumnScope {
 
-        override fun Modifier.fillContentContainerWidth() = this
-            .layout { measurable, constraints ->
-                if (constraints.hasBoundedWidth) {
-                    val paddingLeft = contentStyle.padding
-                        .calculateLeftPadding(layoutDirection)
-                        .roundToPx()
-                    val paddingRight = contentStyle.padding
-                        .calculateRightPadding(layoutDirection)
-                        .roundToPx()
-                    val maxWidth: Int = max(constraints.maxWidth + paddingLeft + paddingRight, 0)
-                    val placeable = measurable.measure(
-                        constraints.copy(maxWidth = maxWidth)
+    override fun Modifier.fillContentContainerWidth() = this
+        .layout { measurable, constraints ->
+            if (constraints.hasBoundedWidth) {
+                val paddingLeft = contentStyle.padding
+                    .calculateLeftPadding(layoutDirection)
+                    .roundToPx()
+                val paddingRight = contentStyle.padding
+                    .calculateRightPadding(layoutDirection)
+                    .roundToPx()
+                val maxWidth: Int = max(constraints.maxWidth + paddingLeft + paddingRight, 0)
+                val placeable = measurable.measure(
+                    constraints.copy(maxWidth = maxWidth)
+                )
+                layout(placeable.width, placeable.height) {
+                    placeable.place(
+                        x = (paddingRight - paddingLeft) / 2,
+                        y = 0
                     )
-                    layout(placeable.width, placeable.height) {
-                        placeable.place(
-                            x = (paddingRight - paddingLeft) / 2,
-                            y = 0
-                        )
-                    }
-                } else {
-                    val placeable = measurable.measure(constraints)
-                    layout(placeable.width, placeable.height) { placeable.place(0, 0) }
                 }
+            } else {
+                val placeable = measurable.measure(constraints)
+                layout(placeable.width, placeable.height) { placeable.place(0, 0) }
             }
-            .fillMaxWidth()
-
-        override fun Modifier.ignoreContentContainerTopPadding() = this
-            .layout { measurable, constraints ->
-                val paddingTop = contentStyle.padding.calculateTopPadding().roundToPx()
-                if (constraints.hasBoundedHeight) {
-                    val maxHeight = constraints.maxHeight + paddingTop
-                    val placeable = measurable.measure(constraints.copy(maxHeight = maxHeight))
-                    layout(placeable.width, max(placeable.height - paddingTop, 0)) {
-                        placeable.place(
-                            x = 0,
-                            y = if (placeable.height > paddingTop) -paddingTop else -placeable.height
-                        )
-                    }
-                } else {
-                    val placeable = measurable.measure(constraints)
-                    layout(placeable.width, placeable.height - paddingTop) { placeable.place(0, -paddingTop) }
-                }
-            }
-
-        override fun Modifier.ignoreContentContainerBottomPadding() = this
-            .layout { measurable, constraints ->
-                val paddingBottom = contentStyle.padding.calculateBottomPadding().roundToPx()
-
-                println("#Test $constraints")
-
-                if (constraints.hasBoundedHeight) {
-                    val maxHeight = constraints.maxHeight + paddingBottom
-                    val placeable = measurable.measure(constraints.copy(maxHeight = maxHeight))
-
-                    layout(placeable.width, max(placeable.height - paddingBottom, 0)) {
-                        placeable.place(0, 0)
-                    }
-                } else {
-                    val placeable = measurable.measure(constraints)
-                    layout(placeable.width, placeable.height - paddingBottom) { placeable.place(0, 0) }
-                }
-            }
-
-        override fun Modifier.contentContainerTopPadding(): Modifier = padding(
-            top = contentStyle.padding.calculateTopPadding()
-        )
-
-        override fun Modifier.contentContainerBottomPadding(): Modifier = padding(
-            bottom = contentStyle.padding.calculateBottomPadding()
-        )
-
-        override fun Modifier.contentContainerHorizontalPaddings(): Modifier = padding(
-            start = contentStyle.padding.calculateStartPadding(layoutDirection),
-            end = contentStyle.padding.calculateEndPadding(layoutDirection)
-        )
-
-        override fun Modifier.contentContainerVerticalPaddings(): Modifier = padding(
-            top = contentStyle.padding.calculateTopPadding(),
-            bottom = contentStyle.padding.calculateBottomPadding()
-        )
-
-        override fun Modifier.contentContainerPaddings(): Modifier = padding(
-            top = contentStyle.padding.calculateTopPadding(),
-            bottom = contentStyle.padding.calculateBottomPadding(),
-            start = contentStyle.padding.calculateStartPadding(layoutDirection),
-            end = contentStyle.padding.calculateEndPadding(layoutDirection)
-        )
-
-        override fun Modifier.align(alignment: Alignment.Horizontal) = with(columnScope) { align(alignment) }
-
-        override fun Modifier.alignBy(alignmentLineBlock: (Measured) -> Int) = with(columnScope) { alignBy(alignmentLineBlock) }
-
-        override fun Modifier.alignBy(alignmentLine: VerticalAlignmentLine) = with(columnScope) { alignBy(alignmentLine) }
-
-        override fun Modifier.weight(weight: Float, fill: Boolean): Modifier = with(columnScope) {
-            weight(weight, fill).fillMaxHeight()
         }
+        .fillMaxWidth()
+
+    override fun Modifier.ignoreContentContainerTopPadding() = this
+        .layout { measurable, constraints ->
+            val paddingTop = contentStyle.padding.calculateTopPadding().roundToPx()
+            if (constraints.hasBoundedHeight) {
+                val maxHeight = constraints.maxHeight + paddingTop
+                val placeable = measurable.measure(constraints.copy(maxHeight = maxHeight))
+                layout(placeable.width, max(placeable.height - paddingTop, 0)) {
+                    placeable.place(
+                        x = 0,
+                        y = if (placeable.height > paddingTop) -paddingTop else -placeable.height
+                    )
+                }
+            } else {
+                val placeable = measurable.measure(constraints)
+                layout(placeable.width, placeable.height - paddingTop) { placeable.place(0, -paddingTop) }
+            }
+        }
+
+    override fun Modifier.ignoreContentContainerBottomPadding() = this
+        .layout { measurable, constraints ->
+            val paddingBottom = contentStyle.padding.calculateBottomPadding().roundToPx()
+            if (constraints.hasBoundedHeight) {
+                val maxHeight = constraints.maxHeight + paddingBottom
+                val placeable = measurable.measure(constraints.copy(maxHeight = maxHeight))
+
+                layout(placeable.width, max(placeable.height - paddingBottom, 0)) {
+                    placeable.place(0, 0)
+                }
+            } else {
+                val placeable = measurable.measure(constraints)
+                layout(placeable.width, placeable.height - paddingBottom) { placeable.place(0, 0) }
+            }
+        }
+
+    override fun Modifier.contentContainerTopPadding(): Modifier = padding(
+        top = contentStyle.padding.calculateTopPadding()
+    )
+
+    override fun Modifier.contentContainerBottomPadding(): Modifier = padding(
+        bottom = contentStyle.padding.calculateBottomPadding()
+    )
+
+    override fun Modifier.contentContainerHorizontalPaddings(): Modifier = padding(
+        start = contentStyle.padding.calculateStartPadding(layoutDirection),
+        end = contentStyle.padding.calculateEndPadding(layoutDirection)
+    )
+
+    override fun Modifier.contentContainerVerticalPaddings(): Modifier = padding(
+        top = contentStyle.padding.calculateTopPadding(),
+        bottom = contentStyle.padding.calculateBottomPadding()
+    )
+
+    override fun Modifier.contentContainerPaddings(): Modifier = padding(
+        top = contentStyle.padding.calculateTopPadding(),
+        bottom = contentStyle.padding.calculateBottomPadding(),
+        start = contentStyle.padding.calculateStartPadding(layoutDirection),
+        end = contentStyle.padding.calculateEndPadding(layoutDirection)
+    )
+
+    override fun Modifier.align(alignment: Alignment.Horizontal) = with(columnScope) { align(alignment) }
+
+    override fun Modifier.alignBy(alignmentLineBlock: (Measured) -> Int) = with(columnScope) { alignBy(alignmentLineBlock) }
+
+    override fun Modifier.alignBy(alignmentLine: VerticalAlignmentLine) = with(columnScope) { alignBy(alignmentLine) }
+
+    override fun Modifier.weight(weight: Float, fill: Boolean): Modifier = with(columnScope) {
+        weight(weight, fill).fillMaxHeight()
     }
+}
+
+interface DialogContentScope : ContentScope
+
+private class DialogContentScopeImpl(
+    columnScope: ColumnScope,
+    contentStyle: ContentStyleValues,
+    layoutDirection: LayoutDirection,
+) : ContentScopeImpl(columnScope, contentStyle, layoutDirection), DialogContentScope
