@@ -176,6 +176,9 @@ class TabIndicatorScope internal constructor() {
         val width by animateDpAsState(targetValue = tabBounds.contentWidth)
         return this.requiredWidth(width)
     }
+
+    fun Modifier.tabIndicatorOffset(tabBounds: TabBounds) =
+        this.tabIndicatorOffset(tabBounds.bounds)
 }
 
 object TabRow {
@@ -195,7 +198,7 @@ object TabRow {
 }
 
 @Immutable
-class TabBounds(val bounds: TabPosition) {
+class TabBounds(internal val bounds: TabPosition) {
     val width get() = bounds.width
 
     val contentWidth get() = bounds.contentWidth
@@ -211,6 +214,4 @@ class TabBounds(val bounds: TabPosition) {
     override fun toString() = bounds.toString()
 }
 
-private fun TabPosition.toTabBounds() = TabBounds(this)
-
-private fun List<TabPosition>.mapToTabBounds() = map(TabPosition::toTabBounds)
+private fun List<TabPosition>.mapToTabBounds() = map(::TabBounds)

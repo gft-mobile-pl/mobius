@@ -1,11 +1,17 @@
 package com.gft.designsystem
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.HorizontalDivider
 import com.gft.mobius.components.Icon
@@ -188,7 +194,15 @@ fun MobiusTabsPresentation() {
             TabRow(
                 selectedTabIndex = selectedNoIndicatorTab,
                 containerColor = Mobius.colors.surface,
-                tabIndicator = { _, _ -> },
+                tabIndicator = { selectedTabIndex, tabBounds ->
+                    Spacer(
+                        Modifier
+                            .tabIndicatorOffset(tabBounds[selectedTabIndex])
+                            .height(4.dp)
+                            .matchContentSize(tabBounds[selectedTabIndex])
+                            .background(Color.Red)
+                    )
+                },
                 divider = { HorizontalDivider() }
             ) {
                 Tab(
