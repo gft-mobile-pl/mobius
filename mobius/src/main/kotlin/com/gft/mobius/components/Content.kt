@@ -23,6 +23,8 @@ import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.LayoutDirection
 import com.gft.compose.common.modifyIf
 import com.gft.mobius.colors.LocalContentColor
+import com.gft.mobius.components.common.resolveHorizontalAlignment
+import com.gft.mobius.components.common.resolveVerticalArrangement
 import com.gft.mobius.components.styles.ContentStyleValues
 import kotlin.math.max
 
@@ -51,8 +53,8 @@ internal fun Content(
                 }
                 .padding(styleValues.padding)
                 .then(modifier),
-            verticalArrangement = styleValues.verticalArrangement,
-            horizontalAlignment = styleValues.horizontalAlignment,
+            verticalArrangement = styleValues.contentAlignment.resolveVerticalArrangement(),
+            horizontalAlignment = styleValues.contentAlignment.resolveHorizontalAlignment(),
             content = content
         )
     }
