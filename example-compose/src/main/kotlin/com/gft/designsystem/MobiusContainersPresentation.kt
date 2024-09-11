@@ -161,38 +161,40 @@ private fun MobiusContainersScopesTest() {
             Header {
                 // Header { } // not allowed in another Header
                 Box(
-                    // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in Header
+                    // modifier = Modifier.fillContentContainerWidth() // not allowed in Header
                 ) { }
                 Content {
                     // Header { } // not allowed in the Content of another Header
                     Box(
-                        // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in the Content of a Header
+                        // modifier = Modifier.fillContentContainerWidth() // not allowed in the Content of a Header
                     ) { }
                 }
                 // ScrollableContent {} // not allowed in Header
             }
             Content {
                 Header(
-                    modifier = Modifier.ignoreContentContainerTopPadding()
+                    modifier = Modifier
+                        .fillContentContainerWidth()
+                        //.ignoreContentContainerTopPadding() // .ignoreContentContainerTopPadding() is internal
                 ) {
                     // Header { } // not allowed in another Header
                     Box(
-                        // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in Header
+                        // modifier = Modifier.fillContentContainerWidth() // not allowed in Header
                     ) { }
 
                     Content {
                         // Header { } // not allowed in the Content of another Header
                         Box(
-                            // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in the Content of a Header
+                            // modifier = Modifier.fillContentContainerWidth() // not allowed in the Content of a Header
                         ) { }
                     }
                     // ScrollableContent {} // not allowed in Header
                 }
                 Box(
-                    modifier = Modifier.ignoreContentContainerTopPadding()
+                    modifier = Modifier.fillContentContainerWidth()
                 ) {
                     Box(
-                        // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in sub-layouts
+                        // modifier = Modifier.fillContentContainerWidth() // not allowed in sub-layouts
                     ) {}
                 }
             }
@@ -203,38 +205,38 @@ private fun MobiusContainersScopesTest() {
             Header {
                 // Header { } // not allowed in another Header
                 Box(
-                    // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in Header
+                    // modifier = Modifier.fillContentContainerWidth() // not allowed in Header
                 ) { }
                 Content {
                     // Header { } // not allowed in the Content of another Header
                     Box(
-                        // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in the Content of a Header
+                        // modifier = Modifier.fillContentContainerWidth() // not allowed in the Content of a Header
                     ) { }
                 }
                 // ScrollableContent {} // not allowed in Header
             }
             Content {
                 Header(
-                    modifier = Modifier.ignoreContentContainerTopPadding()
+                    modifier = Modifier.fillContentContainerWidth()
                 ) {
                     // Header { } // not allowed in another Header
                     Box(
-                        // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in Header
+                        // modifier = Modifier.fillContentContainerWidth() // not allowed in Header
                     ) { }
 
                     Content {
                         // Header { } // not allowed in the Content of another Header
                         Box(
-                            // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in the Content of a Header
+                            // modifier = Modifier.fillContentContainerWidth() // not allowed in the Content of a Header
                         ) { }
                     }
                     // ScrollableContent {} // not allowed in Header
                 }
                 Box(
-                    modifier = Modifier.ignoreContentContainerTopPadding()
+                    modifier = Modifier.fillContentContainerWidth()
                 ) {
                     Box(
-                        // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in sub-layouts
+                        // modifier = Modifier.fillContentContainerWidth() // not allowed in sub-layouts
                     ) {}
                 }
             }

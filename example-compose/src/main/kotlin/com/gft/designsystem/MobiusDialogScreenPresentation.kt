@@ -303,8 +303,8 @@ private fun TestDialog(
                 ContentElementsSpacer()
                 Box(
                     modifier = Modifier
-                        .background(Color.LightGray)
                         .fillContentContainerWidth()
+                        .background(Color.LightGray)
                         .contentContainerHorizontalPaddings()
                 ) {
                     Text("This is text which background\nexpands to a full width\nof the Content element.")

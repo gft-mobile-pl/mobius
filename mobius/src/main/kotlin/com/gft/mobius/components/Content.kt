@@ -1,5 +1,3 @@
-@file:Suppress("UnusedReceiverParameter")
-
 package com.gft.mobius.components
 
 import androidx.compose.foundation.ScrollState
@@ -16,7 +14,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.layout.layout
-import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.platform.LocalLayoutDirection
 import com.gft.compose.common.modifyIf
 import com.gft.mobius.colors.LocalContentColor
 import com.gft.mobius.components.styles.ContentStyleValues
@@ -51,23 +49,11 @@ internal fun ContentBuilder(
     }
 }
 
-interface ContentScope {
-    fun Modifier.fillContentContainerWidth(): Modifier
-    fun Modifier.contentContainerVerticalPaddings(): Modifier
-    fun Modifier.contentContainerHorizontalPaddings(): Modifier
-    fun Modifier.contentContainerPaddings(): Modifier
-    fun Modifier.ignoreContentContainerTopPadding(): Modifier
-    fun Modifier.ignoreContentContainerBottomPadding(): Modifier
-    fun Modifier.contentContainerTopPadding(): Modifier
-    fun Modifier.contentContainerBottomPadding(): Modifier
-}
+open class ContentScope internal constructor(
+    private val contentStyle: ContentStyleValues,
+) {
 
-internal fun ContentScope(
-    contentStyle: ContentStyleValues,
-    layoutDirection: LayoutDirection,
-) = object : ContentScope {
-
-    override fun Modifier.fillContentContainerWidth() = this
+    fun Modifier.fillContentContainerWidth() = this
         .layout { measurable, constraints ->
             val paddingLeft = contentStyle.padding
                 .calculateLeftPadding(layoutDirection)
@@ -91,7 +77,7 @@ internal fun ContentScope(
             }
         }
 
-    override fun Modifier.ignoreContentContainerTopPadding() = this
+    internal fun Modifier.ignoreContentContainerTopPadding() = this
         .layout { measurable, constraints ->
             val paddingTop = contentStyle.padding.calculateTopPadding().roundToPx()
             if (constraints.hasBoundedHeight) {
@@ -109,7 +95,7 @@ internal fun ContentScope(
             }
         }
 
-    override fun Modifier.ignoreContentContainerBottomPadding() = this
+    internal fun Modifier.ignoreContentContainerBottomPadding() = this
         .layout { measurable, constraints ->
             val paddingBottom = contentStyle.padding.calculateBottomPadding().roundToPx()
             if (constraints.hasBoundedHeight) {
@@ -125,38 +111,20 @@ internal fun ContentScope(
             }
         }
 
-    override fun Modifier.contentContainerTopPadding(): Modifier = padding(
-        top = contentStyle.padding.calculateTopPadding()
-    )
-
-    override fun Modifier.contentContainerBottomPadding(): Modifier = padding(
-        bottom = contentStyle.padding.calculateBottomPadding()
-    )
-
-    override fun Modifier.contentContainerHorizontalPaddings(): Modifier = padding(
-        start = contentStyle.padding.calculateStartPadding(layoutDirection),
-        end = contentStyle.padding.calculateEndPadding(layoutDirection)
-    )
-
-    override fun Modifier.contentContainerVerticalPaddings(): Modifier = padding(
-        top = contentStyle.padding.calculateTopPadding(),
-        bottom = contentStyle.padding.calculateBottomPadding()
-    )
-
-    override fun Modifier.contentContainerPaddings(): Modifier = padding(
-        top = contentStyle.padding.calculateTopPadding(),
-        bottom = contentStyle.padding.calculateBottomPadding(),
-        start = contentStyle.padding.calculateStartPadding(layoutDirection),
-        end = contentStyle.padding.calculateEndPadding(layoutDirection)
-    )
+    @Composable
+    fun Modifier.contentContainerHorizontalPaddings(): Modifier {
+        val layoutDirection = LocalLayoutDirection.current
+        return padding(
+            start = contentStyle.padding.calculateStartPadding(layoutDirection),
+            end = contentStyle.padding.calculateEndPadding(layoutDirection)
+        )
+    }
 }
 
-interface ColumnContentScope : ContentScope, ColumnScope
-
-internal fun ColumnContentScope(
-    columnScope: ColumnScope,
-    contentScope: ContentScope,
-): ColumnContentScope = object : ColumnContentScope, ColumnScope by columnScope, ContentScope by contentScope {
+open class ColumnContentScope(
+    contentStyle: ContentStyleValues,
+    private val columnScope: ColumnScope,
+) : ContentScope(contentStyle), ColumnScope by columnScope {
     override fun Modifier.weight(weight: Float, fill: Boolean): Modifier = with(columnScope) {
         weight(weight, fill).fillMaxHeight()
     }

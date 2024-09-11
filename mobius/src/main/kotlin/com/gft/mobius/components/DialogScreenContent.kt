@@ -2,21 +2,19 @@ package com.gft.mobius.components
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLayoutDirection
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.common.resolveHorizontalAlignment
 import com.gft.mobius.components.common.resolveVerticalArrangement
 import com.gft.mobius.components.styles.ContentStyle
+import com.gft.mobius.components.styles.ContentStyleValues
 import com.gft.mobius.components.styles.resolve
 
-
-interface DialogScreenContentScope : ColumnContentScope
-
-private fun DialogScreenContentScope(contentScope: ColumnContentScope) =
-    object : DialogScreenContentScope, ColumnContentScope by contentScope {}
+open class DialogScreenContentScope(contentStyle: ContentStyleValues, columnScope: ColumnScope) :
+    ColumnContentScope(contentStyle, columnScope)
 
 @Suppress("UnusedReceiverParameter")
 @Composable
@@ -64,12 +62,7 @@ private fun ContentImplementation(
             verticalArrangement = styleValues.contentAlignment.resolveVerticalArrangement(),
             horizontalAlignment = styleValues.contentAlignment.resolveHorizontalAlignment()
         ) {
-            DialogScreenContentScope(
-                ColumnContentScope(
-                    columnScope = this,
-                    contentScope = ContentScope(styleValues, LocalLayoutDirection.current)
-                )
-            ).content()
+            DialogScreenContentScope(contentStyle = styleValues, columnScope = this).content()
         }
     }
 }
