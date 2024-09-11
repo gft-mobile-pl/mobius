@@ -5,8 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.material3.TabPosition
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -21,8 +23,6 @@ import com.gft.mobius.components.styles.TabIndicatorWidth.MatchContent
 import com.gft.mobius.components.styles.TabIndicatorWidth.MatchTab
 import com.gft.mobius.components.styles.TabRowStyle
 import com.gft.mobius.components.styles.resolve
-
-typealias TabBounds = androidx.compose.material3.TabPosition
 
 @Composable
 fun PrimaryTabRow(
@@ -83,7 +83,7 @@ fun TabRow(
         containerColor = containerColor,
         contentColor = Color.Unspecified,
         indicator = { tabBounds ->
-            tabIndicatorScope.tabIndicator(selectedTabIndex, tabBounds)
+            tabIndicatorScope.tabIndicator(selectedTabIndex, tabBounds.mapToTabBounds())
         },
         divider = divider,
         tabs = tabs
@@ -151,7 +151,7 @@ fun ScrollableTabRow(
         contentColor = Color.Unspecified,
         edgePadding = edgePadding,
         indicator = { tabBounds ->
-            tabIndicatorScope.tabIndicator(selectedTabIndex, tabBounds)
+            tabIndicatorScope.tabIndicator(selectedTabIndex, tabBounds.mapToTabBounds())
         },
         divider = divider,
         tabs = tabs
@@ -186,10 +186,31 @@ object TabRow {
             val styleValues = style.resolve()
             Spacer(
                 Modifier
-                    .tabIndicatorOffset(tabBounds[selectedTabIndex])
+                    .tabIndicatorOffset(tabBounds[selectedTabIndex].bounds)
                     .requiredHeight(styleValues.height)
                     .requiredWidth(styleValues.width, tabBounds[selectedTabIndex])
                     .background(color = styleValues.color, shape = styleValues.shape)
             )
         }
 }
+
+@Immutable
+class TabBounds(val bounds: TabPosition) {
+    val width get() = bounds.width
+
+    val contentWidth get() = bounds.contentWidth
+
+    val right get() = bounds.right
+
+    val left get() = bounds.left
+
+    override fun equals(other: Any?): Boolean = bounds == other
+
+    override fun hashCode(): Int = bounds.hashCode()
+
+    override fun toString() = bounds.toString()
+}
+
+private fun TabPosition.toTabBounds() = TabBounds(this)
+
+private fun List<TabPosition>.mapToTabBounds() = map(TabPosition::toTabBounds)

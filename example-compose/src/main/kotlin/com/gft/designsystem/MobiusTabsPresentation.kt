@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.gft.mobius.Mobius
+import com.gft.mobius.components.HorizontalDivider
 import com.gft.mobius.components.Icon
 import com.gft.mobius.components.LeadingIconTab
 import com.gft.mobius.components.PrimaryScrollableTabRow
@@ -14,8 +15,8 @@ import com.gft.mobius.components.PrimaryTabRow
 import com.gft.mobius.components.SecondaryScrollableTabRow
 import com.gft.mobius.components.SecondaryTabRow
 import com.gft.mobius.components.Tab
+import com.gft.mobius.components.TabRow
 import com.gft.mobius.components.Text
-
 
 @Composable
 fun MobiusTabsPresentation() {
@@ -85,7 +86,6 @@ fun MobiusTabsPresentation() {
                     text = { Text(text = "3 (Three)") }
                 )
             }
-
 
             var selectedScrollableTab by remember {
                 mutableIntStateOf(0)
@@ -182,6 +182,26 @@ fun MobiusTabsPresentation() {
                 )
             }
 
+            var selectedNoIndicatorTab by remember {
+                mutableIntStateOf(0)
+            }
+            TabRow(
+                selectedTabIndex = selectedNoIndicatorTab,
+                containerColor = Mobius.colors.surface,
+                tabIndicator = { _, _ -> },
+                divider = { HorizontalDivider() }
+            ) {
+                Tab(
+                    selected = selectedNoIndicatorTab == 0,
+                    onClick = { selectedNoIndicatorTab = 0 },
+                    text = { Text(text = "One") }
+                )
+                Tab(
+                    selected = selectedNoIndicatorTab == 1,
+                    onClick = { selectedNoIndicatorTab = 1 },
+                    text = { Text(text = "Two") }
+                )
+            }
         }
     }
 }
