@@ -185,21 +185,18 @@ private fun DialogWithFixedHeaderDestination(
                     .offset((-2).dp, (-2).dp),
                 color = Mobius.colors.onPrimary,
             )
-            Content {
-                Box(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = "This is title",
-                        style = Mobius.typography.titleLarge
-                    )
-                    Text(
-                        text = "Content padded",
-                        style = Mobius.typography.labelSmall,
-                        modifier = Modifier.align(Alignment.TopEnd)
-                    )
-                }
-
+            Content(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "This is title",
+                    style = Mobius.typography.titleLarge
+                )
+                Text(
+                    text = "Content padded",
+                    style = Mobius.typography.labelSmall,
+                    modifier = Modifier.align(Alignment.TopEnd)
+                )
             }
         }
         if (useScrollableContainer) {
@@ -239,21 +236,18 @@ private fun DialogWithInContentHeaderDestination(
                             .offset((-2).dp, (-2).dp),
                         color = Mobius.colors.onPrimary,
                     )
-                    Content {
-                        Box(
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(
-                                text = "This is title",
-                                style = Mobius.typography.titleLarge
-                            )
-                            Text(
-                                text = "Content padded",
-                                style = Mobius.typography.labelSmall,
-                                modifier = Modifier.align(Alignment.TopEnd)
-                            )
-                        }
-
+                    Content(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "This is title",
+                            style = Mobius.typography.titleLarge
+                        )
+                        Text(
+                            text = "Content padded",
+                            style = Mobius.typography.labelSmall,
+                            modifier = Modifier.align(Alignment.TopEnd)
+                        )
                     }
                 }
                 SampleContent(contentLength)
@@ -277,21 +271,18 @@ private fun DialogWithInContentHeaderDestination(
                             .offset((-2).dp, (-2).dp),
                         color = Mobius.colors.onPrimary,
                     )
-                    Content {
-                        Box(
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(
-                                text = "This is title",
-                                style = Mobius.typography.titleLarge
-                            )
-                            Text(
-                                text = "Content padded",
-                                style = Mobius.typography.labelSmall,
-                                modifier = Modifier.align(Alignment.TopEnd)
-                            )
-                        }
-
+                    Content(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "This is title",
+                            style = Mobius.typography.titleLarge
+                        )
+                        Text(
+                            text = "Content padded",
+                            style = Mobius.typography.labelSmall,
+                            modifier = Modifier.align(Alignment.TopEnd)
+                        )
                     }
                 }
                 SampleContent(contentLength)
@@ -323,21 +314,18 @@ private fun ScreenWithFixedHeaderDestination(
                     .offset((-2).dp, (-2).dp),
                 color = Mobius.colors.onPrimary,
             )
-            Content {
-                Box(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = "This is title",
-                        style = Mobius.typography.titleLarge
-                    )
-                    Text(
-                        text = "Content padded",
-                        style = Mobius.typography.labelSmall,
-                        modifier = Modifier.align(Alignment.TopEnd)
-                    )
-                }
-
+            Content(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "This is title",
+                    style = Mobius.typography.titleLarge
+                )
+                Text(
+                    text = "Content padded",
+                    style = Mobius.typography.labelSmall,
+                    modifier = Modifier.align(Alignment.TopEnd)
+                )
             }
         }
         if (useScrollableContainer) {
@@ -373,21 +361,18 @@ private fun ScreenWithInContentHeaderDestination(
                             .offset((-2).dp, (-2).dp),
                         color = Mobius.colors.onPrimary,
                     )
-                    Content {
-                        Box(
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(
-                                text = "This is title",
-                                style = Mobius.typography.titleLarge
-                            )
-                            Text(
-                                text = "Content padded",
-                                style = Mobius.typography.labelSmall,
-                                modifier = Modifier.align(Alignment.TopEnd)
-                            )
-                        }
-
+                    Content(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "This is title",
+                            style = Mobius.typography.titleLarge
+                        )
+                        Text(
+                            text = "Content padded",
+                            style = Mobius.typography.labelSmall,
+                            modifier = Modifier.align(Alignment.TopEnd)
+                        )
                     }
                 }
                 SampleContent(contentLength)
@@ -411,21 +396,18 @@ private fun ScreenWithInContentHeaderDestination(
                             .offset((-2).dp, (-2).dp),
                         color = Mobius.colors.onPrimary,
                     )
-                    Content {
-                        Box(
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(
-                                text = "This is title",
-                                style = Mobius.typography.titleLarge
-                            )
-                            Text(
-                                text = "Content padded",
-                                style = Mobius.typography.labelSmall,
-                                modifier = Modifier.align(Alignment.TopEnd)
-                            )
-                        }
-
+                    Content(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "This is title",
+                            style = Mobius.typography.titleLarge
+                        )
+                        Text(
+                            text = "Content padded",
+                            style = Mobius.typography.labelSmall,
+                            modifier = Modifier.align(Alignment.TopEnd)
+                        )
                     }
                 }
                 SampleContent(contentLength)

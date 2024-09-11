@@ -21,11 +21,14 @@ import com.gft.mobius.Mobius
 import com.gft.mobius.components.Button
 import com.gft.mobius.components.Content
 import com.gft.mobius.components.ContentElementsSpacer
+import com.gft.mobius.components.DialogScreen
 import com.gft.mobius.components.Group
 import com.gft.mobius.components.GroupElementSpacer
+import com.gft.mobius.components.Header
 import com.gft.mobius.components.LargeContentElementsSpacer
 import com.gft.mobius.components.LargeGroupElementSpacer
 import com.gft.mobius.components.Screen
+import com.gft.mobius.components.ScrollableContent
 import com.gft.mobius.components.SmallContentElementsSpacer
 import com.gft.mobius.components.SmallGroupElementSpacer
 import com.gft.mobius.components.Text
@@ -146,6 +149,96 @@ private fun customGroupStyle(): GroupStyle {
             }
             override val shape: Token<Shape?> = Token(RoundedCornerShape(16.dp))
             override val contentColor: Token<Color> = Token { Mobius.colors.onSecondary }
+        }
+    }
+}
+
+@Suppress("unused")
+@Composable
+private fun MobiusContainersScopesTest() {
+    Mobius {
+        Screen {
+            Header {
+                // Header { } // not allowed in another Header
+                Box(
+                    // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in Header
+                ) { }
+                Content {
+                    // Header { } // not allowed in the Content of another Header
+                    Box(
+                        // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in the Content of a Header
+                    ) { }
+                }
+                // ScrollableContent {} // not allowed in Header
+            }
+            Content {
+                Header(
+                    modifier = Modifier.ignoreContentContainerTopPadding()
+                ) {
+                    // Header { } // not allowed in another Header
+                    Box(
+                        // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in Header
+                    ) { }
+
+                    Content {
+                        // Header { } // not allowed in the Content of another Header
+                        Box(
+                            // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in the Content of a Header
+                        ) { }
+                    }
+                    // ScrollableContent {} // not allowed in Header
+                }
+                Box(
+                    modifier = Modifier.ignoreContentContainerTopPadding()
+                ) {
+                    Box(
+                        // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in sub-layouts
+                    ) {}
+                }
+            }
+            ScrollableContent { }
+        }
+
+        DialogScreen {
+            Header {
+                // Header { } // not allowed in another Header
+                Box(
+                    // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in Header
+                ) { }
+                Content {
+                    // Header { } // not allowed in the Content of another Header
+                    Box(
+                        // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in the Content of a Header
+                    ) { }
+                }
+                // ScrollableContent {} // not allowed in Header
+            }
+            Content {
+                Header(
+                    modifier = Modifier.ignoreContentContainerTopPadding()
+                ) {
+                    // Header { } // not allowed in another Header
+                    Box(
+                        // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in Header
+                    ) { }
+
+                    Content {
+                        // Header { } // not allowed in the Content of another Header
+                        Box(
+                            // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in the Content of a Header
+                        ) { }
+                    }
+                    // ScrollableContent {} // not allowed in Header
+                }
+                Box(
+                    modifier = Modifier.ignoreContentContainerTopPadding()
+                ) {
+                    Box(
+                        // modifier = Modifier.ignoreContentContainerTopPadding() // not allowed in sub-layouts
+                    ) {}
+                }
+            }
+            ScrollableContent { }
         }
     }
 }

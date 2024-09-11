@@ -4,7 +4,6 @@ package com.gft.mobius.components
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
@@ -14,34 +13,29 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.takeOrElse
-import androidx.compose.ui.layout.Measured
-import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.LayoutDirection
 import com.gft.compose.common.modifyIf
 import com.gft.mobius.colors.LocalContentColor
-import com.gft.mobius.components.common.resolveHorizontalAlignment
-import com.gft.mobius.components.common.resolveVerticalArrangement
 import com.gft.mobius.components.styles.ContentStyleValues
 import kotlin.math.max
 
 @Composable
-internal fun Content(
+internal fun ContentBuilder(
     modifier: Modifier,
     fillMaxSize: Boolean,
     scrollState: ScrollState?,
     styleValues: ContentStyleValues,
-    content: @Composable ColumnScope.() -> Unit,
+    content: @Composable (modifier: Modifier) -> Unit,
 ) {
     val contentColor = styleValues.contentColor.takeOrElse { LocalContentColor.current }
     CompositionLocalProvider(
         LocalContentColor provides contentColor
     ) {
-        Column(
-            modifier = Modifier
+        content(
+            Modifier
                 .modifyIf(fillMaxSize) {
                     fillMaxSize()
                 }
@@ -52,15 +46,12 @@ internal fun Content(
                     background(styleValues.background!!)
                 }
                 .padding(styleValues.padding)
-                .then(modifier),
-            verticalArrangement = styleValues.contentAlignment.resolveVerticalArrangement(),
-            horizontalAlignment = styleValues.contentAlignment.resolveHorizontalAlignment(),
-            content = content
+                .then(modifier)
         )
     }
 }
 
-interface ContentScope : ColumnScope {
+interface ContentScope {
     fun Modifier.fillContentContainerWidth(): Modifier
     fun Modifier.contentContainerVerticalPaddings(): Modifier
     fun Modifier.contentContainerHorizontalPaddings(): Modifier
@@ -71,11 +62,10 @@ interface ContentScope : ColumnScope {
     fun Modifier.contentContainerBottomPadding(): Modifier
 }
 
-internal open class ContentScopeImpl(
-    private val columnScope: ColumnScope,
-    private val contentStyle: ContentStyleValues,
-    private val layoutDirection: LayoutDirection,
-) : ContentScope, ColumnScope {
+internal fun ContentScope(
+    contentStyle: ContentStyleValues,
+    layoutDirection: LayoutDirection,
+) = object : ContentScope {
 
     override fun Modifier.fillContentContainerWidth() = this
         .layout { measurable, constraints ->
@@ -159,14 +149,14 @@ internal open class ContentScopeImpl(
         start = contentStyle.padding.calculateStartPadding(layoutDirection),
         end = contentStyle.padding.calculateEndPadding(layoutDirection)
     )
+}
 
-    override fun Modifier.align(alignment: Alignment.Horizontal) = with(columnScope) { align(alignment) }
+interface ColumnContentScope : ContentScope, ColumnScope
 
-    override fun Modifier.alignBy(alignmentLineBlock: (Measured) -> Int) =
-        with(columnScope) { alignBy(alignmentLineBlock) }
-
-    override fun Modifier.alignBy(alignmentLine: VerticalAlignmentLine) = with(columnScope) { alignBy(alignmentLine) }
-
+internal fun ColumnContentScope(
+    columnScope: ColumnScope,
+    contentScope: ContentScope,
+): ColumnContentScope = object : ColumnContentScope, ColumnScope by columnScope, ContentScope by contentScope {
     override fun Modifier.weight(weight: Float, fill: Boolean): Modifier = with(columnScope) {
         weight(weight, fill).fillMaxHeight()
     }
