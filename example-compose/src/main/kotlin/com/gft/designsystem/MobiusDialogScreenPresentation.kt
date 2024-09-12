@@ -44,6 +44,7 @@ import com.gft.mobius.components.Screen
 import com.gft.mobius.components.ScrollableContent
 import com.gft.mobius.components.SmallGroupElementSpacer
 import com.gft.mobius.components.Text
+import com.gft.mobius.components.contentContainerHorizontalPaddings
 import com.gft.mobius.components.styles.DefaultButtonStyle
 import com.gft.mobius.components.styles.GroupStyle
 import kotlin.random.Random

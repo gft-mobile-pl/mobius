@@ -123,15 +123,17 @@ open class ContentScope internal constructor(
                 layout(placeable.width, placeable.height - paddingBottom) { placeable.place(0, 0) }
             }
         }
+}
 
-    @Composable
-    fun Modifier.contentContainerHorizontalPaddings(): Modifier {
-        val layoutDirection = LocalLayoutDirection.current
-        return padding(
-            start = contentStyle.padding.calculateStartPadding(layoutDirection),
-            end = contentStyle.padding.calculateEndPadding(layoutDirection)
-        )
-    }
+
+@Composable
+fun Modifier.contentContainerHorizontalPaddings(): Modifier {
+    val layoutDirection = LocalLayoutDirection.current
+    val contentStyle = LocalContentStyle.current
+    return padding(
+        start = contentStyle.padding.calculateStartPadding(layoutDirection),
+        end = contentStyle.padding.calculateEndPadding(layoutDirection)
+    )
 }
 
 open class ColumnContentScope(
