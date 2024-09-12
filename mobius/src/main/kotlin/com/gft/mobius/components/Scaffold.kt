@@ -28,7 +28,7 @@ fun Scaffold(
         snackbarHost = snackbarHost,
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = styleValues.floatingActionButtonPosition.toMaterial3(),
-        containerColor = styleValues.containerColor,
+        containerColor = styleValues.background,
         contentColor = styleValues.contentColor,
         contentWindowInsets = contentWindowInsets,
         content = content

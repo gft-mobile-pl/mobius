@@ -4,8 +4,8 @@ import androidx.compose.ui.text.TextStyle
 import com.gft.designsystem.Token
 
 open class DefaultMobiusStyles : MobiusStyles {
-    override val screenStyle: ScreenStyle = DefaultScreenStyle()
     override val scaffoldStyle: ScaffoldStyle = DefaultScaffoldStyle()
+    override val screenStyle: ScreenStyle = DefaultScreenStyle()
     override val dialogScreenStyle: DialogScreenStyle = DefaultDialogScreenStyle()
     override val contentStyle: ContentStyle = DefaultContentStyle()
     override val scrollableContentStyle: ContentStyle = DefaultContentStyle()
