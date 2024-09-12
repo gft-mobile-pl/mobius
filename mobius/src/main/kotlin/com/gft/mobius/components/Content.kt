@@ -2,12 +2,10 @@ package com.gft.mobius.components
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -97,7 +95,13 @@ open class ContentScope internal constructor(
             val paddingTop = contentStyle.padding.calculateTopPadding().roundToPx()
             if (constraints.hasBoundedHeight) {
                 val maxHeight = constraints.maxHeight + paddingTop
-                val placeable = measurable.measure(constraints.copy(maxHeight = maxHeight))
+                val minHeight = if (constraints.minHeight == constraints.maxHeight) maxHeight else constraints.minHeight
+                val placeable = measurable.measure(
+                    constraints.copy(
+                        minHeight = minHeight,
+                        maxHeight = maxHeight
+                    )
+                )
                 layout(placeable.width, max(placeable.height - paddingTop, 0)) {
                     placeable.place(
                         x = 0,
@@ -106,23 +110,28 @@ open class ContentScope internal constructor(
                 }
             } else {
                 val placeable = measurable.measure(constraints)
-                layout(placeable.width, placeable.height - paddingTop) { placeable.place(0, -paddingTop) }
+                layout(placeable.width, max(placeable.height - paddingTop, 0)) { placeable.place(0, -paddingTop) }
             }
         }
 
-    internal fun Modifier.ignoreContentContainerBottomPadding() = this
+    fun Modifier.ignoreContentContainerBottomPadding() = this
         .layout { measurable, constraints ->
             val paddingBottom = contentStyle.padding.calculateBottomPadding().roundToPx()
             if (constraints.hasBoundedHeight) {
                 val maxHeight = constraints.maxHeight + paddingBottom
-                val placeable = measurable.measure(constraints.copy(maxHeight = maxHeight))
-
+                val minHeight = if (constraints.minHeight == constraints.maxHeight) maxHeight else constraints.minHeight
+                val placeable = measurable.measure(
+                    constraints.copy(
+                        minHeight = minHeight,
+                        maxHeight = maxHeight
+                    )
+                )
                 layout(placeable.width, max(placeable.height - paddingBottom, 0)) {
                     placeable.place(0, 0)
                 }
             } else {
                 val placeable = measurable.measure(constraints)
-                layout(placeable.width, placeable.height - paddingBottom) { placeable.place(0, 0) }
+                layout(placeable.width, max(placeable.height - paddingBottom, 0)) { placeable.place(0, 0) }
             }
         }
 }
@@ -136,15 +145,6 @@ fun Modifier.contentContainerHorizontalPaddings(): Modifier {
         start = contentStyle.padding.calculateStartPadding(layoutDirection),
         end = contentStyle.padding.calculateEndPadding(layoutDirection)
     )
-}
-
-open class ColumnContentScope(
-    contentStyle: ContentStyleValues,
-    private val columnScope: ColumnScope,
-) : ContentScope(contentStyle), ColumnScope by columnScope {
-    override fun Modifier.weight(weight: Float, fill: Boolean): Modifier = with(columnScope) {
-        weight(weight, fill).fillMaxHeight()
-    }
 }
 
 val LocalContentStyle = staticCompositionLocalOf<ContentStyleValues> {

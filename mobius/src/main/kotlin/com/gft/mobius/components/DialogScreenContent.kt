@@ -14,7 +14,7 @@ import com.gft.mobius.components.styles.ContentStyleValues
 import com.gft.mobius.components.styles.resolve
 
 open class DialogScreenContentScope(contentStyle: ContentStyleValues, columnScope: ColumnScope) :
-    ColumnContentScope(contentStyle, columnScope)
+    ContentScope(contentStyle), ColumnScope by columnScope
 
 @Suppress("UnusedReceiverParameter")
 @Composable
