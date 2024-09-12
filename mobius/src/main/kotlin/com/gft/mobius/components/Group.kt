@@ -13,6 +13,8 @@ import androidx.compose.ui.graphics.takeOrElse
 import com.gft.compose.common.modifyIf
 import com.gft.mobius.Mobius
 import com.gft.mobius.colors.LocalContentColor
+import com.gft.mobius.components.common.resolveHorizontalAlignment
+import com.gft.mobius.components.common.resolveVerticalArrangement
 import com.gft.mobius.components.styles.GroupStyle
 import com.gft.mobius.components.styles.resolve
 
@@ -38,10 +40,9 @@ fun Group(
                 }
                 .padding(styleValues.padding)
                 .then(modifier),
-            horizontalAlignment = styleValues.horizontalAlignment,
+            verticalArrangement = styleValues.contentAlignment.resolveVerticalArrangement(),
+            horizontalAlignment = styleValues.contentAlignment.resolveHorizontalAlignment(),
             content = content
         )
     }
 }
-
-//qweqweqeqweqw
