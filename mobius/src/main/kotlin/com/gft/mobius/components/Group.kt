@@ -27,7 +27,8 @@ fun Group(
     val styleValues = style.resolve()
     val contentColor = styleValues.contentColor.takeOrElse { LocalContentColor.current }
     CompositionLocalProvider(
-        LocalContentColor provides contentColor
+        LocalContentColor provides contentColor,
+        LocalContentStyle provides styleValues
     ) {
         Column(
             modifier = Modifier

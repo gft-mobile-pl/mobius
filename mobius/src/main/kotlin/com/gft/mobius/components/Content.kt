@@ -3,6 +3,7 @@ package com.gft.mobius.components
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
@@ -13,10 +14,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.dp
 import com.gft.compose.common.modifyIf
 import com.gft.mobius.colors.LocalContentColor
 import com.gft.mobius.components.styles.ContentStyleValues
@@ -32,7 +38,8 @@ internal fun ContentBuilder(
 ) {
     val contentColor = styleValues.contentColor.takeOrElse { LocalContentColor.current }
     CompositionLocalProvider(
-        LocalContentColor provides contentColor
+        LocalContentColor provides contentColor,
+        LocalContentStyle provides styleValues,
     ) {
         content(
             Modifier
@@ -133,5 +140,14 @@ open class ColumnContentScope(
 ) : ContentScope(contentStyle), ColumnScope by columnScope {
     override fun Modifier.weight(weight: Float, fill: Boolean): Modifier = with(columnScope) {
         weight(weight, fill).fillMaxHeight()
+    }
+}
+
+val LocalContentStyle = staticCompositionLocalOf<ContentStyleValues> {
+    object : ContentStyleValues {
+        override val padding: PaddingValues = PaddingValues(0.dp)
+        override val background: Brush? = null
+        override val contentColor: Color = Color.Unspecified
+        override val contentAlignment: Alignment = Alignment.TopStart
     }
 }
