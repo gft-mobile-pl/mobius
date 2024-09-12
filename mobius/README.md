@@ -26,7 +26,7 @@
 | OutlinedTextField                           | create style                             | ✔ Done |
 | ProgressIndicator                           | create style (with variants?)            | TODO   |
 | RadioButton                                 | create style                             | ✔ Done |
-| Scaffold                                    | wrap / create aliases (like Surface)     | TODO   |
+| Scaffold                                    | wrap / create aliases (like Surface)     | ✔ Done |
 | SegmentedButton                             | Create style OR get custom one from Salt | TODO   |
 | Slider                                      | Create style and aliases                 | ✔ Done |
 | RangeSlider                                 | Create style and aliases                 | ✔ Done |

@@ -6,6 +6,7 @@ import com.gft.designsystem.Token
 
 interface MobiusStyles : Styles {
     val screenStyle: ScreenStyle
+    val scaffoldStyle: ScaffoldStyle
     val dialogScreenStyle: DialogScreenStyle
     val contentStyle: ContentStyle
     val scrollableContentStyle: ContentStyle
