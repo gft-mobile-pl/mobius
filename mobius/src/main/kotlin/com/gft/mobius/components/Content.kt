@@ -22,10 +22,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.gft.compose.common.modifyIf
 import com.gft.mobius.colors.LocalContentColor
 import com.gft.mobius.components.styles.ContentStyleValues
+import com.gft.mobius.references.MobiusReferenceDimensions
 import kotlin.math.max
 
 @Composable
@@ -151,5 +153,11 @@ val LocalContentStyle = staticCompositionLocalOf<ContentStyleValues> {
         override val background: Brush? = null
         override val contentColor: Color = Color.Unspecified
         override val contentAlignment: Alignment = Alignment.TopStart
+        override val smallVerticalElementsSpacing: Dp = MobiusReferenceDimensions.Dimension8
+        override val mediumVerticalElementsSpacing: Dp = MobiusReferenceDimensions.Dimension16
+        override val largeVerticalElementsSpacing: Dp = MobiusReferenceDimensions.Dimension32
+        override val smallHorizontalElementsSpacing: Dp = MobiusReferenceDimensions.Dimension8
+        override val mediumHorizontalElementsSpacing: Dp = MobiusReferenceDimensions.Dimension16
+        override val largeHorizontalElementsSpacing: Dp = MobiusReferenceDimensions.Dimension32
     }
 }
