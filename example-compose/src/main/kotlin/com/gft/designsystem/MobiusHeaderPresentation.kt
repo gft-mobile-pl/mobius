@@ -250,6 +250,7 @@ private fun DialogWithInContentHeaderDestination(
                         )
                     }
                 }
+                HeaderSpacer()
                 SampleContent(contentLength)
             }
         } else {
@@ -285,6 +286,7 @@ private fun DialogWithInContentHeaderDestination(
                         )
                     }
                 }
+                HeaderSpacer()
                 SampleContent(contentLength)
             }
         }
@@ -375,6 +377,7 @@ private fun ScreenWithInContentHeaderDestination(
                         )
                     }
                 }
+                HeaderSpacer()
                 SampleContent(contentLength)
             }
         } else {
@@ -410,6 +413,7 @@ private fun ScreenWithInContentHeaderDestination(
                         )
                     }
                 }
+                HeaderSpacer()
                 SampleContent(contentLength)
             }
         }
