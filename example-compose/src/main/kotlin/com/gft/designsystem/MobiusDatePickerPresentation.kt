@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.gft.mobius.Mobius
-import com.gft.mobius.components.ContentElementsSpacer
 import com.gft.mobius.components.DatePicker
+import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.ScrollableContent
 import com.gft.mobius.components.rememberDatePickerState
@@ -21,7 +21,7 @@ fun MobiusDatePickerPresentation() {
                 val simpleDatePickerState = rememberDatePickerState()
                 DatePicker(state = simpleDatePickerState)
 
-                ContentElementsSpacer()
+                ElementSpacer()
 
                 val datePickerState = rememberDatePickerState(
                     initialDisplayedMonth = YearMonth.of(2022, 1),

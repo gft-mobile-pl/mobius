@@ -6,6 +6,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.unit.Dp
 import com.gft.designsystem.Style
 import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
@@ -19,6 +20,12 @@ interface ContentStyleValues : StyleValues {
     val background: Brush?
     val contentColor: Color
     val contentAlignment: Alignment
+    val smallVerticalElementsSpacing: Dp
+    val mediumVerticalElementsSpacing: Dp
+    val largeVerticalElementsSpacing: Dp
+    val smallHorizontalElementsSpacing: Dp
+    val mediumHorizontalElementsSpacing: Dp
+    val largeHorizontalElementsSpacing: Dp
 }
 
 interface ContentStyle : Style {
@@ -26,6 +33,12 @@ interface ContentStyle : Style {
     val background: Token<Brush?>
     val contentColor: Token<Color>
     val contentAlignment: Token<Alignment>
+    val smallVerticalElementsSpacing: Token<Dp>
+    val mediumVerticalElementsSpacing: Token<Dp>
+    val largeVerticalElementsSpacing: Token<Dp>
+    val smallHorizontalElementsSpacing: Token<Dp>
+    val mediumHorizontalElementsSpacing: Token<Dp>
+    val largeHorizontalElementsSpacing: Token<Dp>
 }
 
 @Composable
@@ -35,6 +48,12 @@ fun ContentStyle.resolve() = produceStyleValues { style ->
         override val background = style.background.resolve()
         override val contentColor = style.contentColor.resolve()
         override val contentAlignment = style.contentAlignment.resolve()
+        override val smallVerticalElementsSpacing = style.smallVerticalElementsSpacing.resolve()
+        override val mediumVerticalElementsSpacing = style.mediumVerticalElementsSpacing.resolve()
+        override val largeVerticalElementsSpacing = style.largeVerticalElementsSpacing.resolve()
+        override val smallHorizontalElementsSpacing = style.smallHorizontalElementsSpacing.resolve()
+        override val mediumHorizontalElementsSpacing = style.mediumHorizontalElementsSpacing.resolve()
+        override val largeHorizontalElementsSpacing = style.largeHorizontalElementsSpacing.resolve()
     }
 }
 
@@ -50,6 +69,12 @@ open class DefaultContentStyle : ContentStyle {
     override val background: Token<Brush?> = Token { SolidColor(Mobius.colors.background) }
     override val contentColor: Token<Color> = Token { Mobius.colors.onBackground }
     override val contentAlignment: Token<Alignment> = Token(Alignment.TopStart)
+    override val smallVerticalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension8)
+    override val mediumVerticalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension16)
+    override val largeVerticalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension32)
+    override val smallHorizontalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension8)
+    override val mediumHorizontalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension16)
+    override val largeHorizontalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension32)
 }
 
 open class DefaultDialogContentStyle : ContentStyle {
@@ -59,6 +84,12 @@ open class DefaultDialogContentStyle : ContentStyle {
     override val background: Token<Brush?> = Token { SolidColor(Mobius.colors.surfaceContainerHigh) }
     override val contentColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
     override val contentAlignment: Token<Alignment> = Token(Alignment.TopStart)
+    override val smallVerticalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension8)
+    override val mediumVerticalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension16)
+    override val largeVerticalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension24)
+    override val smallHorizontalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension8)
+    override val mediumHorizontalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension16)
+    override val largeHorizontalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension24)
 }
 
 open class DefaultHeaderContentStyle : ContentStyle {
@@ -66,6 +97,12 @@ open class DefaultHeaderContentStyle : ContentStyle {
     override val background: Token<Brush?> = Token(null)
     override val contentColor: Token<Color> = Token { Mobius.colors.onPrimary }
     override val contentAlignment: Token<Alignment> = Token(Alignment.CenterStart)
+    override val smallVerticalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.contentStyle.smallVerticalElementsSpacing }
+    override val mediumVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.contentStyle.mediumVerticalElementsSpacing }
+    override val largeVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.contentStyle.largeVerticalElementsSpacing }
+    override val smallHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.contentStyle.smallHorizontalElementsSpacing }
+    override val mediumHorizontalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.contentStyle.mediumHorizontalElementsSpacing }
+    override val largeHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.contentStyle.largeHorizontalElementsSpacing }
 }
 
 open class DefaultDialogHeaderContentStyle : ContentStyle {
@@ -73,4 +110,10 @@ open class DefaultDialogHeaderContentStyle : ContentStyle {
     override val background: Token<Brush?> = Token(null)
     override val contentColor: Token<Color> = Token { Mobius.colors.onPrimary }
     override val contentAlignment: Token<Alignment> = Token(Alignment.CenterStart)
+    override val smallVerticalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogContentStyle.smallVerticalElementsSpacing }
+    override val mediumVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogContentStyle.mediumVerticalElementsSpacing }
+    override val largeVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogContentStyle.largeVerticalElementsSpacing }
+    override val smallHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogContentStyle.smallHorizontalElementsSpacing }
+    override val mediumHorizontalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogContentStyle.mediumHorizontalElementsSpacing }
+    override val largeHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogContentStyle.largeHorizontalElementsSpacing }
 }

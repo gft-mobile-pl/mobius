@@ -14,9 +14,7 @@ interface MobiusStyles : Styles {
     val dialogScrollableContentStyle: ContentStyle
     val headerContentStyle: ContentStyle
     val dialogHeaderContentStyle: ContentStyle
-    val contentElementSpacerStyle: ContentElementSpacerStyle
     val groupStyle: GroupStyle
-    val groupElementSpacerStyle: GroupElementSpacerStyle
     val cardStyle: CardStyle
     val outlinedCardStyle: CardStyle
     val elevatedCardStyle: CardStyle

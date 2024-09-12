@@ -20,19 +20,16 @@ import androidx.compose.ui.unit.dp
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.Button
 import com.gft.mobius.components.Content
-import com.gft.mobius.components.ContentElementsSpacer
 import com.gft.mobius.components.DialogScreen
 import com.gft.mobius.components.Group
-import com.gft.mobius.components.GroupElementSpacer
 import com.gft.mobius.components.Header
-import com.gft.mobius.components.LargeContentElementsSpacer
-import com.gft.mobius.components.LargeGroupElementSpacer
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.ScrollableContent
-import com.gft.mobius.components.SmallContentElementsSpacer
-import com.gft.mobius.components.SmallGroupElementSpacer
 import com.gft.mobius.components.Text
+import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.styles.GroupStyle
+import com.gft.mobius.components.LargeElementSpacer
+import com.gft.mobius.components.SmallElementSpacer
 
 @Composable
 fun MobiusContainersPresentation() {
@@ -40,62 +37,62 @@ fun MobiusContainersPresentation() {
         Screen {
             Content {
                 Text(text = "The whole page is wrapped in Content container.")
-                ContentElementsSpacer()
+                ElementSpacer()
 
                 Column {
                     HorizontalBoxWithMessage("Below is a small content elements spacer.")
-                    SmallContentElementsSpacer()
+                    SmallElementSpacer()
                     HorizontalBoxWithMessage("Below is a default/medium content elements spacer.")
-                    ContentElementsSpacer()
+                    ElementSpacer()
                     HorizontalBoxWithMessage("Below is a large content elements spacer.")
-                    LargeContentElementsSpacer()
+                    LargeElementSpacer()
                 }
 
                 HorizontalBoxWithMessage(
                     message = "This message takes the whole screen width, ignoring content padding.",
                     modifier = Modifier.fillContentContainerWidth()
                 )
-                LargeContentElementsSpacer()
+                LargeElementSpacer()
 
                 Row {
                     VerticalBox()
-                    SmallContentElementsSpacer()
+                    SmallElementSpacer()
                     VerticalBox()
-                    ContentElementsSpacer()
+                    ElementSpacer()
                     VerticalBox()
-                    LargeContentElementsSpacer()
+                    LargeElementSpacer()
                     VerticalBox()
-                    SmallContentElementsSpacer()
+                    SmallElementSpacer()
                     Text(
                         text = "On the left \nsmall, medium, and large content element spacers are displayed, respectively.",
                         style = Mobius.typography.bodySmall
                     )
                 }
 
-                LargeContentElementsSpacer()
+                LargeElementSpacer()
 
                 Group(
                     style = customGroupStyle()
                 ) {
                     Text(text = "This is a Group container with a custom style.")
-                    GroupElementSpacer()
+                    ElementSpacer()
 
                     HorizontalBoxWithMessage("Below is a small group element spacer.")
-                    SmallGroupElementSpacer()
+                    SmallElementSpacer()
                     HorizontalBoxWithMessage("Below is a default/medium group element spacer.")
-                    GroupElementSpacer()
+                    ElementSpacer()
                     HorizontalBoxWithMessage("Below is a large group element spacer.")
-                    LargeGroupElementSpacer()
+                    LargeElementSpacer()
 
                     Row {
                         VerticalBox()
-                        SmallGroupElementSpacer()
+                        SmallElementSpacer()
                         VerticalBox()
-                        GroupElementSpacer()
+                        ElementSpacer()
                         VerticalBox()
-                        LargeGroupElementSpacer()
+                        LargeElementSpacer()
                         VerticalBox()
-                        SmallGroupElementSpacer()
+                        SmallElementSpacer()
                         Text(
                             text = "On the left \nsmall, medium, and large group element spacers are displayed, respectively.",
                             style = Mobius.typography.bodySmall
@@ -177,7 +174,7 @@ private fun MobiusContainersScopesTest() {
                 Header(
                     modifier = Modifier
                         .fillContentContainerWidth()
-                        //.ignoreContentContainerTopPadding() // .ignoreContentContainerTopPadding() is internal
+                    //.ignoreContentContainerTopPadding() // .ignoreContentContainerTopPadding() is internal
                 ) {
                     // Header { } // not allowed in another Header
                     // HeaderSpacer() // not allowed in another Header

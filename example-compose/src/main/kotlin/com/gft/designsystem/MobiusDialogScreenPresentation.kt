@@ -35,14 +35,13 @@ import com.gft.mobius.Mobius
 import com.gft.mobius.components.Button
 import com.gft.mobius.components.Checkbox
 import com.gft.mobius.components.Content
-import com.gft.mobius.components.ContentElementsSpacer
 import com.gft.mobius.components.DialogScreen
 import com.gft.mobius.components.DialogScreenContentScope
+import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.Group
-import com.gft.mobius.components.GroupElementSpacer
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.ScrollableContent
-import com.gft.mobius.components.SmallGroupElementSpacer
+import com.gft.mobius.components.SmallElementSpacer
 import com.gft.mobius.components.Text
 import com.gft.mobius.components.contentContainerHorizontalPaddings
 import com.gft.mobius.components.styles.DefaultButtonStyle
@@ -64,7 +63,7 @@ fun MobiusDialogScreenPresentation() {
                     Text("Short dialog")
                 }
 
-                ContentElementsSpacer()
+                ElementSpacer()
 
                 Button(
                     modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -91,7 +90,7 @@ fun MobiusDialogScreenPresentation() {
                     )
                 }
 
-                ContentElementsSpacer()
+                ElementSpacer()
 
                 Group(
                     style = customGroupStyle()
@@ -102,7 +101,7 @@ fun MobiusDialogScreenPresentation() {
                         style = Mobius.typography.titleLarge,
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
-                    SmallGroupElementSpacer()
+                    SmallElementSpacer()
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -116,7 +115,7 @@ fun MobiusDialogScreenPresentation() {
                             modifier = Modifier.weight(1f)
                         ) {
                             Text(text = "Pad: 0-0")
-                            GroupElementSpacer()
+                            ElementSpacer()
 
                             TestCase(
                                 name = "Test 1",
@@ -171,7 +170,7 @@ fun MobiusDialogScreenPresentation() {
                             modifier = Modifier.weight(1f)
                         ) {
                             Text(text = "Pad: C-C")
-                            GroupElementSpacer()
+                            ElementSpacer()
 
                             TestCase(
                                 name = "Test 1B",
@@ -226,7 +225,7 @@ fun MobiusDialogScreenPresentation() {
                             modifier = Modifier.weight(1f)
                         ) {
                             Text(text = "Pad: 10-30 ")
-                            GroupElementSpacer()
+                            ElementSpacer()
 
                             TestCase(
                                 name = "Test 1C",
@@ -299,9 +298,9 @@ private fun TestDialog(
         DialogScreen {
             ScrollableContent {
                 Text(text = "Dialog screen", style = Mobius.typography.titleLarge)
-                ContentElementsSpacer()
+                ElementSpacer()
                 Text(text = "Dialog screen message")
-                ContentElementsSpacer()
+                ElementSpacer()
                 Box(
                     modifier = Modifier
                         .fillContentContainerWidth()
@@ -310,7 +309,7 @@ private fun TestDialog(
                 ) {
                     Text("This is text which background\nexpands to a full width\nof the Content element.")
                 }
-                ContentElementsSpacer()
+                ElementSpacer()
                 repeat(numberOfBlocks) {
                     Box(
                         modifier = Modifier
@@ -319,7 +318,7 @@ private fun TestDialog(
                             .background(Color(0xff000000 + Random.nextInt(0xffffff)))
                     )
                 }
-                ContentElementsSpacer()
+                ElementSpacer()
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
@@ -353,7 +352,7 @@ private fun ColumnScope.TestCase(
         Text(name)
     }
 
-    ContentElementsSpacer()
+    ElementSpacer()
 
     if (dialogVisible.value) {
         TestDialog(

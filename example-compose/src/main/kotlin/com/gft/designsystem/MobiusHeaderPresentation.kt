@@ -33,14 +33,13 @@ import com.gft.mobius.Mobius
 import com.gft.mobius.components.Button
 import com.gft.mobius.components.Checkbox
 import com.gft.mobius.components.Content
-import com.gft.mobius.components.ContentElementsSpacer
 import com.gft.mobius.components.DialogScreen
+import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.Header
 import com.gft.mobius.components.RadioButton
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.ScrollableContent
 import com.gft.mobius.components.Text
-import kotlin.random.Random
 
 private const val menuDestination = "menuDestination"
 private const val screenWithFixedHeaderDestination = "screenWithFixedHeaderDestination"
@@ -125,28 +124,28 @@ private fun Menu(
                     }
                 )
             }
-            ContentElementsSpacer()
+            ElementSpacer()
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = { navController.navigate(screenWithFixedHeaderDestination) }
             ) {
                 Text(text = "Screen with fixed header")
             }
-            ContentElementsSpacer()
+            ElementSpacer()
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = { navController.navigate(screenWithInContentHeader) }
             ) {
                 Text(text = "Screen with in-content header")
             }
-            ContentElementsSpacer()
+            ElementSpacer()
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = { navController.navigate(dialogScreenWithFixedHeaderDestination) }
             ) {
                 Text(text = "Dialog with fixed header")
             }
-            ContentElementsSpacer()
+            ElementSpacer()
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = { navController.navigate(dialogScreenWithInContentHeader) }
@@ -432,9 +431,8 @@ private fun ColumnScope.SampleContent(contentLength: HeaderPresentationContentLe
 @Composable
 private fun ColumnScope.LongContent() {
     Text(text = "This is some short sample text.")
-    ContentElementsSpacer()
+    ElementSpacer()
     repeat(30) {
-        val random = Random.nextInt(0, 0x101010)
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -442,7 +440,7 @@ private fun ColumnScope.LongContent() {
                 .background(randomColor())
         )
     }
-    ContentElementsSpacer()
+    ElementSpacer()
     Text(
         text = "Last content item",
         modifier = Modifier
@@ -454,9 +452,8 @@ private fun ColumnScope.LongContent() {
 @Composable
 private fun ColumnScope.ShortContent() {
     Text(text = "This is some short sample text.")
-    ContentElementsSpacer()
+    ElementSpacer()
     repeat(5) {
-        val random = Random.nextInt(0, 0x101010)
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -464,7 +461,7 @@ private fun ColumnScope.ShortContent() {
                 .background(randomColor())
         )
     }
-    ContentElementsSpacer()
+    ElementSpacer()
     Text(
         text = "Last content item",
         modifier = Modifier
@@ -476,9 +473,8 @@ private fun ColumnScope.ShortContent() {
 @Composable
 private fun ColumnScope.ExpandingContent() {
     Text(text = "This is some short sample text.")
-    ContentElementsSpacer()
+    ElementSpacer()
     repeat(5) {
-        val random = Random.nextInt(0, 0x101010)
         Box(
             modifier = Modifier
                 .fillMaxWidth()
