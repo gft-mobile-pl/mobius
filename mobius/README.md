@@ -12,7 +12,7 @@
 | DatePicker                                  | create style                             | ✔ Done |
 | DateRangePicker                             | create style and aliases                 | ✔ Done |
 | HorizontalDivider                           | create style                             | ✔ Done |
-| VerticalDivider                             | mimic HorizontalDivider                  | TODO   |
+| VerticalDivider                             | mimic HorizontalDivider                  | ✔ Done |
 | FloatingActionButton                        | create style (with variants)             | TODO   |
 | Icon                                        | wrap                                     | ✔ Done |
 | IconButton                                  | create style (with variants) or Skip?    | TODO   |
@@ -32,7 +32,7 @@
 | RangeSlider                                 | Create style and aliases                 | ✔ Done |
 | Snackbar                                    | Create style OR get custom one from Salt | TODO   |
 | Surface                                     | wrap                                     | ✔ Done |
-| SwipeToDismissBox                           | wrap                                     | TODO   |
+| SwipeToDismissBox                           | wrap                                     | ✔ Done |
 | Switch                                      | create style                             | ✔ Done |
 | Tab                                         | create style                             | ✔ Done |
 | TabRow                                      | create style                             | ✔ Done |
