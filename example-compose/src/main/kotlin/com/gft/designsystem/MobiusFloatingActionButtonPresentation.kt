@@ -1,0 +1,81 @@
+package com.gft.designsystem
+
+import androidx.compose.runtime.Composable
+import com.gft.mobius.Mobius
+import com.gft.mobius.components.Content
+import com.gft.mobius.components.ElementSpacer
+import com.gft.mobius.components.FloatingActionButton
+import com.gft.mobius.components.Icon
+import com.gft.mobius.components.Scaffold
+import com.gft.mobius.components.Screen
+import com.gft.mobius.components.Text
+import com.gft.mobius.components.styles.LargeFloatingActionButtonStyle
+import com.gft.mobius.components.styles.SmallFloatingActionButtonStyle
+
+@Composable
+fun MobiusFloatingActionButtonPresentation() {
+    Mobius {
+        Screen {
+            Scaffold(
+                floatingActionButton = {
+                    FloatingActionButton(
+                        onClick = {}
+                    ) {
+                        Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null)
+                    }
+                }
+            ) {
+                Content {
+                    FloatingActionButton(
+                        style = Mobius.styles.secondaryFloatingActionButtonStyle,
+                        onClick = {}
+                    ) {
+                        Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null)
+                    }
+                    ElementSpacer()
+
+                    FloatingActionButton(
+                        text = { Text(text = "Notifications") },
+                        style = Mobius.styles.secondaryFloatingActionButtonStyle,
+                        onClick = {}
+                    ) {
+                        Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null)
+                    }
+                    ElementSpacer()
+
+                    FloatingActionButton(
+                        onClick = {}
+                    ) {
+                        Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null)
+                    }
+                    ElementSpacer()
+
+                    FloatingActionButton(
+                        text = { Text(text = "Notifications") },
+                        onClick = { }
+                    ) {
+                        Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null)
+                    }
+                    ElementSpacer()
+
+                    FloatingActionButton(
+                        style = Mobius.styles.prominentFloatingActionButtonStyle,
+                        onClick = {}
+                    ) {
+                        Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null)
+                    }
+                    ElementSpacer()
+
+                    FloatingActionButton(
+                        text = { Text(text = "Notifications") },
+                        style = Mobius.styles.prominentFloatingActionButtonStyle,
+                        onClick = {}
+                    ) {
+                        Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null)
+                    }
+                    ElementSpacer()
+                }
+            }
+        }
+    }
+}

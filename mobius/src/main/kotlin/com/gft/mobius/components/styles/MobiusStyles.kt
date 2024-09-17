@@ -25,6 +25,9 @@ interface MobiusStyles : Styles {
     val elevatedButtonStyle: ButtonStyle
     val filledTonalButtonStyle: ButtonStyle
     val textButtonStyle: ButtonStyle
+    val floatingActionButtonStyle: FloatingActionButtonStyle
+    val secondaryFloatingActionButtonStyle: FloatingActionButtonStyle
+    val prominentFloatingActionButtonStyle: FloatingActionButtonStyle
     val radioButtonStyle: RadioButtonStyle
     val iconSizeStyle: IconSizeStyle
     val tab: TabStyle

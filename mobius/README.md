@@ -13,7 +13,7 @@
 | DateRangePicker                             | create style and aliases                 | ✔ Done |
 | HorizontalDivider                           | create style                             | ✔ Done |
 | VerticalDivider                             | mimic HorizontalDivider                  | ✔ Done |
-| FloatingActionButton                        | create style (with variants)             | TODO   |
+| FloatingActionButton                        | create style (with variants)             | ✔ Done |
 | Icon                                        | wrap                                     | ✔ Done |
 | IconButton                                  | create style (with variants) or Skip?    | TODO   |
 | LocalMinimumInteractiveComponentEnforcement | create alias                             | TODO   |
