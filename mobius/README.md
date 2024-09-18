@@ -20,7 +20,7 @@
 | Label                                       | wrap                                     | ✔ Done |
 | ListItem                                    | create style                             | TODO   |
 | Menu                                        | create style                             | TODO   |
-| NavigationBar                               | create style                             | TODO   |
+| NavigationBar                               | create style                             | ✔ Done |
 | NavigationDrawer                            | create style and aliases                 | TODO   |
 | NavigationRail                              | create style and aliases                 | TODO   |
 | OutlinedTextField                           | create style                             | ✔ Done |
