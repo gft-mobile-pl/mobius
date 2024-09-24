@@ -8,6 +8,10 @@ interface MobiusStyles : Styles {
     val scaffoldStyle: ScaffoldStyle
     val navigationBarStyle: NavigationBarStyle
     val navigationBarItemStyle: NavigationBarItemStyle
+    val drawerStyle: DrawerStyle
+    val drawerStyleVariant: DrawerStyle
+    val verticalNavigationStyle: VerticalNavigationStyle
+    val verticalNavigationItemStyle: VerticalNavigationItemStyle
     val screenStyle: ScreenStyle
     val dialogScreenStyle: DialogScreenStyle
     val contentStyle: ContentStyle
