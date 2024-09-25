@@ -22,7 +22,7 @@
 | Menu                                        | create style                             | TODO   |
 | NavigationBar                               | create style                             | ✔ Done |
 | NavigationDrawer                            | create style and aliases                 | TODO   |
-| NavigationRail                              | create style and aliases                 | TODO   |
+| NavigationRail                              | create style and aliases                 | ✔ Done |
 | OutlinedTextField                           | create style                             | ✔ Done |
 | ProgressIndicator                           | create style (with variants?)            | TODO   |
 | RadioButton                                 | create style                             | ✔ Done |

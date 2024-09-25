@@ -11,6 +11,8 @@ open class DefaultMobiusStyles : MobiusStyles {
     override val drawerStyleVariant: DrawerStyle = SlidingDrawerStyle()
     override val verticalNavigationStyle: VerticalNavigationStyle = DefaultVerticalNavigationStyle()
     override val verticalNavigationItemStyle: VerticalNavigationItemStyle = DefaultVerticalNavigationItemStyle()
+    override val navigationRailStyle: NavigationRailStyle = DefaultNavigationRailStyle()
+    override val navigationRailItemStyle: NavigationRailItemStyle = DefaultNavigationRailItemStyle()
     override val screenStyle: ScreenStyle = DefaultScreenStyle()
     override val dialogScreenStyle: DialogScreenStyle = DefaultDialogScreenStyle()
     override val contentStyle: ContentStyle = DefaultContentStyle()

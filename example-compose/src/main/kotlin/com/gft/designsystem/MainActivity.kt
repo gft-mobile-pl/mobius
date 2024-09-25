@@ -24,6 +24,7 @@ private const val menuDestination = "menuDestination"
 private const val scaffoldDestination = "scaffoldDestination"
 private const val navigationBarDestination = "navigationBarDestination"
 private const val navigationDrawerDestination = "navigationDrawerDestination"
+private const val navigationRailDestination = "navigationRailDestination"
 private const val containersDestination = "containersDestination"
 private const val headerDestination = "headerDestination"
 private const val cardsDestination = "cardsDestination"
@@ -92,6 +93,10 @@ class MainActivity : ComponentActivity() {
                         MenuButton(
                             text = "Navigation Drawer",
                             onClick = { navController.navigate(navigationDrawerDestination) }
+                        )
+                        MenuButton(
+                            text = "NavigationRail",
+                            onClick = { navController.navigate(navigationRailDestination) }
                         )
                         MenuButton(
                             text = "Containers",
@@ -197,6 +202,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(navigationDrawerDestination) {
                     MobiusNavigationDrawerPresentation()
+                }
+
+                composable(navigationRailDestination) {
+                    MobiusNavigationRailPresentation()
                 }
 
                 composable(containersDestination) {
