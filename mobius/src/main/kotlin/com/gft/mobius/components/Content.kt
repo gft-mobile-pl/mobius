@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -29,7 +28,6 @@ import kotlin.math.max
 @Composable
 internal fun ContentBuilder(
     modifier: Modifier,
-    fillMaxSize: Boolean,
     scrollState: ScrollState?,
     styleValues: ContentStyleValues,
     content: @Composable (modifier: Modifier) -> Unit,
@@ -41,9 +39,6 @@ internal fun ContentBuilder(
     ) {
         content(
             Modifier
-                .modifyIf(fillMaxSize) {
-                    fillMaxSize()
-                }
                 .modifyIf(scrollState != null) {
                     verticalScroll(scrollState!!)
                 }

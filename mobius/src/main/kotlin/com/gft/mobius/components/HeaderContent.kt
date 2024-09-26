@@ -49,7 +49,6 @@ private fun HeaderContent(
     val styleValues = style.resolve()
     ContentBuilder(
         modifier = modifier,
-        fillMaxSize = false,
         scrollState = null,
         styleValues = styleValues,
     ) { contentModifier ->

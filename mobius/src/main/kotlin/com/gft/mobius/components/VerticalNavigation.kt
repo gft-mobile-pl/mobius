@@ -3,6 +3,8 @@ package com.gft.mobius.components
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.runtime.Composable
@@ -26,11 +28,13 @@ fun VerticalNavigation(
     ContentBuilder(
         modifier = modifier,
         scrollState = null,
-        fillMaxSize = true,
         styleValues = styleValues
     ) { contentModifier ->
         Column(
-            modifier = Modifier.clip(styleValues.shape) then contentModifier,
+            modifier = Modifier
+                .clip(styleValues.shape)
+                .fillMaxSize()
+                .then(contentModifier),
             verticalArrangement = styleValues.contentAlignment.resolveVerticalArrangement(),
             horizontalAlignment = styleValues.contentAlignment.resolveHorizontalAlignment()
         ) {

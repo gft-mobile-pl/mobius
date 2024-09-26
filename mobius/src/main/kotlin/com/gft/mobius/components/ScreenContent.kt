@@ -3,10 +3,12 @@ package com.gft.mobius.components
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.gft.mobius.Mobius
+import com.gft.mobius.components.common.NEGLIGIBLE_NON_ZERO_WEIGHT
 import com.gft.mobius.components.common.resolveHorizontalAlignment
 import com.gft.mobius.components.common.resolveVerticalArrangement
 import com.gft.mobius.components.styles.ContentStyle
@@ -16,7 +18,6 @@ import com.gft.mobius.components.styles.resolve
 open class ScreenContentScope(contentStyle: ContentStyleValues, columnScope: ColumnScope) :
     ContentScope(contentStyle), ColumnScope by columnScope
 
-@Suppress("UnusedReceiverParameter")
 @Composable
 fun ScreenScope.Content(
     modifier: Modifier = Modifier,
@@ -29,7 +30,6 @@ fun ScreenScope.Content(
     content = content
 )
 
-@Suppress("UnusedReceiverParameter")
 @Composable
 fun ScreenScope.ScrollableContent(
     modifier: Modifier = Modifier,
@@ -44,7 +44,7 @@ fun ScreenScope.ScrollableContent(
 )
 
 @Composable
-private fun ContentImplementation(
+private fun ColumnScope.ContentImplementation(
     modifier: Modifier,
     scrollState: ScrollState?,
     style: ContentStyle,
@@ -53,12 +53,14 @@ private fun ContentImplementation(
     val styleValues = style.resolve()
     ContentBuilder(
         modifier = modifier,
-        fillMaxSize = true,
         scrollState = scrollState,
         styleValues = styleValues,
     ) { contentModifier ->
         Column(
-            modifier = contentModifier,
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(weight = NEGLIGIBLE_NON_ZERO_WEIGHT, fill = true)
+                .then(contentModifier),
             verticalArrangement = styleValues.contentAlignment.resolveVerticalArrangement(),
             horizontalAlignment = styleValues.contentAlignment.resolveHorizontalAlignment()
         ) {
