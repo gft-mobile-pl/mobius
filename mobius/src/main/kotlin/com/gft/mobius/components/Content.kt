@@ -102,11 +102,11 @@ open class ContentScope internal constructor(
             }
         }
 
-    fun Modifier.ignoreContentContainerBottomPadding() = this
+    internal fun Modifier.ignoreContentContainerBottomPadding() = this
         .layout { measurable, constraints ->
             val paddingBottom = contentStyle.padding.calculateBottomPadding().roundToPx()
             if (constraints.hasBoundedHeight) {
-                val maxHeight = constraints.maxHeight + paddingBottom
+                val maxHeight = if (constraints.maxHeight > 0) constraints.maxHeight + paddingBottom else 0
                 val minHeight = if (constraints.minHeight == constraints.maxHeight) maxHeight else constraints.minHeight
                 val placeable = measurable.measure(
                     constraints.copy(
@@ -115,11 +115,13 @@ open class ContentScope internal constructor(
                     )
                 )
                 layout(placeable.width, max(placeable.height - paddingBottom, 0)) {
-                    placeable.place(0, 0)
+                    placeable.place(0, max(paddingBottom - placeable.height, 0))
                 }
             } else {
                 val placeable = measurable.measure(constraints)
-                layout(placeable.width, max(placeable.height - paddingBottom, 0)) { placeable.place(0, 0) }
+                layout(placeable.width, max(placeable.height - paddingBottom, 0)) {
+                    placeable.place(0, max(paddingBottom - placeable.height, 0))
+                }
             }
         }
 }
