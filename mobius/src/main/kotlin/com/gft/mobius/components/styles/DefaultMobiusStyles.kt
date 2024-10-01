@@ -63,4 +63,9 @@ open class DefaultMobiusStyles : MobiusStyles {
     override val sliderThumbStyle: SliderThumbStyle = DefaultSliderThumbStyle()
     override val sliderTooltipStyle: TooltipStyle = SliderTooltipStyle()
     override val sliderTrackStyle: SliderTrackStyle = DefaultSliderTrackStyle()
+    override val linearProgressIndicatorStyle: LinearProgressIndicatorStyle = DefaultLinearProgressIndicatorStyle()
+    override val linearProgressIndicatorEndCapStyle: LinearProgressIndicatorEndCapStyle = DefaultLinearProgressIndicatorEndCapStyle()
+    override val indeterminateLinearProgressIndicatorStyle: LinearProgressIndicatorStyle = DefaultLinearProgressIndicatorStyle()
+    override val circularProgressIndicatorStyle: CircularProgressIndicatorStyle = DefaultCircularProgressIndicatorStyle()
+    override val indeterminateCircularProgressIndicatorStyle: CircularProgressIndicatorStyle = IndeterminateCircularProgressIndicatorStyle()
 }

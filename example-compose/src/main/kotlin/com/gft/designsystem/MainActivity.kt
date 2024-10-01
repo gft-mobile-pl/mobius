@@ -49,6 +49,7 @@ private const val tooltipDestination = "tooltipDestination"
 private const val sliderDestination = "sliderDestination"
 private const val rangeSliderDestination = "rangeSliderDestination"
 private const val swipeToDismissBoxDestination = "swipeToDismissBoxDestination"
+private const val progressIndicatorDestination = "progressIndicatorDestination"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -182,6 +183,10 @@ class MainActivity : ComponentActivity() {
                             text = "SwipeToDismissBox",
                             onClick = { navController.navigate(swipeToDismissBoxDestination) }
                         )
+                    MenuButton(
+                            text = "Progress indicator",
+                            onClick = { navController.navigate(progressIndicatorDestination) }
+                        )
                     }
                 }
 
@@ -296,8 +301,11 @@ class MainActivity : ComponentActivity() {
                 composable(swipeToDismissBoxDestination) {
                     MobiusSwipeToDismissBoxPresentation()
                 }
-            }
 
+                composable(progressIndicatorDestination) {
+                    MobiusProgressIndicatorPresentation()
+                }
+            }
         }
     }
 }

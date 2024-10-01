@@ -24,7 +24,7 @@
 | NavigationDrawer                            | create style and aliases                 | TODO   |
 | NavigationRail                              | create style and aliases                 | ✔ Done |
 | OutlinedTextField                           | create style                             | ✔ Done |
-| ProgressIndicator                           | create style (with variants?)            | TODO   |
+| ProgressIndicator                           | create style (with variants?)            | ✔ Done |
 | RadioButton                                 | create style                             | ✔ Done |
 | Scaffold                                    | wrap / create aliases (like Surface)     | ✔ Done |
 | SegmentedButton                             | Create style OR get custom one from Salt | TODO   |

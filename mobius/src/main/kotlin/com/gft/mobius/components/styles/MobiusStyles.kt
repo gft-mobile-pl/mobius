@@ -64,4 +64,9 @@ interface MobiusStyles : Styles {
     val sliderThumbStyle: SliderThumbStyle
     val sliderTrackStyle: SliderTrackStyle
     val sliderTooltipStyle: TooltipStyle
+    val linearProgressIndicatorStyle: LinearProgressIndicatorStyle
+    val linearProgressIndicatorEndCapStyle: LinearProgressIndicatorEndCapStyle
+    val indeterminateLinearProgressIndicatorStyle: LinearProgressIndicatorStyle
+    val circularProgressIndicatorStyle: CircularProgressIndicatorStyle
+    val indeterminateCircularProgressIndicatorStyle: CircularProgressIndicatorStyle
 }
