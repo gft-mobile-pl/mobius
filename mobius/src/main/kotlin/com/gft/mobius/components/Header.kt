@@ -2,7 +2,9 @@ package com.gft.mobius.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
@@ -72,3 +74,13 @@ interface DialogScreenContentHeaderScope : BoxScope
 
 private fun DialogScreenContentHeaderScope(boxScope: BoxScope) =
     object : DialogScreenContentHeaderScope, BoxScope by boxScope {}
+
+@Composable
+fun DialogScreenContentScope.HeaderSpacer() {
+    Spacer(modifier = Modifier.height(contentStyle.padding.calculateTopPadding()))
+}
+
+@Composable
+fun ScreenContentScope.HeaderSpacer() {
+    Spacer(modifier = Modifier.height(contentStyle.padding.calculateTopPadding()))
+}

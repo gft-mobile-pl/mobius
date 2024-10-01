@@ -27,6 +27,7 @@ import com.gft.mobius.components.Screen
 import com.gft.mobius.components.ScrollableContent
 import com.gft.mobius.components.Text
 import com.gft.mobius.components.ElementSpacer
+import com.gft.mobius.components.HeaderSpacer
 import com.gft.mobius.components.styles.GroupStyle
 import com.gft.mobius.components.LargeElementSpacer
 import com.gft.mobius.components.SmallElementSpacer

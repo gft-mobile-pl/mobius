@@ -3,11 +3,9 @@ package com.gft.mobius.components
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -59,13 +57,8 @@ internal fun ContentBuilder(
 }
 
 open class ContentScope internal constructor(
-    private val contentStyle: ContentStyleValues,
+    internal val contentStyle: ContentStyleValues,
 ) {
-    @Composable
-    fun HeaderSpacer() {
-        Spacer(modifier = Modifier.height(contentStyle.padding.calculateTopPadding()))
-    }
-
     fun Modifier.fillContentContainerWidth() = this
         .layout { measurable, constraints ->
             val paddingLeft = contentStyle.padding
