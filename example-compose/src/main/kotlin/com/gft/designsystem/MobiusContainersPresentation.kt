@@ -21,16 +21,15 @@ import com.gft.mobius.Mobius
 import com.gft.mobius.components.Button
 import com.gft.mobius.components.Content
 import com.gft.mobius.components.DialogScreen
+import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.Group
 import com.gft.mobius.components.Header
-import com.gft.mobius.components.Screen
-import com.gft.mobius.components.ScrollableContent
-import com.gft.mobius.components.Text
-import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.HeaderSpacer
-import com.gft.mobius.components.styles.GroupStyle
 import com.gft.mobius.components.LargeElementSpacer
+import com.gft.mobius.components.Screen
 import com.gft.mobius.components.SmallElementSpacer
+import com.gft.mobius.components.Text
+import com.gft.mobius.components.styles.GroupStyle
 
 @Composable
 fun MobiusContainersPresentation() {
@@ -201,7 +200,7 @@ private fun MobiusContainersScopesTest() {
                     //HeaderSpacer() // not allowed in sub-layouts
                 }
             }
-            ScrollableContent { }
+            Content { }
         }
 
         DialogScreen {
@@ -243,7 +242,7 @@ private fun MobiusContainersScopesTest() {
                     ) {}
                 }
             }
-            ScrollableContent { }
+            Content { }
         }
     }
 }

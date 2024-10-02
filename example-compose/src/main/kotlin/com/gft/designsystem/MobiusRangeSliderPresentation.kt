@@ -13,8 +13,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.gft.mobius.components.Content
 import com.gft.mobius.components.ElementSpacer
+import com.gft.mobius.components.Content
 import com.gft.mobius.components.RangeSlider
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.Slider
@@ -22,7 +22,9 @@ import com.gft.mobius.components.Slider
 @Composable
 fun MobiusRangeSliderPresentation() {
     Screen {
-        Content {
+        Content(
+            isScrollable = false
+        ) {
             var rangeSliderValue by remember { mutableStateOf(0f..100f) }
 
             RangeSlider(

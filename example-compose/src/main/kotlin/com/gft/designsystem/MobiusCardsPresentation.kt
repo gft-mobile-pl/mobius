@@ -14,14 +14,14 @@ import com.gft.mobius.components.Card
 import com.gft.mobius.components.ElevatedCard
 import com.gft.mobius.components.OutlinedCard
 import com.gft.mobius.components.Screen
-import com.gft.mobius.components.ScrollableContent
+import com.gft.mobius.components.Content
 import com.gft.mobius.components.Text
 
 @Composable
 fun MobiusCardsPresentation() {
     Mobius {
         Screen {
-            ScrollableContent {
+            Content {
                 val cardModifier = Modifier
                     .fillMaxWidth()
                     .height(100.dp)

@@ -13,15 +13,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.gft.mobius.components.Content
 import com.gft.mobius.components.ElementSpacer
+import com.gft.mobius.components.Content
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.Slider
 
 @Composable
 fun MobiusSliderPresentation() {
     Screen {
-        Content {
+        Content(
+            isScrollable = false
+        ) {
             var sliderValue by remember { mutableStateOf(0f) }
             Slider(
                 value = sliderValue,
@@ -54,14 +56,16 @@ fun MobiusSliderPresentation() {
                     Box(
                         Modifier
                             .size(10.dp, 30.dp)
-                            .background(Color.Red))
+                            .background(Color.Red)
+                    )
                 },
                 track = { state ->
                     Box(
                         Modifier
                             .fillMaxWidth()
                             .height(10.dp)
-                            .background(Color.Blue))
+                            .background(Color.Blue)
+                    )
                 },
                 onValueChange = { value -> sliderValue = value },
             )

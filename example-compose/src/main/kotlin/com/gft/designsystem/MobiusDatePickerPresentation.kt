@@ -7,9 +7,9 @@ import com.gft.mobius.Mobius
 import com.gft.mobius.components.DatePicker
 import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.Screen
-import com.gft.mobius.components.ScrollableContent
+import com.gft.mobius.components.Content
 import com.gft.mobius.components.rememberDatePickerState
-import com.gft.mobius.components.styles.DefaultContentStyle
+import com.gft.mobius.components.styles.DefaultScrollableContentStyle
 import java.time.LocalDate
 import java.time.YearMonth
 
@@ -17,7 +17,7 @@ import java.time.YearMonth
 fun MobiusDatePickerPresentation() {
     Mobius {
         Screen {
-            ScrollableContent(style = NoPaddingContentStyle()) {
+            Content(style = NoPaddingContentStyle()) {
                 val simpleDatePickerState = rememberDatePickerState()
                 DatePicker(state = simpleDatePickerState)
 
@@ -41,6 +41,6 @@ fun MobiusDatePickerPresentation() {
     }
 }
 
-private class NoPaddingContentStyle : DefaultContentStyle() {
+private class NoPaddingContentStyle : DefaultScrollableContentStyle() {
     override val padding = Token(PaddingValues(0.dp))
 }

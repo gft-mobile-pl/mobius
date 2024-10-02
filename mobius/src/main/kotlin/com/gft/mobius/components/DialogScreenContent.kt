@@ -20,19 +20,20 @@ open class DialogScreenContentScope(contentStyle: ContentStyleValues, columnScop
 @Composable
 fun DialogScreenScope.Content(
     modifier: Modifier = Modifier,
-    style: ContentStyle = Mobius.styles.dialogContentStyle,
+    isScrollable: Boolean = true,
+    style: ContentStyle = if (isScrollable) Mobius.styles.scrollableContentStyle else Mobius.styles.dialogContentStyle,
     content: @Composable DialogScreenContentScope.() -> Unit,
 ) = ContentImplementation(
     modifier = modifier,
-    scrollState = null,
+    scrollState = if (isScrollable) rememberScrollState() else null,
     style = style,
     content = content
 )
 
 @Composable
-fun DialogScreenScope.ScrollableContent(
+fun DialogScreenScope.Content(
     modifier: Modifier = Modifier,
-    scrollState: ScrollState = rememberScrollState(),
+    scrollState: ScrollState,
     style: ContentStyle = Mobius.styles.dialogScrollableContentStyle,
     content: @Composable DialogScreenContentScope.() -> Unit,
 ) = ContentImplementation(

@@ -39,7 +39,6 @@ import com.gft.mobius.components.Footer
 import com.gft.mobius.components.FooterSpacer
 import com.gft.mobius.components.RadioButton
 import com.gft.mobius.components.Screen
-import com.gft.mobius.components.ScrollableContent
 import com.gft.mobius.components.Text
 
 private const val menuDestination = "menuDestination"
@@ -91,7 +90,9 @@ private fun Menu(
     navController: NavController,
 ) {
     Screen {
-        Content {
+        Content(
+            isScrollable = useScrollableContainer.value
+        ) {
             Text(text = "Content length:")
             Row(
                 modifier = Modifier
@@ -170,11 +171,7 @@ private fun DialogWithFixedFooter(
         modifier = Modifier
             .heightIn(0.dp, 600.dp)
     ) {
-        if (useScrollableContainer) {
-            ScrollableContent { SampleContent(contentLength) }
-        } else {
-            Content { SampleContent(contentLength) }
-        }
+        Content(isScrollable = useScrollableContainer) { SampleContent(contentLength) }
 
         Footer(
             modifier = Modifier
@@ -220,76 +217,40 @@ private fun DialogWithInContentFooter(
         modifier = Modifier
             .heightIn(0.dp, 600.dp)
     ) {
-        if (useScrollableContainer) {
-            ScrollableContent {
-                SampleContent(contentLength)
-                FooterSpacer()
-                Footer(
-                    modifier = Modifier
-                        .background(
-                            Brush.verticalGradient(
-                                0.0f to Mobius.colors.primary,
-                                1.0f to Mobius.colors.tertiary
-                            )
+        Content(
+            isScrollable = useScrollableContainer
+        ) {
+            SampleContent(contentLength)
+            FooterSpacer()
+            Footer(
+                modifier = Modifier
+                    .background(
+                        Brush.verticalGradient(
+                            0.0f to Mobius.colors.primary,
+                            1.0f to Mobius.colors.tertiary
                         )
+                    )
+            ) {
+                Text(
+                    text = "Custom in-box placement",
+                    style = Mobius.typography.labelSmall,
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .offset((-2).dp, (-2).dp),
+                    color = Mobius.colors.onPrimary,
+                )
+                Content(
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "Custom in-box placement",
-                        style = Mobius.typography.labelSmall,
-                        modifier = Modifier
-                            .align(Alignment.BottomEnd)
-                            .offset((-2).dp, (-2).dp),
-                        color = Mobius.colors.onPrimary,
+                        text = "Footer",
+                        style = Mobius.typography.titleLarge
                     )
-                    Content(
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(
-                            text = "Footer",
-                            style = Mobius.typography.titleLarge
-                        )
-                        Text(
-                            text = "Content padded",
-                            style = Mobius.typography.labelSmall,
-                            modifier = Modifier.align(Alignment.TopEnd)
-                        )
-                    }
-                }
-            }
-        } else {
-            Content {
-                SampleContent(contentLength)
-                FooterSpacer()
-                Footer(
-                    modifier = Modifier
-                        .background(
-                            Brush.verticalGradient(
-                                0.0f to Mobius.colors.primary,
-                                1.0f to Mobius.colors.tertiary
-                            )
-                        )
-                ) {
                     Text(
-                        text = "Custom in-box placement",
+                        text = "Content padded",
                         style = Mobius.typography.labelSmall,
-                        modifier = Modifier
-                            .align(Alignment.BottomEnd)
-                            .offset((-2).dp, (-2).dp),
-                        color = Mobius.colors.onPrimary,
+                        modifier = Modifier.align(Alignment.TopEnd)
                     )
-                    Content(
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(
-                            text = "Footer",
-                            style = Mobius.typography.titleLarge
-                        )
-                        Text(
-                            text = "Content padded",
-                            style = Mobius.typography.labelSmall,
-                            modifier = Modifier.align(Alignment.TopEnd)
-                        )
-                    }
                 }
             }
         }
@@ -302,11 +263,7 @@ private fun ScreenWithFixedFooter(
     contentLength: FooterPresentationContentLength,
 ) {
     Screen {
-        if (useScrollableContainer) {
-            ScrollableContent { SampleContent(contentLength) }
-        } else {
-            Content { SampleContent(contentLength) }
-        }
+        Content(isScrollable = useScrollableContainer) { SampleContent(contentLength) }
         Footer(
             modifier = Modifier
                 .background(
@@ -347,76 +304,40 @@ private fun ScreenWithInContentFooter(
     contentLength: FooterPresentationContentLength,
 ) {
     Screen {
-        if (useScrollableContainer) {
-            ScrollableContent {
-                SampleContent(contentLength)
-                FooterSpacer()
-                Footer(
-                    modifier = Modifier
-                        .background(
-                            Brush.verticalGradient(
-                                0.0f to Mobius.colors.primary,
-                                1.0f to Mobius.colors.tertiary
-                            )
+        Content(
+            isScrollable = useScrollableContainer
+        ) {
+            SampleContent(contentLength)
+            FooterSpacer()
+            Footer(
+                modifier = Modifier
+                    .background(
+                        Brush.verticalGradient(
+                            0.0f to Mobius.colors.primary,
+                            1.0f to Mobius.colors.tertiary
                         )
+                    )
+            ) {
+                Text(
+                    text = "Custom in-box placement",
+                    style = Mobius.typography.labelSmall,
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .offset((-2).dp, (-2).dp),
+                    color = Mobius.colors.onPrimary,
+                )
+                Content(
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "Custom in-box placement",
-                        style = Mobius.typography.labelSmall,
-                        modifier = Modifier
-                            .align(Alignment.BottomEnd)
-                            .offset((-2).dp, (-2).dp),
-                        color = Mobius.colors.onPrimary,
+                        text = "Footer",
+                        style = Mobius.typography.titleLarge
                     )
-                    Content(
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(
-                            text = "Footer",
-                            style = Mobius.typography.titleLarge
-                        )
-                        Text(
-                            text = "Content padded",
-                            style = Mobius.typography.labelSmall,
-                            modifier = Modifier.align(Alignment.TopEnd)
-                        )
-                    }
-                }
-            }
-        } else {
-            Content {
-                SampleContent(contentLength)
-                FooterSpacer()
-                Footer(
-                    modifier = Modifier
-                        .background(
-                            Brush.verticalGradient(
-                                0.0f to Mobius.colors.primary,
-                                1.0f to Mobius.colors.tertiary
-                            )
-                        )
-                ) {
                     Text(
-                        text = "Custom in-box placement",
+                        text = "Content padded",
                         style = Mobius.typography.labelSmall,
-                        modifier = Modifier
-                            .align(Alignment.BottomEnd)
-                            .offset((-2).dp, (-2).dp),
-                        color = Mobius.colors.onPrimary,
+                        modifier = Modifier.align(Alignment.TopEnd)
                     )
-                    Content(
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(
-                            text = "Footer",
-                            style = Mobius.typography.titleLarge
-                        )
-                        Text(
-                            text = "Content padded",
-                            style = Mobius.typography.labelSmall,
-                            modifier = Modifier.align(Alignment.TopEnd)
-                        )
-                    }
                 }
             }
         }

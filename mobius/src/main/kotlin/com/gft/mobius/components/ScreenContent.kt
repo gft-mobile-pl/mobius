@@ -21,19 +21,20 @@ open class ScreenContentScope(contentStyle: ContentStyleValues, columnScope: Col
 @Composable
 fun ScreenScope.Content(
     modifier: Modifier = Modifier,
-    style: ContentStyle = Mobius.styles.contentStyle,
+    isScrollable: Boolean = true,
+    style: ContentStyle = if (isScrollable) Mobius.styles.scrollableContentStyle else Mobius.styles.contentStyle,
     content: @Composable ScreenContentScope.() -> Unit,
 ) = ContentImplementation(
     modifier = modifier,
-    scrollState = null,
+    scrollState = if (isScrollable) rememberScrollState() else null,
     style = style,
     content = content
 )
 
 @Composable
-fun ScreenScope.ScrollableContent(
+fun ScreenScope.Content(
     modifier: Modifier = Modifier,
-    scrollState: ScrollState = rememberScrollState(),
+    scrollState: ScrollState,
     style: ContentStyle = Mobius.styles.scrollableContentStyle,
     content: @Composable ScreenContentScope.() -> Unit,
 ) = ContentImplementation(

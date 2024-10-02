@@ -24,7 +24,9 @@ import com.gft.mobius.components.rememberSwipeToDismissBoxController
 @Composable
 fun MobiusSwipeToDismissBoxPresentation() {
     Screen {
-        Content {
+        Content(
+            isScrollable = false
+        ) {
             val items = remember { (1..10).toList().toMutableStateList() }
             LazyColumn {
                 items(
@@ -44,7 +46,7 @@ fun MobiusSwipeToDismissBoxPresentation() {
 @Composable
 private fun DismissibleItem(
     item: Int,
-    onDismissed: () -> Unit
+    onDismissed: () -> Unit,
 ) {
     val controller = rememberSwipeToDismissBoxController(
         initialState = Visible,

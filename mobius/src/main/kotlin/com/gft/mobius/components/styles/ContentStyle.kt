@@ -57,7 +57,7 @@ fun ContentStyle.resolve() = produceStyleValues { style ->
     }
 }
 
-open class DefaultContentStyle : ContentStyle {
+open class DefaultScrollableContentStyle : ContentStyle {
     override val padding: Token<PaddingValues> = Token(
         PaddingValues(
             start = MobiusReferenceDimensions.Dimension16,
@@ -93,53 +93,53 @@ open class DefaultDialogContentStyle : ContentStyle {
 }
 
 open class DefaultHeaderContentStyle : ContentStyle {
-    override val padding: Token<PaddingValues> = TokenReference { Mobius.styles.contentStyle.padding }
+    override val padding: Token<PaddingValues> = TokenReference { Mobius.styles.scrollableContentStyle.padding }
     override val background: Token<Brush?> = Token(null)
     override val contentColor: Token<Color> = Token { Mobius.colors.onPrimary }
     override val contentAlignment: Token<Alignment> = Token(Alignment.CenterStart)
-    override val smallVerticalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.contentStyle.smallVerticalElementsSpacing }
-    override val mediumVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.contentStyle.mediumVerticalElementsSpacing }
-    override val largeVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.contentStyle.largeVerticalElementsSpacing }
-    override val smallHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.contentStyle.smallHorizontalElementsSpacing }
-    override val mediumHorizontalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.contentStyle.mediumHorizontalElementsSpacing }
-    override val largeHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.contentStyle.largeHorizontalElementsSpacing }
+    override val smallVerticalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.scrollableContentStyle.smallVerticalElementsSpacing }
+    override val mediumVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.scrollableContentStyle.mediumVerticalElementsSpacing }
+    override val largeVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.scrollableContentStyle.largeVerticalElementsSpacing }
+    override val smallHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.scrollableContentStyle.smallHorizontalElementsSpacing }
+    override val mediumHorizontalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.scrollableContentStyle.mediumHorizontalElementsSpacing }
+    override val largeHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.scrollableContentStyle.largeHorizontalElementsSpacing }
 }
 
 open class DefaultDialogHeaderContentStyle : ContentStyle {
-    override val padding: Token<PaddingValues> = TokenReference { Mobius.styles.dialogContentStyle.padding }
+    override val padding: Token<PaddingValues> = TokenReference { Mobius.styles.dialogScrollableContentStyle.padding }
     override val background: Token<Brush?> = Token(null)
     override val contentColor: Token<Color> = Token { Mobius.colors.onPrimary }
     override val contentAlignment: Token<Alignment> = Token(Alignment.CenterStart)
-    override val smallVerticalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogContentStyle.smallVerticalElementsSpacing }
-    override val mediumVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogContentStyle.mediumVerticalElementsSpacing }
-    override val largeVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogContentStyle.largeVerticalElementsSpacing }
-    override val smallHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogContentStyle.smallHorizontalElementsSpacing }
-    override val mediumHorizontalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogContentStyle.mediumHorizontalElementsSpacing }
-    override val largeHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogContentStyle.largeHorizontalElementsSpacing }
+    override val smallVerticalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogScrollableContentStyle.smallVerticalElementsSpacing }
+    override val mediumVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogScrollableContentStyle.mediumVerticalElementsSpacing }
+    override val largeVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogScrollableContentStyle.largeVerticalElementsSpacing }
+    override val smallHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogScrollableContentStyle.smallHorizontalElementsSpacing }
+    override val mediumHorizontalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogScrollableContentStyle.mediumHorizontalElementsSpacing }
+    override val largeHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogScrollableContentStyle.largeHorizontalElementsSpacing }
 }
 
 open class DefaultFooterContentStyle : ContentStyle {
-    override val padding: Token<PaddingValues> = TokenReference { Mobius.styles.contentStyle.padding }
+    override val padding: Token<PaddingValues> = TokenReference { Mobius.styles.scrollableContentStyle.padding }
     override val background: Token<Brush?> = Token(null)
     override val contentColor: Token<Color> = Token { Mobius.colors.onPrimary }
     override val contentAlignment: Token<Alignment> = Token(Alignment.CenterStart)
-    override val smallVerticalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.contentStyle.smallVerticalElementsSpacing }
-    override val mediumVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.contentStyle.mediumVerticalElementsSpacing }
-    override val largeVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.contentStyle.largeVerticalElementsSpacing }
-    override val smallHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.contentStyle.smallHorizontalElementsSpacing }
-    override val mediumHorizontalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.contentStyle.mediumHorizontalElementsSpacing }
-    override val largeHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.contentStyle.largeHorizontalElementsSpacing }
+    override val smallVerticalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.scrollableContentStyle.smallVerticalElementsSpacing }
+    override val mediumVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.scrollableContentStyle.mediumVerticalElementsSpacing }
+    override val largeVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.scrollableContentStyle.largeVerticalElementsSpacing }
+    override val smallHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.scrollableContentStyle.smallHorizontalElementsSpacing }
+    override val mediumHorizontalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.scrollableContentStyle.mediumHorizontalElementsSpacing }
+    override val largeHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.scrollableContentStyle.largeHorizontalElementsSpacing }
 }
 
 open class DefaultDialogFooterContentStyle : ContentStyle {
-    override val padding: Token<PaddingValues> = TokenReference { Mobius.styles.dialogContentStyle.padding }
+    override val padding: Token<PaddingValues> = TokenReference { Mobius.styles.dialogScrollableContentStyle.padding }
     override val background: Token<Brush?> = Token(null)
     override val contentColor: Token<Color> = Token { Mobius.colors.onPrimary }
     override val contentAlignment: Token<Alignment> = Token(Alignment.CenterStart)
-    override val smallVerticalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogContentStyle.smallVerticalElementsSpacing }
-    override val mediumVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogContentStyle.mediumVerticalElementsSpacing }
-    override val largeVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogContentStyle.largeVerticalElementsSpacing }
-    override val smallHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogContentStyle.smallHorizontalElementsSpacing }
-    override val mediumHorizontalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogContentStyle.mediumHorizontalElementsSpacing }
-    override val largeHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogContentStyle.largeHorizontalElementsSpacing }
+    override val smallVerticalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogScrollableContentStyle.smallVerticalElementsSpacing }
+    override val mediumVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogScrollableContentStyle.mediumVerticalElementsSpacing }
+    override val largeVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogScrollableContentStyle.largeVerticalElementsSpacing }
+    override val smallHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogScrollableContentStyle.smallHorizontalElementsSpacing }
+    override val mediumHorizontalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogScrollableContentStyle.mediumHorizontalElementsSpacing }
+    override val largeHorizontalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogScrollableContentStyle.largeHorizontalElementsSpacing }
 }

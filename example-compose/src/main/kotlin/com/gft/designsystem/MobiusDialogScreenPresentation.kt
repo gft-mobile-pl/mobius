@@ -34,13 +34,12 @@ import com.gft.designsystem.MobiusDialogScreenPresentation.MessageWidth.SHORT
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.Button
 import com.gft.mobius.components.Checkbox
-import com.gft.mobius.components.Content
 import com.gft.mobius.components.DialogScreen
 import com.gft.mobius.components.DialogScreenContentScope
 import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.Group
+import com.gft.mobius.components.Content
 import com.gft.mobius.components.Screen
-import com.gft.mobius.components.ScrollableContent
 import com.gft.mobius.components.SmallElementSpacer
 import com.gft.mobius.components.Text
 import com.gft.mobius.components.contentContainerHorizontalPaddings
@@ -52,7 +51,7 @@ import kotlin.random.Random
 fun MobiusDialogScreenPresentation() {
     Mobius {
         Screen {
-            ScrollableContent {
+            Content {
                 val shortDialogVisible = remember { mutableStateOf(false) }
                 val scrollableDialogVisible = remember { mutableStateOf(false) }
 
@@ -296,7 +295,7 @@ private fun TestDialog(
         onDismissRequest = onDismissRequest
     ) {
         DialogScreen {
-            ScrollableContent {
+            Content {
                 Text(text = "Dialog screen", style = Mobius.typography.titleLarge)
                 ElementSpacer()
                 Text(text = "Dialog screen message")
@@ -375,22 +374,14 @@ private fun TestDialog(
 ) {
     Dialog(onDismissRequest = onDismissRequest) {
         DialogScreen {
-            if (scrollable) {
-                ScrollableContent {
-                    TestDialogContent(
-                        message1Width = message1Width,
-                        message2Width = message2Width,
-                        message2Padding = message2Padding
-                    )
-                }
-            } else {
-                Content {
-                    TestDialogContent(
-                        message1Width = message1Width,
-                        message2Width = message2Width,
-                        message2Padding = message2Padding
-                    )
-                }
+            Content(
+                isScrollable = scrollable
+            ) {
+                TestDialogContent(
+                    message1Width = message1Width,
+                    message2Width = message2Width,
+                    message2Padding = message2Padding
+                )
             }
         }
     }

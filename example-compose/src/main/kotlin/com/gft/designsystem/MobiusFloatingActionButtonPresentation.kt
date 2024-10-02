@@ -2,15 +2,13 @@ package com.gft.designsystem
 
 import androidx.compose.runtime.Composable
 import com.gft.mobius.Mobius
-import com.gft.mobius.components.Content
 import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.FloatingActionButton
 import com.gft.mobius.components.Icon
 import com.gft.mobius.components.Scaffold
 import com.gft.mobius.components.Screen
+import com.gft.mobius.components.Content
 import com.gft.mobius.components.Text
-import com.gft.mobius.components.styles.LargeFloatingActionButtonStyle
-import com.gft.mobius.components.styles.SmallFloatingActionButtonStyle
 
 @Composable
 fun MobiusFloatingActionButtonPresentation() {
