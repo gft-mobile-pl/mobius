@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,6 +38,8 @@ internal fun ContentBuilder(
     CompositionLocalProvider(
         LocalContentColor provides contentColor,
         LocalContentStyle provides styleValues,
+        LocalFooterVisible provides remember { mutableStateOf(false) },
+        LocalContentHeaderVisible provides remember { mutableStateOf(false) },
     ) {
         content(
             Modifier
@@ -45,7 +49,14 @@ internal fun ContentBuilder(
                 .modifyIf(styleValues.background != null) {
                     background(styleValues.background!!)
                 }
-                .padding(styleValues.padding)
+                .padding(
+                    PaddingValues(
+                        start = styleValues.padding.calculateStartPadding(LocalLayoutDirection.current),
+                        end = styleValues.padding.calculateEndPadding(LocalLayoutDirection.current),
+                        top = if (LocalContentHeaderVisible.current.value) 0.dp else styleValues.padding.calculateTopPadding(),
+                        bottom = if (LocalFooterVisible.current.value) 0.dp else styleValues.padding.calculateBottomPadding(),
+                    )
+                )
                 .then(modifier)
         )
     }
@@ -74,53 +85,6 @@ open class ContentScope internal constructor(
                 val placeable = measurable.measure(constraints)
                 layout(max(placeable.width - paddingLeft - paddingRight, 0), placeable.height) {
                     placeable.place(0, 0)
-                }
-            }
-        }
-
-    internal fun Modifier.ignoreContentContainerTopPadding() = this
-        .layout { measurable, constraints ->
-            val paddingTop = contentStyle.padding.calculateTopPadding().roundToPx()
-            if (constraints.hasBoundedHeight) {
-                val maxHeight = constraints.maxHeight + paddingTop
-                val minHeight = if (constraints.minHeight == constraints.maxHeight) maxHeight else constraints.minHeight
-                val placeable = measurable.measure(
-                    constraints.copy(
-                        minHeight = minHeight,
-                        maxHeight = maxHeight
-                    )
-                )
-                layout(placeable.width, max(placeable.height - paddingTop, 0)) {
-                    placeable.place(
-                        x = 0,
-                        y = if (placeable.height > paddingTop) -paddingTop else -placeable.height
-                    )
-                }
-            } else {
-                val placeable = measurable.measure(constraints)
-                layout(placeable.width, max(placeable.height - paddingTop, 0)) { placeable.place(0, -paddingTop) }
-            }
-        }
-
-    internal fun Modifier.ignoreContentContainerBottomPadding() = this
-        .layout { measurable, constraints ->
-            val paddingBottom = contentStyle.padding.calculateBottomPadding().roundToPx()
-            if (constraints.hasBoundedHeight) {
-                val maxHeight = if (constraints.maxHeight > 0) constraints.maxHeight + paddingBottom else 0
-                val minHeight = if (constraints.minHeight == constraints.maxHeight) maxHeight else constraints.minHeight
-                val placeable = measurable.measure(
-                    constraints.copy(
-                        minHeight = minHeight,
-                        maxHeight = maxHeight
-                    )
-                )
-                layout(placeable.width, max(placeable.height - paddingBottom, 0)) {
-                    placeable.place(0, max(paddingBottom - placeable.height, 0))
-                }
-            } else {
-                val placeable = measurable.measure(constraints)
-                layout(placeable.width, max(placeable.height - paddingBottom, 0)) {
-                    placeable.place(0, max(paddingBottom - placeable.height, 0))
                 }
             }
         }

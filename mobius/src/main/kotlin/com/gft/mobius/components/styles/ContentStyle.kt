@@ -77,7 +77,7 @@ open class DefaultScrollableContentStyle : ContentStyle {
     override val largeHorizontalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension32)
 }
 
-open class DefaultDialogContentStyle : ContentStyle {
+open class DefaultDialogScrollableContentStyle : ContentStyle {
     override val padding: Token<PaddingValues> = Token(
         PaddingValues(all = MobiusReferenceDimensions.Dimension24)
     )

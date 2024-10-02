@@ -36,7 +36,6 @@ import com.gft.mobius.components.Content
 import com.gft.mobius.components.DialogScreen
 import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.Footer
-import com.gft.mobius.components.FooterSpacer
 import com.gft.mobius.components.RadioButton
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.Text
@@ -221,7 +220,6 @@ private fun DialogWithInContentFooter(
             isScrollable = useScrollableContainer
         ) {
             SampleContent(contentLength)
-            FooterSpacer()
             Footer(
                 modifier = Modifier
                     .background(
@@ -308,7 +306,6 @@ private fun ScreenWithInContentFooter(
             isScrollable = useScrollableContainer
         ) {
             SampleContent(contentLength)
-            FooterSpacer()
             Footer(
                 modifier = Modifier
                     .background(

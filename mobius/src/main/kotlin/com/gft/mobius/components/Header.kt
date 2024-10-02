@@ -2,10 +2,12 @@ package com.gft.mobius.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 
 @Suppress("UnusedReceiverParameter")
@@ -28,13 +30,22 @@ private fun ScreenHeaderScope(boxScope: BoxScope) = object : ScreenHeaderScope, 
 fun ScreenContentScope.Header(
     modifier: Modifier = Modifier,
     content: @Composable ScreenContentHeaderScope.() -> Unit,
-) = Box(
-    modifier = Modifier
-        .ignoreContentContainerTopPadding()
-        .fillContentContainerWidth()
-        .then(modifier)
 ) {
-    ScreenContentHeaderScope(this).content()
+    val headerVisible = LocalContentHeaderVisible.current
+    DisposableEffect(headerVisible) {
+        headerVisible.value = true
+        onDispose { headerVisible.value = false }
+    }
+    if (headerVisible.value) {
+        Box(
+            modifier = Modifier
+                .padding(bottom = contentStyle.padding.calculateTopPadding())
+                .fillContentContainerWidth()
+                .then(modifier)
+        ) {
+            ScreenContentHeaderScope(this).content()
+        }
+    }
 }
 
 interface ScreenContentHeaderScope : BoxScope
@@ -61,13 +72,22 @@ private fun DialogScreenHeaderScope(boxScope: BoxScope) = object : DialogScreenH
 fun DialogScreenContentScope.Header(
     modifier: Modifier = Modifier,
     content: @Composable DialogScreenContentHeaderScope.() -> Unit,
-) = Box(
-    modifier = Modifier
-        .ignoreContentContainerTopPadding()
-        .fillContentContainerWidth()
-        .then(modifier)
 ) {
-    DialogScreenContentHeaderScope(this).content()
+    val headerVisible = LocalContentHeaderVisible.current
+    DisposableEffect(headerVisible) {
+        headerVisible.value = true
+        onDispose { headerVisible.value = false }
+    }
+    if (headerVisible.value) {
+        Box(
+            modifier = Modifier
+                .padding(bottom = contentStyle.padding.calculateTopPadding())
+                .fillContentContainerWidth()
+                .then(modifier)
+        ) {
+            DialogScreenContentHeaderScope(this).content()
+        }
+    }
 }
 
 interface DialogScreenContentHeaderScope : BoxScope
@@ -75,12 +95,4 @@ interface DialogScreenContentHeaderScope : BoxScope
 private fun DialogScreenContentHeaderScope(boxScope: BoxScope) =
     object : DialogScreenContentHeaderScope, BoxScope by boxScope {}
 
-@Composable
-fun DialogScreenContentScope.HeaderSpacer() {
-    Spacer(modifier = Modifier.height(contentStyle.padding.calculateTopPadding()))
-}
-
-@Composable
-fun ScreenContentScope.HeaderSpacer() {
-    Spacer(modifier = Modifier.height(contentStyle.padding.calculateTopPadding()))
-}
+internal val LocalContentHeaderVisible = compositionLocalOf { mutableStateOf(false) }

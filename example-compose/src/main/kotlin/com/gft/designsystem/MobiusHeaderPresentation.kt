@@ -36,7 +36,6 @@ import com.gft.mobius.components.Content
 import com.gft.mobius.components.DialogScreen
 import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.Header
-import com.gft.mobius.components.HeaderSpacer
 import com.gft.mobius.components.RadioButton
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.Text
@@ -246,7 +245,6 @@ private fun DialogWithInContentHeaderDestination(
                     )
                 }
             }
-            HeaderSpacer()
             SampleContent(contentLength)
         }
     }
@@ -333,7 +331,6 @@ private fun ScreenWithInContentHeaderDestination(
                     )
                 }
             }
-            HeaderSpacer()
             SampleContent(contentLength)
         }
     }
