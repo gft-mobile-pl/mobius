@@ -34,6 +34,8 @@ interface MobiusStyles : Styles {
     val cardStyle: CardStyle
     val outlinedCardStyle: CardStyle
     val elevatedCardStyle: CardStyle
+    val popUpScreenStyle: PopUpScreenStyle
+    val dialogButtonsStyle: DialogButtonsStyle
     val buttonStyle: ButtonStyle
     val outlinedButtonStyle: ButtonStyle
     val elevatedButtonStyle: ButtonStyle

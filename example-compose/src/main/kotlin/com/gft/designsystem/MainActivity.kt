@@ -33,6 +33,7 @@ private const val footerDestination = "footerDestination"
 private const val cardsDestination = "cardsDestination"
 private const val dialogScreenDestination = "dialogScreenDestination"
 private const val dialogScreenSizingDestination = "dialogScreenSizingDestination"
+private const val popUpDialogDestination = "popUpDialogDestination"
 private const val lightColorsDestination = "lightColorsDestination"
 private const val darkColorsDestination = "darkColorsDestination"
 private const val typographyDestination = "typographyDestination"
@@ -134,6 +135,10 @@ class MainActivity : ComponentActivity() {
                             onClick = { navController.navigate(dialogScreenSizingDestination) }
                         )
                         MenuButton(
+                            text = "PopUp dialog",
+                            onClick = { navController.navigate(popUpDialogDestination) }
+                        )
+                        MenuButton(
                             text = "Surface",
                             onClick = { navController.navigate(surfaceDestination) }
                         )
@@ -155,7 +160,7 @@ class MainActivity : ComponentActivity() {
                         )
                         MenuButton(
                             text = "Floating Action Buttons",
-                            onClick = { navController.navigate(floatingActionButtonsDestination) } )
+                            onClick = { navController.navigate(floatingActionButtonsDestination) })
                         MenuButton(
                             text = "Radio Buttons",
                             onClick = { navController.navigate(radioButtonsDestination) }
@@ -265,6 +270,10 @@ class MainActivity : ComponentActivity() {
 
                 dialog(dialogScreenSizingDestination) {
                     MobiusDialogScreenSizingPresentation()
+                }
+
+                composable(popUpDialogDestination) {
+                    MobiusPopUpDialogPresentation()
                 }
 
                 composable(textFieldsDestination) {

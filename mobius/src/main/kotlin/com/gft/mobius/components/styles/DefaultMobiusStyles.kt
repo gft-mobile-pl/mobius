@@ -33,6 +33,8 @@ open class DefaultMobiusStyles : MobiusStyles {
     override val cardStyle: CardStyle = DefaultCardStyle()
     override val outlinedCardStyle: CardStyle = OutlinedCardStyle()
     override val elevatedCardStyle: CardStyle = ElevatedCardStyle()
+    override val popUpScreenStyle: PopUpScreenStyle = DefaultPopUpScreenStyle()
+    override val dialogButtonsStyle: DialogButtonsStyle = DefaultDialogButtonsStyle()
     override val buttonStyle: ButtonStyle = DefaultButtonStyle()
     override val outlinedButtonStyle: ButtonStyle = OutlinedButtonStyle()
     override val elevatedButtonStyle: ButtonStyle = ElevatedButtonStyle()
@@ -78,10 +80,12 @@ open class DefaultMobiusStyles : MobiusStyles {
     override val sliderTooltipStyle: TooltipStyle = SliderTooltipStyle()
     override val sliderTrackStyle: SliderTrackStyle = DefaultSliderTrackStyle()
     override val linearProgressIndicatorStyle: LinearProgressIndicatorStyle = DefaultLinearProgressIndicatorStyle()
-    override val linearProgressIndicatorEndCapStyle: LinearProgressIndicatorEndCapStyle = DefaultLinearProgressIndicatorEndCapStyle()
+    override val linearProgressIndicatorEndCapStyle: LinearProgressIndicatorEndCapStyle =
+        DefaultLinearProgressIndicatorEndCapStyle()
     override val indeterminateLinearProgressIndicatorStyle: LinearProgressIndicatorStyle = DefaultLinearProgressIndicatorStyle()
     override val circularProgressIndicatorStyle: CircularProgressIndicatorStyle = DefaultCircularProgressIndicatorStyle()
-    override val indeterminateCircularProgressIndicatorStyle: CircularProgressIndicatorStyle = IndeterminateCircularProgressIndicatorStyle()
     override val labelStyle: LabelStyle = DefaultLabelStyle()
     override val interactiveComponentStyle: InteractiveComponentStyle = DefaultInteractiveComponentStyle()
+    override val indeterminateCircularProgressIndicatorStyle: CircularProgressIndicatorStyle =
+        IndeterminateCircularProgressIndicatorStyle()
 }
