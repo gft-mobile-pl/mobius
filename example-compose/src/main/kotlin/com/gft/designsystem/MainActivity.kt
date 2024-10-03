@@ -22,6 +22,7 @@ import com.gft.mobius.components.Text
 
 private const val menuDestination = "menuDestination"
 private const val scaffoldDestination = "scaffoldDestination"
+private const val topAppBarDestination = "topAppBarDestination"
 private const val navigationBarDestination = "navigationBarDestination"
 private const val navigationDrawerDestination = "navigationDrawerDestination"
 private const val navigationRailDestination = "navigationRailDestination"
@@ -88,6 +89,10 @@ class MainActivity : ComponentActivity() {
                         MenuButton(
                             text = "Scaffold",
                             onClick = { navController.navigate(scaffoldDestination) }
+                        )
+                        MenuButton(
+                            text = "Top app bar",
+                            onClick = { navController.navigate(topAppBarDestination) }
                         )
                         MenuButton(
                             text = "Navigation Bar",
@@ -209,6 +214,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(scaffoldDestination) {
                     MobiusScaffoldPresentation()
+                }
+
+                composable(topAppBarDestination) {
+                    MobiusTopAppBarPresentation()
                 }
 
                 composable(navigationBarDestination) {

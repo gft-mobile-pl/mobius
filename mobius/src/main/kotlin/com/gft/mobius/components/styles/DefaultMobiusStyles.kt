@@ -5,6 +5,8 @@ import com.gft.designsystem.Token
 
 open class DefaultMobiusStyles : MobiusStyles {
     override val scaffoldStyle: ScaffoldStyle = DefaultScaffoldStyle()
+    override val topAppBarVariantStyle: TopAppBarStyle = CenteredTopAppBarStyle()
+    override val topAppBarStyle: TopAppBarStyle = DefaultTopAppBarStyle()
     override val navigationBarStyle: NavigationBarStyle = DefaultNavigationBarStyle()
     override val navigationBarItemStyle: NavigationBarItemStyle = DefaultNavigationBarItemStyle()
     override val drawerStyle: DrawerStyle = ModalDrawerStyle()
