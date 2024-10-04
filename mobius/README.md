@@ -15,7 +15,7 @@
 | VerticalDivider                             | mimic HorizontalDivider                  | ✔ Done |
 | FloatingActionButton                        | create style (with variants)             | ✔ Done |
 | Icon                                        | wrap                                     | ✔ Done |
-| IconButton                                  | create style (with variants) or Skip?    | TODO   |
+| IconButton                                  | create style (with variants) or Skip?    | ✔ Done |
 | LocalMinimumInteractiveComponentEnforcement | create alias                             | TODO   |
 | Label                                       | wrap                                     | ✔ Done |
 | ListItem                                    | create style                             | TODO   |

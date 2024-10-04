@@ -37,6 +37,7 @@ private const val textFieldsDestination = "textFieldsDestination"
 private const val surfaceDestination = "surfaceDestination"
 private const val tabsDestination = "tabsDestination"
 private const val buttonsDestination = "buttonsDestination"
+private const val iconButtonsDestination = "iconButtonsDestination"
 private const val floatingActionButtonsDestination = "floatingActionButtonsDestination"
 private const val radioButtonsDestination = "radioButtonsDestination"
 private const val switchDestination = "switchDestination"
@@ -135,6 +136,10 @@ class MainActivity : ComponentActivity() {
                         MenuButton(
                             text = "Buttons",
                             onClick = { navController.navigate(buttonsDestination) }
+                        )
+                        MenuButton(
+                            text = "Icon Buttons",
+                            onClick = { navController.navigate(iconButtonsDestination) }
                         )
                         MenuButton(
                             text = "Floating Action Buttons",
@@ -252,6 +257,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(buttonsDestination) {
                     MobiusButtonsPresentation()
+                }
+
+                composable(iconButtonsDestination) {
+                    MobiusIconButtonPresentation()
                 }
 
                 composable(floatingActionButtonsDestination) {
