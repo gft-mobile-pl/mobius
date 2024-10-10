@@ -8,18 +8,18 @@ import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
 import com.gft.designsystem.produceStyleValues
 import com.gft.mobius.Mobius
-import com.gft.mobius.components.common.SizeFactor
+import com.gft.mobius.components.common.SizeFraction
 
 interface LinearProgressIndicatorEndCapStyleValues : StyleValues {
     val color: Color
     val strokeCap: StrokeCap
-    val sizeFactor: SizeFactor
+    val sizeFraction: SizeFraction
 }
 
 interface LinearProgressIndicatorEndCapStyle : Style {
     val color: Token<Color>
     val strokeCap: Token<StrokeCap>
-    val sizeFactor: Token<SizeFactor>
+    val sizeFraction: Token<SizeFraction>
 }
 
 @Composable
@@ -27,12 +27,12 @@ fun LinearProgressIndicatorEndCapStyle.resolve() = produceStyleValues { style ->
     object : LinearProgressIndicatorEndCapStyleValues {
         override val color = style.color.resolve()
         override val strokeCap = style.strokeCap.resolve()
-        override val sizeFactor = style.sizeFactor.resolve()
+        override val sizeFraction = style.sizeFraction.resolve()
     }
 }
 
 open class DefaultLinearProgressIndicatorEndCapStyle : LinearProgressIndicatorEndCapStyle {
     override val color = Token { Mobius.colors.primary }
     override val strokeCap = Token(StrokeCap.Round)
-    override val sizeFactor = Token(SizeFactor(1f))
+    override val sizeFraction = Token(SizeFraction(1f))
 }

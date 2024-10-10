@@ -55,7 +55,7 @@ object LinearProgressIndicator {
         val indicatorProvider: DrawScope.() -> Unit = {
             ProgressIndicatorDefaults.drawStopIndicator(
                 drawScope = this,
-                stopSize = (size.height * styleValues.sizeFactor.value).toDp(),
+                stopSize = (size.height * styleValues.sizeFraction.value).toDp(),
                 strokeCap = styleValues.strokeCap,
                 color = styleValues.color
             )
