@@ -24,11 +24,11 @@ fun FloatingActionButton(
     val styleValues = style.resolve()
     androidx.compose.material3.ExtendedFloatingActionButton(
         onClick = onClick,
-        modifier = modifier.sizeIn(
+        modifier = Modifier.sizeIn(
             minWidth = styleValues.collapsedWidth,
             minHeight = styleValues.height,
             maxWidth = if (text != null) Dp.Unspecified else styleValues.collapsedWidth
-        ),
+        ) then modifier,
         shape = styleValues.shape,
         containerColor = styleValues.backgroundColor,
         contentColor = styleValues.contentColor,
@@ -47,10 +47,32 @@ fun FloatingActionButton(
         },
         text = {
             if (text != null) {
-                ProvideTextStyle(styleValues.textStyle!!) {
+                ProvideTextStyle(styleValues.textStyle) {
                     text()
                 }
             }
         }
+    )
+}
+
+@Suppress("UnusedReceiverParameter")
+@Composable
+fun BottomAppBarFloatingActionButtonScope.FloatingActionButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource? = null,
+    style: FloatingActionButtonStyle = Mobius.styles.bottomAppBarFloatingActionButtonStyle,
+    text: (@Composable () -> Unit)? = null,
+    expanded: Boolean = text != null,
+    icon: @Composable () -> Unit
+) {
+    com.gft.mobius.components.FloatingActionButton(
+        onClick = onClick,
+        modifier = modifier,
+        interactionSource = interactionSource,
+        style = style,
+        text = text,
+        expanded = expanded,
+        icon = icon,
     )
 }

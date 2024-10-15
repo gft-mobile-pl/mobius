@@ -23,7 +23,7 @@ fun IconButton(
     val styleValues = style.resolve()
     androidx.compose.material3.OutlinedIconButton(
         onClick = onClick,
-        modifier = modifier.size(styleValues.size),
+        modifier = Modifier.size(styleValues.size) then modifier,
         enabled = enabled,
         colors = IconButtonColors(
             containerColor = styleValues.backgroundColor,

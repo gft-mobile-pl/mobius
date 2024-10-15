@@ -16,6 +16,7 @@ interface MobiusStyles : Styles {
     val verticalNavigationItemStyle: VerticalNavigationItemStyle
     val navigationRailStyle: NavigationRailStyle
     val navigationRailItemStyle: NavigationRailItemStyle
+    val bottomAppBarStyle: BottomAppBarStyle
     val screenStyle: ScreenStyle
     val dialogScreenStyle: DialogScreenStyle
     val contentStyle: ContentStyle
@@ -52,6 +53,7 @@ interface MobiusStyles : Styles {
     val floatingActionButtonStyle: FloatingActionButtonStyle
     val secondaryFloatingActionButtonStyle: FloatingActionButtonStyle
     val prominentFloatingActionButtonStyle: FloatingActionButtonStyle
+    val bottomAppBarFloatingActionButtonStyle: FloatingActionButtonStyle
     val radioButtonStyle: RadioButtonStyle
     val iconSizeStyle: IconSizeStyle
     val tab: TabStyle

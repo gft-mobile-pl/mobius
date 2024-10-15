@@ -14,6 +14,7 @@ import com.gft.designsystem.produceStyleValues
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.IconSize
 import com.gft.mobius.references.MobiusReferenceDimensions
+import com.gft.mobius.references.MobiusReferenceElevations
 
 interface FloatingActionButtonStyleValues : StyleValues {
     val shape: Shape
@@ -99,5 +100,19 @@ open class LargeFloatingActionButtonStyle : FloatingActionButtonStyle {
     override val hoveredElevation = TokenReference { Mobius.styles.floatingActionButtonStyle.hoveredElevation }
     override val collapsedWidth = Token(MobiusReferenceDimensions.Dimension96)
     override val height = Token(MobiusReferenceDimensions.Dimension96)
+    override val iconSize = Token { IconSize.Medium }
+}
+
+open class FlatFloatingActionButtonStyle : FloatingActionButtonStyle {
+    override val shape: Token<Shape> = TokenReference { Mobius.styles.floatingActionButtonStyle.shape }
+    override val contentColor = TokenReference { Mobius.styles.floatingActionButtonStyle.contentColor }
+    override val backgroundColor = TokenReference { Mobius.styles.floatingActionButtonStyle.backgroundColor }
+    override val textStyle = TokenReference { Mobius.styles.floatingActionButtonStyle.textStyle }
+    override val defaultElevation = Token(MobiusReferenceElevations.Level0)
+    override val pressedElevation = Token(MobiusReferenceElevations.Level0)
+    override val focusedElevation = Token(MobiusReferenceElevations.Level0)
+    override val hoveredElevation = Token(MobiusReferenceElevations.Level0)
+    override val collapsedWidth = TokenReference { Mobius.styles.floatingActionButtonStyle.collapsedWidth }
+    override val height = TokenReference { Mobius.styles.floatingActionButtonStyle.height }
     override val iconSize = Token { IconSize.Medium }
 }

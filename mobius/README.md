@@ -3,7 +3,7 @@
 | M3 Class                                    | Scope                                    | Status |
 |---------------------------------------------|------------------------------------------|--------|
 | AlertDialog                                 | create style,<br/>check PopUp in Salt    | TODO   |
-| AppBar                                      | create style and aliases                 | TODO   |
+| AppBar                                      | create style and aliases                 | ✔ Done |
 | Badge                                       | create style                             | TODO   |
 | BottomSheetScaffold                         | create style and aliases                 | TODO   |
 | Button                                      | create style (with variants)             | ✔ Done |

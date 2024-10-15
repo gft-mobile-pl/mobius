@@ -27,6 +27,7 @@ private const val topAppBarDestination = "topAppBarDestination"
 private const val navigationBarDestination = "navigationBarDestination"
 private const val navigationDrawerDestination = "navigationDrawerDestination"
 private const val navigationRailDestination = "navigationRailDestination"
+private const val bottomAppBarDestination = "bottomAppBarDestination"
 private const val containersDestination = "containersDestination"
 private const val headerDestination = "headerDestination"
 private const val footerDestination = "footerDestination"
@@ -109,6 +110,10 @@ class MainActivity : ComponentActivity() {
                         MenuButton(
                             text = "NavigationRail",
                             onClick = { navController.navigate(navigationRailDestination) }
+                        )
+                        MenuButton(
+                            text = "Bottom app bar",
+                            onClick = { navController.navigate(bottomAppBarDestination) }
                         )
                         MenuButton(
                             text = "Containers",
@@ -246,6 +251,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(navigationRailDestination) {
                     MobiusNavigationRailPresentation()
+                }
+
+                composable(bottomAppBarDestination) {
+                    MobiusBottomAppBarPresentation()
                 }
 
                 composable(containersDestination) {

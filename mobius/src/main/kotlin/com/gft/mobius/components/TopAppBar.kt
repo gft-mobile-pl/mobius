@@ -33,7 +33,7 @@ import com.gft.mobius.components.styles.TopAppBarStyle
 import com.gft.mobius.components.styles.resolve
 
 @OptIn(ExperimentalMaterial3Api::class)
-internal val LocalModifierScrollBehavior = modifierLocalOf<TopAppBarScrollBehavior?> { null }
+private val LocalTopAppBarScrollBehavior = modifierLocalOf<TopAppBarScrollBehavior?> { null }
 
 @Composable
 @OptIn(ExperimentalComposeUiApi::class)
@@ -60,7 +60,7 @@ fun TopAppBar(
             )
         },
         modifier = modifier.modifierLocalConsumer {
-            scrollBehavior.value = LocalModifierScrollBehavior.current
+            scrollBehavior.value = LocalTopAppBarScrollBehavior.current
         },
         navigationIcon = {
             ProvideIconSize(styleValues.navigationIconSize) {
@@ -109,7 +109,7 @@ fun Modifier.topAppBarScope(
     val scrollBehavior = scrollType.resolveScrollBehavior(state, canScroll)
     @OptIn(ExperimentalMaterial3Api::class)
     return this
-        .modifierLocalProvider(LocalModifierScrollBehavior) { scrollBehavior }
+        .modifierLocalProvider(LocalTopAppBarScrollBehavior) { scrollBehavior }
         .nestedScroll(scrollBehavior.nestedScrollConnection)
 }
 
