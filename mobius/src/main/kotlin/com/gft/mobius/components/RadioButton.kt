@@ -3,6 +3,7 @@ package com.gft.mobius.components
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.RadioButtonColors
+import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -20,13 +21,50 @@ fun RadioButton(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     style: RadioButtonStyle = Mobius.styles.radioButtonStyle,
 ) {
+    RadioButtonImplementation(
+        selected = selected,
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        interactionSource = interactionSource,
+        style = style
+    )
+}
+
+@Composable
+fun ClickableLabelScope.RadioButton(
+    selected: Boolean,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    style: RadioButtonStyle = Mobius.styles.radioButtonStyle,
+) {
+    RadioButtonImplementation(
+        selected = selected,
+        onClick = null,
+        modifier = modifier,
+        enabled = enabled,
+        interactionSource = null,
+        style = style
+    )
+}
+
+@Composable
+private fun RadioButtonImplementation(
+    selected: Boolean,
+    onClick: (() -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean,
+    interactionSource: MutableInteractionSource?,
+    style: RadioButtonStyle,
+) {
     val styleValues = style.resolve()
     val rippleColor = if (selected) styleValues.selectedRippleColor else styleValues.unselectedRippleColor
+
     CompositionLocalProvider(LocalContentColor provides rippleColor) {
         androidx.compose.material3.RadioButton(
             selected = selected,
+            modifier = Modifier.minimumInteractiveComponentSize() then modifier,
             onClick = onClick,
-            modifier = modifier,
             enabled = enabled,
             colors = RadioButtonColors(
                 selectedColor = styleValues.selectedColor,

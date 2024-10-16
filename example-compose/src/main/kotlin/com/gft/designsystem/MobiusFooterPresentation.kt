@@ -36,6 +36,7 @@ import com.gft.mobius.components.Content
 import com.gft.mobius.components.DialogScreen
 import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.Footer
+import com.gft.mobius.components.Label
 import com.gft.mobius.components.RadioButton
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.Text
@@ -45,7 +46,6 @@ private const val screenWithFixedFooterDestination = "screenWithFixedFooterDesti
 private const val screenWithInContentFooter = "screenWithInContentFooter"
 private const val dialogScreenWithFixedFooterDestination = "dialogScreenWithFixedFooterDestination"
 private const val dialogScreenWithInContentFooter = "dialogScreenWithInContentFooter"
-
 
 @Composable
 fun MobiusFooterPresentation() {
@@ -98,21 +98,24 @@ private fun Menu(
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                RadioButton(
-                    selected = contentLength.value == SHORT,
+                Label(
+                    text = { Text(text = "Short ") },
                     onClick = { contentLength.value = SHORT }
-                )
-                Text(text = "Short ")
-                RadioButton(
-                    selected = contentLength.value == LONG,
+                ) {
+                    RadioButton(selected = contentLength.value == SHORT)
+                }
+                Label(
+                    text = { Text(text = "Long ") },
                     onClick = { contentLength.value = LONG }
-                )
-                Text(text = "Long ")
-                RadioButton(
-                    selected = contentLength.value == EXPANDING,
+                ) {
+                    RadioButton(selected = contentLength.value == LONG)
+                }
+                Label(
+                    text = { Text(text = "Expanding ") },
                     onClick = { contentLength.value = EXPANDING }
-                )
-                Text(text = "Expanding ")
+                ) {
+                    RadioButton(selected = contentLength.value == EXPANDING)
+                }
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -160,7 +163,6 @@ private fun Menu(
     }
 }
 
-
 @Composable
 private fun DialogWithFixedFooter(
     useScrollableContainer: Boolean,
@@ -205,7 +207,6 @@ private fun DialogWithFixedFooter(
         }
     }
 }
-
 
 @Composable
 private fun DialogWithInContentFooter(

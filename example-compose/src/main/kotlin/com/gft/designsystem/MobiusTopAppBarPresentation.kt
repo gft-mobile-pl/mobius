@@ -1,22 +1,20 @@
 package com.gft.designsystem
 
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.gft.designsystem.TopAppBarPresentationScrollType.ShowOrHideOnScroll
-import com.gft.designsystem.TopAppBarPresentationScrollType.ScrollWithContent
 import com.gft.designsystem.TopAppBarPresentationScrollType.Pinned
+import com.gft.designsystem.TopAppBarPresentationScrollType.ScrollWithContent
+import com.gft.designsystem.TopAppBarPresentationScrollType.ShowOrHideOnScroll
 import com.gft.designsystem.TopAppBarPresentationStyle.Default
 import com.gft.designsystem.TopAppBarPresentationStyle.Variant
 import com.gft.designsystem.TopAppBarPresentationUsage.WithTopAppBarScopeComponent
@@ -27,6 +25,7 @@ import com.gft.mobius.components.Content
 import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.Icon
 import com.gft.mobius.components.IconButton
+import com.gft.mobius.components.Label
 import com.gft.mobius.components.RadioButton
 import com.gft.mobius.components.Scaffold
 import com.gft.mobius.components.Screen
@@ -74,58 +73,65 @@ private fun Menu(
     Screen {
         Content {
             Text("TopAppBarStyle:")
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Label(
+                text = { Text(text = "Default") },
+                onClick = { topAppBarStyle.value = Default }
+            ) {
                 RadioButton(
-                    selected = topAppBarStyle.value == Default,
-                    onClick = { topAppBarStyle.value = Default }
+                    selected = topAppBarStyle.value == Default
                 )
-                Text(text = "Default")
             }
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Label(
+                text = { Text(text = "Variant") },
+                onClick = { topAppBarStyle.value = Variant }
+            ) {
                 RadioButton(
-                    selected = topAppBarStyle.value == Variant,
-                    onClick = { topAppBarStyle.value = Variant }
+                    selected = topAppBarStyle.value == Variant
                 )
-                Text(text = "Variant")
             }
             ElementSpacer()
             Text("Top appbar scroll type:")
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Label(
+                text = { Text(text = "Pinned") },
+                onClick = { scrollType.value = Pinned }
+            ) {
                 RadioButton(
-                    selected = scrollType.value == Pinned,
-                    onClick = { scrollType.value = Pinned }
+                    selected = scrollType.value == Pinned
                 )
-                Text(text = "Pinned")
             }
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Label(
+                text = { Text(text = "ShowOrHideOnScroll") },
+                onClick = { scrollType.value = ShowOrHideOnScroll }
+            ) {
                 RadioButton(
-                    selected = scrollType.value == ShowOrHideOnScroll,
-                    onClick = { scrollType.value = ShowOrHideOnScroll }
+                    selected = scrollType.value == ShowOrHideOnScroll
                 )
-                Text(text = "ShowOrHideOnScroll")
             }
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Label(
+                text = { Text(text = "ScrollWithContent") },
+                onClick = { scrollType.value = ScrollWithContent }
+            ) {
                 RadioButton(
-                    selected = scrollType.value == ScrollWithContent,
-                    onClick = { scrollType.value = ScrollWithContent }
+                    selected = scrollType.value == ScrollWithContent
                 )
-                Text(text = "ScrollWithContent")
             }
             ElementSpacer()
             Text("Usage type:")
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Label(
+                text = { Text(text = "with TopAppBarScope component") },
+                onClick = { usage.value = WithTopAppBarScopeComponent }
+            ) {
                 RadioButton(
-                    selected = usage.value == WithTopAppBarScopeComponent,
-                    onClick = { usage.value = WithTopAppBarScopeComponent }
+                    selected = usage.value == WithTopAppBarScopeComponent
                 )
-                Text(text = "with TopAppBarScope component")
             }
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Label(
+                text = { Text(text = "with topAppBarScope modifier") },
+                onClick = { usage.value = WithTopAppBarScopeModifier }
+            ) {
                 RadioButton(
-                    selected = usage.value == WithTopAppBarScopeModifier,
-                    onClick = { usage.value = WithTopAppBarScopeModifier }
+                    selected = usage.value == WithTopAppBarScopeModifier
                 )
-                Text(text = "with topAppBarScope modifier")
             }
             ElementSpacer()
             MenuItem(text = "Show sample", onClick = { controller.navigate(sampleDestination) })

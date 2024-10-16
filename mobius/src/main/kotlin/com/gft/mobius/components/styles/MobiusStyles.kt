@@ -79,4 +79,5 @@ interface MobiusStyles : Styles {
     val indeterminateLinearProgressIndicatorStyle: LinearProgressIndicatorStyle
     val circularProgressIndicatorStyle: CircularProgressIndicatorStyle
     val indeterminateCircularProgressIndicatorStyle: CircularProgressIndicatorStyle
+    val labelStyle: LabelStyle
 }
