@@ -1,5 +1,6 @@
 package com.gft.mobius
 
+import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -12,8 +13,8 @@ import com.gft.mobius.Mobius.styles
 import com.gft.mobius.colors.MobiusColors
 import com.gft.mobius.colors.MobiusLightColors
 import com.gft.mobius.components.styles.DefaultMobiusStyles
+import com.gft.mobius.components.styles.LocalTextStyle
 import com.gft.mobius.components.styles.MobiusStyles
-import com.gft.mobius.components.styles.ProvideTextStyle
 import com.gft.mobius.materialdesign.toMaterialDesign
 import com.gft.mobius.typography.DefaultMobiusTypography
 import com.gft.mobius.typography.MobiusTypography
@@ -49,8 +50,9 @@ fun Mobius(
                 colorScheme = elements.colors.toMaterialDesign(),
                 typography = elements.typography.toMaterialDesign(),
             ) {
-                ProvideTextStyle(
-                    style = styles.text.resolve(),
+                CompositionLocalProvider(
+                    LocalMinimumInteractiveComponentSize provides styles.interactiveComponentStyle.minimumSize.resolve(),
+                    LocalTextStyle provides styles.text.resolve(),
                     content = content
                 )
             }

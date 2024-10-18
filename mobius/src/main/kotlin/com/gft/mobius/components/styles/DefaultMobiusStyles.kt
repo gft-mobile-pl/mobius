@@ -79,4 +79,5 @@ open class DefaultMobiusStyles : MobiusStyles {
     override val circularProgressIndicatorStyle: CircularProgressIndicatorStyle = DefaultCircularProgressIndicatorStyle()
     override val indeterminateCircularProgressIndicatorStyle: CircularProgressIndicatorStyle = IndeterminateCircularProgressIndicatorStyle()
     override val labelStyle: LabelStyle = DefaultLabelStyle()
+    override val interactiveComponentStyle: InteractiveComponentStyle = DefaultInteractiveComponentStyle()
 }
