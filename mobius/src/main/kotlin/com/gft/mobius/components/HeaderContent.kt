@@ -8,7 +8,6 @@ import com.gft.mobius.Mobius
 import com.gft.mobius.components.styles.ContentStyle
 import com.gft.mobius.components.styles.resolve
 
-@Suppress("UnusedReceiverParameter")
 @Composable
 fun ScreenHeaderScope.Content(
     modifier: Modifier = Modifier,
@@ -16,7 +15,6 @@ fun ScreenHeaderScope.Content(
     content: @Composable BoxScope.() -> Unit,
 ) = HeaderContent(modifier, style, content)
 
-@Suppress("UnusedReceiverParameter")
 @Composable
 fun ScreenContentHeaderScope.Content(
     modifier: Modifier = Modifier,
@@ -24,7 +22,6 @@ fun ScreenContentHeaderScope.Content(
     content: @Composable BoxScope.() -> Unit,
 ) = HeaderContent(modifier, style, content)
 
-@Suppress("UnusedReceiverParameter")
 @Composable
 fun DialogScreenHeaderScope.Content(
     modifier: Modifier = Modifier,
@@ -32,7 +29,6 @@ fun DialogScreenHeaderScope.Content(
     content: @Composable BoxScope.() -> Unit,
 ) = HeaderContent(modifier, style, content)
 
-@Suppress("UnusedReceiverParameter")
 @Composable
 fun DialogScreenContentHeaderScope.Content(
     modifier: Modifier = Modifier,
@@ -41,14 +37,16 @@ fun DialogScreenContentHeaderScope.Content(
 ) = HeaderContent(modifier, style, content)
 
 @Composable
-private fun HeaderContent(
+private fun HeaderScope.HeaderContent(
     modifier: Modifier,
     style: ContentStyle,
     content: @Composable BoxScope.() -> Unit,
 ) {
     val styleValues = style.resolve()
     ContentBuilder(
-        modifier = modifier,
+        modifier = Modifier
+            .fillHeaderWidth()
+            .then(modifier),
         scrollState = null,
         styleValues = styleValues,
     ) { contentModifier ->

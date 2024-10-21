@@ -24,7 +24,9 @@ fun DialogScreenScope.Content(
     style: ContentStyle = if (isScrollable) Mobius.styles.dialogScrollableContentStyle else Mobius.styles.dialogContentStyle,
     content: @Composable DialogScreenContentScope.() -> Unit,
 ) = ContentImplementation(
-    modifier = modifier,
+    modifier = Modifier
+        .fillDialogWidth()
+        .then(modifier),
     scrollState = if (isScrollable) rememberScrollState() else null,
     style = style,
     content = content
@@ -37,7 +39,9 @@ fun DialogScreenScope.Content(
     style: ContentStyle = Mobius.styles.dialogScrollableContentStyle,
     content: @Composable DialogScreenContentScope.() -> Unit,
 ) = ContentImplementation(
-    modifier = modifier,
+    modifier = Modifier
+        .fillDialogWidth()
+        .then(modifier),
     scrollState = scrollState,
     style = style,
     content = content

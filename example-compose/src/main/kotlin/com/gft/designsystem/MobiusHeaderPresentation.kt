@@ -6,11 +6,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -65,18 +67,18 @@ fun MobiusHeaderPresentation() {
             Menu(useScrollableContainer, contentLength, navController)
         }
         composable(screenWithFixedHeaderDestination) {
-            ScreenWithFixedHeaderDestination(useScrollableContainer.value, contentLength.value)
+            ScreenWithFixedHeader(useScrollableContainer.value, contentLength.value)
         }
         composable(screenWithInContentHeader) {
-            ScreenWithInContentHeaderDestination(useScrollableContainer.value, contentLength.value)
+            ScreenWithInContentHeader(useScrollableContainer.value, contentLength.value)
         }
 
         dialog(dialogScreenWithFixedHeaderDestination) {
-            DialogWithFixedHeaderDestination(useScrollableContainer.value, contentLength.value)
+            DialogWithFixedHeader(useScrollableContainer.value, contentLength.value)
         }
 
         dialog(dialogScreenWithInContentHeader) {
-            DialogWithInContentHeaderDestination(useScrollableContainer.value, contentLength.value)
+            DialogWithInContentHeader(useScrollableContainer.value, contentLength.value)
         }
     }
 }
@@ -162,7 +164,7 @@ private fun Menu(
 
 
 @Composable
-private fun DialogWithFixedHeaderDestination(
+private fun DialogWithFixedHeader(
     useScrollableContainer: Boolean,
     contentLength: HeaderPresentationContentLength,
 ) {
@@ -187,9 +189,7 @@ private fun DialogWithFixedHeaderDestination(
                     .offset((-2).dp, (-2).dp),
                 color = Mobius.colors.onPrimary,
             )
-            Content(
-                modifier = Modifier.fillMaxWidth()
-            ) {
+            Content {
                 Text(
                     text = "This is title",
                     style = Mobius.typography.titleLarge
@@ -201,13 +201,16 @@ private fun DialogWithFixedHeaderDestination(
                 )
             }
         }
-        Content(isScrollable = useScrollableContainer) { SampleContent(contentLength) }
+        Content(
+            modifier = Modifier.width(IntrinsicSize.Max),
+            isScrollable = useScrollableContainer
+        ) { SampleContent(contentLength) }
     }
 }
 
 
 @Composable
-private fun DialogWithInContentHeaderDestination(
+private fun DialogWithInContentHeader(
     useScrollableContainer: Boolean,
     contentLength: HeaderPresentationContentLength,
 ) {
@@ -216,6 +219,7 @@ private fun DialogWithInContentHeaderDestination(
             .heightIn(0.dp, 600.dp)
     ) {
         Content(
+            modifier = Modifier.width(IntrinsicSize.Max),
             isScrollable = useScrollableContainer
         ) {
             Header(
@@ -235,9 +239,7 @@ private fun DialogWithInContentHeaderDestination(
                         .offset((-2).dp, (-2).dp),
                     color = Mobius.colors.onPrimary,
                 )
-                Content(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
+                Content {
                     Text(
                         text = "This is title",
                         style = Mobius.typography.titleLarge
@@ -255,7 +257,7 @@ private fun DialogWithInContentHeaderDestination(
 }
 
 @Composable
-private fun ScreenWithFixedHeaderDestination(
+private fun ScreenWithFixedHeader(
     useScrollableContainer: Boolean,
     contentLength: HeaderPresentationContentLength,
 ) {
@@ -277,9 +279,7 @@ private fun ScreenWithFixedHeaderDestination(
                     .offset((-2).dp, (-2).dp),
                 color = Mobius.colors.onPrimary,
             )
-            Content(
-                modifier = Modifier.fillMaxWidth()
-            ) {
+            Content {
                 Text(
                     text = "This is title",
                     style = Mobius.typography.titleLarge
@@ -296,7 +296,7 @@ private fun ScreenWithFixedHeaderDestination(
 }
 
 @Composable
-private fun ScreenWithInContentHeaderDestination(
+private fun ScreenWithInContentHeader(
     useScrollableContainer: Boolean,
     contentLength: HeaderPresentationContentLength,
 ) {
@@ -321,9 +321,7 @@ private fun ScreenWithInContentHeaderDestination(
                         .offset((-2).dp, (-2).dp),
                     color = Mobius.colors.onPrimary,
                 )
-                Content(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
+                Content {
                     Text(
                         text = "This is title",
                         style = Mobius.typography.titleLarge

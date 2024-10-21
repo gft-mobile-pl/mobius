@@ -6,11 +6,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -172,7 +174,10 @@ private fun DialogWithFixedFooter(
         modifier = Modifier
             .heightIn(0.dp, 600.dp)
     ) {
-        Content(isScrollable = useScrollableContainer) { SampleContent(contentLength) }
+        Content(
+            modifier = Modifier.width(IntrinsicSize.Max),
+            isScrollable = useScrollableContainer
+        ) { SampleContent(contentLength) }
 
         Footer(
             modifier = Modifier
@@ -191,9 +196,7 @@ private fun DialogWithFixedFooter(
                     .offset((-2).dp, (-2).dp),
                 color = Mobius.colors.onPrimary,
             )
-            Content(
-                modifier = Modifier.fillMaxWidth()
-            ) {
+            Content {
                 Text(
                     text = "Footer",
                     style = Mobius.typography.titleLarge
@@ -218,6 +221,7 @@ private fun DialogWithInContentFooter(
             .heightIn(0.dp, 600.dp)
     ) {
         Content(
+            modifier = Modifier.width(IntrinsicSize.Max),
             isScrollable = useScrollableContainer
         ) {
             SampleContent(contentLength)
@@ -238,9 +242,7 @@ private fun DialogWithInContentFooter(
                         .offset((-2).dp, (-2).dp),
                     color = Mobius.colors.onPrimary,
                 )
-                Content(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
+                Content {
                     Text(
                         text = "Footer",
                         style = Mobius.typography.titleLarge
@@ -280,9 +282,7 @@ private fun ScreenWithFixedFooter(
                     .offset((-2).dp, (-2).dp),
                 color = Mobius.colors.onPrimary,
             )
-            Content(
-                modifier = Modifier.fillMaxWidth()
-            ) {
+            Content {
                 Text(
                     text = "Footer",
                     style = Mobius.typography.titleLarge
@@ -324,9 +324,7 @@ private fun ScreenWithInContentFooter(
                         .offset((-2).dp, (-2).dp),
                     color = Mobius.colors.onPrimary,
                 )
-                Content(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
+                Content {
                     Text(
                         text = "Footer",
                         style = Mobius.typography.titleLarge

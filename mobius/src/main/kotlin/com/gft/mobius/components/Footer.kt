@@ -10,7 +10,14 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
+import com.gft.compose.common.modifyIf
 import com.gft.mobius.components.common.NEGLIGIBLE_NON_ZERO_WEIGHT
+import com.gft.mobius.components.common.isInMainLayoutPass
+
+interface FooterScope : BoxScope {
+    @Composable
+    fun Modifier.fillFooterWidth(): Modifier = modifyIf(isInMainLayoutPass()) { fillMaxWidth() }
+}
 
 @Suppress("UnusedReceiverParameter")
 @Composable
@@ -18,13 +25,14 @@ fun ScreenScope.Footer(
     modifier: Modifier = Modifier,
     content: @Composable ScreenFooterScope.() -> Unit,
 ) = Box(
-    modifier = modifier
+    modifier = Modifier
         .fillMaxWidth()
+        .then(modifier)
 ) {
     ScreenFooterScope(this).content()
 }
 
-interface ScreenFooterScope : BoxScope
+interface ScreenFooterScope : FooterScope
 
 private fun ScreenFooterScope(boxScope: BoxScope) = object : ScreenFooterScope, BoxScope by boxScope {}
 
@@ -51,23 +59,23 @@ fun ScreenContentScope.Footer(
     }
 }
 
-interface ScreenContentFooterScope : BoxScope
+interface ScreenContentFooterScope : FooterScope
 
 private fun ScreenContentFooterScope(boxScope: BoxScope) = object : ScreenContentFooterScope, BoxScope by boxScope {}
 
-@Suppress("UnusedReceiverParameter")
 @Composable
 fun DialogScreenScope.Footer(
     modifier: Modifier = Modifier,
     content: @Composable DialogScreenFooterScope.() -> Unit,
 ) = Box(
-    modifier = modifier
-        .fillMaxWidth()
+    modifier = Modifier
+        .fillDialogWidth()
+        .then(modifier)
 ) {
     DialogScreenFooterScope(this).content()
 }
 
-interface DialogScreenFooterScope : BoxScope
+interface DialogScreenFooterScope : FooterScope
 
 private fun DialogScreenFooterScope(boxScope: BoxScope) = object : DialogScreenFooterScope, BoxScope by boxScope {}
 
@@ -93,7 +101,7 @@ fun DialogScreenContentScope.Footer(
     }
 }
 
-interface DialogScreenContentFooterScope : BoxScope
+interface DialogScreenContentFooterScope : FooterScope
 
 private fun DialogScreenContentFooterScope(boxScope: BoxScope) =
     object : DialogScreenContentFooterScope, BoxScope by boxScope {}

@@ -9,6 +9,13 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
+import com.gft.compose.common.modifyIf
+import com.gft.mobius.components.common.isInMainLayoutPass
+
+interface HeaderScope : BoxScope {
+    @Composable
+    fun Modifier.fillHeaderWidth(): Modifier = modifyIf(isInMainLayoutPass()) { fillMaxWidth() }
+}
 
 @Suppress("UnusedReceiverParameter")
 @Composable
@@ -16,13 +23,14 @@ fun ScreenScope.Header(
     modifier: Modifier = Modifier,
     content: @Composable ScreenHeaderScope.() -> Unit,
 ) = Box(
-    modifier = modifier
+    modifier = Modifier
         .fillMaxWidth()
+        .then(modifier)
 ) {
     ScreenHeaderScope(this).content()
 }
 
-interface ScreenHeaderScope : BoxScope
+interface ScreenHeaderScope : HeaderScope
 
 private fun ScreenHeaderScope(boxScope: BoxScope) = object : ScreenHeaderScope, BoxScope by boxScope {}
 
@@ -48,23 +56,23 @@ fun ScreenContentScope.Header(
     }
 }
 
-interface ScreenContentHeaderScope : BoxScope
+interface ScreenContentHeaderScope : HeaderScope
 
 private fun ScreenContentHeaderScope(boxScope: BoxScope) = object : ScreenContentHeaderScope, BoxScope by boxScope {}
 
-@Suppress("UnusedReceiverParameter")
 @Composable
 fun DialogScreenScope.Header(
     modifier: Modifier = Modifier,
     content: @Composable DialogScreenHeaderScope.() -> Unit,
 ) = Box(
-    modifier = modifier
-        .fillMaxWidth()
+    modifier = Modifier
+        .fillDialogWidth()
+        .then(modifier)
 ) {
     DialogScreenHeaderScope(this).content()
 }
 
-interface DialogScreenHeaderScope : BoxScope
+interface DialogScreenHeaderScope : HeaderScope
 
 private fun DialogScreenHeaderScope(boxScope: BoxScope) = object : DialogScreenHeaderScope, BoxScope by boxScope {}
 
@@ -90,7 +98,7 @@ fun DialogScreenContentScope.Header(
     }
 }
 
-interface DialogScreenContentHeaderScope : BoxScope
+interface DialogScreenContentHeaderScope : HeaderScope
 
 private fun DialogScreenContentHeaderScope(boxScope: BoxScope) =
     object : DialogScreenContentHeaderScope, BoxScope by boxScope {}

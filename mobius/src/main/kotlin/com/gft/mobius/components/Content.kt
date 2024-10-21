@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.gft.compose.common.modifyIf
 import com.gft.mobius.colors.LocalContentColor
+import com.gft.mobius.components.common.isInMainLayoutPass
 import com.gft.mobius.components.styles.ContentStyleValues
 import com.gft.mobius.references.MobiusReferenceDimensions
 import kotlin.math.max
@@ -65,29 +66,44 @@ internal fun ContentBuilder(
 open class ContentScope internal constructor(
     internal val contentStyle: ContentStyleValues,
 ) {
-    fun Modifier.fillContentContainerWidth() = this
-        .layout { measurable, constraints ->
-            val paddingLeft = contentStyle.padding
-                .calculateLeftPadding(layoutDirection)
-                .roundToPx()
-            val paddingRight = contentStyle.padding
-                .calculateRightPadding(layoutDirection)
-                .roundToPx()
-            if (constraints.hasBoundedWidth) {
-                val placeable = measurable.measure(
-                    constraints.copy(
-                        minWidth = constraints.maxWidth + paddingLeft + paddingRight,
-                        maxWidth = constraints.maxWidth + paddingLeft + paddingRight
+    @Composable
+    fun Modifier.fillContentContainerWidth(): Modifier {
+        val isInMainLayoutPhase = isInMainLayoutPass()
+        return this
+            .layout { measurable, constraints ->
+                val paddingLeft = contentStyle.padding
+                    .calculateLeftPadding(layoutDirection)
+                    .roundToPx()
+                val paddingRight = contentStyle.padding
+                    .calculateRightPadding(layoutDirection)
+                    .roundToPx()
+                if (constraints.hasBoundedWidth) {
+                    val placeable = measurable.measure(
+                        constraints.copy(
+                            minWidth = if (isInMainLayoutPhase)  {
+                                constraints.maxWidth + paddingLeft + paddingRight
+                            } else {
+                                constraints.minWidth + paddingLeft + paddingRight
+                            },
+                            maxWidth = constraints.maxWidth + paddingLeft + paddingRight
+                        )
                     )
-                )
-                layout(placeable.width, placeable.height) { placeable.place(0, 0) }
-            } else {
-                val placeable = measurable.measure(constraints)
-                layout(max(placeable.width - paddingLeft - paddingRight, 0), placeable.height) {
-                    placeable.place(0, 0)
+                    layout(
+                        width = if (isInMainLayoutPhase) {
+                            placeable.width
+                        } else {
+                            placeable.width - paddingLeft - paddingRight
+                        },
+                        height = placeable.height
+                    ) { placeable.place(0, 0) }
+                } else {
+                    val placeable = measurable.measure(constraints)
+                    layout(max(placeable.width - paddingLeft - paddingRight, 0), placeable.height) {
+                        placeable.place(0, 0)
+                    }
                 }
             }
-        }
+    }
 }
 
 

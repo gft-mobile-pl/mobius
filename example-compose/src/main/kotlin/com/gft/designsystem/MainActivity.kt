@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
 import com.gft.mobius.components.Button
 import com.gft.mobius.components.Text
@@ -31,6 +32,7 @@ private const val headerDestination = "headerDestination"
 private const val footerDestination = "footerDestination"
 private const val cardsDestination = "cardsDestination"
 private const val dialogScreenDestination = "dialogScreenDestination"
+private const val dialogScreenSizingDestination = "dialogScreenSizingDestination"
 private const val lightColorsDestination = "lightColorsDestination"
 private const val darkColorsDestination = "darkColorsDestination"
 private const val typographyDestination = "typographyDestination"
@@ -126,6 +128,10 @@ class MainActivity : ComponentActivity() {
                         MenuButton(
                             text = "Dialog screen",
                             onClick = { navController.navigate(dialogScreenDestination) }
+                        )
+                        MenuButton(
+                            text = "Dialog screen sizing",
+                            onClick = { navController.navigate(dialogScreenSizingDestination) }
                         )
                         MenuButton(
                             text = "Surface",
@@ -255,6 +261,10 @@ class MainActivity : ComponentActivity() {
 
                 composable(dialogScreenDestination) {
                     MobiusDialogScreenPresentation()
+                }
+
+                dialog(dialogScreenSizingDestination) {
+                    MobiusDialogScreenSizingPresentation()
                 }
 
                 composable(textFieldsDestination) {
