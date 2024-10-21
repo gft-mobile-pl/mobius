@@ -20,7 +20,7 @@
 | LocalMinimumInteractiveComponentEnforcement | create alias                             | TODO   |
 | Label                                       | wrap                                     | ✔ Done |
 | ListItem                                    | create style                             | TODO   |
-| Menu                                        | create style                             | TODO   |
+| Menu                                        | create style                             | ✔ Done |
 | NavigationBar                               | create style                             | ✔ Done |
 | NavigationDrawer                            | create style and aliases                 | ✔ Done |
 | NavigationRail                              | create style and aliases                 | ✔ Done |

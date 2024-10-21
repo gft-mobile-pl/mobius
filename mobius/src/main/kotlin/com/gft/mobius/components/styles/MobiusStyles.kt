@@ -89,4 +89,6 @@ interface MobiusStyles : Styles {
     val indeterminateCircularProgressIndicatorStyle: CircularProgressIndicatorStyle
     val labelStyle: LabelStyle
     val interactiveComponentStyle: InteractiveComponentStyle
+    val dropdownMenuStyle: DropdownMenuStyle
+    val dropdownMenuItemStyle: DropdownMenuItemStyle
 }

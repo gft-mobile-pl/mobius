@@ -90,4 +90,6 @@ open class DefaultMobiusStyles : MobiusStyles {
     override val interactiveComponentStyle: InteractiveComponentStyle = DefaultInteractiveComponentStyle()
     override val indeterminateCircularProgressIndicatorStyle: CircularProgressIndicatorStyle =
         IndeterminateCircularProgressIndicatorStyle()
+    override val dropdownMenuStyle: DropdownMenuStyle = DefaultDropdownMenuStyle()
+    override val dropdownMenuItemStyle: DropdownMenuItemStyle = DefaultDropdownMenuItemStyle()
 }
