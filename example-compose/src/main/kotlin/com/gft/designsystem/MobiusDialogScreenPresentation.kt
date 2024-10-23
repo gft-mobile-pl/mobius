@@ -117,7 +117,7 @@ fun MobiusDialogScreenPresentation() {
                             ElementSpacer()
 
                             TestCase(
-                                name = "Test 1",
+                                name = "Def/Def",
                                 scrollable = scrollable.value,
                                 message1Width = DEFAULT,
                                 message2Width = DEFAULT,
@@ -125,7 +125,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 2",
+                                name = "Def/Short",
                                 scrollable = scrollable.value,
                                 message1Width = DEFAULT,
                                 message2Width = SHORT,
@@ -133,7 +133,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 3",
+                                name = "Long/Def",
                                 scrollable = scrollable.value,
                                 message1Width = LONG,
                                 message2Width = DEFAULT,
@@ -141,7 +141,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 4",
+                                name = "Long/Short",
                                 scrollable = scrollable.value,
                                 message1Width = LONG,
                                 message2Width = SHORT,
@@ -149,7 +149,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 5",
+                                name = "Fill/Def",
                                 scrollable = scrollable.value,
                                 message1Width = FILL,
                                 message2Width = DEFAULT,
@@ -157,7 +157,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 6",
+                                name = "Def/Fill",
                                 scrollable = scrollable.value,
                                 message1Width = DEFAULT,
                                 message2Width = FILL,
@@ -172,7 +172,7 @@ fun MobiusDialogScreenPresentation() {
                             ElementSpacer()
 
                             TestCase(
-                                name = "Test 1B",
+                                name = "Def/Def",
                                 scrollable = scrollable.value,
                                 message1Width = DEFAULT,
                                 message2Width = DEFAULT,
@@ -180,7 +180,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 2B",
+                                name = "Def/Short",
                                 scrollable = scrollable.value,
                                 message1Width = DEFAULT,
                                 message2Width = SHORT,
@@ -188,7 +188,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 3B",
+                                name = "Long/Def",
                                 scrollable = scrollable.value,
                                 message1Width = LONG,
                                 message2Width = DEFAULT,
@@ -196,7 +196,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 4B",
+                                name = "Long/Short",
                                 scrollable = scrollable.value,
                                 message1Width = LONG,
                                 message2Width = SHORT,
@@ -204,7 +204,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 5B",
+                                name = "Fill/Def",
                                 scrollable = scrollable.value,
                                 message1Width = FILL,
                                 message2Width = DEFAULT,
@@ -212,7 +212,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 6B",
+                                name = "Def/Fill",
                                 scrollable = scrollable.value,
                                 message1Width = DEFAULT,
                                 message2Width = FILL,
@@ -227,7 +227,7 @@ fun MobiusDialogScreenPresentation() {
                             ElementSpacer()
 
                             TestCase(
-                                name = "Test 1C",
+                                name = "Def/Def",
                                 scrollable = scrollable.value,
                                 message1Width = DEFAULT,
                                 message2Width = DEFAULT,
@@ -235,7 +235,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 2C",
+                                name = "Def/Short",
                                 scrollable = scrollable.value,
                                 message1Width = DEFAULT,
                                 message2Width = SHORT,
@@ -243,7 +243,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 3C",
+                                name = "Long/Def",
                                 scrollable = scrollable.value,
                                 message1Width = LONG,
                                 message2Width = DEFAULT,
@@ -251,7 +251,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 4C",
+                                name = "Long/Short",
                                 scrollable = scrollable.value,
                                 message1Width = LONG,
                                 message2Width = SHORT,
@@ -259,7 +259,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 5C",
+                                name = "Fill/Def",
                                 scrollable = scrollable.value,
                                 message1Width = FILL,
                                 message2Width = DEFAULT,
@@ -267,7 +267,7 @@ fun MobiusDialogScreenPresentation() {
                             )
 
                             TestCase(
-                                name = "Test 6C",
+                                name = "Def/Fill",
                                 scrollable = scrollable.value,
                                 message1Width = DEFAULT,
                                 message2Width = FILL,
