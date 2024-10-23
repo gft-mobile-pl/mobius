@@ -91,4 +91,5 @@ interface MobiusStyles : Styles {
     val interactiveComponentStyle: InteractiveComponentStyle
     val dropdownMenuStyle: DropdownMenuStyle
     val dropdownMenuItemStyle: DropdownMenuItemStyle
+    val listItemStyle: ListItemStyle
 }
