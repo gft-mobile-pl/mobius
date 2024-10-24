@@ -48,7 +48,7 @@ fun ScreenContentScope.Header(
         Box(
             modifier = Modifier
                 .padding(bottom = contentStyle.padding.calculateTopPadding())
-                .fillContentContainerWidth()
+                .fillContentContainerWidth(ignorePadding = true)
                 .then(modifier)
         ) {
             ScreenContentHeaderScope(this).content()
@@ -90,7 +90,7 @@ fun DialogScreenContentScope.Header(
         Box(
             modifier = Modifier
                 .padding(bottom = contentStyle.padding.calculateTopPadding())
-                .fillContentContainerWidth()
+                .fillContentContainerWidth(ignorePadding = true)
                 .then(modifier)
         ) {
             DialogScreenContentHeaderScope(this).content()

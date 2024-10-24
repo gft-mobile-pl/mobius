@@ -48,7 +48,7 @@ fun MobiusDialogScreenSizingPresentation() {
                 Text(
                     modifier = Modifier
                         .background(Color.LightGray)
-                        .fillContentContainerWidth()
+                        .fillContentContainerWidth(ignorePadding = true)
                         .contentContainerHorizontalPaddings(),
                     text = "Full width background"
                 )

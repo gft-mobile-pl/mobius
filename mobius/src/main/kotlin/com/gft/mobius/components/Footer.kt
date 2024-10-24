@@ -51,7 +51,7 @@ fun ScreenContentScope.Footer(
         Box(
             modifier = Modifier
                 .padding(top = contentStyle.padding.calculateBottomPadding())
-                .fillContentContainerWidth()
+                .fillContentContainerWidth(ignorePadding = true)
                 .then(modifier)
         ) {
             ScreenContentFooterScope(this).content()
@@ -93,7 +93,7 @@ fun DialogScreenContentScope.Footer(
         Box(
             modifier = Modifier
                 .padding(top = contentStyle.padding.calculateBottomPadding())
-                .fillContentContainerWidth()
+                .fillContentContainerWidth(ignorePadding = true)
                 .then(modifier)
         ) {
             DialogScreenContentFooterScope(this).content()

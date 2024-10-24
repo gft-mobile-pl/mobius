@@ -305,7 +305,7 @@ private fun TestDialog(
                 ElementSpacer()
                 Box(
                     modifier = Modifier
-                        .fillContentContainerWidth()
+                        .fillContentContainerWidth(ignorePadding = true)
                         .background(Color.LightGray)
                         .contentContainerHorizontalPaddings()
                 ) {
@@ -412,7 +412,7 @@ private fun DialogScreenContentScope.TestDialogContent(
     )
     Column(
         modifier = Modifier
-            .fillContentContainerWidth()
+            .fillContentContainerWidth(ignorePadding = true)
             .background(Color.LightGray)
             .run {
                 when (message2Padding) {

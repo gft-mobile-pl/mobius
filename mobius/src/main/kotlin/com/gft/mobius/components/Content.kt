@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -67,10 +68,10 @@ open class ContentScope internal constructor(
     internal val contentStyle: ContentStyleValues,
 ) {
     @Composable
-    fun Modifier.fillContentContainerWidth(): Modifier {
+    fun Modifier.fillContentContainerWidth(ignorePadding: Boolean = false): Modifier {
         val isInMainLayoutPhase = isInMainLayoutPass()
-        return this
-            .layout { measurable, constraints ->
+        return if (ignorePadding) {
+            layout { measurable, constraints ->
                 val paddingLeft = contentStyle.padding
                     .calculateLeftPadding(layoutDirection)
                     .roundToPx()
@@ -80,7 +81,7 @@ open class ContentScope internal constructor(
                 if (constraints.hasBoundedWidth) {
                     val placeable = measurable.measure(
                         constraints.copy(
-                            minWidth = if (isInMainLayoutPhase)  {
+                            minWidth = if (isInMainLayoutPhase) {
                                 constraints.maxWidth + paddingLeft + paddingRight
                             } else {
                                 constraints.minWidth + paddingLeft + paddingRight
@@ -103,6 +104,9 @@ open class ContentScope internal constructor(
                     }
                 }
             }
+        } else {
+            if (isInMainLayoutPhase) fillMaxWidth() else this
+        }
     }
 }
 
