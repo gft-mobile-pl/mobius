@@ -13,10 +13,14 @@ import com.gft.mobius.references.MobiusReferenceDimensions
 
 interface GroupStyleValues : ContentStyleValues {
     val shape: Shape?
+    val background: Brush?
+    val contentColor: Color
 }
 
 interface GroupStyle : ContentStyle {
     val shape: Token<Shape?>
+    val background: Token<Brush?>
+    val contentColor: Token<Color>
 }
 
 @Composable

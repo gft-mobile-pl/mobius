@@ -29,7 +29,7 @@ fun MobiusDialogScreenSizingPresentation() {
         DialogScreen {
             Header(
                 modifier = Modifier
-                    .background(Mobius.colors.primary)
+                    .background(Color.LightGray)
             ) {
                 Content {
                     Text(
@@ -63,7 +63,7 @@ fun MobiusDialogScreenSizingPresentation() {
             }
             Footer(
                 modifier = Modifier
-                    .background(Color.Gray)
+                    .background(Color.LightGray)
             ) {
                 Content {
                     Text(

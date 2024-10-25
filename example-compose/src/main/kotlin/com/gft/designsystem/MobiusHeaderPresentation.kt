@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,6 +33,7 @@ import com.gft.designsystem.HeaderPresentationContentLength.LONG
 import com.gft.designsystem.HeaderPresentationContentLength.SHORT
 import com.gft.designsystem.utils.randomColor
 import com.gft.mobius.Mobius
+import com.gft.mobius.colors.LocalContentColor
 import com.gft.mobius.components.Button
 import com.gft.mobius.components.Checkbox
 import com.gft.mobius.components.Content
@@ -175,30 +177,32 @@ private fun DialogWithFixedHeader(
         Header(
             modifier = Modifier
                 .background(
+                    // Note: prefer using style than hardcoding background like this
                     Brush.verticalGradient(
                         0.0f to Mobius.colors.primary,
                         1.0f to Mobius.colors.tertiary
                     )
                 )
         ) {
-            Text(
-                text = "Custom in-box placement",
-                style = Mobius.typography.labelSmall,
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .offset((-2).dp, (-2).dp),
-                color = Mobius.colors.onPrimary,
-            )
-            Content {
+            CompositionLocalProvider(LocalContentColor provides Mobius.colors.onPrimary) {
                 Text(
-                    text = "This is title",
-                    style = Mobius.typography.titleLarge
-                )
-                Text(
-                    text = "Content padded",
+                    text = "Custom in-box placement",
                     style = Mobius.typography.labelSmall,
-                    modifier = Modifier.align(Alignment.TopEnd)
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .offset((-2).dp, (-2).dp),
                 )
+                Content {
+                    Text(
+                        text = "This is title",
+                        style = Mobius.typography.titleLarge
+                    )
+                    Text(
+                        text = "Content padded",
+                        style = Mobius.typography.labelSmall,
+                        modifier = Modifier.align(Alignment.TopEnd)
+                    )
+                }
             }
         }
         Content(
@@ -225,30 +229,32 @@ private fun DialogWithInContentHeader(
             Header(
                 modifier = Modifier
                     .background(
+                        // Note: prefer using style than hardcoding background like this
                         Brush.verticalGradient(
                             0.0f to Mobius.colors.primary,
                             1.0f to Mobius.colors.tertiary
                         )
                     )
             ) {
-                Text(
-                    text = "Custom in-box placement",
-                    style = Mobius.typography.labelSmall,
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .offset((-2).dp, (-2).dp),
-                    color = Mobius.colors.onPrimary,
-                )
-                Content {
+                CompositionLocalProvider(LocalContentColor provides Mobius.colors.onPrimary) {
                     Text(
-                        text = "This is title",
-                        style = Mobius.typography.titleLarge
-                    )
-                    Text(
-                        text = "Content padded",
+                        text = "Custom in-box placement",
                         style = Mobius.typography.labelSmall,
-                        modifier = Modifier.align(Alignment.TopEnd)
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .offset((-2).dp, (-2).dp),
                     )
+                    Content {
+                        Text(
+                            text = "This is title",
+                            style = Mobius.typography.titleLarge
+                        )
+                        Text(
+                            text = "Content padded",
+                            style = Mobius.typography.labelSmall,
+                            modifier = Modifier.align(Alignment.TopEnd)
+                        )
+                    }
                 }
             }
             SampleContent(contentLength)
@@ -265,30 +271,32 @@ private fun ScreenWithFixedHeader(
         Header(
             modifier = Modifier
                 .background(
+                    // Note: prefer using style than hardcoding background like this
                     Brush.verticalGradient(
                         0.0f to Mobius.colors.primary,
                         1.0f to Mobius.colors.tertiary
                     )
                 )
         ) {
-            Text(
-                text = "Custom in-box placement",
-                style = Mobius.typography.labelSmall,
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .offset((-2).dp, (-2).dp),
-                color = Mobius.colors.onPrimary,
-            )
-            Content {
+            CompositionLocalProvider(LocalContentColor provides Mobius.colors.onPrimary) {
                 Text(
-                    text = "This is title",
-                    style = Mobius.typography.titleLarge
-                )
-                Text(
-                    text = "Content padded",
+                    text = "Custom in-box placement",
                     style = Mobius.typography.labelSmall,
-                    modifier = Modifier.align(Alignment.TopEnd)
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .offset((-2).dp, (-2).dp),
                 )
+                Content {
+                    Text(
+                        text = "This is title",
+                        style = Mobius.typography.titleLarge
+                    )
+                    Text(
+                        text = "Content padded",
+                        style = Mobius.typography.labelSmall,
+                        modifier = Modifier.align(Alignment.TopEnd)
+                    )
+                }
             }
         }
         Content(isScrollable = useScrollableContainer) { SampleContent(contentLength) }
@@ -307,30 +315,32 @@ private fun ScreenWithInContentHeader(
             Header(
                 modifier = Modifier
                     .background(
+                        // Note: prefer using style than hardcoding background like this
                         Brush.verticalGradient(
                             0.0f to Mobius.colors.primary,
                             1.0f to Mobius.colors.tertiary
                         )
                     )
             ) {
-                Text(
-                    text = "Custom in-box placement",
-                    style = Mobius.typography.labelSmall,
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .offset((-2).dp, (-2).dp),
-                    color = Mobius.colors.onPrimary,
-                )
-                Content {
+                CompositionLocalProvider(LocalContentColor provides Mobius.colors.onPrimary) {
                     Text(
-                        text = "This is title",
-                        style = Mobius.typography.titleLarge
-                    )
-                    Text(
-                        text = "Content padded",
+                        text = "Custom in-box placement",
                         style = Mobius.typography.labelSmall,
-                        modifier = Modifier.align(Alignment.TopEnd)
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .offset((-2).dp, (-2).dp),
                     )
+                    Content {
+                        Text(
+                            text = "This is title",
+                            style = Mobius.typography.titleLarge
+                        )
+                        Text(
+                            text = "Content padded",
+                            style = Mobius.typography.labelSmall,
+                            modifier = Modifier.align(Alignment.TopEnd)
+                        )
+                    }
                 }
             }
             SampleContent(contentLength)

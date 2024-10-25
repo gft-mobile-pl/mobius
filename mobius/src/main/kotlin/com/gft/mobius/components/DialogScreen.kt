@@ -2,6 +2,7 @@ package com.gft.mobius.components
 
 import android.os.Build
 import android.view.WindowManager
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.layout.Measured
 import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.layout.VerticalAlignmentLine
@@ -24,6 +26,7 @@ import com.gft.compose.common.modifyIf
 import com.gft.compose.interaction.InteractionFilter
 import com.gft.compose.interaction.clearFocusOnClick
 import com.gft.mobius.Mobius
+import com.gft.mobius.colors.LocalContentColor
 import com.gft.mobius.components.common.LocalLayoutPass
 import com.gft.mobius.components.common.MainLayoutPass
 import com.gft.mobius.components.common.isInMainLayoutPass
@@ -43,6 +46,7 @@ fun DialogScreen(
     content: @Composable DialogScreenScope.() -> Unit,
 ) {
     val styleValues = style.resolve()
+    val contentColor = styleValues.contentColor.takeOrElse { LocalContentColor.current }
 
     if (styleValues.underlyingContentBlur != Dp.Unspecified
         && styleValues.underlyingContentBlur != MobiusReferenceDimensions.Dimension0
@@ -80,9 +84,15 @@ fun DialogScreen(
                             clip(styleValues.shape!!)
                         }
                         .width(widestChildWidth.toDp())
+                        .modifyIf(styleValues.background != null) {
+                            background(styleValues.background!!)
+                        }
                         .then(modifier),
                     content = {
-                        CompositionLocalProvider(LocalLayoutPass provides MainLayoutPass) {
+                        CompositionLocalProvider(
+                            LocalLayoutPass provides MainLayoutPass,
+                            LocalContentColor provides contentColor,
+                        ) {
                             DialogScreenScope(this).content()
                         }
                     }

@@ -17,8 +17,6 @@ import com.gft.mobius.references.MobiusReferenceDimensions
 
 interface ContentStyleValues : StyleValues {
     val padding: PaddingValues
-    val background: Brush?
-    val contentColor: Color
     val contentAlignment: Alignment
     val smallVerticalElementsSpacing: Dp
     val mediumVerticalElementsSpacing: Dp
@@ -30,8 +28,6 @@ interface ContentStyleValues : StyleValues {
 
 interface ContentStyle : Style {
     val padding: Token<PaddingValues>
-    val background: Token<Brush?>
-    val contentColor: Token<Color>
     val contentAlignment: Token<Alignment>
     val smallVerticalElementsSpacing: Token<Dp>
     val mediumVerticalElementsSpacing: Token<Dp>
@@ -45,8 +41,6 @@ interface ContentStyle : Style {
 fun ContentStyle.resolve() = produceStyleValues { style ->
     object : ContentStyleValues {
         override val padding = style.padding.resolve()
-        override val background = style.background.resolve()
-        override val contentColor = style.contentColor.resolve()
         override val contentAlignment = style.contentAlignment.resolve()
         override val smallVerticalElementsSpacing = style.smallVerticalElementsSpacing.resolve()
         override val mediumVerticalElementsSpacing = style.mediumVerticalElementsSpacing.resolve()
@@ -66,8 +60,6 @@ open class DefaultScrollableContentStyle : ContentStyle {
             bottom = MobiusReferenceDimensions.Dimension16,
         )
     )
-    override val background: Token<Brush?> = Token { SolidColor(Mobius.colors.background) }
-    override val contentColor: Token<Color> = Token { Mobius.colors.onBackground }
     override val contentAlignment: Token<Alignment> = Token(Alignment.TopStart)
     override val smallVerticalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension8)
     override val mediumVerticalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension16)
@@ -81,8 +73,6 @@ open class DefaultDialogScrollableContentStyle : ContentStyle {
     override val padding: Token<PaddingValues> = Token(
         PaddingValues(all = MobiusReferenceDimensions.Dimension24)
     )
-    override val background: Token<Brush?> = Token { SolidColor(Mobius.colors.surfaceContainerHigh) }
-    override val contentColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
     override val contentAlignment: Token<Alignment> = Token(Alignment.TopStart)
     override val smallVerticalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension8)
     override val mediumVerticalElementsSpacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension16)
@@ -94,8 +84,6 @@ open class DefaultDialogScrollableContentStyle : ContentStyle {
 
 open class DefaultHeaderContentStyle : ContentStyle {
     override val padding: Token<PaddingValues> = TokenReference { Mobius.styles.scrollableContentStyle.padding }
-    override val background: Token<Brush?> = Token(null)
-    override val contentColor: Token<Color> = Token { Mobius.colors.onPrimary }
     override val contentAlignment: Token<Alignment> = Token(Alignment.CenterStart)
     override val smallVerticalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.scrollableContentStyle.smallVerticalElementsSpacing }
     override val mediumVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.scrollableContentStyle.mediumVerticalElementsSpacing }
@@ -107,8 +95,6 @@ open class DefaultHeaderContentStyle : ContentStyle {
 
 open class DefaultDialogHeaderContentStyle : ContentStyle {
     override val padding: Token<PaddingValues> = TokenReference { Mobius.styles.dialogScrollableContentStyle.padding }
-    override val background: Token<Brush?> = Token(null)
-    override val contentColor: Token<Color> = Token { Mobius.colors.onPrimary }
     override val contentAlignment: Token<Alignment> = Token(Alignment.CenterStart)
     override val smallVerticalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogScrollableContentStyle.smallVerticalElementsSpacing }
     override val mediumVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogScrollableContentStyle.mediumVerticalElementsSpacing }
@@ -120,8 +106,6 @@ open class DefaultDialogHeaderContentStyle : ContentStyle {
 
 open class DefaultFooterContentStyle : ContentStyle {
     override val padding: Token<PaddingValues> = TokenReference { Mobius.styles.scrollableContentStyle.padding }
-    override val background: Token<Brush?> = Token(null)
-    override val contentColor: Token<Color> = Token { Mobius.colors.onPrimary }
     override val contentAlignment: Token<Alignment> = Token(Alignment.CenterStart)
     override val smallVerticalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.scrollableContentStyle.smallVerticalElementsSpacing }
     override val mediumVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.scrollableContentStyle.mediumVerticalElementsSpacing }
@@ -133,8 +117,6 @@ open class DefaultFooterContentStyle : ContentStyle {
 
 open class DefaultDialogFooterContentStyle : ContentStyle {
     override val padding: Token<PaddingValues> = TokenReference { Mobius.styles.dialogScrollableContentStyle.padding }
-    override val background: Token<Brush?> = Token(null)
-    override val contentColor: Token<Color> = Token { Mobius.colors.onPrimary }
     override val contentAlignment: Token<Alignment> = Token(Alignment.CenterStart)
     override val smallVerticalElementsSpacing: Token<Dp> = TokenReference { Mobius.styles.dialogScrollableContentStyle.smallVerticalElementsSpacing }
     override val mediumVerticalElementsSpacing: Token<Dp>  = TokenReference { Mobius.styles.dialogScrollableContentStyle.mediumVerticalElementsSpacing }

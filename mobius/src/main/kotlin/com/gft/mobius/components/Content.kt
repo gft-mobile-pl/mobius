@@ -1,7 +1,6 @@
 package com.gft.mobius.components
 
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
@@ -15,15 +14,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.gft.compose.common.modifyIf
-import com.gft.mobius.colors.LocalContentColor
 import com.gft.mobius.components.common.isInMainLayoutPass
 import com.gft.mobius.components.styles.ContentStyleValues
 import com.gft.mobius.references.MobiusReferenceDimensions
@@ -36,9 +31,7 @@ internal fun ContentBuilder(
     styleValues: ContentStyleValues,
     content: @Composable (modifier: Modifier) -> Unit,
 ) {
-    val contentColor = styleValues.contentColor.takeOrElse { LocalContentColor.current }
     CompositionLocalProvider(
-        LocalContentColor provides contentColor,
         LocalContentStyle provides styleValues,
         LocalFooterVisible provides remember { mutableStateOf(false) },
         LocalContentHeaderVisible provides remember { mutableStateOf(false) },
@@ -47,9 +40,6 @@ internal fun ContentBuilder(
             Modifier
                 .modifyIf(scrollState != null) {
                     verticalScroll(scrollState!!)
-                }
-                .modifyIf(styleValues.background != null) {
-                    background(styleValues.background!!)
                 }
                 .padding(
                     PaddingValues(
@@ -124,8 +114,6 @@ fun Modifier.contentContainerHorizontalPaddings(): Modifier {
 val LocalContentStyle = staticCompositionLocalOf<ContentStyleValues> {
     object : ContentStyleValues {
         override val padding: PaddingValues = PaddingValues(0.dp)
-        override val background: Brush? = null
-        override val contentColor: Color = Color.Unspecified
         override val contentAlignment: Alignment = Alignment.TopStart
         override val smallVerticalElementsSpacing: Dp = MobiusReferenceDimensions.Dimension8
         override val mediumVerticalElementsSpacing: Dp = MobiusReferenceDimensions.Dimension16
