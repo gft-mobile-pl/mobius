@@ -20,6 +20,10 @@ interface MobiusStyles : Styles {
     val dialogScreenStyle: DialogScreenStyle
     val contentStyle: ContentStyle
     val scrollableContentStyle: ContentStyle
+    val headerStyle: HeaderStyle
+    val dialogHeaderStyle: HeaderStyle
+    val footerStyle: FooterStyle
+    val dialogFooterStyle: FooterStyle
     val dialogContentStyle: ContentStyle
     val dialogScrollableContentStyle: ContentStyle
     val headerContentStyle: ContentStyle
