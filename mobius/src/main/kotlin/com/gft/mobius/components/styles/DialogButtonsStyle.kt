@@ -46,6 +46,7 @@ interface DialogButtonsStyle : Style {
             data class Fixed(val width: Dp) : ButtonWidth
             data object Default : ButtonWidth
             data object Max : ButtonWidth
+            data object MatchOtherButtons : ButtonWidth
         }
     }
 }

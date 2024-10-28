@@ -218,6 +218,11 @@ private fun PopUpPresentationMenu(
                         selected = buttonsWidth.value == ButtonsWidthPresets.Max,
                         onClick = { buttonsWidth.value = ButtonsWidthPresets.Max }
                     )
+                    RadioButtonWithLabel(
+                        label = "Match other buttons",
+                        selected = buttonsWidth.value == ButtonsWidthPresets.MatchOtherButtons,
+                        onClick = { buttonsWidth.value = ButtonsWidthPresets.MatchOtherButtons }
+                    )
                 }
 
             }
@@ -241,7 +246,6 @@ private fun PopUpPresentationMenu(
                     Text(text = "Show pop-up dialog")
                 }
             }
-
         }
     }
 }
@@ -366,4 +370,5 @@ private object ButtonsWidthPresets {
     val Fixed = ButtonWidth.Fixed(160.dp)
     val Default = ButtonWidth.Default
     val Max = ButtonWidth.Max
+    val MatchOtherButtons = ButtonWidth.MatchOtherButtons
 }

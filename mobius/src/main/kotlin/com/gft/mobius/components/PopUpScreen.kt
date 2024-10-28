@@ -34,7 +34,7 @@ fun PopUpScreen(
     buttons: (@Composable () -> Unit)? = null,
     isContentScrollable: Boolean = true,
     style: PopUpScreenStyle = Mobius.styles.popUpScreenStyle,
-    content: (@Composable ColumnScope.() -> Unit)? = null,
+    content: (@Composable ContentScope.() -> Unit)? = null,
 ) {
     val styleValues = style.resolve()
     DialogScreen(
@@ -124,7 +124,7 @@ private fun DialogScreenScope.PopUpContent(
     isScrollable: Boolean = true,
     minimumPadding: PaddingValues,
     popUpStyleValues: PopUpScreenStyleValues,
-    content: @Composable ColumnScope.() -> Unit,
+    content: @Composable ContentScope.() -> Unit,
 ) {
     val contentStyleValues = popUpStyleValues.contentStyle.resolve()
     val additionalPadding = minimumPadding.minus(contentStyleValues.padding)
