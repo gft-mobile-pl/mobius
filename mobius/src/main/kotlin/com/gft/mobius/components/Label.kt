@@ -105,9 +105,9 @@ sealed interface LabelPlacement {
     }
 
     sealed class Bottom(alignment: Alignment.Horizontal) : Vertical(alignment), LabelPlacement {
-        data object AlignStart : Top(Alignment.Start)
-        data object CenterHorizontally : Top(Alignment.CenterHorizontally)
-        data object AlignEnd : Top(Alignment.End)
+        data object AlignStart : Bottom(Alignment.Start)
+        data object CenterHorizontally : Bottom(Alignment.CenterHorizontally)
+        data object AlignEnd : Bottom(Alignment.End)
     }
 }
 
