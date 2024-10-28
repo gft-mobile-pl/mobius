@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
+
 package com.gft.mobius.components
 
 import androidx.compose.animation.core.AnimationSpec
@@ -19,24 +21,21 @@ import androidx.compose.material3.TopAppBarDefaults.exitUntilCollapsedScrollBeha
 import androidx.compose.material3.TopAppBarDefaults.pinnedScrollBehavior
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.modifier.modifierLocalConsumer
-import androidx.compose.ui.modifier.modifierLocalOf
-import androidx.compose.ui.modifier.modifierLocalProvider
 import com.gft.mobius.Mobius
+import com.gft.mobius.components.TopAppBar.ScrollConfig
 import com.gft.mobius.components.styles.TopAppBarStyle
 import com.gft.mobius.components.styles.resolve
 
-@OptIn(ExperimentalMaterial3Api::class)
-private val LocalTopAppBarScrollBehavior = modifierLocalOf<TopAppBarScrollBehavior?> { null }
-
 @Composable
-@OptIn(ExperimentalComposeUiApi::class)
 fun TopAppBar(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
@@ -45,12 +44,12 @@ fun TopAppBar(
     windowInsets: WindowInsets = WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top),
     style: TopAppBarStyle = Mobius.styles.topAppBarStyle,
 ) {
-    @OptIn(ExperimentalMaterial3Api::class)
-    val scrollBehavior = remember {
-        mutableStateOf<TopAppBarScrollBehavior?>(null)
+    var scrollContext by remember { mutableStateOf<ScrollContext<ScrollConfig>?>(null) }
+    val scrollBehavior = scrollContext?.scrollConfig?.let { config ->
+        config.scrollType.resolveScrollBehavior(config.state, config.canScroll)
     }
+
     val styleValues = style.resolve()
-    @OptIn(ExperimentalMaterial3Api::class)
     androidx.compose.material3.TopAppBar(
         title = {
             Box(
@@ -60,7 +59,7 @@ fun TopAppBar(
             )
         },
         modifier = modifier.modifierLocalConsumer {
-            scrollBehavior.value = LocalTopAppBarScrollBehavior.current
+            scrollContext = LocalTopAppBarScrollContext.current
         },
         navigationIcon = {
             ProvideIconSize(styleValues.navigationIconSize) {
@@ -81,156 +80,144 @@ fun TopAppBar(
             titleContentColor = styleValues.titleContentColor,
             actionIconContentColor = styleValues.actionIconsContentColor
         ),
-        scrollBehavior = scrollBehavior.value
+        scrollBehavior = scrollBehavior
     )
-}
 
-@Composable
-fun TopAppBarScope(
-    modifier: Modifier = Modifier,
-    scrollType: TopAppBarScrollType = TopAppBarScrollType.pinned(),
-    state: TopAppBarState = rememberTopAppBarState(),
-    canScroll: () -> Boolean = { true },
-    content: @Composable () -> Unit,
-) {
-    Box(modifier.topAppBarScope(scrollType, state, canScroll)) {
-        content()
+    DisposableEffect(scrollContext) {
+        val connection = scrollBehavior?.nestedScrollConnection
+        val appBarsConnection = scrollContext?.appBarsNestedScrollConnection
+        if (connection != null) appBarsConnection?.registerNestedScrollConnection(connection)
+        onDispose {
+            if (connection != null) appBarsConnection?.unregisterNestedScrollConnection(connection)
+        }
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
-@Composable
-fun Modifier.topAppBarScope(
-    scrollType: TopAppBarScrollType = TopAppBarScrollType.pinned(),
-    state: TopAppBarState = rememberTopAppBarState(),
-    canScroll: () -> Boolean = { true }
-): Modifier {
-    @OptIn(ExperimentalMaterial3Api::class)
-    val scrollBehavior = scrollType.resolveScrollBehavior(state, canScroll)
-    @OptIn(ExperimentalMaterial3Api::class)
-    return this
-        .modifierLocalProvider(LocalTopAppBarScrollBehavior) { scrollBehavior }
-        .nestedScroll(scrollBehavior.nestedScrollConnection)
-}
+object TopAppBar {
 
-@Stable
-sealed class TopAppBarScrollType {
     @Composable
-    @OptIn(ExperimentalMaterial3Api::class)
-    internal abstract fun resolveScrollBehavior(state: TopAppBarState, canScroll: () -> Boolean): TopAppBarScrollBehavior
+    fun scrollConfig(
+        scrollType: ScrollType = ScrollType.pinned(),
+        state: TopAppBarState = rememberTopAppBarState(),
+        canScroll: () -> Boolean = { true },
+    ) = ScrollConfig(
+        scrollType = scrollType,
+        state = state,
+        canScroll = canScroll
+    )
 
-    private object Pinned : TopAppBarScrollType() {
-        @OptIn(ExperimentalMaterial3Api::class)
-        @Composable
-        override fun resolveScrollBehavior(state: TopAppBarState, canScroll: () -> Boolean) =
-            pinnedScrollBehavior(
-                state = state.state,
-                canScroll = canScroll
-            )
-    }
+    data class ScrollConfig internal constructor(
+        val scrollType: ScrollType,
+        val state: TopAppBarState,
+        val canScroll: () -> Boolean
+    )
 
-    private class ShowOrHideOnScroll (
-        val snapAnimationSpec: AnimationSpec<Float>?,
-        val flingAnimationSpec: DecayAnimationSpec<Float>?
-    ) : TopAppBarScrollType() {
-        @OptIn(ExperimentalMaterial3Api::class)
+    @Stable
+    sealed class ScrollType {
         @Composable
-        override fun resolveScrollBehavior(state: TopAppBarState, canScroll: () -> Boolean) =
-            enterAlwaysScrollBehavior(
-                state = state.state,
-                snapAnimationSpec = snapAnimationSpec,
-                flingAnimationSpec = flingAnimationSpec,
-                canScroll = canScroll
-            )
-    }
+        internal abstract fun resolveScrollBehavior(state: TopAppBarState, canScroll: () -> Boolean): TopAppBarScrollBehavior
 
-    private class ScrollWithContent (
-        val snapAnimationSpec: AnimationSpec<Float>?,
-        val flingAnimationSpec: DecayAnimationSpec<Float>?
-    ) : TopAppBarScrollType() {
-        @OptIn(ExperimentalMaterial3Api::class)
-        @Composable
-        override fun resolveScrollBehavior(state: TopAppBarState, canScroll: () -> Boolean) =
-            exitUntilCollapsedScrollBehavior(
-                state = state.state,
-                snapAnimationSpec = snapAnimationSpec,
-                flingAnimationSpec = flingAnimationSpec,
-                canScroll = canScroll
-            )
-    }
-
-    companion object {
-        @Composable
-        fun pinned(): TopAppBarScrollType = Pinned
-
-        @Composable
-        fun showOrHideOnScroll(
-            snapAnimationSpec: AnimationSpec<Float>? = spring(stiffness = Spring.StiffnessMediumLow),
-            flingAnimationSpec: DecayAnimationSpec<Float>? = rememberSplineBasedDecay()
-        ): TopAppBarScrollType = remember(snapAnimationSpec, flingAnimationSpec) {
-            ShowOrHideOnScroll(
-                snapAnimationSpec = snapAnimationSpec,
-                flingAnimationSpec = flingAnimationSpec
-            )
+        private data object Pinned : ScrollType() {
+            @Composable
+            override fun resolveScrollBehavior(state: TopAppBarState, canScroll: () -> Boolean) =
+                pinnedScrollBehavior(
+                    state = state.state,
+                    canScroll = canScroll
+                )
         }
 
-        @Composable
-        fun scrollWithContent(
-            snapAnimationSpec: AnimationSpec<Float>? = spring(stiffness = Spring.StiffnessMediumLow),
-            flingAnimationSpec: DecayAnimationSpec<Float>? = rememberSplineBasedDecay()
-        ): TopAppBarScrollType = remember(snapAnimationSpec, flingAnimationSpec) {
-            ScrollWithContent(
-                snapAnimationSpec = snapAnimationSpec,
-                flingAnimationSpec = flingAnimationSpec
-            )
+        private class ShowOrHideOnScroll(
+            val snapAnimationSpec: AnimationSpec<Float>?,
+            val flingAnimationSpec: DecayAnimationSpec<Float>?
+        ) : ScrollType() {
+            @Composable
+            override fun resolveScrollBehavior(state: TopAppBarState, canScroll: () -> Boolean) =
+                enterAlwaysScrollBehavior(
+                    state = state.state,
+                    snapAnimationSpec = snapAnimationSpec,
+                    flingAnimationSpec = flingAnimationSpec,
+                    canScroll = canScroll
+                )
+        }
+
+        private class ScrollWithContent(
+            val snapAnimationSpec: AnimationSpec<Float>?,
+            val flingAnimationSpec: DecayAnimationSpec<Float>?
+        ) : ScrollType() {
+            @Composable
+            override fun resolveScrollBehavior(state: TopAppBarState, canScroll: () -> Boolean) =
+                exitUntilCollapsedScrollBehavior(
+                    state = state.state,
+                    snapAnimationSpec = snapAnimationSpec,
+                    flingAnimationSpec = flingAnimationSpec,
+                    canScroll = canScroll
+                )
+        }
+
+        companion object {
+            @Composable
+            fun pinned(): ScrollType = Pinned
+
+            @Composable
+            fun showOrHideOnScroll(
+                snapAnimationSpec: AnimationSpec<Float>? = spring(stiffness = Spring.StiffnessMediumLow),
+                flingAnimationSpec: DecayAnimationSpec<Float>? = rememberSplineBasedDecay()
+            ): ScrollType = remember(snapAnimationSpec, flingAnimationSpec) {
+                ShowOrHideOnScroll(
+                    snapAnimationSpec = snapAnimationSpec,
+                    flingAnimationSpec = flingAnimationSpec
+                )
+            }
+
+            @Composable
+            fun scrollWithContent(
+                snapAnimationSpec: AnimationSpec<Float>? = spring(stiffness = Spring.StiffnessMediumLow),
+                flingAnimationSpec: DecayAnimationSpec<Float>? = rememberSplineBasedDecay()
+            ): ScrollType = remember(snapAnimationSpec, flingAnimationSpec) {
+                ScrollWithContent(
+                    snapAnimationSpec = snapAnimationSpec,
+                    flingAnimationSpec = flingAnimationSpec
+                )
+            }
         }
     }
 }
 
 @Stable
 class TopAppBarState internal constructor(
-    @OptIn(ExperimentalMaterial3Api::class)
     internal val state: androidx.compose.material3.TopAppBarState
 ) {
     var heightOffsetLimit: Float
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.heightOffsetLimit
         }
         set(value) {
-            @OptIn(ExperimentalMaterial3Api::class)
             state.heightOffsetLimit = value
         }
 
     var heightOffset: Float
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.heightOffset
         }
         set(value) {
-            @OptIn(ExperimentalMaterial3Api::class)
             state.heightOffset = value
         }
 
     var contentOffset: Float
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.contentOffset
         }
         set(value) {
-            @OptIn(ExperimentalMaterial3Api::class)
             state.contentOffset = value
         }
 
     val collapsedFraction: Float
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.collapsedFraction
         }
 
     val overlappedFraction: Float
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.overlappedFraction
         }
 }
@@ -241,13 +228,11 @@ fun rememberTopAppBarState(
     initialHeightOffset: Float = 0f,
     initialContentOffset: Float = 0f
 ): TopAppBarState {
-    @OptIn(ExperimentalMaterial3Api::class)
     val state = androidx.compose.material3.rememberTopAppBarState(
         initialHeightOffsetLimit = initialHeightOffsetLimit,
         initialHeightOffset = initialHeightOffset,
         initialContentOffset = initialContentOffset
     )
-    @OptIn(ExperimentalMaterial3Api::class)
     return remember(state) {
         TopAppBarState(state)
     }

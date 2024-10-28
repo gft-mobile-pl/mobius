@@ -8,34 +8,32 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.systemBars
-import androidx.compose.material3.BottomAppBarDefaults.exitAlwaysScrollBehavior
 import androidx.compose.material3.BottomAppBarScrollBehavior
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.modifier.modifierLocalConsumer
-import androidx.compose.ui.modifier.modifierLocalOf
-import androidx.compose.ui.modifier.modifierLocalProvider
 import com.gft.mobius.Mobius
+import com.gft.mobius.components.BottomAppBar.ScrollConfig
 import com.gft.mobius.components.styles.BottomAppBarStyle
 import com.gft.mobius.components.styles.resolve
-
-
-private val LocalBottomAppBarScrollBehavior = modifierLocalOf<BottomAppBarScrollBehavior?> { null }
-
 
 @Composable
 fun BottomAppBar(
@@ -61,7 +59,9 @@ fun BottomAppBar(
                 content = actions
             )
             if (floatingActionButton != null) {
-                BottomAppBarFloatingActionButtonScope.floatingActionButton()
+                with(BottomAppBarFloatingActionButtonScope) {
+                    floatingActionButton()
+                }
             }
         }
     }
@@ -76,88 +76,92 @@ fun BottomAppBar(
     style: BottomAppBarStyle = Mobius.styles.bottomAppBarStyle,
     content: @Composable RowScope.() -> Unit
 ) {
-    val scrollBehavior = remember {
-        mutableStateOf<BottomAppBarScrollBehavior?>(null)
+    var scrollContext by remember { mutableStateOf<ScrollContext<ScrollConfig>?>(null) }
+    val scrollBehavior = scrollContext?.scrollConfig?.let { config ->
+        config.scrollType.resolveScrollBehavior(config.state, config.canScroll)
     }
+
     val styleValues = style.resolve()
     androidx.compose.material3.BottomAppBar(
         modifier = modifier.modifierLocalConsumer {
-            scrollBehavior.value = LocalBottomAppBarScrollBehavior.current
+            scrollContext = LocalBottomAppBarScrollContext.current
         },
         containerColor = styleValues.backgroundColor,
         contentColor = styleValues.contentColor,
         tonalElevation = styleValues.tonalElevation,
         contentPadding = styleValues.padding,
         windowInsets = windowInsets,
-        scrollBehavior = scrollBehavior.value,
+        scrollBehavior = scrollBehavior,
         content = content
     )
-}
 
-@Composable
-fun BottomAppBarScope(
-    modifier: Modifier = Modifier,
-    scrollType: BottomAppBarScrollType = BottomAppBarScrollType.pinned(),
-    state: BottomAppBarState = rememberBottomAppBarState(),
-    canScroll: () -> Boolean = { true },
-    content: @Composable () -> Unit,
-) {
-    Box(modifier.bottomAppBarScope(scrollType, state, canScroll)) {
-        content()
+    DisposableEffect(scrollContext) {
+        val connection = scrollBehavior?.nestedScrollConnection
+        val appBarsConnection = scrollContext?.appBarsNestedScrollConnection
+        if (connection != null) appBarsConnection?.registerNestedScrollConnection(connection)
+        onDispose {
+            if (connection != null) appBarsConnection?.unregisterNestedScrollConnection(connection)
+        }
     }
 }
 
-@Composable
-fun Modifier.bottomAppBarScope(
-    scrollType: BottomAppBarScrollType = BottomAppBarScrollType.pinned(),
-    state: BottomAppBarState = rememberBottomAppBarState(),
-    canScroll: () -> Boolean = { true }
-): Modifier {
-    val scrollBehavior = scrollType.resolveScrollBehavior(state, canScroll)
-    return scrollBehavior?.let {
-        this
-            .modifierLocalProvider(LocalBottomAppBarScrollBehavior) { scrollBehavior }
-            .nestedScroll(scrollBehavior.nestedScrollConnection)
-    } ?: this
-}
+object BottomAppBar {
 
-@Stable
-sealed class BottomAppBarScrollType {
     @Composable
-    internal abstract fun resolveScrollBehavior(state: BottomAppBarState, canScroll: () -> Boolean): BottomAppBarScrollBehavior?
+    fun scrollConfig(
+        scrollType: ScrollType = ScrollType.pinned(),
+        state: BottomAppBarState = rememberBottomAppBarState(),
+        canScroll: () -> Boolean = { true },
+    ) = ScrollConfig(
+        scrollType = scrollType,
+        state = state,
+        canScroll = canScroll
+    )
 
-    private data object Pinned : BottomAppBarScrollType() {
-        @Composable
-        override fun resolveScrollBehavior(state: BottomAppBarState, canScroll: () -> Boolean) = null
-    }
+    data class ScrollConfig internal constructor(
+        val scrollType: ScrollType,
+        val state: BottomAppBarState,
+        val canScroll: () -> Boolean
+    )
 
-    private class ShowOrHideOnScroll(
-        val snapAnimationSpec: AnimationSpec<Float>?,
-        val flingAnimationSpec: DecayAnimationSpec<Float>?
-    ) : BottomAppBarScrollType() {
+    @Stable
+    sealed class ScrollType {
         @Composable
-        override fun resolveScrollBehavior(state: BottomAppBarState, canScroll: () -> Boolean) =
-            exitAlwaysScrollBehavior(
-                state = state.state,
-                snapAnimationSpec = snapAnimationSpec,
-                flingAnimationSpec = flingAnimationSpec,
-                canScroll = canScroll
-            )
-    }
+        internal abstract fun resolveScrollBehavior(state: BottomAppBarState, canScroll: () -> Boolean): BottomAppBarScrollBehavior?
 
-    companion object {
-        @Composable
-        fun pinned(): BottomAppBarScrollType = Pinned
+        private data object Pinned : ScrollType() {
+            @Composable
+            override fun resolveScrollBehavior(state: BottomAppBarState, canScroll: () -> Boolean) = null
+        }
 
-        @Composable
-        fun showOrHideOnScroll(
-            snapAnimationSpec: AnimationSpec<Float>? = spring(stiffness = Spring.StiffnessMediumLow),
-            flingAnimationSpec: DecayAnimationSpec<Float>? = rememberSplineBasedDecay()
-        ): BottomAppBarScrollType = remember(snapAnimationSpec, flingAnimationSpec) {
-            ShowOrHideOnScroll(
-                snapAnimationSpec = snapAnimationSpec,
-                flingAnimationSpec = flingAnimationSpec
-            )
+        private class ShowOrHideOnScroll(
+            val snapAnimationSpec: AnimationSpec<Float>?,
+            val flingAnimationSpec: DecayAnimationSpec<Float>?
+        ) : ScrollType() {
+            @Composable
+            override fun resolveScrollBehavior(state: BottomAppBarState, canScroll: () -> Boolean) =
+                ShowOrHideScrollBehavior(
+                    state = state.state,
+                    snapAnimationSpec = snapAnimationSpec,
+                    flingAnimationSpec = flingAnimationSpec,
+                    canScroll = canScroll
+                )
+        }
+
+        companion object {
+            @Composable
+            fun pinned(): ScrollType = Pinned
+
+            @Composable
+            fun showOrHideOnScroll(
+                snapAnimationSpec: AnimationSpec<Float>? = spring(stiffness = Spring.StiffnessMediumLow),
+                flingAnimationSpec: DecayAnimationSpec<Float>? = rememberSplineBasedDecay()
+            ): ScrollType = remember(snapAnimationSpec, flingAnimationSpec) {
+                ShowOrHideOnScroll(
+                    snapAnimationSpec = snapAnimationSpec,
+                    flingAnimationSpec = flingAnimationSpec
+                )
+            }
         }
     }
 }
@@ -214,4 +218,27 @@ fun rememberBottomAppBarState(
 
 interface BottomAppBarFloatingActionButtonScope {
     companion object : BottomAppBarFloatingActionButtonScope
+}
+
+private class ShowOrHideScrollBehavior(
+    override val state: androidx.compose.material3.BottomAppBarState,
+    override val snapAnimationSpec: AnimationSpec<Float>?,
+    override val flingAnimationSpec: DecayAnimationSpec<Float>?,
+    val canScroll: () -> Boolean = { true }
+) : BottomAppBarScrollBehavior {
+    override val isPinned: Boolean = false
+    override val nestedScrollConnection: NestedScrollConnection = object : NestedScrollConnection {
+        @Suppress("SameReturnValue")
+        override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+            if (!canScroll()) return Offset.Zero
+            state.contentOffset += available.y
+            if (state.heightOffset == 0f || state.heightOffset == state.heightOffsetLimit) {
+                if (available.y == 0f && available.y > 0f) {
+                    state.contentOffset = 0f
+                }
+            }
+            state.heightOffset += available.y
+            return Offset.Zero
+        }
+    }
 }

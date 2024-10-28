@@ -17,9 +17,8 @@ import com.gft.designsystem.BottomAppBarPresentationScrollType.ShowOrHideOnScrol
 import com.gft.designsystem.BottomAppBarPresentationUsage.WithBottomAppBarScopeComponent
 import com.gft.designsystem.BottomAppBarPresentationUsage.WithBottomAppBarScopeModifier
 import com.gft.mobius.Mobius
+import com.gft.mobius.components.AppBarsScope
 import com.gft.mobius.components.BottomAppBar
-import com.gft.mobius.components.BottomAppBarScope
-import com.gft.mobius.components.BottomAppBarScrollType
 import com.gft.mobius.components.Button
 import com.gft.mobius.components.Content
 import com.gft.mobius.components.ElementSpacer
@@ -33,10 +32,7 @@ import com.gft.mobius.components.Screen
 import com.gft.mobius.components.ScreenScope
 import com.gft.mobius.components.Text
 import com.gft.mobius.components.TopAppBar
-import com.gft.mobius.components.TopAppBarScope
-import com.gft.mobius.components.TopAppBarScrollType
-import com.gft.mobius.components.bottomAppBarScope
-import com.gft.mobius.components.topAppBarScope
+import com.gft.mobius.components.appBarsScope
 
 private const val menuDestination = "menuDestination"
 private const val sampleDestination = "sampleDestination"
@@ -131,25 +127,26 @@ private fun BottomAppBarSampleScreen(
     usage: BottomAppBarPresentationUsage
 ) {
     val scrollType = when (presentationScrollType) {
-        Pinned -> BottomAppBarScrollType.pinned()
-        ShowOrHideOnScroll -> BottomAppBarScrollType.showOrHideOnScroll()
+        Pinned -> BottomAppBar.ScrollType.pinned()
+        ShowOrHideOnScroll -> BottomAppBar.ScrollType.showOrHideOnScroll()
     }
     Screen {
         when (usage) {
             WithBottomAppBarScopeComponent ->
-                TopAppBarScope(scrollType = TopAppBarScrollType.showOrHideOnScroll()) {
-                    BottomAppBarScope(
-                        scrollType = scrollType
-                    ) {
-                        ScreenContent()
-                    }
+                AppBarsScope(
+                    topAppBarScrollConfig = TopAppBar.scrollConfig(scrollType = TopAppBar.ScrollType.showOrHideOnScroll()),
+                    bottomAppBarScrollConfig = BottomAppBar.scrollConfig(scrollType = scrollType)
+                ) {
+                    ScreenContent()
                 }
 
             WithBottomAppBarScopeModifier ->
                 ScreenContent(
                     modifier = Modifier
-                        .bottomAppBarScope(scrollType = scrollType)
-                        .topAppBarScope(scrollType = TopAppBarScrollType.showOrHideOnScroll())
+                        .appBarsScope(
+                            topAppBarScrollConfig = TopAppBar.scrollConfig(scrollType = TopAppBar.ScrollType.showOrHideOnScroll()),
+                            bottomAppBarScrollConfig = BottomAppBar.scrollConfig(scrollType = scrollType)
+                        )
                 )
         }
     }

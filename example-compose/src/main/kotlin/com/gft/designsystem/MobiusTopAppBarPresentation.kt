@@ -20,6 +20,7 @@ import com.gft.designsystem.TopAppBarPresentationStyle.Variant
 import com.gft.designsystem.TopAppBarPresentationUsage.WithTopAppBarScopeComponent
 import com.gft.designsystem.TopAppBarPresentationUsage.WithTopAppBarScopeModifier
 import com.gft.mobius.Mobius
+import com.gft.mobius.components.AppBarsScope
 import com.gft.mobius.components.Button
 import com.gft.mobius.components.Content
 import com.gft.mobius.components.ElementSpacer
@@ -32,10 +33,8 @@ import com.gft.mobius.components.Screen
 import com.gft.mobius.components.ScreenScope
 import com.gft.mobius.components.Text
 import com.gft.mobius.components.TopAppBar
-import com.gft.mobius.components.TopAppBarScope
-import com.gft.mobius.components.TopAppBarScrollType
+import com.gft.mobius.components.appBarsScope
 import com.gft.mobius.components.styles.TopAppBarStyle
-import com.gft.mobius.components.topAppBarScope
 
 private const val menuDestination = "menuDestination"
 private const val sampleDestination = "sampleDestination"
@@ -164,15 +163,15 @@ private fun TopAppBarSampleScreen(
         Variant -> Mobius.styles.topAppBarVariantStyle
     }
     val scrollType = when (presentationScrollType) {
-        Pinned -> TopAppBarScrollType.pinned()
-        ShowOrHideOnScroll -> TopAppBarScrollType.showOrHideOnScroll()
-        ScrollWithContent -> TopAppBarScrollType.scrollWithContent()
+        Pinned -> TopAppBar.ScrollType.pinned()
+        ShowOrHideOnScroll -> TopAppBar.ScrollType.showOrHideOnScroll()
+        ScrollWithContent -> TopAppBar.ScrollType.scrollWithContent()
     }
     Screen {
         when (usage) {
             WithTopAppBarScopeComponent ->
-                TopAppBarScope(
-                    scrollType = scrollType
+                AppBarsScope(
+                    topAppBarScrollConfig = TopAppBar.scrollConfig(scrollType = scrollType),
                 ) {
                     ScreenContent(
                         style = topAppBarStyle
@@ -181,8 +180,8 @@ private fun TopAppBarSampleScreen(
 
             WithTopAppBarScopeModifier ->
                 ScreenContent(
-                    style = topAppBarStyle, modifier = Modifier.topAppBarScope(
-                        scrollType = scrollType,
+                    style = topAppBarStyle, modifier = Modifier.appBarsScope(
+                        topAppBarScrollConfig = TopAppBar.scrollConfig(scrollType = scrollType)
                     )
                 )
         }
