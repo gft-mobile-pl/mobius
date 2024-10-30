@@ -1,6 +1,5 @@
 package com.gft.designsystem
 
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -73,6 +72,7 @@ private fun Menu(
         Content {
             Text("TopAppBarStyle:")
             Label(
+                modifier = Modifier.fillMaxWidth(),
                 text = { Text(text = "Default") },
                 onClick = { topAppBarStyle.value = Default }
             ) {
@@ -81,6 +81,7 @@ private fun Menu(
                 )
             }
             Label(
+                modifier = Modifier.fillMaxWidth(),
                 text = { Text(text = "Variant") },
                 onClick = { topAppBarStyle.value = Variant }
             ) {
@@ -91,6 +92,7 @@ private fun Menu(
             ElementSpacer()
             Text("Top appbar scroll type:")
             Label(
+                modifier = Modifier.fillMaxWidth(),
                 text = { Text(text = "Pinned") },
                 onClick = { scrollType.value = Pinned }
             ) {
@@ -99,6 +101,7 @@ private fun Menu(
                 )
             }
             Label(
+                modifier = Modifier.fillMaxWidth(),
                 text = { Text(text = "ShowOrHideOnScroll") },
                 onClick = { scrollType.value = ShowOrHideOnScroll }
             ) {
@@ -107,6 +110,7 @@ private fun Menu(
                 )
             }
             Label(
+                modifier = Modifier.fillMaxWidth(),
                 text = { Text(text = "ScrollWithContent") },
                 onClick = { scrollType.value = ScrollWithContent }
             ) {
@@ -117,6 +121,7 @@ private fun Menu(
             ElementSpacer()
             Text("Usage type:")
             Label(
+                modifier = Modifier.fillMaxWidth(),
                 text = { Text(text = "with TopAppBarScope component") },
                 onClick = { usage.value = WithTopAppBarScopeComponent }
             ) {
@@ -125,6 +130,7 @@ private fun Menu(
                 )
             }
             Label(
+                modifier = Modifier.fillMaxWidth(),
                 text = { Text(text = "with topAppBarScope modifier") },
                 onClick = { usage.value = WithTopAppBarScopeModifier }
             ) {
@@ -133,23 +139,14 @@ private fun Menu(
                 )
             }
             ElementSpacer()
-            MenuItem(text = "Show sample", onClick = { controller.navigate(sampleDestination) })
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = { controller.navigate(sampleDestination) }
+            ) {
+                Text(text = "Show sample")
+            }
         }
     }
-}
-
-@Composable
-private fun ColumnScope.MenuItem(
-    onClick: () -> Unit,
-    text: String,
-) {
-    Button(
-        modifier = Modifier.fillMaxWidth(),
-        onClick = onClick
-    ) {
-        Text(text = text)
-    }
-    ElementSpacer()
 }
 
 @Composable
