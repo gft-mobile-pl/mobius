@@ -12,7 +12,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.Icon
@@ -20,8 +19,6 @@ import com.gft.mobius.components.NavigationRail
 import com.gft.mobius.components.NavigationRailItem
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.Text
-import com.gft.mobius.components.styles.DefaultNavigationRailItemStyle
-import com.gft.mobius.components.styles.DefaultNavigationRailStyle
 import com.gft.mobius.components.styles.NavigationRailItemStyle
 import com.gft.mobius.components.styles.NavigationRailItemStyle.LabelVisibility.WhenSelected
 import com.gft.mobius.components.styles.NavigationRailStyle

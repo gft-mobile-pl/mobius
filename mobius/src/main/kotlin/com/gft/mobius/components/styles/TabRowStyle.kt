@@ -62,4 +62,3 @@ open class SecondaryTabRowStyle : TabRowStyle {
     }
     override val dividerStyle: Token<HorizontalDividerStyle> = TokenReference { Mobius.styles.primaryTabRow.dividerStyle }
 }
-

@@ -40,4 +40,3 @@ open class SecondaryScrollableTabRowStyle : ScrollableTabRowStyle {
     override val dividerStyle: Token<HorizontalDividerStyle> = TokenReference { Mobius.styles.secondaryTabRow.dividerStyle }
     override val edgePadding: Token<Dp> = TokenReference { Mobius.styles.primaryScrollableTabRow.edgePadding }
 }
-

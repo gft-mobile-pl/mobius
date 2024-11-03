@@ -21,5 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "GFT Design System"
 include(":example-compose")
-include(":design-system")
 include(":mobius")
