@@ -40,7 +40,7 @@ fun TopAppBar(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     navigationIcon: @Composable () -> Unit = {},
-    actions: @Composable RowScope.() -> Unit,
+    actions: @Composable RowScope.() -> Unit = {},
     windowInsets: WindowInsets = WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top),
     style: TopAppBarStyle = Mobius.styles.topAppBarStyle,
 ) {
