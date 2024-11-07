@@ -55,14 +55,14 @@ fun DropdownMenuItemStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultDropdownMenuItemStyle : DropdownMenuItemStyle {
-    override val padding = Token(PaddingValues(horizontal = MobiusReferenceDimensions.Dimension12))
-    override val textStyle = Token { Mobius.typography.bodyLarge }
-    override val textColor = Token { Mobius.colors.onSurface }
-    override val disabledTextColor = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val leadingIconSize = Token { IconSize.Medium }
-    override val leadingIconColor = Token { Mobius.colors.onSurfaceVariant }
-    override val disabledLeadingIconColor = Token { Mobius.colors.onSurfaceVariant.copy(alpha = 0.38f) }
-    override val trailingIconSize = Token { IconSize.Medium }
-    override val trailingIconColor = Token { Mobius.colors.onSurfaceVariant }
-    override val disabledTrailingIconColor = Token { Mobius.colors.onSurfaceVariant.copy(alpha = 0.38f) }
+    override val padding: Token<PaddingValues> = Token(PaddingValues(horizontal = MobiusReferenceDimensions.Dimension12))
+    override val textStyle: Token<TextStyle> = Token { Mobius.typography.bodyLarge }
+    override val textColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val disabledTextColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
+    override val leadingIconSize: Token<IconSize> = Token { IconSize.Medium }
+    override val leadingIconColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val disabledLeadingIconColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant.copy(alpha = 0.38f) }
+    override val trailingIconSize: Token<IconSize> = Token { IconSize.Medium }
+    override val trailingIconColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val disabledTrailingIconColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant.copy(alpha = 0.38f) }
 }

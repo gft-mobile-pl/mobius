@@ -24,5 +24,5 @@ fun InteractiveComponentStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultInteractiveComponentStyle : InteractiveComponentStyle {
-    override val minimumSize = Token(MobiusReferenceDimensions.Dimension40)
+    override val minimumSize: Token<Dp> = Token(MobiusReferenceDimensions.Dimension40)
 }

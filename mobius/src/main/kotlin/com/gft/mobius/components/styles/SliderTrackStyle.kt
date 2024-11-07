@@ -53,14 +53,14 @@ fun SliderTrackStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultSliderTrackStyle : SliderTrackStyle {
-    override val activeTrackColor = Token { Mobius.colors.primary}
-    override val activeTickColor = Token { Mobius.colors.primaryContainer }
-    override val inactiveTrackColor = Token { Mobius.colors.primaryContainer }
-    override val inactiveTickColor = Token { Mobius.colors.primary }
-    override val disabledActiveTrackColor = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val disabledActiveTickColor = Token { Mobius.colors.inverseOnSurface.copy(alpha = 0.66f) }
-    override val disabledInactiveTrackColor = Token { Mobius.colors.onSurface.copy(alpha = 0.12f) }
-    override val disabledInactiveTickColor = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val thumbTrackGapSize = Token(MobiusReferenceDimensions.Dimension4)
-    override val trackInsideCornerSize = Token(MobiusReferenceDimensions.Dimension2)
+    override val activeTrackColor: Token<Color> = Token { Mobius.colors.primary }
+    override val activeTickColor: Token<Color> = Token { Mobius.colors.primaryContainer }
+    override val inactiveTrackColor: Token<Color> = Token { Mobius.colors.primaryContainer }
+    override val inactiveTickColor: Token<Color> = Token { Mobius.colors.primary }
+    override val disabledActiveTrackColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
+    override val disabledActiveTickColor: Token<Color> = Token { Mobius.colors.inverseOnSurface.copy(alpha = 0.66f) }
+    override val disabledInactiveTrackColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.12f) }
+    override val disabledInactiveTickColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
+    override val thumbTrackGapSize: Token<Dp> = Token(MobiusReferenceDimensions.Dimension4)
+    override val trackInsideCornerSize: Token<Dp> = Token(MobiusReferenceDimensions.Dimension2)
 }

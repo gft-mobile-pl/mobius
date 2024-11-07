@@ -20,7 +20,7 @@ interface FooterStyle : Style {
 
 @Composable
 fun FooterStyle.resolve() = produceStyleValues { style ->
-    object : HeaderStyleValues {
+    object : FooterStyleValues {
         override val background: Brush? = style.background.resolve()
         override val contentColor: Color = style.contentColor.resolve()
     }

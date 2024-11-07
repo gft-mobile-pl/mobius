@@ -56,12 +56,12 @@ fun TooltipStyle.resolve() = produceStyleValues { style ->
 
 open class DefaultTooltipStyle : TooltipStyle {
     override val shape: Token<Shape> = Token(RoundedCornerShape(MobiusReferenceDimensions.Dimension4))
-    override val containerColor = Token { Mobius.colors.inverseSurface }
-    override val contentColor = Token { Mobius.colors.inverseOnSurface }
-    override val tonalElevation = Token(MobiusReferenceDimensions.Dimension0)
-    override val shadowElevation = Token(MobiusReferenceDimensions.Dimension0)
-    override val pointerSize = Token(DpSize.Unspecified)
-    override val contentTextStyle = Token { Mobius.typography.bodySmall }
-    override val padding = Token(PaddingValues(MobiusReferenceDimensions.Dimension0))
-    override val minWidth = Token(Dp.Unspecified)
+    override val containerColor: Token<Color> = Token { Mobius.colors.inverseSurface }
+    override val contentColor: Token<Color> = Token { Mobius.colors.inverseOnSurface }
+    override val tonalElevation: Token<Dp> = Token(MobiusReferenceDimensions.Dimension0)
+    override val shadowElevation: Token<Dp> = Token(MobiusReferenceDimensions.Dimension0)
+    override val pointerSize: Token<DpSize> = Token(DpSize.Unspecified)
+    override val contentTextStyle: Token<TextStyle> = Token { Mobius.typography.bodySmall }
+    override val padding: Token<PaddingValues> = Token(PaddingValues(MobiusReferenceDimensions.Dimension0))
+    override val minWidth: Token<Dp> = Token(Dp.Unspecified)
 }

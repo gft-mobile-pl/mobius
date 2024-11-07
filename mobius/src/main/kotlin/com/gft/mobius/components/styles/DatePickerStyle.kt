@@ -148,30 +148,30 @@ fun DatePickerStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultDatePickerStyle : DatePickerStyle {
-    override val containerColor = Token { Mobius.colors.surfaceContainerHigh }
-    override val titleColor = Token { Mobius.colors.onSurfaceVariant }
-    override val titleTextStyle = Token { Mobius.typography.labelLarge }
-    override val headlineContentColor = Token { Mobius.colors.onSurface }
-    override val headlineTextStyle = Token { Mobius.typography.headlineLarge }
-    override val weekdayContentColor = Token { Mobius.colors.onSurface }
-    override val navigationContentColor = Token { Mobius.colors.onSurfaceVariant }
-    override val yearContentColor = Token { Mobius.colors.onSurfaceVariant }
-    override val disabledYearContentColor = Token { Mobius.colors.onSurfaceVariant.copy(alpha = 0.38f) }
-    override val currentYearContentColor = Token { Mobius.colors.primary }
-    override val selectedYearContentColor = Token { Mobius.colors.onPrimary }
-    override val disabledSelectedYearContentColor = Token { Mobius.colors.onPrimary.copy(alpha = 0.38f) }
-    override val selectedYearContainerColor = Token { Mobius.colors.primary }
-    override val disabledSelectedYearContainerColor = Token { Mobius.colors.primary.copy(alpha = 0.38f) }
-    override val dayContentColor = Token { Mobius.colors.onSurface }
-    override val disabledDayContentColor = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val selectedDayContentColor = Token { Mobius.colors.onPrimary }
-    override val disabledSelectedDayContentColor = Token { Mobius.colors.onPrimary.copy(alpha = 0.38f) }
-    override val selectedDayContainerColor = Token { Mobius.colors.primary }
-    override val disabledSelectedDayContainerColor = Token { Mobius.colors.primary.copy(alpha = 0.38f) }
-    override val todayContentColor = Token { Mobius.colors.primary }
-    override val todayDateBorderColor = Token { Mobius.colors.primary }
-    override val dividerColor = Token { Mobius.colors.outlineVariant }
+    override val containerColor: Token<Color> = Token { Mobius.colors.surfaceContainerHigh }
+    override val titleColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val titleTextStyle: Token<TextStyle> = Token { Mobius.typography.labelLarge }
+    override val headlineContentColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val headlineTextStyle: Token<TextStyle> = Token { Mobius.typography.headlineLarge }
+    override val weekdayContentColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val navigationContentColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val yearContentColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val disabledYearContentColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant.copy(alpha = 0.38f) }
+    override val currentYearContentColor: Token<Color> = Token { Mobius.colors.primary }
+    override val selectedYearContentColor: Token<Color> = Token { Mobius.colors.onPrimary }
+    override val disabledSelectedYearContentColor: Token<Color> = Token { Mobius.colors.onPrimary.copy(alpha = 0.38f) }
+    override val selectedYearContainerColor: Token<Color> = Token { Mobius.colors.primary }
+    override val disabledSelectedYearContainerColor: Token<Color> = Token { Mobius.colors.primary.copy(alpha = 0.38f) }
+    override val dayContentColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val disabledDayContentColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
+    override val selectedDayContentColor: Token<Color> = Token { Mobius.colors.onPrimary }
+    override val disabledSelectedDayContentColor: Token<Color> = Token { Mobius.colors.onPrimary.copy(alpha = 0.38f) }
+    override val selectedDayContainerColor: Token<Color> = Token { Mobius.colors.primary }
+    override val disabledSelectedDayContainerColor: Token<Color> = Token { Mobius.colors.primary.copy(alpha = 0.38f) }
+    override val todayContentColor: Token<Color> = Token { Mobius.colors.primary }
+    override val todayDateBorderColor: Token<Color> = Token { Mobius.colors.primary }
+    override val dividerColor: Token<Color> = Token { Mobius.colors.outlineVariant }
     override val dateTextFieldColorTokens: Token<TextFieldColorTokens> = Token { Mobius.styles.outlinedTextField }
-    override val modeToggleVisible = Token(true)
+    override val modeToggleVisible: Token<Boolean> = Token(true)
     override val datePickerFormatter: Token<DatePickerFormatter> = Token(DefaultDatePickerFormatter())
 }

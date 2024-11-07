@@ -42,19 +42,19 @@ fun CircularProgressIndicatorStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultCircularProgressIndicatorStyle : CircularProgressIndicatorStyle {
-    override val size = Token(MobiusReferenceDimensions.Dimension48)
-    override val color = Token { Mobius.colors.primary }
-    override val trackColor = Token { Mobius.colors.primaryContainer }
-    override val strokeWidth = Token(MobiusReferenceDimensions.Dimension4)
-    override val strokeCap = Token(StrokeCap.Round)
-    override val gapSize = Token(MobiusReferenceDimensions.Dimension4)
+    override val size: Token<Dp> = Token(MobiusReferenceDimensions.Dimension48)
+    override val color: Token<Color> = Token { Mobius.colors.primary }
+    override val trackColor: Token<Color> = Token { Mobius.colors.primaryContainer }
+    override val strokeWidth: Token<Dp> = Token(MobiusReferenceDimensions.Dimension4)
+    override val strokeCap: Token<StrokeCap> = Token(StrokeCap.Round)
+    override val gapSize: Token<Dp> = Token(MobiusReferenceDimensions.Dimension4)
 }
 
 open class IndeterminateCircularProgressIndicatorStyle : CircularProgressIndicatorStyle {
-    override val size = Token(MobiusReferenceDimensions.Dimension48)
-    override val color = Token { Mobius.colors.primary }
-    override val trackColor = Token(Color.Transparent)
-    override val strokeWidth = Token(MobiusReferenceDimensions.Dimension4)
-    override val strokeCap = Token(StrokeCap.Round)
-    override val gapSize = Token(MobiusReferenceDimensions.Dimension4)
+    override val size: Token<Dp> = Token(MobiusReferenceDimensions.Dimension48)
+    override val color: Token<Color> = Token { Mobius.colors.primary }
+    override val trackColor: Token<Color> = Token(Color.Transparent)
+    override val strokeWidth: Token<Dp> = Token(MobiusReferenceDimensions.Dimension4)
+    override val strokeCap: Token<StrokeCap> = Token(StrokeCap.Round)
+    override val gapSize: Token<Dp> = Token(MobiusReferenceDimensions.Dimension4)
 }

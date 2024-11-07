@@ -5,7 +5,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpSize
 import com.gft.designsystem.Style
 import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
@@ -42,25 +44,25 @@ fun SliderThumbStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultSliderThumbStyle : SliderThumbStyle {
-    override val color = Token { Mobius.colors.primary }
-    override val disabledColor = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val height = Token(MobiusReferenceDimensions.Dimension40)
-    override val width = Token(MobiusReferenceDimensions.Dimension4)
-    override val tooltipStyle = Token { Mobius.styles.sliderTooltipStyle }
+    override val color: Token<Color> = Token { Mobius.colors.primary }
+    override val disabledColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
+    override val height: Token<Dp> = Token(MobiusReferenceDimensions.Dimension40)
+    override val width: Token<Dp> = Token(MobiusReferenceDimensions.Dimension4)
+    override val tooltipStyle: Token<TooltipStyle> = Token { Mobius.styles.sliderTooltipStyle }
 }
 
 open class SliderTooltipStyle : TooltipStyle {
     override val shape: Token<Shape> = Token(RoundedCornerShape(MobiusReferenceDimensions.Dimension32))
-    override val containerColor = TokenReference { Mobius.styles.tooltipStyle.containerColor }
-    override val contentColor = TokenReference { Mobius.styles.tooltipStyle.contentColor }
-    override val tonalElevation = TokenReference { Mobius.styles.tooltipStyle.tonalElevation }
-    override val shadowElevation = TokenReference { Mobius.styles.tooltipStyle.shadowElevation }
-    override val pointerSize = TokenReference { Mobius.styles.tooltipStyle.pointerSize }
-    override val contentTextStyle = Token { Mobius.typography.labelLarge }
-    override val padding = Token(
-            PaddingValues(
-                vertical = MobiusReferenceDimensions.Dimension12
-            )
+    override val containerColor: Token<Color> = TokenReference { Mobius.styles.tooltipStyle.containerColor }
+    override val contentColor: Token<Color> = TokenReference { Mobius.styles.tooltipStyle.contentColor }
+    override val tonalElevation: Token<Dp> = TokenReference { Mobius.styles.tooltipStyle.tonalElevation }
+    override val shadowElevation: Token<Dp> = TokenReference { Mobius.styles.tooltipStyle.shadowElevation }
+    override val pointerSize: Token<DpSize> = TokenReference { Mobius.styles.tooltipStyle.pointerSize }
+    override val contentTextStyle: Token<TextStyle> = Token { Mobius.typography.labelLarge }
+    override val padding: Token<PaddingValues> = Token(
+        PaddingValues(
+            vertical = MobiusReferenceDimensions.Dimension12
         )
-    override val minWidth = Token(MobiusReferenceDimensions.Dimension48)
+    )
+    override val minWidth: Token<Dp> = Token(MobiusReferenceDimensions.Dimension48)
 }

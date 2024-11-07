@@ -24,5 +24,5 @@ fun InfoBoxPositionProviderStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultInfoBoxPositionProviderStyle : InfoBoxPositionProviderStyle {
-    override val spaceFromContent = Token(MobiusReferenceDimensions.Dimension4)
+    override val spaceFromContent: Token<Dp> = Token(MobiusReferenceDimensions.Dimension4)
 }

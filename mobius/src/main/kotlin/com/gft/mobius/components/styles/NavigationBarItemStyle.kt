@@ -55,13 +55,13 @@ fun NavigationBarItemStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultNavigationBarItemStyle : NavigationBarItemStyle {
-    override val textStyle = Token { Mobius.typography.labelMedium }
-    override val selectedIconColor = Token { Mobius.colors.onSecondaryContainer }
-    override val selectedTextColor = Token { Mobius.colors.onSurface }
-    override val indicatorColor = Token { Mobius.colors.secondaryContainer }
-    override val unselectedIconColor = Token { Mobius.colors.onSurfaceVariant }
-    override val unselectedTextColor = Token { Mobius.colors.onSurfaceVariant }
-    override val disabledIconColor = Token { Mobius.colors.onSurfaceVariant.copy(alpha = 0.38f) }
-    override val disabledTextColor = Token { Mobius.colors.onSurfaceVariant.copy(alpha = 0.38f) }
-    override val labelVisibility = Token(Always)
+    override val textStyle: Token<TextStyle> = Token { Mobius.typography.labelMedium }
+    override val selectedIconColor: Token<Color> = Token { Mobius.colors.onSecondaryContainer }
+    override val selectedTextColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val indicatorColor: Token<Color> = Token { Mobius.colors.secondaryContainer }
+    override val unselectedIconColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val unselectedTextColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val disabledIconColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant.copy(alpha = 0.38f) }
+    override val disabledTextColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant.copy(alpha = 0.38f) }
+    override val labelVisibility: Token<LabelVisibility> = Token(Always)
 }

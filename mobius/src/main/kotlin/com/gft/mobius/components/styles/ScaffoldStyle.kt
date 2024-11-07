@@ -31,7 +31,7 @@ fun ScaffoldStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultScaffoldStyle : ScaffoldStyle {
-    override val background = Token { Mobius.colors.background }
-    override val contentColor = Token { Mobius.colors.onBackground }
-    override val floatingActionButtonPosition = Token { FabPosition.End }
+    override val background: Token<Color> = Token { Mobius.colors.background }
+    override val contentColor: Token<Color> = Token { Mobius.colors.onBackground }
+    override val floatingActionButtonPosition: Token<FabPosition> = Token { FabPosition.End }
 }

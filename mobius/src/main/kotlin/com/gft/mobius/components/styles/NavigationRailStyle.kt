@@ -41,8 +41,8 @@ fun NavigationRailStyle.resolve() = produceStyleValues { style ->
 
 open class DefaultNavigationRailStyle : NavigationRailStyle {
     override val shape: Token<Shape?> = Token(null)
-    override val backgroundColor = Token { Mobius.colors.surface }
-    override val contentColor = Token { Mobius.colors.onSurface }
-    override val padding = Token(PaddingValues(MobiusReferenceDimensions.Dimension8))
-    override val arrangement = Token(Arrangement.Top)
+    override val backgroundColor: Token<Color> = Token { Mobius.colors.surface }
+    override val contentColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val padding: Token<PaddingValues> = Token(PaddingValues(MobiusReferenceDimensions.Dimension8))
+    override val arrangement: Token<Arrangement.Vertical> = Token(Arrangement.Top)
 }

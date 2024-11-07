@@ -1,13 +1,11 @@
 package com.gft.mobius.components.styles
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.gft.designsystem.Style
 import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
@@ -44,9 +42,9 @@ fun NavigationBarStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultNavigationBarStyle : NavigationBarStyle {
-    override val backgroundColor = Token { Mobius.colors.surfaceContainer }
-    override val contentColor = Token { Mobius.colors.onSurface }
-    override val tonalElevation = Token { MobiusReferenceElevations.Level0 }
+    override val backgroundColor: Token<Color> = Token { Mobius.colors.surfaceContainer }
+    override val contentColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val tonalElevation: Token<Dp> = Token { MobiusReferenceElevations.Level0 }
     override val shape: Token<Shape?> = Token(RectangleShape)
-    override val padding = Token(PaddingValues(MobiusReferenceDimensions.Dimension0))
+    override val padding: Token<PaddingValues> = Token(PaddingValues(MobiusReferenceDimensions.Dimension0))
 }

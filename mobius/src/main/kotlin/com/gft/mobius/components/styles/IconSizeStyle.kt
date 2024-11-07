@@ -33,9 +33,8 @@ fun IconSizeStyle.resolve() = produceStyleValues { style ->
 }
 
 class DefaultIconSizeStyle : IconSizeStyle {
-    override val smallIconSize = Token(MobiusReferenceDimensions.Dimension16)
-    override val mediumIconSize = Token(MobiusReferenceDimensions.Dimension24)
-    override val largeIconSize = Token(MobiusReferenceDimensions.Dimension40)
-    override val extraLargeIconSize = Token(MobiusReferenceDimensions.Dimension64)
-
+    override val smallIconSize: Token<Dp> = Token(MobiusReferenceDimensions.Dimension16)
+    override val mediumIconSize: Token<Dp> = Token(MobiusReferenceDimensions.Dimension24)
+    override val largeIconSize: Token<Dp> = Token(MobiusReferenceDimensions.Dimension40)
+    override val extraLargeIconSize: Token<Dp> = Token(MobiusReferenceDimensions.Dimension64)
 }

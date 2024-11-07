@@ -78,23 +78,23 @@ fun CheckboxStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultCheckboxStyle : CheckboxStyle {
-    override val checkedCheckmarkColor = Token { Mobius.colors.onPrimary }
-    override val checkedRippleColor = Token { Mobius.colors.primary }
-    override val checkedBoxColor = Token { Mobius.colors.primary }
-    override val checkedBorderColor = Token { Mobius.colors.primary }
-    override val uncheckedCheckmarkColor = Token(Color.Transparent)
-    override val uncheckedRippleColor = Token { Mobius.colors.onSurface }
-    override val uncheckedBoxColor = Token(Color.Transparent)
-    override val uncheckedBorderColor = Token { Mobius.colors.onSurfaceVariant }
-    override val disabledCheckedBoxColor = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val disabledUncheckedBoxColor = Token(Color.Transparent)
-    override val disabledIndeterminateBoxColor = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val disabledBorderColor = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val disabledUncheckedBorderColor = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val disabledIndeterminateBorderColor = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val errorCheckmarkColor = Token { Mobius.colors.onPrimary }
-    override val errorRippleColor = Token { Mobius.colors.error }
-    override val errorCheckedBoxColor = Token { Mobius.colors.error }
-    override val errorUncheckedBoxColor = Token(Color.Transparent)
-    override val errorBorderColor = Token { Mobius.colors.error }
+    override val checkedCheckmarkColor: Token<Color> = Token { Mobius.colors.onPrimary }
+    override val checkedRippleColor: Token<Color> = Token { Mobius.colors.primary }
+    override val checkedBoxColor: Token<Color> = Token { Mobius.colors.primary }
+    override val checkedBorderColor: Token<Color> = Token { Mobius.colors.primary }
+    override val uncheckedCheckmarkColor: Token<Color> = Token(Color.Transparent)
+    override val uncheckedRippleColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val uncheckedBoxColor: Token<Color> = Token(Color.Transparent)
+    override val uncheckedBorderColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val disabledCheckedBoxColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
+    override val disabledUncheckedBoxColor: Token<Color> = Token(Color.Transparent)
+    override val disabledIndeterminateBoxColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
+    override val disabledBorderColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
+    override val disabledUncheckedBorderColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
+    override val disabledIndeterminateBorderColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
+    override val errorCheckmarkColor: Token<Color> = Token { Mobius.colors.onPrimary }
+    override val errorRippleColor: Token<Color> = Token { Mobius.colors.error }
+    override val errorCheckedBoxColor: Token<Color> = Token { Mobius.colors.error }
+    override val errorUncheckedBoxColor: Token<Color> = Token(Color.Transparent)
+    override val errorBorderColor: Token<Color> = Token { Mobius.colors.error }
 }

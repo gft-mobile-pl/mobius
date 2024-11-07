@@ -48,13 +48,13 @@ fun TimeInputStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultTimeInputStyle : TimeInputStyle {
-    override val periodSelectorBorderColor = Token { Mobius.colors.outline }
-    override val periodSelectorSelectedContainerColor = Token { Mobius.colors.tertiaryContainer }
-    override val periodSelectorUnselectedContainerColor = Token { Color.Transparent }
-    override val periodSelectorSelectedContentColor = Token { Mobius.colors.onTertiaryContainer }
-    override val periodSelectorUnselectedContentColor = Token { Mobius.colors.onSurfaceVariant }
-    override val timeSelectorSelectedContainerColor = Token { Mobius.colors.primaryContainer }
-    override val timeSelectorUnselectedContainerColor = Token { Mobius.colors.surfaceContainerHighest }
-    override val timeSelectorSelectedContentColor = Token { Mobius.colors.onPrimaryContainer }
-    override val timeSelectorUnselectedContentColor = Token { Mobius.colors.onSurface }
+    override val periodSelectorBorderColor: Token<Color> = Token { Mobius.colors.outline }
+    override val periodSelectorSelectedContainerColor: Token<Color> = Token { Mobius.colors.tertiaryContainer }
+    override val periodSelectorUnselectedContainerColor: Token<Color> = Token { Color.Transparent }
+    override val periodSelectorSelectedContentColor: Token<Color> = Token { Mobius.colors.onTertiaryContainer }
+    override val periodSelectorUnselectedContentColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val timeSelectorSelectedContainerColor: Token<Color> = Token { Mobius.colors.primaryContainer }
+    override val timeSelectorUnselectedContainerColor: Token<Color> = Token { Mobius.colors.surfaceContainerHighest }
+    override val timeSelectorSelectedContentColor: Token<Color> = Token { Mobius.colors.onPrimaryContainer }
+    override val timeSelectorUnselectedContentColor: Token<Color> = Token { Mobius.colors.onSurface }
 }

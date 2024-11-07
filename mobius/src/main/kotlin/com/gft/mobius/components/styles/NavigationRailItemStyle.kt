@@ -59,14 +59,14 @@ fun NavigationRailItemStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultNavigationRailItemStyle : NavigationRailItemStyle {
-    override val labelTextStyle = Token { Mobius.typography.labelMedium }
-    override val labelVisibility = Token(Always)
-    override val iconSize = Token { IconSize.Medium }
-    override val indicatorColor = Token { Mobius.colors.secondaryContainer }
-    override val labelColor = Token { Mobius.colors.onSurfaceVariant }
-    override val iconColor = Token { Mobius.colors.onSurfaceVariant }
-    override val selectedLabelColor = Token { Mobius.colors.onSurface }
-    override val selectedIconColor = Token { Mobius.colors.onSecondaryContainer }
-    override val disabledLabelColor = Token { Mobius.colors.onSurfaceVariant.copy(alpha = 0.38f) }
-    override val disabledIconColor = Token { Mobius.colors.onSurfaceVariant.copy(alpha = 0.38f) }
+    override val labelTextStyle: Token<TextStyle> = Token { Mobius.typography.labelMedium }
+    override val labelVisibility: Token<LabelVisibility> = Token(Always)
+    override val iconSize: Token<IconSize> = Token { IconSize.Medium }
+    override val indicatorColor: Token<Color> = Token { Mobius.colors.secondaryContainer }
+    override val labelColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val iconColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val selectedLabelColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val selectedIconColor: Token<Color> = Token { Mobius.colors.onSecondaryContainer }
+    override val disabledLabelColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant.copy(alpha = 0.38f) }
+    override val disabledIconColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant.copy(alpha = 0.38f) }
 }

@@ -35,8 +35,8 @@ fun DatePickerHeadlineStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultDatePickerHeadlineStyle : DatePickerHeadlineStyle {
-    override val textStyle = TokenReference { Mobius.styles.datePickerStyle.headlineTextStyle }
-    override val padding = Token(
+    override val textStyle: Token<TextStyle> = TokenReference { Mobius.styles.datePickerStyle.headlineTextStyle }
+    override val padding: Token<PaddingValues> = Token(
         PaddingValues(
             start = MobiusReferenceDimensions.Dimension24,
             end = MobiusReferenceDimensions.Dimension12,
@@ -47,8 +47,8 @@ open class DefaultDatePickerHeadlineStyle : DatePickerHeadlineStyle {
 }
 
 open class DefaultDateRangePickerHeadlineStyle : DatePickerHeadlineStyle {
-    override val textStyle = TokenReference { Mobius.styles.dateRangePickerStyle.headlineTextStyle }
-    override val padding = Token(
+    override val textStyle: Token<TextStyle> = TokenReference { Mobius.styles.dateRangePickerStyle.headlineTextStyle }
+    override val padding: Token<PaddingValues> = Token(
         PaddingValues(
             start = MobiusReferenceDimensions.Dimension64,
             end = MobiusReferenceDimensions.Dimension12,

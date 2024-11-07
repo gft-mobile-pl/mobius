@@ -38,10 +38,10 @@ fun DrawerStyle.resolve() = produceStyleValues { style ->
 
 open class ModalDrawerStyle : DrawerStyle {
     override val placement: Token<Placement> = Token { Modal(Mobius.colors.scrim.copy(alpha = 0.32f)) }
-    override val padding = Token(PaddingValues(end = MobiusReferenceDimensions.Dimension48))
+    override val padding: Token<PaddingValues> = Token(PaddingValues(end = MobiusReferenceDimensions.Dimension48))
 }
 
 open class SlidingDrawerStyle : DrawerStyle {
     override val placement: Token<Placement> = Token(Slide)
-    override val padding = Token(PaddingValues(MobiusReferenceDimensions.Dimension0))
+    override val padding: Token<PaddingValues> = Token(PaddingValues(MobiusReferenceDimensions.Dimension0))
 }

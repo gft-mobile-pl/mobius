@@ -52,25 +52,25 @@ fun TopAppBarStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultTopAppBarStyle : TopAppBarStyle {
-    override val height = Token(MobiusReferenceDimensions.Dimension64)
-    override val backgroundColor = Token { Mobius.colors.surface }
-    override val scrolledBackgroundColor = Token { Mobius.colors.surfaceContainer }
-    override val navigationIconSize = Token { IconSize.Medium }
-    override val navigationIconContentColor = Token { Mobius.colors.onSurface }
-    override val actionIconsSize = Token { IconSize.Medium }
-    override val actionIconsContentColor = Token { Mobius.colors.onSurface }
-    override val titleAlignment = Token(Alignment.CenterStart)
-    override val titleContentColor = Token { Mobius.colors.onSurface }
+    override val height: Token<Dp> = Token(MobiusReferenceDimensions.Dimension64)
+    override val backgroundColor: Token<Color> = Token { Mobius.colors.surface }
+    override val scrolledBackgroundColor: Token<Color> = Token { Mobius.colors.surfaceContainer }
+    override val navigationIconSize: Token<IconSize> = Token { IconSize.Medium }
+    override val navigationIconContentColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val actionIconsSize: Token<IconSize> = Token { IconSize.Medium }
+    override val actionIconsContentColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val titleAlignment: Token<Alignment> = Token(Alignment.CenterStart)
+    override val titleContentColor: Token<Color> = Token { Mobius.colors.onSurface }
 }
 
 open class CenteredTopAppBarStyle : TopAppBarStyle {
-    override val height = Token(MobiusReferenceDimensions.Dimension64)
-    override val backgroundColor = Token { Mobius.colors.surface }
-    override val scrolledBackgroundColor = Token { Mobius.colors.surfaceContainer }
-    override val navigationIconSize = Token { IconSize.Medium }
-    override val navigationIconContentColor = Token { Mobius.colors.onSurface }
-    override val actionIconsSize = Token { IconSize.Medium }
-    override val actionIconsContentColor = Token { Mobius.colors.onSurface }
-    override val titleAlignment = Token(Alignment.Center)
-    override val titleContentColor = Token { Mobius.colors.onSurface }
+    override val height: Token<Dp> = Token(MobiusReferenceDimensions.Dimension64)
+    override val backgroundColor: Token<Color> = Token { Mobius.colors.surface }
+    override val scrolledBackgroundColor: Token<Color> = Token { Mobius.colors.surfaceContainer }
+    override val navigationIconSize: Token<IconSize> = Token { IconSize.Medium }
+    override val navigationIconContentColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val actionIconsSize: Token<IconSize> = Token { IconSize.Medium }
+    override val actionIconsContentColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val titleAlignment: Token<Alignment> = Token(Alignment.Center)
+    override val titleContentColor: Token<Color> = Token { Mobius.colors.onSurface }
 }

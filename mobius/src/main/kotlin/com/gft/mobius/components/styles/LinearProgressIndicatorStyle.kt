@@ -43,10 +43,10 @@ fun LinearProgressIndicatorStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultLinearProgressIndicatorStyle : LinearProgressIndicatorStyle {
-    override val width = Token(240.dp)
-    override val height = Token(MobiusReferenceDimensions.Dimension4)
-    override val color = Token { Mobius.colors.primary }
-    override val trackColor = Token { Mobius.colors.primaryContainer }
-    override val strokeCap = Token(StrokeCap.Round)
-    override val gapSize = Token(MobiusReferenceDimensions.Dimension4)
+    override val width: Token<Dp> = Token(240.dp)
+    override val height: Token<Dp> = Token(MobiusReferenceDimensions.Dimension4)
+    override val color: Token<Color> = Token { Mobius.colors.primary }
+    override val trackColor: Token<Color> = Token { Mobius.colors.primaryContainer }
+    override val strokeCap: Token<StrokeCap> = Token(StrokeCap.Round)
+    override val gapSize: Token<Dp> = Token(MobiusReferenceDimensions.Dimension4)
 }

@@ -29,6 +29,6 @@ fun LabelStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultLabelStyle : LabelStyle {
-    override val textStyle = Token { Mobius.typography.bodyMedium }
-    override val spacing = Token(MobiusReferenceDimensions.Dimension0)
+    override val textStyle: Token<TextStyle> = Token { Mobius.typography.bodyMedium }
+    override val spacing: Token<Dp> = Token(MobiusReferenceDimensions.Dimension0)
 }

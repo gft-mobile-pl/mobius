@@ -43,8 +43,8 @@ fun DropdownMenuStyle.resolve() = produceStyleValues { style ->
 
 open class DefaultDropdownMenuStyle : DropdownMenuStyle {
     override val shape: Token<Shape> = Token(RoundedCornerShape(MobiusReferenceDimensions.Dimension4))
-    override val backgroundColor = Token { Mobius.colors.surfaceContainer }
-    override val tonalElevation = Token(MobiusReferenceElevations.Level0)
-    override val shadowElevation = Token(MobiusReferenceElevations.Level2)
+    override val backgroundColor: Token<Color> = Token { Mobius.colors.surfaceContainer }
+    override val tonalElevation: Token<Dp> = Token(MobiusReferenceElevations.Level0)
+    override val shadowElevation: Token<Dp> = Token(MobiusReferenceElevations.Level2)
     override val border: Token<BorderStroke?> = Token(null)
 }

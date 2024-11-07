@@ -64,15 +64,15 @@ fun VerticalNavigationItemStyle.resolve() = produceStyleValues { style ->
 
 open class DefaultVerticalNavigationItemStyle : VerticalNavigationItemStyle {
     override val shape: Token<Shape> = Token(RoundedCornerShape(50))
-    override val backgroundColor = Token(Color.Transparent)
-    override val selectedBackgroundColor = Token { Mobius.colors.secondaryContainer }
-    override val iconColor = Token { Mobius.colors.onSurfaceVariant }
-    override val selectedIconColor = Token { Mobius.colors.onSecondaryContainer }
-    override val labelColor = Token { Mobius.colors.onSurfaceVariant }
-    override val selectedLabelColor = Token { Mobius.colors.onSecondaryContainer }
-    override val labelTextStyle = Token { Mobius.typography.bodyLarge }
-    override val badgeColor = Token { Mobius.colors.onSurfaceVariant }
-    override val selectedBadgeColor = Token { Mobius.colors.onSecondaryContainer }
-    override val badgeTextStyle = Token { Mobius.typography.bodyLarge }
-    override val padding = Token(PaddingValues(horizontal = MobiusReferenceDimensions.Dimension12))
+    override val backgroundColor: Token<Color> = Token(Color.Transparent)
+    override val selectedBackgroundColor: Token<Color> = Token { Mobius.colors.secondaryContainer }
+    override val iconColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val selectedIconColor: Token<Color> = Token { Mobius.colors.onSecondaryContainer }
+    override val labelColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val selectedLabelColor: Token<Color> = Token { Mobius.colors.onSecondaryContainer }
+    override val labelTextStyle: Token<TextStyle> = Token { Mobius.typography.bodyLarge }
+    override val badgeColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
+    override val selectedBadgeColor: Token<Color> = Token { Mobius.colors.onSecondaryContainer }
+    override val badgeTextStyle: Token<TextStyle> = Token { Mobius.typography.bodyLarge }
+    override val padding: Token<PaddingValues> = Token(PaddingValues(horizontal = MobiusReferenceDimensions.Dimension12))
 }

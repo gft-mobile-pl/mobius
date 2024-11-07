@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.unit.Dp
 import com.gft.designsystem.Token
 import com.gft.designsystem.TokenReference
 import com.gft.designsystem.produceStyleValues
@@ -44,21 +45,21 @@ fun VerticalNavigationStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultVerticalNavigationStyle : VerticalNavigationStyle {
-    override val padding = Token(PaddingValues(MobiusReferenceDimensions.Dimension0))
+    override val padding: Token<PaddingValues> = Token(PaddingValues(MobiusReferenceDimensions.Dimension0))
     override val background: Token<Brush?> = Token { SolidColor(Mobius.colors.surfaceContainerLow) }
-    override val contentColor = Token { Mobius.colors.onSurface }
-    override val contentAlignment = Token(Alignment.TopStart)
-    override val smallVerticalElementsSpacing =
+    override val contentColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val contentAlignment: Token<Alignment> = Token(Alignment.TopStart)
+    override val smallVerticalElementsSpacing: Token<Dp> =
         TokenReference { Mobius.styles.scrollableContentStyle.smallVerticalElementsSpacing }
-    override val mediumVerticalElementsSpacing =
+    override val mediumVerticalElementsSpacing: Token<Dp> =
         TokenReference { Mobius.styles.scrollableContentStyle.mediumVerticalElementsSpacing }
-    override val largeVerticalElementsSpacing =
+    override val largeVerticalElementsSpacing: Token<Dp> =
         TokenReference { Mobius.styles.scrollableContentStyle.largeVerticalElementsSpacing }
-    override val smallHorizontalElementsSpacing =
+    override val smallHorizontalElementsSpacing: Token<Dp> =
         TokenReference { Mobius.styles.scrollableContentStyle.smallHorizontalElementsSpacing }
-    override val mediumHorizontalElementsSpacing =
+    override val mediumHorizontalElementsSpacing: Token<Dp> =
         TokenReference { Mobius.styles.scrollableContentStyle.mediumHorizontalElementsSpacing }
-    override val largeHorizontalElementsSpacing =
+    override val largeHorizontalElementsSpacing: Token<Dp> =
         TokenReference { Mobius.styles.scrollableContentStyle.largeHorizontalElementsSpacing }
     override val shape: Token<Shape> = Token(
         RoundedCornerShape(

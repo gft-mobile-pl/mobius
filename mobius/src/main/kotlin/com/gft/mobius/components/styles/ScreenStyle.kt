@@ -48,6 +48,6 @@ fun ScreenStyle.resolve() = produceStyleValues { style ->
 open class DefaultScreenStyle : ScreenStyle {
     override val background: Token<Brush?> = Token { SolidColor(Mobius.colors.background) }
     override val contentColor: Token<Color> = Token { Mobius.colors.onBackground }
-    override val statusBarOverlappingPolicy = Token(ALLOW_DISPLAYING_BEHIND_SYSTEM_BAR)
-    override val navigationBarOverlappingPolicy = Token(ALLOW_DISPLAYING_BEHIND_SYSTEM_BAR)
+    override val statusBarOverlappingPolicy: Token<SystemBarOverlappingPolicy> = Token(ALLOW_DISPLAYING_BEHIND_SYSTEM_BAR)
+    override val navigationBarOverlappingPolicy: Token<SystemBarOverlappingPolicy> = Token(ALLOW_DISPLAYING_BEHIND_SYSTEM_BAR)
 }

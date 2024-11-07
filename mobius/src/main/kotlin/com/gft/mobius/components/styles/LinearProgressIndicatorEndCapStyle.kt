@@ -32,7 +32,7 @@ fun LinearProgressIndicatorEndCapStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultLinearProgressIndicatorEndCapStyle : LinearProgressIndicatorEndCapStyle {
-    override val color = Token { Mobius.colors.primary }
-    override val strokeCap = Token(StrokeCap.Round)
-    override val sizeFraction = Token(SizeFraction(1f))
+    override val color: Token<Color> = Token { Mobius.colors.primary }
+    override val strokeCap: Token<StrokeCap> = Token(StrokeCap.Round)
+    override val sizeFraction: Token<SizeFraction> = Token(SizeFraction(1f))
 }

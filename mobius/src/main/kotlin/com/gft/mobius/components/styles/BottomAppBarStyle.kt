@@ -37,7 +37,7 @@ fun BottomAppBarStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultBottomAppBarStyle : BottomAppBarStyle {
-    override val padding = Token {
+    override val padding: Token<PaddingValues> = Token {
         PaddingValues(
             start = MobiusReferenceDimensions.Dimension8,
             top = MobiusReferenceDimensions.Dimension12,
@@ -45,7 +45,7 @@ open class DefaultBottomAppBarStyle : BottomAppBarStyle {
             bottom = MobiusReferenceDimensions.Dimension12
         )
     }
-    override val backgroundColor = Token { Mobius.colors.surfaceContainer }
-    override val contentColor = Token { Mobius.colors.onSurface }
-    override val tonalElevation = Token { MobiusReferenceElevations.Level2 }
+    override val backgroundColor: Token<Color> = Token { Mobius.colors.surfaceContainer }
+    override val contentColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val tonalElevation: Token<Dp> = Token { MobiusReferenceElevations.Level2 }
 }

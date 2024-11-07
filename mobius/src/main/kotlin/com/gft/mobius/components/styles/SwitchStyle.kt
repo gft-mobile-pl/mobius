@@ -90,26 +90,26 @@ fun SwitchStyle.resolve() = produceStyleValues { style ->
 }
 
 open class DefaultSwitchStyle : SwitchStyle {
-    override val checkedThumbColor = Token { Mobius.colors.onPrimary }
-    override val checkedPressedThumbColor = Token { Mobius.colors.primaryContainer }
-    override val checkedTrackColor = Token { Mobius.colors.primary }
-    override val checkedBorderColor = Token(Color.Transparent)
-    override val checkedThumbIconColor = Token { Mobius.colors.onPrimaryContainer }
+    override val checkedThumbColor: Token<Color> = Token { Mobius.colors.onPrimary }
+    override val checkedPressedThumbColor: Token<Color> = Token { Mobius.colors.primaryContainer }
+    override val checkedTrackColor: Token<Color> = Token { Mobius.colors.primary }
+    override val checkedBorderColor: Token<Color> = Token(Color.Transparent)
+    override val checkedThumbIconColor: Token<Color> = Token { Mobius.colors.onPrimaryContainer }
     override val checkedRippleColor: Token<Color> = Token { Mobius.colors.primary }
-    override val uncheckedThumbColor = Token { Mobius.colors.outline }
-    override val uncheckedTrackColor = Token { Mobius.colors.surfaceContainerHighest }
-    override val uncheckedBorderColor = Token { Mobius.colors.outline }
-    override val uncheckedThumbIconColor = Token { Mobius.colors.surfaceContainerHighest }
-    override val uncheckedRippleColor = Token { Mobius.colors.onSurface }
-    override val disabledCheckedThumbColor = Token { Mobius.colors.surface }
-    override val disabledCheckedTrackColor = Token { Mobius.colors.onSurface.copy(alpha = 0.12f) }
-    override val disabledCheckedBorderColor = Token(Color.Transparent)
-    override val disabledCheckedIconColor = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val disabledUncheckedThumbColor = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val disabledUncheckedTrackColor = Token { Mobius.colors.surfaceVariant.copy(alpha = 0.12f) }
-    override val disabledUncheckedBorderColor = Token { Mobius.colors.onSurface.copy(alpha = 0.12f) }
-    override val disabledUncheckedIconColor = Token { Mobius.colors.surfaceVariant.copy(alpha = 0.38f) }
-    override val thumbIconSize = Token { IconSize.Small }
+    override val uncheckedThumbColor: Token<Color> = Token { Mobius.colors.outline }
+    override val uncheckedTrackColor: Token<Color> = Token { Mobius.colors.surfaceContainerHighest }
+    override val uncheckedBorderColor: Token<Color> = Token { Mobius.colors.outline }
+    override val uncheckedThumbIconColor: Token<Color> = Token { Mobius.colors.surfaceContainerHighest }
+    override val uncheckedRippleColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val disabledCheckedThumbColor: Token<Color> = Token { Mobius.colors.surface }
+    override val disabledCheckedTrackColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.12f) }
+    override val disabledCheckedBorderColor: Token<Color> = Token(Color.Transparent)
+    override val disabledCheckedIconColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
+    override val disabledUncheckedThumbColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
+    override val disabledUncheckedTrackColor: Token<Color> = Token { Mobius.colors.surfaceVariant.copy(alpha = 0.12f) }
+    override val disabledUncheckedBorderColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.12f) }
+    override val disabledUncheckedIconColor: Token<Color> = Token { Mobius.colors.surfaceVariant.copy(alpha = 0.38f) }
+    override val thumbIconSize: Token<IconSize> = Token { IconSize.Small }
     override val thumbIconOn: Token<DrawableRes?> = Token(DrawableRes(R.drawable.ic_switch_thumb_on))
     override val thumbIconOff: Token<DrawableRes?> = Token(DrawableRes(R.drawable.ic_switch_thumb_off))
 }
