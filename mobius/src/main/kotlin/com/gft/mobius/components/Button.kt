@@ -1,7 +1,9 @@
 package com.gft.mobius.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.height
@@ -12,11 +14,12 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.isSpecified
+import com.gft.compose.common.modifyIf
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.styles.ButtonStyle
 import com.gft.mobius.components.styles.resolve
@@ -32,41 +35,47 @@ fun Button(
 ) {
     val styleValues = style.resolve()
     val contentColor = if (enabled) styleValues.contentColor else styleValues.disabledContentColor
-    androidx.compose.material3.Button(
-        onClick = onClick,
-        modifier = modifier.then(Modifier.height(styleValues.height)),
-        enabled = enabled,
-        shape = styleValues.shape,
-        colors = ButtonColors(
-            containerColor = styleValues.containerColor,
-            contentColor = styleValues.rippleColor,
-            disabledContentColor = styleValues.disabledContentColor,
-            disabledContainerColor = styleValues.disabledContainerColor
-        ),
-        elevation = createButtonElevationConfig(
-            defaultElevation = styleValues.defaultElevation,
-            pressedElevation = styleValues.pressedElevation,
-            focusedElevation = styleValues.focusedElevation,
-            hoveredElevation = styleValues.hoveredElevation,
-            disabledElevation = styleValues.disabledElevation
-        ),
-        border = styleValues.border,
-        contentPadding = styleValues.contentPadding,
-        interactionSource = interactionSource,
-    ) {
-        CompositionLocalProvider(
-            LocalContentColor provides contentColor,
-            LocalTextStyle provides styleValues.textStyle,
-            LocalIconSize provides styleValues.iconSize
+    val backgroundBrush = if (enabled) styleValues.background else styleValues.disabledBackground
+    Box(modifier = Modifier
+        .modifyIf(backgroundBrush != null) {
+            background(backgroundBrush!!, styleValues.shape)
+        }) {
+        androidx.compose.material3.Button(
+            onClick = onClick,
+            modifier = modifier.then(Modifier.height(styleValues.height)),
+            enabled = enabled,
+            shape = styleValues.shape,
+            colors = ButtonColors(
+                containerColor = Color.Transparent,
+                contentColor = styleValues.rippleColor,
+                disabledContentColor = styleValues.disabledContentColor,
+                disabledContainerColor = Color.Transparent
+            ),
+            elevation = createButtonElevationConfig(
+                defaultElevation = styleValues.defaultElevation,
+                pressedElevation = styleValues.pressedElevation,
+                focusedElevation = styleValues.focusedElevation,
+                hoveredElevation = styleValues.hoveredElevation,
+                disabledElevation = styleValues.disabledElevation
+            ),
+            border = styleValues.border,
+            contentPadding = styleValues.contentPadding,
+            interactionSource = interactionSource,
         ) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(
-                    space = styleValues.contentElementsSpacing,
-                    alignment = Alignment.CenterHorizontally
-                ),
-                verticalAlignment = Alignment.CenterVertically,
-                content = content
-            )
+            CompositionLocalProvider(
+                LocalContentColor provides contentColor,
+                LocalTextStyle provides styleValues.textStyle,
+                LocalIconSize provides styleValues.iconSize
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(
+                        space = styleValues.contentElementsSpacing,
+                        alignment = Alignment.CenterHorizontally
+                    ),
+                    verticalAlignment = Alignment.CenterVertically,
+                    content = content
+                )
+            }
         }
     }
 }
@@ -138,7 +147,6 @@ fun TextButton(
     style = style,
     content = content
 )
-
 
 @Composable
 private fun createButtonElevationConfig(

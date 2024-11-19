@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.Button
@@ -16,6 +17,7 @@ import com.gft.mobius.components.Icon
 import com.gft.mobius.components.OutlinedButton
 import com.gft.mobius.components.Text
 import com.gft.mobius.components.TextButton
+import com.gft.mobius.components.styles.DefaultButtonStyle
 
 @Composable
 fun MobiusButtonsPresentation() {
@@ -99,6 +101,21 @@ fun MobiusButtonsPresentation() {
             ) {
                 Text(text = "Text button")
             }
+
+            Button(
+                onClick = { },
+                style = GradientButtonStyle
+            ) {
+                Icon(
+                    drawableResId = android.R.drawable.ic_delete,
+                    contentDescription = ""
+                )
+                Text(text = "Gradient button")
+            }
         }
     }
+}
+
+private object GradientButtonStyle : DefaultButtonStyle() {
+    override val background: Token<Brush?> = Token { Brush.horizontalGradient(listOf(Mobius.colors.primary, Mobius.colors.tertiary)) }
 }

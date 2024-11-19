@@ -4,8 +4,10 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import com.gft.designsystem.Style
@@ -21,9 +23,9 @@ import com.gft.mobius.references.MobiusReferenceElevations
 interface ButtonStyleValues : StyleValues {
     val shape: Shape
     val contentColor: Color
-    val containerColor: Color
+    val background: Brush?
     val disabledContentColor: Color
-    val disabledContainerColor: Color
+    val disabledBackground: Brush?
     val defaultElevation: Dp
     val pressedElevation: Dp
     val focusedElevation: Dp
@@ -41,9 +43,9 @@ interface ButtonStyleValues : StyleValues {
 interface ButtonStyle : Style {
     val shape: Token<Shape>
     val contentColor: Token<Color>
-    val containerColor: Token<Color>
+    val background: Token<Brush?>
     val disabledContentColor: Token<Color>
-    val disabledContainerColor: Token<Color>
+    val disabledBackground: Token<Brush?>
     val defaultElevation: Token<Dp>
     val pressedElevation: Token<Dp>
     val focusedElevation: Token<Dp>
@@ -63,9 +65,9 @@ fun ButtonStyle.resolve() = produceStyleValues { style ->
     object : ButtonStyleValues {
         override val shape = style.shape.resolve()
         override val contentColor = style.contentColor.resolve()
-        override val containerColor = style.containerColor.resolve()
+        override val background = style.background.resolve()
         override val disabledContentColor = style.disabledContentColor.resolve()
-        override val disabledContainerColor = style.disabledContainerColor.resolve()
+        override val disabledBackground = style.disabledBackground.resolve()
         override val defaultElevation = style.defaultElevation.resolve()
         override val pressedElevation = style.pressedElevation.resolve()
         override val focusedElevation = style.focusedElevation.resolve()
@@ -84,9 +86,9 @@ fun ButtonStyle.resolve() = produceStyleValues { style ->
 open class DefaultButtonStyle : ButtonStyle {
     override val shape: Token<Shape> = Token(RoundedCornerShape(50))
     override val contentColor: Token<Color> = Token { Mobius.colors.onPrimary }
-    override val containerColor: Token<Color> = Token { Mobius.colors.primary }
+    override val background: Token<Brush?> = Token { SolidColor(Mobius.colors.primary) }
     override val disabledContentColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val disabledContainerColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.12f) }
+    override val disabledBackground: Token<Brush?> = Token { SolidColor(Mobius.colors.onSurface.copy(alpha = 0.12f)) }
     override val rippleColor: Token<Color> = Token { Mobius.colors.onPrimary }
     override val defaultElevation: Token<Dp> = Token(MobiusReferenceElevations.Level0)
     override val pressedElevation: Token<Dp> = Token(MobiusReferenceElevations.Level0)
@@ -109,9 +111,9 @@ open class DefaultButtonStyle : ButtonStyle {
 open class OutlinedButtonStyle : ButtonStyle {
     override val shape: Token<Shape> = TokenReference { Mobius.styles.buttonStyle.shape }
     override val contentColor: Token<Color> = Token { Mobius.colors.primary }
-    override val containerColor: Token<Color> = Token(Color.Transparent)
+    override val background: Token<Brush?> = Token(null)
     override val disabledContentColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val disabledContainerColor: Token<Color> = Token(Color.Transparent)
+    override val disabledBackground: Token<Brush?> = Token(null)
     override val rippleColor: Token<Color> = Token { Mobius.colors.primary }
     override val defaultElevation: Token<Dp> = Token(Dp.Unspecified)
     override val pressedElevation: Token<Dp> = Token(Dp.Unspecified)
@@ -134,9 +136,9 @@ open class OutlinedButtonStyle : ButtonStyle {
 open class ElevatedButtonStyle : ButtonStyle {
     override val shape: Token<Shape> = TokenReference { Mobius.styles.buttonStyle.shape }
     override val contentColor: Token<Color> = Token { Mobius.colors.primary }
-    override val containerColor: Token<Color> = Token { Mobius.colors.surface }
+    override val background: Token<Brush?> = Token { SolidColor(Mobius.colors.surface) }
     override val disabledContentColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val disabledContainerColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.12f) }
+    override val disabledBackground: Token<Brush?> = Token { SolidColor(Mobius.colors.onSurface.copy(alpha = 0.12f)) }
     override val rippleColor: Token<Color> = Token { Mobius.colors.primary }
     override val defaultElevation: Token<Dp> = Token(MobiusReferenceElevations.Level2)
     override val pressedElevation: Token<Dp> = Token(MobiusReferenceElevations.Level2)
@@ -154,9 +156,9 @@ open class ElevatedButtonStyle : ButtonStyle {
 open class FilledTonalButtonStyle : ButtonStyle {
     override val shape: Token<Shape> = TokenReference { Mobius.styles.buttonStyle.shape }
     override val contentColor: Token<Color> = Token { Mobius.colors.onSecondaryContainer }
-    override val containerColor: Token<Color> = Token { Mobius.colors.secondaryContainer }
+    override val background: Token<Brush?> = Token { SolidColor(Mobius.colors.secondaryContainer) }
     override val disabledContentColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val disabledContainerColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.12f) }
+    override val disabledBackground: Token<Brush?> = Token { SolidColor(Mobius.colors.onSurface.copy(alpha = 0.12f)) }
     override val rippleColor: Token<Color> = Token { Mobius.colors.primary }
     override val defaultElevation: Token<Dp> = Token(Dp.Unspecified)
     override val pressedElevation: Token<Dp> = Token(Dp.Unspecified)
@@ -174,9 +176,9 @@ open class FilledTonalButtonStyle : ButtonStyle {
 open class TextButtonStyle : ButtonStyle {
     override val shape: Token<Shape> = TokenReference { Mobius.styles.buttonStyle.shape }
     override val contentColor: Token<Color> = Token { Mobius.colors.primary }
-    override val containerColor: Token<Color> = Token(Color.Transparent)
+    override val background: Token<Brush?> = Token(null)
     override val disabledContentColor: Token<Color> = Token { Mobius.colors.onSurface.copy(alpha = 0.38f) }
-    override val disabledContainerColor: Token<Color> = Token(Color.Transparent)
+    override val disabledBackground: Token<Brush?> = Token(null)
     override val rippleColor: Token<Color> = Token { Mobius.colors.primary }
     override val defaultElevation: Token<Dp> = TokenReference { Mobius.styles.buttonStyle.defaultElevation }
     override val pressedElevation: Token<Dp> = TokenReference { Mobius.styles.buttonStyle.pressedElevation }
