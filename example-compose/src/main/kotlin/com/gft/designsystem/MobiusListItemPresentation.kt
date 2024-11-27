@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.Header
 import com.gft.mobius.components.Icon
@@ -73,6 +74,15 @@ fun MobiusListItemPresentation() {
                     leadingContent = { Icon(R.drawable.ic_settings, contentDescription = "Localized description") },
                     trailingContent = { Icon(R.drawable.ic_chevron, contentDescription = "Localized description") },
                 )
+                ListItem(
+                    style = TrailingBottomListItemStyle,
+                    modifier = Modifier.clickable { },
+                    headlineContent = { Text("List item headline") },
+                    supportingContent = { Text("List item supporting text") },
+                    overlineContent = { Text(text = "Overline") },
+                    leadingContent = { Icon(R.drawable.ic_settings, contentDescription = "Localized description") },
+                    trailingContent = { Icon(R.drawable.ic_chevron, contentDescription = "Localized description") },
+                )
             }
         }
     }
@@ -85,6 +95,17 @@ object TrailingCenteredListItemStyle : DefaultListItemStyle() {
             headlineWithOverline = SideContentVerticalAlignment.Center,
             headlineWithSupportingText = SideContentVerticalAlignment.Center,
             allElements = SideContentVerticalAlignment.Center
+        )
+    }
+}
+
+object TrailingBottomListItemStyle : DefaultListItemStyle() {
+    override val trailingContentAlignment = Token {
+        SideContentAlignment(
+            headlineOnly = SideContentVerticalAlignment.Bottom(0.dp),
+            headlineWithOverline = SideContentVerticalAlignment.Bottom(0.dp),
+            headlineWithSupportingText = SideContentVerticalAlignment.Bottom(0.dp),
+            allElements = SideContentVerticalAlignment.Bottom(10.dp)
         )
     }
 }

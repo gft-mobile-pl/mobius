@@ -155,9 +155,11 @@ private fun SideContentAlignment.resolveAlignment(itemType: ListItemLayout) = wh
 private fun SideContentVerticalAlignment.resolveOffset() = when (this) {
     SideContentVerticalAlignment.Center -> 0.dp
     is SideContentVerticalAlignment.Top -> offset
+    is SideContentVerticalAlignment.Bottom -> -offset
 }
 
 private fun SideContentVerticalAlignment.resolveVerticalAlignment() = when (this) {
     SideContentVerticalAlignment.Center -> Alignment.CenterVertically
     is SideContentVerticalAlignment.Top -> Alignment.Top
+    is SideContentVerticalAlignment.Bottom -> Alignment.Bottom
 }

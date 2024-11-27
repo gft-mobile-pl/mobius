@@ -68,6 +68,7 @@ interface ListItemStyle : Style {
     sealed interface SideContentVerticalAlignment {
         data class Top(val offset: Dp) : SideContentVerticalAlignment
         data object Center : SideContentVerticalAlignment
+        data class Bottom(val offset: Dp) : SideContentVerticalAlignment
     }
 
     data class SideContentAlignment(
