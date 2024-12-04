@@ -11,45 +11,42 @@ import com.gft.mobius.components.Icon
 import com.gft.mobius.components.NavigationBar
 import com.gft.mobius.components.NavigationBarItem
 import com.gft.mobius.components.ScaffoldScreen
-import com.gft.mobius.components.Screen
 import com.gft.mobius.components.Text
 
 @Composable
 fun MobiusScaffoldPresentation() {
     Mobius {
-        Screen {
-            var selectedNavigationItem by remember { mutableIntStateOf(0) }
-            ScaffoldScreen(
-                floatingActionButton = {
-                    FloatingActionButton(onClick = { }) {
-                        Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null)
-                    }
-                },
-                bottomBar = {
-                    NavigationBar {
-                        NavigationBarItem(
-                            selected = selectedNavigationItem == 0,
-                            onClick = { selectedNavigationItem = 0 },
-                            icon = { Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null) },
-                            label = { Text("Notifications") }
-                        )
-                        NavigationBarItem(
-                            selected = selectedNavigationItem == 1,
-                            onClick = { selectedNavigationItem = 1 },
-                            icon = { Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null) },
-                            label = { Text("Notifications") }
-                        )
-                        NavigationBarItem(
-                            selected = selectedNavigationItem == 2,
-                            onClick = { selectedNavigationItem = 2 },
-                            icon = { Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null) },
-                            label = { Text("Notifications") }
-                        )
-                    }
+        var selectedNavigationItem by remember { mutableIntStateOf(0) }
+        ScaffoldScreen(
+            floatingActionButton = {
+                FloatingActionButton(onClick = { }) {
+                    Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null)
                 }
-            ) {
-
+            },
+            bottomBar = {
+                NavigationBar {
+                    NavigationBarItem(
+                        selected = selectedNavigationItem == 0,
+                        onClick = { selectedNavigationItem = 0 },
+                        icon = { Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null) },
+                        label = { Text("Notifications") }
+                    )
+                    NavigationBarItem(
+                        selected = selectedNavigationItem == 1,
+                        onClick = { selectedNavigationItem = 1 },
+                        icon = { Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null) },
+                        label = { Text("Notifications") }
+                    )
+                    NavigationBarItem(
+                        selected = selectedNavigationItem == 2,
+                        onClick = { selectedNavigationItem = 2 },
+                        icon = { Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null) },
+                        label = { Text("Notifications") }
+                    )
+                }
             }
+        ) {
+
         }
     }
 }

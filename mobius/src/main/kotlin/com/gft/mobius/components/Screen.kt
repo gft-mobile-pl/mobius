@@ -17,6 +17,7 @@ import com.gft.compose.interaction.clearFocusOnClick
 import com.gft.mobius.Mobius
 import com.gft.mobius.colors.LocalContentColor
 import com.gft.mobius.components.styles.ScreenStyle
+import com.gft.mobius.components.styles.ScreenStyle.SystemBarOverlappingPolicy.ALLOW_SCREEN_BACKGROUND_BEHIND_SYSTEM_BAR
 import com.gft.mobius.components.styles.ScreenStyle.SystemBarOverlappingPolicy.NEVER_DISPLAY_BEHIND_SYSTEM_BAR
 import com.gft.mobius.components.styles.resolve
 
@@ -38,16 +39,23 @@ fun Screen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .modifyIf(styleValues.background != null) {
-                        background(styleValues.background!!)
-                    }
-                    .modifyIf(clearFocusOnClick) { clearFocusOnClick() }
                     .modifyIf(styleValues.statusBarOverlappingPolicy == NEVER_DISPLAY_BEHIND_SYSTEM_BAR) {
                         statusBarsPadding()
                     }
                     .modifyIf(styleValues.navigationBarOverlappingPolicy == NEVER_DISPLAY_BEHIND_SYSTEM_BAR) {
                         navigationBarsPadding()
                     }
+                    .modifyIf(styleValues.background != null) {
+                        background(styleValues.background!!)
+                    }
+                    .modifyIf(styleValues.statusBarOverlappingPolicy == ALLOW_SCREEN_BACKGROUND_BEHIND_SYSTEM_BAR) {
+                        statusBarsPadding()
+                    }
+                    .modifyIf(styleValues.navigationBarOverlappingPolicy == ALLOW_SCREEN_BACKGROUND_BEHIND_SYSTEM_BAR) {
+                        navigationBarsPadding()
+                    }
+                    .modifyIf(clearFocusOnClick) { clearFocusOnClick() }
+
                     .then(modifier),
             ) {
                 ScreenScope(this).content()
@@ -58,4 +66,4 @@ fun Screen(
 
 interface ScreenScope : ColumnScope
 
-private fun ScreenScope(columnScope: ColumnScope) = object : ScreenScope, ColumnScope by columnScope {}
+internal fun ScreenScope(columnScope: ColumnScope): ScreenScope = object : ScreenScope, ColumnScope by columnScope {}

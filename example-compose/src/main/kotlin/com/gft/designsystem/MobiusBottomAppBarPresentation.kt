@@ -28,7 +28,6 @@ import com.gft.mobius.components.Label
 import com.gft.mobius.components.RadioButton
 import com.gft.mobius.components.ScaffoldScreen
 import com.gft.mobius.components.Screen
-import com.gft.mobius.components.ScreenScope
 import com.gft.mobius.components.Text
 import com.gft.mobius.components.TopAppBar
 import com.gft.mobius.components.appBarsScope
@@ -124,30 +123,28 @@ private fun BottomAppBarSampleScreen(
         Pinned -> BottomAppBar.ScrollType.pinned()
         ShowOrHideOnScroll -> BottomAppBar.ScrollType.showOrHideOnScroll()
     }
-    Screen {
-        when (usage) {
-            WithBottomAppBarScopeComponent ->
-                AppBarsScope(
-                    topAppBarScrollConfig = TopAppBar.scrollConfig(scrollType = TopAppBar.ScrollType.showOrHideOnScroll()),
-                    bottomAppBarScrollConfig = BottomAppBar.scrollConfig(scrollType = scrollType)
-                ) {
-                    ScreenContent()
-                }
+    when (usage) {
+        WithBottomAppBarScopeComponent ->
+            AppBarsScope(
+                topAppBarScrollConfig = TopAppBar.scrollConfig(scrollType = TopAppBar.ScrollType.showOrHideOnScroll()),
+                bottomAppBarScrollConfig = BottomAppBar.scrollConfig(scrollType = scrollType)
+            ) {
+                ScreenContent()
+            }
 
-            WithBottomAppBarScopeModifier ->
-                ScreenContent(
-                    modifier = Modifier
-                        .appBarsScope(
-                            topAppBarScrollConfig = TopAppBar.scrollConfig(scrollType = TopAppBar.ScrollType.showOrHideOnScroll()),
-                            bottomAppBarScrollConfig = BottomAppBar.scrollConfig(scrollType = scrollType)
-                        )
-                )
-        }
+        WithBottomAppBarScopeModifier ->
+            ScreenContent(
+                modifier = Modifier
+                    .appBarsScope(
+                        topAppBarScrollConfig = TopAppBar.scrollConfig(scrollType = TopAppBar.ScrollType.showOrHideOnScroll()),
+                        bottomAppBarScrollConfig = BottomAppBar.scrollConfig(scrollType = scrollType)
+                    )
+            )
     }
 }
 
 @Composable
-private fun ScreenScope.ScreenContent(
+private fun ScreenContent(
     modifier: Modifier = Modifier
 ) {
     ScaffoldScreen(

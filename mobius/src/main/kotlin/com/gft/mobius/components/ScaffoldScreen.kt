@@ -1,10 +1,12 @@
 package com.gft.mobius.components
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.styles.ScaffoldScreenStyle
 import com.gft.mobius.components.styles.resolve
@@ -18,21 +20,29 @@ fun ScaffoldScreen(
     floatingActionButton: @Composable () -> Unit = {},
     contentWindowInsets: WindowInsets = WindowInsets.systemBars,
     style: ScaffoldScreenStyle = Mobius.styles.scaffoldScreenStyle,
-    content: @Composable (PaddingValues) -> Unit
+    content: @Composable ScreenScope.(PaddingValues) -> Unit
 ) {
     val styleValues = style.resolve()
-    androidx.compose.material3.Scaffold(
-        modifier = modifier,
-        topBar = topBar,
-        bottomBar = bottomBar,
-        snackbarHost = snackbarHost,
-        floatingActionButton = floatingActionButton,
-        floatingActionButtonPosition = styleValues.floatingActionButtonPosition.toMaterial3(),
-        containerColor = styleValues.background,
-        contentColor = styleValues.contentColor,
-        contentWindowInsets = contentWindowInsets,
-        content = content
-    )
+    Screen(
+        style = style
+    ) {
+        androidx.compose.material3.Scaffold(
+            modifier = modifier,
+            topBar = topBar,
+            bottomBar = bottomBar,
+            snackbarHost = snackbarHost,
+            floatingActionButton = floatingActionButton,
+            floatingActionButtonPosition = styleValues.floatingActionButtonPosition.toMaterial3(),
+            containerColor = Color.Unspecified,
+            contentColor = Color.Unspecified,
+            contentWindowInsets = contentWindowInsets,
+            content = { paddingValues ->
+                Column {
+                    ScreenScope(this).content(paddingValues)
+                }
+            }
+        )
+    }
 }
 
 enum class FabPosition {

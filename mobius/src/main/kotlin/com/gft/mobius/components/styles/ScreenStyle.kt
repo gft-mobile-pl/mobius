@@ -31,6 +31,11 @@ interface ScreenStyle : Style {
         /**
          * Note: This mode is typically used in conjunction with [androidx.activity.enableEdgeToEdge].
          */
+        ALLOW_SCREEN_BACKGROUND_BEHIND_SYSTEM_BAR,
+
+        /**
+         * Note: This mode is typically used in conjunction with [androidx.activity.enableEdgeToEdge].
+         */
         ALLOW_DISPLAYING_BEHIND_SYSTEM_BAR
     }
 }

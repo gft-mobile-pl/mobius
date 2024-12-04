@@ -29,7 +29,6 @@ import com.gft.mobius.components.Label
 import com.gft.mobius.components.RadioButton
 import com.gft.mobius.components.ScaffoldScreen
 import com.gft.mobius.components.Screen
-import com.gft.mobius.components.ScreenScope
 import com.gft.mobius.components.Text
 import com.gft.mobius.components.TopAppBar
 import com.gft.mobius.components.appBarsScope
@@ -164,29 +163,27 @@ private fun TopAppBarSampleScreen(
         ShowOrHideOnScroll -> TopAppBar.ScrollType.showOrHideOnScroll()
         ScrollWithContent -> TopAppBar.ScrollType.scrollWithContent()
     }
-    Screen {
-        when (usage) {
-            WithTopAppBarScopeComponent ->
-                AppBarsScope(
-                    topAppBarScrollConfig = TopAppBar.scrollConfig(scrollType = scrollType),
-                ) {
-                    ScreenContent(
-                        style = topAppBarStyle
-                    )
-                }
-
-            WithTopAppBarScopeModifier ->
+    when (usage) {
+        WithTopAppBarScopeComponent ->
+            AppBarsScope(
+                topAppBarScrollConfig = TopAppBar.scrollConfig(scrollType = scrollType),
+            ) {
                 ScreenContent(
-                    style = topAppBarStyle, modifier = Modifier.appBarsScope(
-                        topAppBarScrollConfig = TopAppBar.scrollConfig(scrollType = scrollType)
-                    )
+                    style = topAppBarStyle
                 )
-        }
+            }
+
+        WithTopAppBarScopeModifier ->
+            ScreenContent(
+                style = topAppBarStyle, modifier = Modifier.appBarsScope(
+                    topAppBarScrollConfig = TopAppBar.scrollConfig(scrollType = scrollType)
+                )
+            )
     }
 }
 
 @Composable
-private fun ScreenScope.ScreenContent(
+private fun ScreenContent(
     style: TopAppBarStyle,
     modifier: Modifier = Modifier
 ) {
