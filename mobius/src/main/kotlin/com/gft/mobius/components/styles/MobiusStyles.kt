@@ -5,7 +5,7 @@ import com.gft.designsystem.Styles
 import com.gft.designsystem.Token
 
 interface MobiusStyles : Styles {
-    val scaffoldStyle: ScaffoldStyle
+    val scaffoldScreenStyle: ScaffoldScreenStyle
     val topAppBarStyle: TopAppBarStyle
     val topAppBarVariantStyle: TopAppBarStyle
     val navigationBarStyle: NavigationBarStyle

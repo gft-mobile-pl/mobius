@@ -4,7 +4,7 @@ import androidx.compose.ui.text.TextStyle
 import com.gft.designsystem.Token
 
 open class DefaultMobiusStyles : MobiusStyles {
-    override val scaffoldStyle: ScaffoldStyle = DefaultScaffoldStyle()
+    override val scaffoldScreenStyle: ScaffoldScreenStyle = DefaultScaffoldScreenStyle()
     override val topAppBarVariantStyle: TopAppBarStyle = CenteredTopAppBarStyle()
     override val topAppBarStyle: TopAppBarStyle = DefaultTopAppBarStyle()
     override val navigationBarStyle: NavigationBarStyle = DefaultNavigationBarStyle()

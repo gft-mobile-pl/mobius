@@ -5,7 +5,7 @@ import com.gft.mobius.Mobius
 import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.FloatingActionButton
 import com.gft.mobius.components.Icon
-import com.gft.mobius.components.Scaffold
+import com.gft.mobius.components.ScaffoldScreen
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.Content
 import com.gft.mobius.components.Text
@@ -14,7 +14,7 @@ import com.gft.mobius.components.Text
 fun MobiusFloatingActionButtonPresentation() {
     Mobius {
         Screen {
-            Scaffold(
+            ScaffoldScreen(
                 floatingActionButton = {
                     FloatingActionButton(
                         onClick = {}

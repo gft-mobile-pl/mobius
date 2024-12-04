@@ -9,28 +9,28 @@ import com.gft.designsystem.produceStyleValues
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.FabPosition
 
-interface ScaffoldStyleValues : StyleValues {
+interface ScaffoldScreenStyleValues : StyleValues {
     val background: Color
     val contentColor: Color
     val floatingActionButtonPosition: FabPosition
 }
 
-interface ScaffoldStyle : Style {
+interface ScaffoldScreenStyle : Style {
     val background: Token<Color>
     val contentColor: Token<Color>
     val floatingActionButtonPosition: Token<FabPosition>
 }
 
 @Composable
-fun ScaffoldStyle.resolve() = produceStyleValues { style ->
-    object : ScaffoldStyleValues {
+fun ScaffoldScreenStyle.resolve() = produceStyleValues { style ->
+    object : ScaffoldScreenStyleValues {
         override val background = style.background.resolve()
         override val contentColor = style.contentColor.resolve()
         override val floatingActionButtonPosition = style.floatingActionButtonPosition.resolve()
     }
 }
 
-open class DefaultScaffoldStyle : ScaffoldStyle {
+open class DefaultScaffoldScreenStyle : ScaffoldScreenStyle {
     override val background: Token<Color> = Token { Mobius.colors.background }
     override val contentColor: Token<Color> = Token { Mobius.colors.onBackground }
     override val floatingActionButtonPosition: Token<FabPosition> = Token { FabPosition.End }

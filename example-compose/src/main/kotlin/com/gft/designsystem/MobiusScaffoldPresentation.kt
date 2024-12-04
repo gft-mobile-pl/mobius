@@ -10,7 +10,7 @@ import com.gft.mobius.components.FloatingActionButton
 import com.gft.mobius.components.Icon
 import com.gft.mobius.components.NavigationBar
 import com.gft.mobius.components.NavigationBarItem
-import com.gft.mobius.components.Scaffold
+import com.gft.mobius.components.ScaffoldScreen
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.Text
 
@@ -19,7 +19,7 @@ fun MobiusScaffoldPresentation() {
     Mobius {
         Screen {
             var selectedNavigationItem by remember { mutableIntStateOf(0) }
-            Scaffold(
+            ScaffoldScreen(
                 floatingActionButton = {
                     FloatingActionButton(onClick = { }) {
                         Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null)

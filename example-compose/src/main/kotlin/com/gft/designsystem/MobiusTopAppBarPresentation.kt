@@ -27,7 +27,7 @@ import com.gft.mobius.components.Icon
 import com.gft.mobius.components.IconButton
 import com.gft.mobius.components.Label
 import com.gft.mobius.components.RadioButton
-import com.gft.mobius.components.Scaffold
+import com.gft.mobius.components.ScaffoldScreen
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.ScreenScope
 import com.gft.mobius.components.Text
@@ -190,7 +190,7 @@ private fun ScreenScope.ScreenContent(
     style: TopAppBarStyle,
     modifier: Modifier = Modifier
 ) {
-    Scaffold(
+    ScaffoldScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(

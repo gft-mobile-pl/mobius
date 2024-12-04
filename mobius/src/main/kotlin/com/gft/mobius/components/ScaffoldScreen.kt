@@ -6,18 +6,18 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.gft.mobius.Mobius
-import com.gft.mobius.components.styles.ScaffoldStyle
+import com.gft.mobius.components.styles.ScaffoldScreenStyle
 import com.gft.mobius.components.styles.resolve
 
 @Composable
-fun Scaffold(
+fun ScaffoldScreen(
     modifier: Modifier = Modifier,
     topBar: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
     snackbarHost: @Composable () -> Unit = {},
     floatingActionButton: @Composable () -> Unit = {},
     contentWindowInsets: WindowInsets = WindowInsets.systemBars,
-    style: ScaffoldStyle = Mobius.styles.scaffoldStyle,
+    style: ScaffoldScreenStyle = Mobius.styles.scaffoldScreenStyle,
     content: @Composable (PaddingValues) -> Unit
 ) {
     val styleValues = style.resolve()
