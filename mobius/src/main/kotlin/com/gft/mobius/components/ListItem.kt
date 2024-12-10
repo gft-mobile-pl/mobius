@@ -118,7 +118,7 @@ fun ListItem(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             styledLeadingContent()
-            Column(Modifier.weight(1f)) {
+            Column(Modifier.weight(1f).padding(styleValues.contentPadding)) {
                 styledOverlineContent()
                 styledHeadlineContent()
                 styledSupportingContent()

@@ -26,6 +26,7 @@ interface ListItemStyleValues : StyleValues {
     val backgroundColor: Color
     val tonalElevation: Dp
     val shadowElevation: Dp
+    val contentPadding: PaddingValues
     val supportingTextStyle: TextStyle
     val supportingTextColor: Color
     val overlineTextStyle: TextStyle
@@ -49,6 +50,7 @@ interface ListItemStyle : Style {
     val backgroundColor: Token<Color>
     val tonalElevation: Token<Dp>
     val shadowElevation: Token<Dp>
+    val contentPadding: Token<PaddingValues>
     val supportingTextStyle: Token<TextStyle>
     val supportingTextColor: Token<Color>
     val overlineTextStyle: Token<TextStyle>
@@ -87,6 +89,7 @@ fun ListItemStyle.resolve() = produceStyleValues { style ->
         override val backgroundColor = style.backgroundColor.resolve()
         override val tonalElevation = style.tonalElevation.resolve()
         override val shadowElevation = style.shadowElevation.resolve()
+        override val contentPadding = style.contentPadding.resolve()
         override val supportingTextStyle = style.supportingTextStyle.resolve()
         override val supportingTextColor = style.supportingTextColor.resolve()
         override val overlineTextStyle = style.overlineTextStyle.resolve()
@@ -111,6 +114,7 @@ open class DefaultListItemStyle : ListItemStyle {
     override val backgroundColor: Token<Color> = Token { Mobius.colors.surface }
     override val tonalElevation: Token<Dp> = Token(MobiusReferenceElevations.Level0)
     override val shadowElevation: Token<Dp> = Token(MobiusReferenceElevations.Level0)
+    override val contentPadding: Token<PaddingValues> = Token(PaddingValues(MobiusReferenceDimensions.Dimension0))
     override val supportingTextStyle: Token<TextStyle> = Token { Mobius.typography.bodyMedium }
     override val supportingTextColor: Token<Color> = Token { Mobius.colors.onSurfaceVariant }
     override val overlineTextStyle: Token<TextStyle> = Token { Mobius.typography.labelSmall }
