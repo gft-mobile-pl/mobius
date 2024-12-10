@@ -66,9 +66,9 @@ interface ListItemStyle : Style {
     val trailingContentColor: Token<Color>
 
     sealed interface SideContentVerticalAlignment {
-        data class Top(val offset: Dp) : SideContentVerticalAlignment
+        data class Top(val topPadding: Dp) : SideContentVerticalAlignment
         data object Center : SideContentVerticalAlignment
-        data class Bottom(val offset: Dp) : SideContentVerticalAlignment
+        data class Bottom(val bottomPadding: Dp) : SideContentVerticalAlignment
     }
 
     data class SideContentAlignment(

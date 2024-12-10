@@ -2,10 +2,10 @@ package com.gft.mobius.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -46,7 +46,7 @@ fun ListItem(
                 Modifier
                     .padding(styleValues.leadingContentPadding)
                     .align(leadingContentAlignment.resolveVerticalAlignment())
-                    .offset(y = leadingContentAlignment.resolveOffset())
+                    .padding(leadingContentAlignment.resolvePaddingValues())
             ) {
                 CompositionLocalProvider(
                     LocalIconSize provides styleValues.leadingIconSize,
@@ -91,7 +91,7 @@ fun ListItem(
                 Modifier
                     .padding(styleValues.trailingContentPadding)
                     .align(trailingContentAlignment.resolveVerticalAlignment())
-                    .offset(y = trailingContentAlignment.resolveOffset())
+                    .padding(trailingContentAlignment.resolvePaddingValues())
             ) {
                 CompositionLocalProvider(
                     LocalTextStyle provides styleValues.trailingTextStyle,
@@ -152,11 +152,11 @@ private fun SideContentAlignment.resolveAlignment(itemType: ListItemLayout) = wh
     AllElements -> allElements
 }
 
-private fun SideContentVerticalAlignment.resolveOffset() = when (this) {
-    SideContentVerticalAlignment.Center -> 0.dp
-    is SideContentVerticalAlignment.Top -> offset
-    is SideContentVerticalAlignment.Bottom -> -offset
-}
+private fun SideContentVerticalAlignment.resolvePaddingValues() =
+    PaddingValues(
+        top = if (this is SideContentVerticalAlignment.Top) this.topPadding else 0.dp,
+        bottom = if (this is SideContentVerticalAlignment.Bottom) this.bottomPadding else 0.dp
+    )
 
 private fun SideContentVerticalAlignment.resolveVerticalAlignment() = when (this) {
     SideContentVerticalAlignment.Center -> Alignment.CenterVertically
