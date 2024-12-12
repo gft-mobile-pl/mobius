@@ -13,6 +13,7 @@ import com.gft.mobius.Mobius.styles
 import com.gft.mobius.colors.MobiusColors
 import com.gft.mobius.colors.MobiusLightColors
 import com.gft.mobius.components.styles.DefaultMobiusStyles
+import com.gft.mobius.components.styles.LocalTextLinkStyles
 import com.gft.mobius.components.styles.LocalTextStyle
 import com.gft.mobius.components.styles.MobiusStyles
 import com.gft.mobius.materialdesign.toMaterialDesign
@@ -52,6 +53,7 @@ fun Mobius(
             ) {
                 CompositionLocalProvider(
                     LocalMinimumInteractiveComponentSize provides styles.interactiveComponentStyle.minimumSize.resolve(),
+                    LocalTextLinkStyles provides styles.textLink.resolve(),
                     LocalTextStyle provides styles.text.resolve(),
                     content = content
                 )

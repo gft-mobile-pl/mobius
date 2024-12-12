@@ -1,5 +1,6 @@
 package com.gft.mobius.components.styles
 
+import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.TextStyle
 import com.gft.designsystem.Styles
 import com.gft.designsystem.Token
@@ -62,6 +63,7 @@ interface MobiusStyles : Styles {
     val primaryScrollableTabRow: ScrollableTabRowStyle
     val secondaryScrollableTabRow: ScrollableTabRowStyle
     val text: Token<TextStyle>
+    val textLink: Token<TextLinkStyles>
     val textField: TextFieldStyle
     val outlinedTextField: TextFieldStyle
     val horizontalDivider: HorizontalDividerStyle
