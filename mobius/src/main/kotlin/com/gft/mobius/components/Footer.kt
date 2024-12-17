@@ -148,7 +148,7 @@ fun DialogScreenContentScope.Footer(
     }
 }
 
-interface DialogScreenContentFooterScope : FooterScope
+interface DialogScreenContentFooterScope : DialogScreenFooterScope
 
 private fun DialogScreenContentFooterScope(boxScope: BoxScope) =
     object : DialogScreenContentFooterScope, BoxScope by boxScope {}

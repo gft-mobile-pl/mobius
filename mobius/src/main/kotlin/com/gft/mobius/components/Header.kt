@@ -145,7 +145,7 @@ fun DialogScreenContentScope.Header(
     }
 }
 
-interface DialogScreenContentHeaderScope : HeaderScope
+interface DialogScreenContentHeaderScope : DialogScreenHeaderScope
 
 private fun DialogScreenContentHeaderScope(boxScope: BoxScope) =
     object : DialogScreenContentHeaderScope, BoxScope by boxScope {}

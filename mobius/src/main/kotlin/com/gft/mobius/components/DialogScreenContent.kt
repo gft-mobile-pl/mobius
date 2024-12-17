@@ -28,7 +28,7 @@ fun DialogScreenScope.Content(
         .fillDialogWidth()
         .then(modifier),
     scrollState = if (isScrollable) rememberScrollState() else null,
-    style = style,
+    styleValues = style.resolve(),
     content = content
 )
 
@@ -43,7 +43,22 @@ fun DialogScreenScope.Content(
         .fillDialogWidth()
         .then(modifier),
     scrollState = scrollState,
-    style = style,
+    styleValues = style.resolve(),
+    content = content
+)
+
+@Composable
+internal fun DialogScreenScope.Content(
+    modifier: Modifier = Modifier,
+    scrollState: ScrollState?,
+    styleValues: ContentStyleValues,
+    content: @Composable DialogScreenContentScope.() -> Unit,
+) = ContentImplementation(
+    modifier = Modifier
+        .fillDialogWidth()
+        .then(modifier),
+    scrollState = scrollState,
+    styleValues = styleValues,
     content = content
 )
 
@@ -51,10 +66,9 @@ fun DialogScreenScope.Content(
 private fun ColumnScope.ContentImplementation(
     modifier: Modifier,
     scrollState: ScrollState?,
-    style: ContentStyle,
+    styleValues: ContentStyleValues,
     content: @Composable DialogScreenContentScope.() -> Unit,
 ) {
-    val styleValues = style.resolve()
     ContentBuilder(
         modifier = modifier,
         scrollState = scrollState,

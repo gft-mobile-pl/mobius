@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -37,6 +38,7 @@ import com.gft.mobius.components.Label
 import com.gft.mobius.components.LabelPlacement
 import com.gft.mobius.components.LargeElementSpacer
 import com.gft.mobius.components.PopUpScreen
+import com.gft.mobius.components.PopUpScreen.ScrollPolicy
 import com.gft.mobius.components.RadioButton
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.Text
@@ -56,6 +58,7 @@ fun MobiusPopUpDialogPresentation() {
     val contentVisible = remember { mutableStateOf(true) }
     val buttonsVisible = remember { mutableStateOf(true) }
     val showPopupDialog = remember { mutableStateOf(false) }
+    val scrollPolicy = remember { mutableStateOf(ScrollPolicy.ScrollContentOnly) }
     val buttonsLayout = remember { mutableStateOf(HORIZONTAL_FLOW) }
     val buttonsWidth = remember { mutableStateOf<ButtonWidth>(ButtonsWidthPresets.Default) }
     val buttonsAlignment = remember { mutableStateOf(Alignment.End) }
@@ -79,6 +82,7 @@ fun MobiusPopUpDialogPresentation() {
                     titleVisible = titleVisible,
                     contentVisible = contentVisible,
                     buttonsVisible = buttonsVisible,
+                    scrollPolicy = scrollPolicy,
                     buttonsArrangement = buttonsLayout,
                     buttonsAlignment = buttonsAlignment,
                     buttonsWidth = buttonsWidth
@@ -92,6 +96,7 @@ fun MobiusPopUpDialogPresentation() {
                     titleVisible = titleVisible.value,
                     contentVisible = contentVisible.value,
                     buttonsVisible = buttonsVisible.value,
+                    scrollPolicy = scrollPolicy.value,
                     buttonsLayout = buttonsLayout.value,
                     buttonsAlignment = buttonsAlignment.value,
                     buttonsWidth = buttonsWidth.value
@@ -109,6 +114,7 @@ fun MobiusPopUpDialogPresentation() {
                     titleVisible = titleVisible.value,
                     contentVisible = contentVisible.value,
                     buttonsVisible = buttonsVisible.value,
+                    scrollPolicy = scrollPolicy.value,
                     buttonsLayout = buttonsLayout.value,
                     buttonsAlignment = buttonsAlignment.value,
                     buttonsWidth = buttonsWidth.value
@@ -126,23 +132,30 @@ private fun PopUpPresentationMenu(
     titleVisible: MutableState<Boolean>,
     contentVisible: MutableState<Boolean>,
     buttonsVisible: MutableState<Boolean>,
+    scrollPolicy: MutableState<ScrollPolicy>,
     buttonsArrangement: MutableState<ButtonsLayoutOptions>,
     buttonsAlignment: MutableState<Alignment.Horizontal>,
     buttonsWidth: MutableState<ButtonWidth>,
 ) {
     Screen {
         Content {
-            Option(label = "Icon visible:") {
-                Checkbox(checked = iconVisible.value, onCheckedChange = { iconVisible.value = it })
+            Row {
+                Option(label = "Icon visible:") {
+                    Checkbox(checked = iconVisible.value, onCheckedChange = { iconVisible.value = it })
+                }
+                LargeElementSpacer()
+                Option(label = "Title visible:") {
+                    Checkbox(checked = titleVisible.value, onCheckedChange = { titleVisible.value = it })
+                }
             }
-            Option(label = "Title visible:") {
-                Checkbox(checked = titleVisible.value, onCheckedChange = { titleVisible.value = it })
-            }
-            Option(label = "Content visible:") {
-                Checkbox(checked = contentVisible.value, onCheckedChange = { contentVisible.value = it })
-            }
-            Option(label = "Buttons visible:") {
-                Checkbox(checked = buttonsVisible.value, onCheckedChange = { buttonsVisible.value = it })
+            Row {
+                Option(label = "Content visible:") {
+                    Checkbox(checked = contentVisible.value, onCheckedChange = { contentVisible.value = it })
+                }
+                LargeElementSpacer()
+                Option(label = "Buttons visible:") {
+                    Checkbox(checked = buttonsVisible.value, onCheckedChange = { buttonsVisible.value = it })
+                }
             }
             Option(
                 modifier = Modifier
@@ -187,6 +200,33 @@ private fun PopUpPresentationMenu(
                         label = "End",
                         selected = buttonsAlignment.value == Alignment.End,
                         onClick = { buttonsAlignment.value = Alignment.End }
+                    )
+                }
+            }
+            ElementSpacer()
+            Option(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Mobius.colors.surfaceContainerHigh)
+                    .padding(8.dp),
+                label = "Scroll policy:"
+            ) {
+                Column {
+                    RadioButtonWithLabel(
+                        label = "No scroll",
+                        selected = scrollPolicy.value == ScrollPolicy.NoScroll,
+                        onClick = { scrollPolicy.value = ScrollPolicy.NoScroll }
+                    )
+                    RadioButtonWithLabel(
+                        label = "Scroll content only",
+                        selected = scrollPolicy.value == ScrollPolicy.ScrollContentOnly,
+                        onClick = { scrollPolicy.value = ScrollPolicy.ScrollContentOnly }
+                    )
+                    RadioButtonWithLabel(
+                        label = "Scroll everything",
+                        selected = scrollPolicy.value == ScrollPolicy.ScrollEverything,
+                        onClick = { scrollPolicy.value = ScrollPolicy.ScrollEverything }
                     )
                 }
             }
@@ -294,6 +334,7 @@ private fun PopUpScreen(
     titleVisible: Boolean,
     contentVisible: Boolean,
     buttonsVisible: Boolean,
+    scrollPolicy: ScrollPolicy,
     buttonsLayout: ButtonsLayoutOptions,
     buttonsAlignment: Alignment.Horizontal,
     buttonsWidth: ButtonWidth,
@@ -320,6 +361,7 @@ private fun PopUpScreen(
     PopUpScreen(
         modifier = Modifier
             .heightIn(0.dp, 400.dp),
+        scrollPolicy = scrollPolicy,
         icon = if (iconVisible) {
             {
                 Icon(drawableResId = R.drawable.ic_account, contentDescription = "")
