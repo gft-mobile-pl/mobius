@@ -38,7 +38,8 @@ fun PopUpScreen(
 ) {
     val styleValues = style.resolve()
     DialogScreen(
-        modifier = modifier
+        modifier = modifier,
+        style = style
     ) {
         val headerVisible = title != null || icon != null
         val contentVisible = content != null
