@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "GFT Design System"
+rootProject.name = "Mobius"
 include(":example-compose")
 include(":mobius")
