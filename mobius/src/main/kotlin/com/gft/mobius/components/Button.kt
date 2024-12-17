@@ -3,7 +3,6 @@ package com.gft.mobius.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.height
@@ -36,46 +35,47 @@ fun Button(
     val styleValues = style.resolve()
     val contentColor = if (enabled) styleValues.contentColor else styleValues.disabledContentColor
     val backgroundBrush = if (enabled) styleValues.background else styleValues.disabledBackground
-    Box(modifier = Modifier
-        .modifyIf(backgroundBrush != null) {
-            background(backgroundBrush!!, styleValues.shape)
-        }) {
-        androidx.compose.material3.Button(
-            onClick = onClick,
-            modifier = modifier.then(Modifier.height(styleValues.height)),
-            enabled = enabled,
-            shape = styleValues.shape,
-            colors = ButtonColors(
-                containerColor = Color.Transparent,
-                contentColor = styleValues.rippleColor,
-                disabledContentColor = styleValues.disabledContentColor,
-                disabledContainerColor = Color.Transparent
-            ),
-            elevation = createButtonElevationConfig(
-                defaultElevation = styleValues.defaultElevation,
-                pressedElevation = styleValues.pressedElevation,
-                focusedElevation = styleValues.focusedElevation,
-                hoveredElevation = styleValues.hoveredElevation,
-                disabledElevation = styleValues.disabledElevation
-            ),
-            border = styleValues.border,
-            contentPadding = styleValues.contentPadding,
-            interactionSource = interactionSource,
-        ) {
-            CompositionLocalProvider(
-                LocalContentColor provides contentColor,
-                LocalTextStyle provides styleValues.textStyle,
-                LocalIconSize provides styleValues.iconSize
-            ) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(
-                        space = styleValues.contentElementsSpacing,
-                        alignment = Alignment.CenterHorizontally
-                    ),
-                    verticalAlignment = Alignment.CenterVertically,
-                    content = content
-                )
+
+    androidx.compose.material3.Button(
+        onClick = onClick,
+        modifier = Modifier
+            .modifyIf(backgroundBrush != null) {
+                background(backgroundBrush!!, styleValues.shape)
             }
+            .then(modifier)
+            .then(Modifier.height(styleValues.height)),
+        enabled = enabled,
+        shape = styleValues.shape,
+        colors = ButtonColors(
+            containerColor = Color.Transparent,
+            contentColor = styleValues.rippleColor,
+            disabledContentColor = styleValues.disabledContentColor,
+            disabledContainerColor = Color.Transparent
+        ),
+        elevation = createButtonElevationConfig(
+            defaultElevation = styleValues.defaultElevation,
+            pressedElevation = styleValues.pressedElevation,
+            focusedElevation = styleValues.focusedElevation,
+            hoveredElevation = styleValues.hoveredElevation,
+            disabledElevation = styleValues.disabledElevation
+        ),
+        border = styleValues.border,
+        contentPadding = styleValues.contentPadding,
+        interactionSource = interactionSource,
+    ) {
+        CompositionLocalProvider(
+            LocalContentColor provides contentColor,
+            LocalTextStyle provides styleValues.textStyle,
+            LocalIconSize provides styleValues.iconSize
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(
+                    space = styleValues.contentElementsSpacing,
+                    alignment = Alignment.CenterHorizontally
+                ),
+                verticalAlignment = Alignment.CenterVertically,
+                content = content
+            )
         }
     }
 }
