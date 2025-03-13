@@ -40,7 +40,7 @@ fun PopUpScreen(
     buttons: (@Composable () -> Unit)? = null,
     scrollPolicy: ScrollPolicy = ScrollPolicy.ScrollContentOnly,
     style: PopUpScreenStyle = Mobius.styles.popUpScreenStyle,
-    content: (@Composable ContentScope.() -> Unit)? = null,
+    content: (@Composable DialogScreenContentScope.() -> Unit)? = null,
 ) {
     val styleValues = style.resolve()
     DialogScreen(
