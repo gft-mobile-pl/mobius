@@ -1,29 +1,15 @@
 package com.gft.mobius.components.styles
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import com.gft.designsystem.Style
-import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
-import com.gft.designsystem.produceStyleValues
+import com.gft.designsystem.codegen.annotation.GenerateStyleValues
 
-interface HeaderStyleValues : StyleValues {
-    val background: Brush?
-    val contentColor: Color
-}
-
+@GenerateStyleValues
 interface HeaderStyle : Style {
     val background: Token<Brush?>
     val contentColor: Token<Color>
-}
-
-@Composable
-fun HeaderStyle.resolve() = produceStyleValues { style ->
-    object : HeaderStyleValues {
-        override val background: Brush? = style.background.resolve()
-        override val contentColor: Color = style.contentColor.resolve()
-    }
 }
 
 open class DefaultHeaderStyle : HeaderStyle {

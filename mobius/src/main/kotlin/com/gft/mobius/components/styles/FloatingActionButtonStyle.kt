@@ -1,35 +1,20 @@
 package com.gft.mobius.components.styles
 
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import com.gft.designsystem.Style
-import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
 import com.gft.designsystem.TokenReference
-import com.gft.designsystem.produceStyleValues
+import com.gft.designsystem.codegen.annotation.GenerateStyleValues
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.IconSize
 import com.gft.mobius.references.MobiusReferenceDimensions
 import com.gft.mobius.references.MobiusReferenceElevations
 
-interface FloatingActionButtonStyleValues : StyleValues {
-    val shape: Shape
-    val contentColor: Color
-    val backgroundColor: Color
-    val textStyle: TextStyle
-    val defaultElevation: Dp
-    val pressedElevation: Dp
-    val focusedElevation: Dp
-    val hoveredElevation: Dp
-    val collapsedWidth: Dp
-    val height: Dp
-    val iconSize: IconSize
-}
-
+@GenerateStyleValues
 interface FloatingActionButtonStyle : Style {
     val shape: Token<Shape>
     val contentColor: Token<Color>
@@ -42,23 +27,6 @@ interface FloatingActionButtonStyle : Style {
     val collapsedWidth: Token<Dp>
     val height: Token<Dp>
     val iconSize: Token<IconSize>
-}
-
-@Composable
-fun FloatingActionButtonStyle.resolve() = produceStyleValues { style ->
-    object : FloatingActionButtonStyleValues {
-        override val shape = style.shape.resolve()
-        override val contentColor = style.contentColor.resolve()
-        override val backgroundColor = style.backgroundColor.resolve()
-        override val textStyle = style.textStyle.resolve()
-        override val defaultElevation = style.defaultElevation.resolve()
-        override val pressedElevation = style.pressedElevation.resolve()
-        override val focusedElevation = style.focusedElevation.resolve()
-        override val hoveredElevation = style.hoveredElevation.resolve()
-        override val collapsedWidth = style.collapsedWidth.resolve()
-        override val height = style.height.resolve()
-        override val iconSize = style.iconSize.resolve()
-    }
 }
 
 open class DefaultFloatingActionButtonStyle : FloatingActionButtonStyle {

@@ -2,7 +2,6 @@ package com.gft.mobius.components.styles
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -10,31 +9,15 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import com.gft.designsystem.Style
-import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
 import com.gft.designsystem.TokenReference
-import com.gft.designsystem.produceStyleValues
+import com.gft.designsystem.codegen.annotation.GenerateStyleValues
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.IconSize
 import com.gft.mobius.components.common.copy
 import com.gft.mobius.references.MobiusReferenceDimensions
 
-interface PopUpScreenStyleValues : StyleValues, DialogScreenStyleValues {
-    val minimumPadding: PaddingValues
-    val headerPadding: PaddingValues
-    val headerBackground: Brush?
-    val headerIconSize: IconSize
-    val headerIconContentColor: Color
-    val headerTextStyle: TextStyle
-    val headerContentColor: Color
-    val textOnlyHeaderAlignment: Alignment.Horizontal
-    val withIconHeaderAlignment: Alignment.Horizontal
-    val headerVerticalArrangement: Arrangement.Vertical
-    val contentStyle: ContentStyle
-    val contentTextStyle: TextStyle
-    val buttonsStyle: DialogButtonsStyle
-}
-
+@GenerateStyleValues
 interface PopUpScreenStyle : Style, DialogScreenStyle {
     val minimumPadding: Token<PaddingValues>
     val headerPadding: Token<PaddingValues>
@@ -49,29 +32,6 @@ interface PopUpScreenStyle : Style, DialogScreenStyle {
     val contentStyle: Token<ContentStyle>
     val contentTextStyle: Token<TextStyle>
     val buttonsStyle: Token<DialogButtonsStyle>
-}
-
-@Composable
-fun PopUpScreenStyle.resolve() = produceStyleValues { style ->
-    object : PopUpScreenStyleValues {
-        override val minimumPadding: PaddingValues = style.minimumPadding.resolve()
-        override val shape: Shape? = style.shape.resolve()
-        override val background: Brush? = style.background.resolve()
-        override val contentColor: Color = style.contentColor.resolve()
-        override val underlyingContentBlur: Dp = style.underlyingContentBlur.resolve()
-        override val headerPadding: PaddingValues = style.headerPadding.resolve()
-        override val headerBackground: Brush? = style.headerBackground.resolve()
-        override val headerIconSize: IconSize = style.headerIconSize.resolve()
-        override val headerIconContentColor: Color = style.headerIconContentColor.resolve()
-        override val headerTextStyle: TextStyle = style.headerTextStyle.resolve()
-        override val headerContentColor: Color = style.headerContentColor.resolve()
-        override val textOnlyHeaderAlignment: Alignment.Horizontal = style.textOnlyHeaderAlignment.resolve()
-        override val withIconHeaderAlignment: Alignment.Horizontal = style.withIconHeaderAlignment.resolve()
-        override val headerVerticalArrangement: Arrangement.Vertical = style.headerVerticalArrangement.resolve()
-        override val contentStyle: ContentStyle = style.contentStyle.resolve()
-        override val contentTextStyle: TextStyle = style.contentTextStyle.resolve()
-        override val buttonsStyle: DialogButtonsStyle = style.buttonsStyle.resolve()
-    }
 }
 
 open class DefaultPopUpScreenStyle : PopUpScreenStyle {

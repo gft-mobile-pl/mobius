@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.maven.publish)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -82,7 +83,9 @@ mavenPublishing {
 }
 
 dependencies {
-    api(libs.gft.designsystem)
+    api(libs.gft.design.system)
+    implementation(libs.gft.design.system.codegen)
+    ksp(libs.gft.design.system.codegen)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.gft.compose)

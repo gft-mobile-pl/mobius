@@ -1,29 +1,16 @@
 package com.gft.mobius.components.styles
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import com.gft.designsystem.Style
-import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
-import com.gft.designsystem.produceStyleValues
+import com.gft.designsystem.codegen.annotation.GenerateStyleValues
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.IconSize
 import com.gft.mobius.references.MobiusReferenceDimensions
 
-interface TopAppBarStyleValues : StyleValues {
-    val height: Dp
-    val backgroundColor: Color
-    val scrolledBackgroundColor: Color
-    val navigationIconSize: IconSize
-    val navigationIconContentColor: Color
-    val titleAlignment: Alignment
-    val titleContentColor: Color
-    val actionIconsSize: IconSize
-    val actionIconsContentColor: Color
-}
-
+@GenerateStyleValues
 interface TopAppBarStyle : Style {
     val height: Token<Dp>
     val backgroundColor: Token<Color>
@@ -34,21 +21,6 @@ interface TopAppBarStyle : Style {
     val titleContentColor: Token<Color>
     val actionIconsSize: Token<IconSize>
     val actionIconsContentColor: Token<Color>
-}
-
-@Composable
-fun TopAppBarStyle.resolve() = produceStyleValues { style ->
-    object : TopAppBarStyleValues {
-        override val height = style.height.resolve()
-        override val backgroundColor = style.backgroundColor.resolve()
-        override val scrolledBackgroundColor = style.scrolledBackgroundColor.resolve()
-        override val navigationIconSize = style.navigationIconSize.resolve()
-        override val navigationIconContentColor = style.navigationIconContentColor.resolve()
-        override val actionIconsSize = style.actionIconsSize.resolve()
-        override val actionIconsContentColor = style.actionIconsContentColor.resolve()
-        override val titleAlignment = style.titleAlignment.resolve()
-        override val titleContentColor = style.titleContentColor.resolve()
-    }
 }
 
 open class DefaultTopAppBarStyle : TopAppBarStyle {

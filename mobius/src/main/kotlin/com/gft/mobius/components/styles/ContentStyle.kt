@@ -1,31 +1,16 @@
 package com.gft.mobius.components.styles
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.Dp
 import com.gft.designsystem.Style
-import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
 import com.gft.designsystem.TokenReference
-import com.gft.designsystem.produceStyleValues
+import com.gft.designsystem.codegen.annotation.GenerateStyleValues
 import com.gft.mobius.Mobius
 import com.gft.mobius.references.MobiusReferenceDimensions
 
-interface ContentStyleValues : StyleValues {
-    val padding: PaddingValues
-    val contentAlignment: Alignment
-    val smallVerticalElementsSpacing: Dp
-    val mediumVerticalElementsSpacing: Dp
-    val largeVerticalElementsSpacing: Dp
-    val smallHorizontalElementsSpacing: Dp
-    val mediumHorizontalElementsSpacing: Dp
-    val largeHorizontalElementsSpacing: Dp
-}
-
+@GenerateStyleValues
 interface ContentStyle : Style {
     val padding: Token<PaddingValues>
     val contentAlignment: Token<Alignment>
@@ -35,20 +20,6 @@ interface ContentStyle : Style {
     val smallHorizontalElementsSpacing: Token<Dp>
     val mediumHorizontalElementsSpacing: Token<Dp>
     val largeHorizontalElementsSpacing: Token<Dp>
-}
-
-@Composable
-fun ContentStyle.resolve() = produceStyleValues { style ->
-    object : ContentStyleValues {
-        override val padding = style.padding.resolve()
-        override val contentAlignment = style.contentAlignment.resolve()
-        override val smallVerticalElementsSpacing = style.smallVerticalElementsSpacing.resolve()
-        override val mediumVerticalElementsSpacing = style.mediumVerticalElementsSpacing.resolve()
-        override val largeVerticalElementsSpacing = style.largeVerticalElementsSpacing.resolve()
-        override val smallHorizontalElementsSpacing = style.smallHorizontalElementsSpacing.resolve()
-        override val mediumHorizontalElementsSpacing = style.mediumHorizontalElementsSpacing.resolve()
-        override val largeHorizontalElementsSpacing = style.largeHorizontalElementsSpacing.resolve()
-    }
 }
 
 open class DefaultScrollableContentStyle : ContentStyle {

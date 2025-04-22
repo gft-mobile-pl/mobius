@@ -1,35 +1,12 @@
 package com.gft.mobius.components.styles
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.gft.designsystem.Style
-import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
-import com.gft.designsystem.produceStyleValues
+import com.gft.designsystem.codegen.annotation.GenerateStyleValues
 import com.gft.mobius.Mobius
 
-interface CheckboxStyleValues : StyleValues {
-    val checkedCheckmarkColor : Color
-    val checkedRippleColor : Color
-    val checkedBoxColor : Color
-    val checkedBorderColor : Color
-    val uncheckedCheckmarkColor : Color
-    val uncheckedRippleColor : Color
-    val uncheckedBoxColor : Color
-    val uncheckedBorderColor : Color
-    val disabledCheckedBoxColor : Color
-    val disabledUncheckedBoxColor : Color
-    val disabledIndeterminateBoxColor : Color
-    val disabledBorderColor : Color
-    val disabledUncheckedBorderColor : Color
-    val disabledIndeterminateBorderColor : Color
-    val errorCheckmarkColor : Color
-    val errorRippleColor : Color
-    val errorCheckedBoxColor : Color
-    val errorUncheckedBoxColor : Color
-    val errorBorderColor : Color
-}
-
+@GenerateStyleValues
 interface CheckboxStyle : Style {
     val checkedCheckmarkColor : Token<Color>
     val checkedRippleColor : Token<Color>
@@ -50,31 +27,6 @@ interface CheckboxStyle : Style {
     val errorCheckedBoxColor : Token<Color>
     val errorUncheckedBoxColor : Token<Color>
     val errorBorderColor : Token<Color>
-}
-
-@Composable
-fun CheckboxStyle.resolve() = produceStyleValues { style ->
-    object : CheckboxStyleValues {
-        override val checkedCheckmarkColor = style.checkedCheckmarkColor.resolve()
-        override val checkedRippleColor = style.checkedRippleColor.resolve()
-        override val checkedBoxColor = style.checkedBoxColor.resolve()
-        override val checkedBorderColor = style.checkedBorderColor.resolve()
-        override val uncheckedCheckmarkColor = style.uncheckedCheckmarkColor.resolve()
-        override val uncheckedRippleColor = style.uncheckedRippleColor.resolve()
-        override val uncheckedBoxColor = style.uncheckedBoxColor.resolve()
-        override val uncheckedBorderColor = style.uncheckedBorderColor.resolve()
-        override val disabledCheckedBoxColor = style.disabledCheckedBoxColor.resolve()
-        override val disabledUncheckedBoxColor = style.disabledUncheckedBoxColor.resolve()
-        override val disabledIndeterminateBoxColor = style.disabledIndeterminateBoxColor.resolve()
-        override val disabledBorderColor = style.disabledBorderColor.resolve()
-        override val disabledUncheckedBorderColor = style.disabledUncheckedBorderColor.resolve()
-        override val disabledIndeterminateBorderColor = style.disabledIndeterminateBorderColor.resolve()
-        override val errorCheckmarkColor = style.errorCheckmarkColor.resolve()
-        override val errorRippleColor = style.errorRippleColor.resolve()
-        override val errorCheckedBoxColor = style.errorCheckedBoxColor.resolve()
-        override val errorUncheckedBoxColor = style.errorUncheckedBoxColor.resolve()
-        override val errorBorderColor = style.errorBorderColor.resolve()
-    }
 }
 
 open class DefaultCheckboxStyle : CheckboxStyle {

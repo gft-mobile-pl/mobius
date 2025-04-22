@@ -2,17 +2,15 @@ package com.gft.mobius.components.styles
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.gft.designsystem.Style
-import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
 import com.gft.designsystem.TokenReference
-import com.gft.designsystem.produceStyleValues
+import com.gft.designsystem.codegen.annotation.GenerateStyleValues
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.IconSize
 import com.gft.mobius.components.styles.ListItemStyle.SideContentAlignment
@@ -20,30 +18,7 @@ import com.gft.mobius.components.styles.ListItemStyle.SideContentVerticalAlignme
 import com.gft.mobius.references.MobiusReferenceDimensions
 import com.gft.mobius.references.MobiusReferenceElevations
 
-interface ListItemStyleValues : StyleValues {
-    val padding: PaddingValues
-    val shape: Shape
-    val backgroundColor: Color
-    val tonalElevation: Dp
-    val shadowElevation: Dp
-    val contentPadding: PaddingValues
-    val supportingTextStyle: TextStyle
-    val supportingTextColor: Color
-    val overlineTextStyle: TextStyle
-    val overlineColor: Color
-    val headlineTextStyle: TextStyle
-    val headlineColor: Color
-    val leadingContentPadding: PaddingValues
-    val leadingContentAlignment: SideContentAlignment
-    val leadingIconSize: IconSize
-    val leadingContentColor: Color
-    val trailingContentPadding: PaddingValues
-    val trailingContentAlignment: SideContentAlignment
-    val trailingTextStyle: TextStyle
-    val trailingIconSize: IconSize
-    val trailingContentColor: Color
-}
-
+@GenerateStyleValues
 interface ListItemStyle : Style {
     val padding: Token<PaddingValues>
     val shape: Token<Shape>
@@ -79,33 +54,6 @@ interface ListItemStyle : Style {
         val headlineWithSupportingText: SideContentVerticalAlignment,
         val allElements: SideContentVerticalAlignment
     )
-}
-
-@Composable
-fun ListItemStyle.resolve() = produceStyleValues { style ->
-    object : ListItemStyleValues {
-        override val padding = style.padding.resolve()
-        override val shape = style.shape.resolve()
-        override val backgroundColor = style.backgroundColor.resolve()
-        override val tonalElevation = style.tonalElevation.resolve()
-        override val shadowElevation = style.shadowElevation.resolve()
-        override val contentPadding = style.contentPadding.resolve()
-        override val supportingTextStyle = style.supportingTextStyle.resolve()
-        override val supportingTextColor = style.supportingTextColor.resolve()
-        override val overlineTextStyle = style.overlineTextStyle.resolve()
-        override val overlineColor = style.overlineColor.resolve()
-        override val headlineTextStyle = style.headlineTextStyle.resolve()
-        override val headlineColor = style.headlineColor.resolve()
-        override val leadingContentPadding = style.leadingContentPadding.resolve()
-        override val leadingContentAlignment = style.leadingContentAlignment.resolve()
-        override val leadingIconSize = style.leadingIconSize.resolve()
-        override val leadingContentColor = style.leadingContentColor.resolve()
-        override val trailingContentPadding = style.trailingContentPadding.resolve()
-        override val trailingContentAlignment = style.trailingContentAlignment.resolve()
-        override val trailingTextStyle = style.trailingTextStyle.resolve()
-        override val trailingIconSize = style.trailingIconSize.resolve()
-        override val trailingContentColor = style.trailingContentColor.resolve()
-    }
 }
 
 open class DefaultListItemStyle : ListItemStyle {

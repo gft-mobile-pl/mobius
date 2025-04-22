@@ -1,29 +1,15 @@
 package com.gft.mobius.components.styles
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import com.gft.designsystem.Style
-import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
-import com.gft.designsystem.produceStyleValues
+import com.gft.designsystem.codegen.annotation.GenerateStyleValues
 
-interface FooterStyleValues : StyleValues {
-    val background: Brush?
-    val contentColor: Color
-}
-
+@GenerateStyleValues
 interface FooterStyle : Style {
     val background: Token<Brush?>
     val contentColor: Token<Color>
-}
-
-@Composable
-fun FooterStyle.resolve() = produceStyleValues { style ->
-    object : FooterStyleValues {
-        override val background: Brush? = style.background.resolve()
-        override val contentColor: Color = style.contentColor.resolve()
-    }
 }
 
 open class DefaultFooterStyle : FooterStyle {

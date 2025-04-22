@@ -1,32 +1,18 @@
 package com.gft.mobius.components.styles
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import com.gft.designsystem.Style
-import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
 import com.gft.designsystem.TokenReference
-import com.gft.designsystem.produceStyleValues
+import com.gft.designsystem.codegen.annotation.GenerateStyleValues
 import com.gft.mobius.Mobius
 import com.gft.mobius.references.MobiusReferenceDimensions
 
-interface DatePickerTitleStyleValues : StyleValues {
-    val textStyle: TextStyle
-    val padding: PaddingValues
-}
-
+@GenerateStyleValues
 interface DatePickerTitleStyle : Style {
     val textStyle: Token<TextStyle>
     val padding: Token<PaddingValues>
-}
-
-@Composable
-fun DatePickerTitleStyle.resolve() = produceStyleValues { style ->
-    object : DatePickerTitleStyleValues {
-        override val textStyle = style.textStyle.resolve()
-        override val padding = style.padding.resolve()
-    }
 }
 
 open class DefaultDatePickerTitleStyle : DatePickerTitleStyle {

@@ -1,40 +1,23 @@
 package com.gft.mobius.components.styles
 
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.gft.designsystem.Style
-import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
 import com.gft.designsystem.TokenReference
-import com.gft.designsystem.produceStyleValues
+import com.gft.designsystem.codegen.annotation.GenerateStyleValues
 import com.gft.mobius.Mobius
 import com.gft.mobius.references.MobiusReferenceDimensions
 
-
-interface TabRowStyleValues : StyleValues {
-    val containerColor: Color
-    val indicatorStyle: TabIndicatorStyle
-    val dividerStyle: HorizontalDividerStyle
-}
-
+@GenerateStyleValues
 interface TabRowStyle : Style {
     val containerColor: Token<Color>
     val indicatorStyle: Token<TabIndicatorStyle>
     val dividerStyle: Token<HorizontalDividerStyle>
-}
-
-@Composable
-fun TabRowStyle.resolve() = produceStyleValues { style ->
-    object : TabRowStyleValues {
-        override val containerColor = style.containerColor.resolve()
-        override val indicatorStyle = style.indicatorStyle.resolve()
-        override val dividerStyle = style.dividerStyle.resolve()
-    }
 }
 
 open class PrimaryTabRowStyle : TabRowStyle {

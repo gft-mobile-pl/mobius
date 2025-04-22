@@ -2,45 +2,25 @@ package com.gft.mobius.components.styles
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import com.gft.designsystem.Style
-import com.gft.designsystem.StyleValues
 import com.gft.designsystem.Token
 import com.gft.designsystem.TokenReference
-import com.gft.designsystem.produceStyleValues
+import com.gft.designsystem.codegen.annotation.GenerateStyleValues
 import com.gft.mobius.Mobius
 import com.gft.mobius.references.MobiusReferenceDimensions
 
-interface SliderThumbStyleValues : StyleValues {
-    val color: Color
-    val disabledColor: Color
-    val height: Dp
-    val width: Dp
-    val tooltipStyle: TooltipStyle
-}
-
+@GenerateStyleValues
 interface SliderThumbStyle : Style {
     val color: Token<Color>
     val disabledColor: Token<Color>
     val height: Token<Dp>
     val width: Token<Dp>
     val tooltipStyle: Token<TooltipStyle>
-}
-
-@Composable
-fun SliderThumbStyle.resolve() = produceStyleValues { style ->
-    object : SliderThumbStyleValues {
-        override val color = style.color.resolve()
-        override val disabledColor = style.disabledColor.resolve()
-        override val height = style.height.resolve()
-        override val width = style.width.resolve()
-        override val tooltipStyle = style.tooltipStyle.resolve()
-    }
 }
 
 open class DefaultSliderThumbStyle : SliderThumbStyle {

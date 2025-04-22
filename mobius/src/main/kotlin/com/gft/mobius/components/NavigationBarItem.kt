@@ -41,8 +41,8 @@ fun NavigationBarScope.NavigationBarItem(
             selectedIconColor = styleValues.selectedIconColor,
             selectedTextColor = styleValues.selectedTextColor,
             indicatorColor = styleValues.indicatorColor,
-            unselectedIconColor = styleValues.iconColor,
-            unselectedTextColor = styleValues.textColor,
+            unselectedIconColor = styleValues.unselectedIconColor,
+            unselectedTextColor = styleValues.unselectedTextColor,
             disabledIconColor = styleValues.disabledIconColor,
             disabledTextColor = styleValues.disabledTextColor
         ),
