@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import com.gft.designsystem.Token
 import com.gft.designsystem.TokenReference
-import com.gft.designsystem.codegen.annotation.GenerateStyleValues
+import com.gft.designsystem.GenerateStyleValues
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.FabPosition
 

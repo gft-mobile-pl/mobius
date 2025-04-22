@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import com.gft.designsystem.Style
 import com.gft.designsystem.Token
-import com.gft.designsystem.codegen.annotation.GenerateStyleValues
+import com.gft.designsystem.GenerateStyleValues
 
 sealed interface TabIndicatorWidth {
     data object MatchTab : TabIndicatorWidth
