@@ -15,13 +15,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.Button
+import com.gft.mobius.components.Content
 import com.gft.mobius.components.Drawer
 import com.gft.mobius.components.DrawerState.Closed
 import com.gft.mobius.components.ElementSpacer
 import com.gft.mobius.components.Icon
 import com.gft.mobius.components.Item
 import com.gft.mobius.components.Screen
-import com.gft.mobius.components.Content
 import com.gft.mobius.components.Text
 import com.gft.mobius.components.VerticalNavigation
 import com.gft.mobius.components.rememberDrawerController

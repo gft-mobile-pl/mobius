@@ -11,12 +11,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.Icon
 import com.gft.mobius.components.Switch
 import com.gft.mobius.components.styles.DefaultSwitchStyle
-import com.gft.mobius.graphics.DrawableRes
 
 @Composable
 fun MobiusSwitchPresentation() {
@@ -73,21 +73,21 @@ fun MobiusSwitchPresentation() {
                 var switchTurnedOn by remember { mutableStateOf(false) }
                 Switch(
                     checked = switchTurnedOn,
-                    thumbContent = { Icon(R.drawable.ic_notifications, contentDescription = null) },
+                    thumbContent = { Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null) },
                     onCheckedChange = { switchTurnedOn = !switchTurnedOn },
                 )
 
                 Switch(
                     checked = true,
                     enabled = false,
-                    thumbContent = { Icon(R.drawable.ic_notifications, contentDescription = null) },
+                    thumbContent = { Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null) },
                     onCheckedChange = {},
                 )
 
                 Switch(
                     checked = false,
                     enabled = false,
-                    thumbContent = { Icon(R.drawable.ic_notifications, contentDescription = null) },
+                    thumbContent = { Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null) },
                     onCheckedChange = {},
                 )
             }
@@ -96,6 +96,6 @@ fun MobiusSwitchPresentation() {
 }
 
 private class NoIconSwitchStyle : DefaultSwitchStyle() {
-    override val thumbIconOff: Token<DrawableRes?> = Token(null)
-    override val thumbIconOn: Token<DrawableRes?> = Token(null)
+    override val thumbIconOff: Token<Painter?> = Token(null)
+    override val thumbIconOn: Token<Painter?> = Token(null)
 }

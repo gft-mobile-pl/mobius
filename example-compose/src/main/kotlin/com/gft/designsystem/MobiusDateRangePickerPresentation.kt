@@ -5,22 +5,22 @@ import com.gft.mobius.Mobius
 import com.gft.mobius.components.DatePicker
 import com.gft.mobius.components.DateRangePicker
 import com.gft.mobius.components.Screen
+import com.gft.mobius.components.common.YearMonth
 import com.gft.mobius.components.rememberDateRangePickerState
-import java.time.LocalDate
-import java.time.YearMonth
+import kotlinx.datetime.LocalDate
 
 @Composable
 fun MobiusDateRangePickerPresentation() {
     Mobius {
         Screen {
             val dateRangePickerState = rememberDateRangePickerState(
-                initialDisplayedMonth = YearMonth.of(2022, 11),
-                initialSelectedStartDate = LocalDate.of(2022, 11, 20),
-                initialSelectedEndDate = LocalDate.of(2022, 11, 25),
+                initialDisplayedMonth = YearMonth(2022, 11),
+                initialSelectedStartDate = LocalDate(2022, 11, 20),
+                initialSelectedEndDate = LocalDate(2022, 11, 25),
                 initialDisplayMode = DatePicker.DisplayMode.Picker,
                 yearRange = 2000..2050,
                 yearFilter = { year -> year > 2021 },
-                dateFilter = { date -> date.isAfter(LocalDate.of(2022, 11, 10)) }
+                dateFilter = { date -> date > LocalDate(2022, 11, 10) }
             )
             DateRangePicker(
                 state = dateRangePickerState

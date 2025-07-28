@@ -27,42 +27,42 @@ fun MobiusListItemPresentation() {
                 ListItem(
                     modifier = Modifier.clickable { },
                     headlineContent = { Text("List item headline") },
-                    leadingContent = { Icon(R.drawable.ic_settings, contentDescription = "Localized description") },
-                    trailingContent = { Icon(R.drawable.ic_home, contentDescription = "Localized description") },
+                    leadingContent = { Icon(drawableResId = R.drawable.ic_settings, contentDescription = "Localized description") },
+                    trailingContent = { Icon(drawableResId = R.drawable.ic_home, contentDescription = "Localized description") },
                 )
                 ListItem(
                     modifier = Modifier.clickable { },
                     headlineContent = { Text("List item headline") },
                     supportingContent = { Text("List item supporting text") },
-                    leadingContent = { Icon(R.drawable.ic_settings, contentDescription = "Localized description") },
-                    trailingContent = { Icon(R.drawable.ic_home, contentDescription = "Localized description") },
+                    leadingContent = { Icon(drawableResId = R.drawable.ic_settings, contentDescription = "Localized description") },
+                    trailingContent = { Icon(drawableResId = R.drawable.ic_home, contentDescription = "Localized description") },
                 )
                 ListItem(
                     modifier = Modifier.clickable { },
                     headlineContent = { Text("List item headline that is so long that it should wrap") },
                     supportingContent = { Text("List item supporting text") },
-                    leadingContent = { Icon(R.drawable.ic_settings, contentDescription = "Localized description") },
-                    trailingContent = { Icon(R.drawable.ic_home, contentDescription = "Localized description") },
+                    leadingContent = { Icon(drawableResId = R.drawable.ic_settings, contentDescription = "Localized description") },
+                    trailingContent = { Icon(drawableResId = R.drawable.ic_home, contentDescription = "Localized description") },
                 )
                 ListItem(
                     modifier = Modifier.clickable { },
                     headlineContent = { Text("List item headline") },
                     overlineContent = { Text(text = "Overline") },
-                    leadingContent = { Icon(R.drawable.ic_settings, contentDescription = "Localized description") },
-                    trailingContent = { Icon(R.drawable.ic_home, contentDescription = "Localized description") },
+                    leadingContent = { Icon(drawableResId = R.drawable.ic_settings, contentDescription = "Localized description") },
+                    trailingContent = { Icon(drawableResId = R.drawable.ic_home, contentDescription = "Localized description") },
                 )
                 ListItem(
                     modifier = Modifier.clickable { },
                     headlineContent = { Text("List item headline that is so long that it should wrap") },
                     overlineContent = { Text(text = "Overline") },
-                    leadingContent = { Icon(R.drawable.ic_settings, contentDescription = "Localized description") },
-                    trailingContent = { Icon(R.drawable.ic_home, contentDescription = "Localized description") },
+                    leadingContent = { Icon(drawableResId = R.drawable.ic_settings, contentDescription = "Localized description") },
+                    trailingContent = { Icon(drawableResId = R.drawable.ic_home, contentDescription = "Localized description") },
                 )
                 ListItem(
                     modifier = Modifier.clickable { },
                     headlineContent = { Text("List item headline") },
                     supportingContent = { Text("List item supporting text that is so long that it wraps to the second line. Or maybe even third line?") },
-                    leadingContent = { Icon(R.drawable.ic_settings, contentDescription = "Localized description") },
+                    leadingContent = { Icon(drawableResId = R.drawable.ic_settings, contentDescription = "Localized description") },
                     overlineContent = { Text(text = "Overline") }
                 )
                 ListItem(
@@ -71,8 +71,8 @@ fun MobiusListItemPresentation() {
                     headlineContent = { Text("List item headline") },
                     supportingContent = { Text("List item supporting text") },
                     overlineContent = { Text(text = "Overline") },
-                    leadingContent = { Icon(R.drawable.ic_settings, contentDescription = "Localized description") },
-                    trailingContent = { Icon(R.drawable.ic_chevron, contentDescription = "Localized description") },
+                    leadingContent = { Icon(drawableResId = R.drawable.ic_settings, contentDescription = "Localized description") },
+                    trailingContent = { Icon(drawableResId = R.drawable.ic_chevron, contentDescription = "Localized description") },
                 )
                 ListItem(
                     style = TrailingBottomListItemStyle,
@@ -80,8 +80,8 @@ fun MobiusListItemPresentation() {
                     headlineContent = { Text("List item headline") },
                     supportingContent = { Text("List item supporting text") },
                     overlineContent = { Text(text = "Overline") },
-                    leadingContent = { Icon(R.drawable.ic_settings, contentDescription = "Localized description") },
-                    trailingContent = { Icon(R.drawable.ic_chevron, contentDescription = "Localized description") },
+                    leadingContent = { Icon(drawableResId = R.drawable.ic_settings, contentDescription = "Localized description") },
+                    trailingContent = { Icon(drawableResId = R.drawable.ic_chevron, contentDescription = "Localized description") },
                 )
             }
         }

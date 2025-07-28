@@ -47,6 +47,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.gft.design.system)
     implementation(project(":mobius"))
 
     implementation(libs.androidx.core.ktx)

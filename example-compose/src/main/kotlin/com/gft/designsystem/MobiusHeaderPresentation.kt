@@ -54,33 +54,35 @@ private const val dialogScreenWithInContentHeader = "dialogScreenWithInContentHe
 
 @Composable
 fun MobiusHeaderPresentation() {
-    val useScrollableContainer = remember {
-        mutableStateOf(true)
-    }
-    val contentLength = remember {
-        mutableStateOf(LONG)
-    }
-    val navController = rememberNavController()
-    NavHost(
-        navController = navController,
-        startDestination = menuDestination
-    ) {
-        composable(menuDestination) {
-            Menu(useScrollableContainer, contentLength, navController)
+    Mobius {
+        val useScrollableContainer = remember {
+            mutableStateOf(true)
         }
-        composable(screenWithFixedHeaderDestination) {
-            ScreenWithFixedHeader(useScrollableContainer.value, contentLength.value)
+        val contentLength = remember {
+            mutableStateOf(LONG)
         }
-        composable(screenWithInContentHeader) {
-            ScreenWithInContentHeader(useScrollableContainer.value, contentLength.value)
-        }
+        val navController = rememberNavController()
+        NavHost(
+            navController = navController,
+            startDestination = menuDestination
+        ) {
+            composable(menuDestination) {
+                Menu(useScrollableContainer, contentLength, navController)
+            }
+            composable(screenWithFixedHeaderDestination) {
+                ScreenWithFixedHeader(useScrollableContainer.value, contentLength.value)
+            }
+            composable(screenWithInContentHeader) {
+                ScreenWithInContentHeader(useScrollableContainer.value, contentLength.value)
+            }
 
-        dialog(dialogScreenWithFixedHeaderDestination) {
-            DialogWithFixedHeader(useScrollableContainer.value, contentLength.value)
-        }
+            dialog(dialogScreenWithFixedHeaderDestination) {
+                DialogWithFixedHeader(useScrollableContainer.value, contentLength.value)
+            }
 
-        dialog(dialogScreenWithInContentHeader) {
-            DialogWithInContentHeader(useScrollableContainer.value, contentLength.value)
+            dialog(dialogScreenWithInContentHeader) {
+                DialogWithInContentHeader(useScrollableContainer.value, contentLength.value)
+            }
         }
     }
 }

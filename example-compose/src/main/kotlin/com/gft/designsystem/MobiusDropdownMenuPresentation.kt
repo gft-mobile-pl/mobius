@@ -32,23 +32,23 @@ fun MobiusDropdownMenuPresentation() {
                         DropdownMenuItem(text = { Text("Item 1") }, onClick = { })
                         DropdownMenuItem(
                             text = { Text("Item 2") },
-                            leadingIcon = { Icon(R.drawable.ic_settings, contentDescription = null) },
+                            leadingIcon = { Icon(drawableResId = R.drawable.ic_settings, contentDescription = null) },
                             onClick = { }
                         )
                         DropdownMenuItem(
                             text = { Text("Item 3") },
-                            leadingIcon = { Icon(R.drawable.ic_settings, contentDescription = null) },
+                            leadingIcon = { Icon(drawableResId = R.drawable.ic_settings, contentDescription = null) },
                             onClick = { }
                         )
                         DropdownMenuItem(
                             text = { Text("Item 4") },
-                            trailingIcon = { Icon(R.drawable.ic_notifications, contentDescription = null) },
+                            trailingIcon = { Icon(drawableResId = R.drawable.ic_notifications, contentDescription = null) },
                             onClick = { }
                         )
                         DropdownMenuItem(
                             text = { Text("Item 5") },
                             enabled = false,
-                            trailingIcon = { Icon(R.drawable.ic_home, contentDescription = null) },
+                            trailingIcon = { Icon(drawableResId = R.drawable.ic_home, contentDescription = null) },
                             onClick = { }
                         )
                     }

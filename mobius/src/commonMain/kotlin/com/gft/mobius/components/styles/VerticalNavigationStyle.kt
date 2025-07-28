@@ -1,0 +1,73 @@
+package com.gft.mobius.components.styles
+
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.unit.Dp
+import com.gft.designsystem.StyleValuesProducer
+import com.gft.designsystem.Token
+import com.gft.designsystem.TokenReference
+import com.gft.designsystem.produceStyleValues
+import com.gft.mobius.Mobius
+import com.gft.mobius.references.MobiusReferenceDimensions
+
+interface VerticalNavigationStyleValues : ContentStyleValues {
+    val shape: Shape
+    val background: Brush?
+    val contentColor: Color
+}
+
+interface VerticalNavigationStyle : ContentStyle {
+    val shape: Token<Shape>
+    val background: Token<Brush?>
+    val contentColor: Token<Color>
+}
+
+@Composable
+fun VerticalNavigationStyle.resolve() = produceStyleValues(
+    StyleValuesProducer<VerticalNavigationStyle, VerticalNavigationStyleValues> { style: VerticalNavigationStyle ->
+        object : VerticalNavigationStyleValues {
+            override val padding = style.padding.resolve()
+            override val background = style.background.resolve()
+            override val contentColor = style.contentColor.resolve()
+            override val contentAlignment = style.contentAlignment.resolve()
+            override val smallVerticalElementsSpacing = style.smallVerticalElementsSpacing.resolve()
+            override val mediumVerticalElementsSpacing = style.mediumVerticalElementsSpacing.resolve()
+            override val largeVerticalElementsSpacing = style.largeVerticalElementsSpacing.resolve()
+            override val smallHorizontalElementsSpacing = style.smallHorizontalElementsSpacing.resolve()
+            override val mediumHorizontalElementsSpacing = style.mediumHorizontalElementsSpacing.resolve()
+            override val largeHorizontalElementsSpacing = style.largeHorizontalElementsSpacing.resolve()
+            override val shape = style.shape.resolve()
+        }
+    }
+)
+
+open class DefaultVerticalNavigationStyle : VerticalNavigationStyle {
+    override val padding: Token<PaddingValues> = Token(PaddingValues(MobiusReferenceDimensions.Dimension0))
+    override val background: Token<Brush?> = Token { SolidColor(Mobius.colors.surfaceContainerLow) }
+    override val contentColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val contentAlignment: Token<Alignment> = Token(Alignment.TopStart)
+    override val smallVerticalElementsSpacing: Token<Dp> =
+        TokenReference { Mobius.styles.scrollableContentStyle.smallVerticalElementsSpacing }
+    override val mediumVerticalElementsSpacing: Token<Dp> =
+        TokenReference { Mobius.styles.scrollableContentStyle.mediumVerticalElementsSpacing }
+    override val largeVerticalElementsSpacing: Token<Dp> =
+        TokenReference { Mobius.styles.scrollableContentStyle.largeVerticalElementsSpacing }
+    override val smallHorizontalElementsSpacing: Token<Dp> =
+        TokenReference { Mobius.styles.scrollableContentStyle.smallHorizontalElementsSpacing }
+    override val mediumHorizontalElementsSpacing: Token<Dp> =
+        TokenReference { Mobius.styles.scrollableContentStyle.mediumHorizontalElementsSpacing }
+    override val largeHorizontalElementsSpacing: Token<Dp> =
+        TokenReference { Mobius.styles.scrollableContentStyle.largeHorizontalElementsSpacing }
+    override val shape: Token<Shape> = Token(
+        RoundedCornerShape(
+            topEnd = MobiusReferenceDimensions.Dimension16,
+            bottomEnd = MobiusReferenceDimensions.Dimension16
+        )
+    )
+}

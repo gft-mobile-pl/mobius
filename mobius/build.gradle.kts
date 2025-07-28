@@ -1,11 +1,44 @@
-import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.android.library)
-    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.ksp)
+}
+
+kotlin {
+    androidTarget {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = Java.jvmTarget
+            }
+        }
+    }
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    sourceSets {
+        val commonMain by getting {
+            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+            dependencies {
+                implementation(compose.runtime)
+                implementation(compose.ui)
+                implementation(compose.foundation)
+                implementation(compose.components.resources)
+                implementation(compose.material3)
+
+                api(libs.datetime)
+                implementation(libs.gft.compose)
+                implementation(libs.gft.design.system)
+                implementation(libs.gft.design.system.codegen)
+                implementation(libs.lifecycle.runtime)
+            }
+        }
+    }
 }
 
 android {
@@ -14,45 +47,34 @@ android {
 
     defaultConfig {
         minSdk = 26
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = Java.sourceCompatibility
+        targetCompatibility = Java.targetCompatibility
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+}
+
+compose {
+    kotlinCompilerPlugin.set(Compose.kotlinCompilerPlugin)
+}
+
+dependencies {
+    add("kspCommonMainMetadata", libs.gft.design.system.codegen)
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile>().all {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
     }
 }
 
 mavenPublishing {
-    configure(
-        AndroidSingleVariantLibrary(
-            sourcesJar = true,
-            publishJavadocJar = false,
-        )
-    )
-
     coordinates(project.property("libraryGroupId") as String, "mobius", project.property("libraryVersion") as String)
 
     pom {
@@ -77,22 +99,7 @@ mavenPublishing {
             connection.set("scm:git:git://${project.property("libraryRepositoryUrl") as String}")
             developerConnection.set("scm:git:ssh://git@${project.property("libraryRepositoryUrl") as String}.git")
         }
-        publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
-        signAllPublications()
     }
-}
-
-dependencies {
-    api(libs.gft.design.system)
-    implementation(libs.gft.design.system.codegen)
-    ksp(libs.gft.design.system.codegen)
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.gft.compose)
-
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    signAllPublications()
 }

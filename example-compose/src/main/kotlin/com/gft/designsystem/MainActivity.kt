@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
+import com.gft.mobius.Mobius
 import com.gft.mobius.components.Button
 import com.gft.mobius.components.Text
 
@@ -70,164 +71,166 @@ class MainActivity : ComponentActivity() {
                 startDestination = menuDestination
             ) {
                 composable(menuDestination) {
-                    Column(
-                        modifier = Modifier
-                            .padding(16.dp)
-                            .fillMaxSize()
-                            .verticalScroll(rememberScrollState()),
-                        verticalArrangement = Arrangement.spacedBy(
-                            16.dp,
-                            Alignment.CenterVertically
-                        ),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        MenuButton(
-                            text = "Light Colors",
-                            onClick = { navController.navigate(lightColorsDestination) }
-                        )
-                        MenuButton(
-                            text = "Dark Colors",
-                            onClick = { navController.navigate(darkColorsDestination) }
-                        )
-                        MenuButton(
-                            text = "Typography",
-                            onClick = { navController.navigate(typographyDestination) }
-                        )
-                        MenuButton(
-                            text = "Scaffold",
-                            onClick = { navController.navigate(scaffoldDestination) }
-                        )
-                        MenuButton(
-                            text = "Top app bar",
-                            onClick = { navController.navigate(topAppBarDestination) }
-                        )
-                        MenuButton(
-                            text = "Navigation Bar",
-                            onClick = { navController.navigate(navigationBarDestination) }
-                        )
-                        MenuButton(
-                            text = "Navigation Drawer",
-                            onClick = { navController.navigate(navigationDrawerDestination) }
-                        )
-                        MenuButton(
-                            text = "NavigationRail",
-                            onClick = { navController.navigate(navigationRailDestination) }
-                        )
-                        MenuButton(
-                            text = "Bottom app bar",
-                            onClick = { navController.navigate(bottomAppBarDestination) }
-                        )
-                        MenuButton(
-                            text = "Containers",
-                            onClick = { navController.navigate(containersDestination) }
-                        )
-                        MenuButton(
-                            text = "Headers",
-                            onClick = { navController.navigate(headerDestination) }
-                        )
-                        MenuButton(
-                            text = "Footers",
-                            onClick = { navController.navigate(footerDestination) }
-                        )
-                        MenuButton(
-                            text = "Cards",
-                            onClick = { navController.navigate(cardsDestination) }
-                        )
-                        MenuButton(
-                            text = "Dialog screen",
-                            onClick = { navController.navigate(dialogScreenDestination) }
-                        )
-                        MenuButton(
-                            text = "Dialog screen sizing",
-                            onClick = { navController.navigate(dialogScreenSizingDestination) }
-                        )
-                        MenuButton(
-                            text = "PopUp dialog",
-                            onClick = { navController.navigate(popUpDialogDestination) }
-                        )
-                        MenuButton(
-                            text = "Surface",
-                            onClick = { navController.navigate(surfaceDestination) }
-                        )
-                        MenuButton(
-                            text = "TextFields",
-                            onClick = { navController.navigate(textFieldsDestination) }
-                        )
-                        MenuButton(
-                            text = "Tabs",
-                            onClick = { navController.navigate(tabsDestination) }
-                        )
-                        MenuButton(
-                            text = "Buttons",
-                            onClick = { navController.navigate(buttonsDestination) }
-                        )
-                        MenuButton(
-                            text = "Icon Buttons",
-                            onClick = { navController.navigate(iconButtonsDestination) }
-                        )
-                        MenuButton(
-                            text = "Floating Action Buttons",
-                            onClick = { navController.navigate(floatingActionButtonsDestination) })
-                        MenuButton(
-                            text = "Radio Buttons",
-                            onClick = { navController.navigate(radioButtonsDestination) }
-                        )
-                        MenuButton(
-                            text = "Switch",
-                            onClick = { navController.navigate(switchDestination) }
-                        )
-                        MenuButton(
-                            text = "Checkbox",
-                            onClick = { navController.navigate(checkboxDestination) }
-                        )
-                        MenuButton(
-                            text = "TimePicker",
-                            onClick = { navController.navigate(timePickerDestination) }
-                        )
-                        MenuButton(
-                            text = "TimeInput",
-                            onClick = { navController.navigate(timeInputDestination) }
-                        )
-                        MenuButton(
-                            text = "DatePicker",
-                            onClick = { navController.navigate(datePickerDestination) }
-                        )
-                        MenuButton(
-                            text = "DateRangePicker",
-                            onClick = { navController.navigate(dateRangePickerDestination) }
-                        )
-                        MenuButton(
-                            text = "Tooltip",
-                            onClick = { navController.navigate(tooltipDestination) }
-                        )
-                        MenuButton(
-                            text = "Slider",
-                            onClick = { navController.navigate(sliderDestination) }
-                        )
-                        MenuButton(
-                            text = "RangeSlider",
-                            onClick = { navController.navigate(rangeSliderDestination) }
-                        )
-                        MenuButton(
-                            text = "SwipeToDismissBox",
-                            onClick = { navController.navigate(swipeToDismissBoxDestination) }
-                        )
-                        MenuButton(
-                            text = "Progress indicator",
-                            onClick = { navController.navigate(progressIndicatorDestination) }
-                        )
-                        MenuButton(
-                            text = "Label",
-                            onClick = { navController.navigate(labelDestination) }
-                        )
-                        MenuButton(
-                            text = "Dropdown menu",
-                            onClick = { navController.navigate(dropdownMenuDestination) }
-                        )
-                        MenuButton(
-                            text = "List Item",
-                            onClick = { navController.navigate(listItemDestination) }
-                        )
+                    Mobius {
+                        Column(
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .fillMaxSize()
+                                .verticalScroll(rememberScrollState()),
+                            verticalArrangement = Arrangement.spacedBy(
+                                16.dp,
+                                Alignment.CenterVertically
+                            ),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            MenuButton(
+                                text = "Light Colors",
+                                onClick = { navController.navigate(lightColorsDestination) }
+                            )
+                            MenuButton(
+                                text = "Dark Colors",
+                                onClick = { navController.navigate(darkColorsDestination) }
+                            )
+                            MenuButton(
+                                text = "Typography",
+                                onClick = { navController.navigate(typographyDestination) }
+                            )
+                            MenuButton(
+                                text = "Scaffold",
+                                onClick = { navController.navigate(scaffoldDestination) }
+                            )
+                            MenuButton(
+                                text = "Top app bar",
+                                onClick = { navController.navigate(topAppBarDestination) }
+                            )
+                            MenuButton(
+                                text = "Navigation Bar",
+                                onClick = { navController.navigate(navigationBarDestination) }
+                            )
+                            MenuButton(
+                                text = "Navigation Drawer",
+                                onClick = { navController.navigate(navigationDrawerDestination) }
+                            )
+                            MenuButton(
+                                text = "NavigationRail",
+                                onClick = { navController.navigate(navigationRailDestination) }
+                            )
+                            MenuButton(
+                                text = "Bottom app bar",
+                                onClick = { navController.navigate(bottomAppBarDestination) }
+                            )
+                            MenuButton(
+                                text = "Containers",
+                                onClick = { navController.navigate(containersDestination) }
+                            )
+                            MenuButton(
+                                text = "Headers",
+                                onClick = { navController.navigate(headerDestination) }
+                            )
+                            MenuButton(
+                                text = "Footers",
+                                onClick = { navController.navigate(footerDestination) }
+                            )
+                            MenuButton(
+                                text = "Cards",
+                                onClick = { navController.navigate(cardsDestination) }
+                            )
+                            MenuButton(
+                                text = "Dialog screen",
+                                onClick = { navController.navigate(dialogScreenDestination) }
+                            )
+                            MenuButton(
+                                text = "Dialog screen sizing",
+                                onClick = { navController.navigate(dialogScreenSizingDestination) }
+                            )
+                            MenuButton(
+                                text = "PopUp dialog",
+                                onClick = { navController.navigate(popUpDialogDestination) }
+                            )
+                            MenuButton(
+                                text = "Surface",
+                                onClick = { navController.navigate(surfaceDestination) }
+                            )
+                            MenuButton(
+                                text = "TextFields",
+                                onClick = { navController.navigate(textFieldsDestination) }
+                            )
+                            MenuButton(
+                                text = "Tabs",
+                                onClick = { navController.navigate(tabsDestination) }
+                            )
+                            MenuButton(
+                                text = "Buttons",
+                                onClick = { navController.navigate(buttonsDestination) }
+                            )
+                            MenuButton(
+                                text = "Icon Buttons",
+                                onClick = { navController.navigate(iconButtonsDestination) }
+                            )
+                            MenuButton(
+                                text = "Floating Action Buttons",
+                                onClick = { navController.navigate(floatingActionButtonsDestination) })
+                            MenuButton(
+                                text = "Radio Buttons",
+                                onClick = { navController.navigate(radioButtonsDestination) }
+                            )
+                            MenuButton(
+                                text = "Switch",
+                                onClick = { navController.navigate(switchDestination) }
+                            )
+                            MenuButton(
+                                text = "Checkbox",
+                                onClick = { navController.navigate(checkboxDestination) }
+                            )
+                            MenuButton(
+                                text = "TimePicker",
+                                onClick = { navController.navigate(timePickerDestination) }
+                            )
+                            MenuButton(
+                                text = "TimeInput",
+                                onClick = { navController.navigate(timeInputDestination) }
+                            )
+                            MenuButton(
+                                text = "DatePicker",
+                                onClick = { navController.navigate(datePickerDestination) }
+                            )
+                            MenuButton(
+                                text = "DateRangePicker",
+                                onClick = { navController.navigate(dateRangePickerDestination) }
+                            )
+                            MenuButton(
+                                text = "Tooltip",
+                                onClick = { navController.navigate(tooltipDestination) }
+                            )
+                            MenuButton(
+                                text = "Slider",
+                                onClick = { navController.navigate(sliderDestination) }
+                            )
+                            MenuButton(
+                                text = "RangeSlider",
+                                onClick = { navController.navigate(rangeSliderDestination) }
+                            )
+                            MenuButton(
+                                text = "SwipeToDismissBox",
+                                onClick = { navController.navigate(swipeToDismissBoxDestination) }
+                            )
+                            MenuButton(
+                                text = "Progress indicator",
+                                onClick = { navController.navigate(progressIndicatorDestination) }
+                            )
+                            MenuButton(
+                                text = "Label",
+                                onClick = { navController.navigate(labelDestination) }
+                            )
+                            MenuButton(
+                                text = "Dropdown menu",
+                                onClick = { navController.navigate(dropdownMenuDestination) }
+                            )
+                            MenuButton(
+                                text = "List Item",
+                                onClick = { navController.navigate(listItemDestination) }
+                            )
+                        }
                     }
                 }
 
