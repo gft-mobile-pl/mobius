@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.gft.mobius.Mobius
-import com.gft.mobius.Mobius.colors
 import com.gft.mobius.colors.MobiusDarkColors
 import com.gft.mobius.colors.MobiusLightColors
 import com.gft.mobius.components.Text
@@ -48,46 +47,46 @@ fun MobiusColorsPresentation(
 
 @Composable
 private fun colorItems() = listOf(
-    ColorItem(colors.primary, colors.onPrimary, "Primary"),
-    ColorItem(colors.onPrimary, colors.primary, "On Primary"),
-    ColorItem(colors.secondary, colors.onSecondary, "Secondary"),
-    ColorItem(colors.onSecondary, colors.secondary, "On Secondary"),
-    ColorItem(colors.tertiary, colors.onTertiary, "Tertiary"),
-    ColorItem(colors.onTertiary, colors.tertiary, "On Tertiary"),
-    ColorItem(colors.inversePrimary, colors.onPrimary, "Inverse Primary"),
+    ColorItem(Mobius.colors.primary, Mobius.colors.onPrimary, "Primary"),
+    ColorItem(Mobius.colors.onPrimary, Mobius.colors.primary, "On Primary"),
+    ColorItem(Mobius.colors.secondary, Mobius.colors.onSecondary, "Secondary"),
+    ColorItem(Mobius.colors.onSecondary, Mobius.colors.secondary, "On Secondary"),
+    ColorItem(Mobius.colors.tertiary, Mobius.colors.onTertiary, "Tertiary"),
+    ColorItem(Mobius.colors.onTertiary, Mobius.colors.tertiary, "On Tertiary"),
+    ColorItem(Mobius.colors.inversePrimary, Mobius.colors.onPrimary, "Inverse Primary"),
     ColorItem(Color.White, Color.White, "----------------------"),
 
-    ColorItem(colors.primaryContainer, colors.onPrimaryContainer, "Primary Container"),
-    ColorItem(colors.onPrimaryContainer, colors.primaryContainer, "On Primary Container"),
-    ColorItem(colors.secondaryContainer, colors.onSecondaryContainer, "Secondary Container"),
-    ColorItem(colors.onSecondaryContainer, colors.secondaryContainer, "On Secondary Container"),
-    ColorItem(colors.tertiaryContainer, colors.onTertiaryContainer, "Tertiary Container"),
-    ColorItem(colors.onTertiaryContainer, colors.tertiaryContainer, "On Tertiary Container"),
+    ColorItem(Mobius.colors.primaryContainer, Mobius.colors.onPrimaryContainer, "Primary Container"),
+    ColorItem(Mobius.colors.onPrimaryContainer, Mobius.colors.primaryContainer, "On Primary Container"),
+    ColorItem(Mobius.colors.secondaryContainer, Mobius.colors.onSecondaryContainer, "Secondary Container"),
+    ColorItem(Mobius.colors.onSecondaryContainer, Mobius.colors.secondaryContainer, "On Secondary Container"),
+    ColorItem(Mobius.colors.tertiaryContainer, Mobius.colors.onTertiaryContainer, "Tertiary Container"),
+    ColorItem(Mobius.colors.onTertiaryContainer, Mobius.colors.tertiaryContainer, "On Tertiary Container"),
 
-    ColorItem(colors.surface, colors.onSurface, "Surface"),
-    ColorItem(colors.surfaceBright, colors.onSurface, "Surface Bright"),
-    ColorItem(colors.surfaceDim, colors.onSurface, "Surface Dim"),
-    ColorItem(colors.surfaceContainer, colors.onSurface, "Surface Container"),
-    ColorItem(colors.surfaceContainerLow, colors.onSurface, "Surface Container Low"),
-    ColorItem(colors.surfaceContainerLowest, colors.onSurface, "Surface Container Lowest"),
-    ColorItem(colors.surfaceContainerHigh, colors.onSurface, "Surface Container High"),
-    ColorItem(colors.surfaceContainerHighest, colors.onSurface, "Surface Container Highest"),
-    ColorItem(colors.onSurface, colors.surface, "On Surface"),
-    ColorItem(colors.onSurfaceVariant, colors.surface, "On Surface Variant"),
+    ColorItem(Mobius.colors.surface, Mobius.colors.onSurface, "Surface"),
+    ColorItem(Mobius.colors.surfaceBright, Mobius.colors.onSurface, "Surface Bright"),
+    ColorItem(Mobius.colors.surfaceDim, Mobius.colors.onSurface, "Surface Dim"),
+    ColorItem(Mobius.colors.surfaceContainer, Mobius.colors.onSurface, "Surface Container"),
+    ColorItem(Mobius.colors.surfaceContainerLow, Mobius.colors.onSurface, "Surface Container Low"),
+    ColorItem(Mobius.colors.surfaceContainerLowest, Mobius.colors.onSurface, "Surface Container Lowest"),
+    ColorItem(Mobius.colors.surfaceContainerHigh, Mobius.colors.onSurface, "Surface Container High"),
+    ColorItem(Mobius.colors.surfaceContainerHighest, Mobius.colors.onSurface, "Surface Container Highest"),
+    ColorItem(Mobius.colors.onSurface, Mobius.colors.surface, "On Surface"),
+    ColorItem(Mobius.colors.onSurfaceVariant, Mobius.colors.surface, "On Surface Variant"),
 
-    ColorItem(colors.inverseSurface, colors.inverseOnSurface, "Inverse Surface"),
-    ColorItem(colors.inverseOnSurface, colors.inverseSurface, "Inverse On Surface"),
+    ColorItem(Mobius.colors.inverseSurface, Mobius.colors.inverseOnSurface, "Inverse Surface"),
+    ColorItem(Mobius.colors.inverseOnSurface, Mobius.colors.inverseSurface, "Inverse On Surface"),
 
-    ColorItem(colors.outline, colors.outlineVariant, "Outline"),
-    ColorItem(colors.outlineVariant, colors.outline, "Outline Variant"),
+    ColorItem(Mobius.colors.outline, Mobius.colors.outlineVariant, "Outline"),
+    ColorItem(Mobius.colors.outlineVariant, Mobius.colors.outline, "Outline Variant"),
 
-    ColorItem(colors.scrim, Color.White, "Scrim"),
-    ColorItem(colors.shadow, Color.White, "Shadow"),
+    ColorItem(Mobius.colors.scrim, Color.White, "Scrim"),
+    ColorItem(Mobius.colors.shadow, Color.White, "Shadow"),
 
-    ColorItem(colors.error, colors.onError, "Error"),
-    ColorItem(colors.onError, colors.error, "On Error"),
-    ColorItem(colors.errorContainer, colors.onErrorContainer, "Error Container"),
-    ColorItem(colors.onErrorContainer, colors.errorContainer, "On Error Container"),
+    ColorItem(Mobius.colors.error, Mobius.colors.onError, "Error"),
+    ColorItem(Mobius.colors.onError, Mobius.colors.error, "On Error"),
+    ColorItem(Mobius.colors.errorContainer, Mobius.colors.onErrorContainer, "Error Container"),
+    ColorItem(Mobius.colors.onErrorContainer, Mobius.colors.errorContainer, "On Error Container"),
 )
 
 private data class ColorItem(

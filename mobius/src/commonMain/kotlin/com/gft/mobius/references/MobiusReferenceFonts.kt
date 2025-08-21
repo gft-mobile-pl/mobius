@@ -16,11 +16,15 @@ import mobius.mobius.generated.resources.figtree_semi_bold_italic
 import org.jetbrains.compose.resources.Font
 
 internal object MobiusReferenceFonts {
-    lateinit var Figtree: FontFamily
+    private lateinit var _Figtree: FontFamily
+    val Figtree: FontFamily
+        get() = if (::_Figtree.isInitialized) _Figtree
+        else throw IllegalStateException("Trying to use Figtree, but the font is not loaded yet. Call the MobiusReferenceFonts.loadFonts() before using default Mobius typography.")
 
     @Composable
-    fun initializeFonts() {
-        Figtree = FontFamily(
+    fun loadFonts() {
+        if (::_Figtree.isInitialized) return
+        _Figtree = FontFamily(
             Font(Res.font.figtree_regular, FontWeight.Normal, FontStyle.Normal),
             Font(Res.font.figtree_regular, FontWeight.W400, FontStyle.Normal),
             Font(Res.font.figtree_italic, FontWeight.Normal, FontStyle.Italic),

@@ -2,14 +2,12 @@ package com.gft.mobius.colors
 
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
 import com.gft.designsystem.Colors
 import com.gft.mobius.Mobius
 
-@Immutable
 interface MobiusColors : Colors {
     // defining colors
     val primary: Color
