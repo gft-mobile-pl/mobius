@@ -1,0 +1,26 @@
+# Xcode
+DerivedData/
+build/
+*.xcworkspace
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad
+*.xccheckout
+*.moved-aside
+*.xcscmblueprint
+
+# SwiftPM
+.swiftpm/
+.build/
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# iOS artifacts
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# macOS
+.DS_Store

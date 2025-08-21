@@ -14,5 +14,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Mobius"
-include(":example-compose")
+include(":example-android")
+include(":example-kmp-android")
 include(":mobius")
+include(":example-shared")

@@ -13,6 +13,8 @@ compose = "1.7.3"
 ksp = "1.9.24-1.0.20"
 datetime = "0.6.1"
 lifecycle = "2.8.0"
+kotlinStdlib = "1.9.24"
+coroutines = "1.10.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -36,6 +38,7 @@ gft-design-system-codegen = { group = "com.gft.mobile", name = "design-system-co
 
 datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
 lifecycle-runtime = { group ="org.jetbrains.androidx.lifecycle", name="lifecycle-runtime-compose", version.ref="lifecycle"}
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlinStdlib" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
