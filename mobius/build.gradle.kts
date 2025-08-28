@@ -1,4 +1,5 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import org.gradle.jvm.tasks.Jar
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -70,6 +71,12 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile>().all {
     if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
+}
+
+tasks.withType<Jar>().configureEach {
+    if (name.contains("SourcesJar", ignoreCase = true)) {
         dependsOn("kspCommonMainKotlinMetadata")
     }
 }
