@@ -28,6 +28,7 @@ interface HeaderScope : BoxScope {
 @Composable
 fun ScreenScope.Header(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: HeaderStyle = Mobius.styles.headerStyle,
     content: @Composable ScreenHeaderScope.() -> Unit,
 ) {
@@ -36,7 +37,7 @@ fun ScreenScope.Header(
 
     CompositionLocalProvider(LocalContentColor provides contentColor) {
         Box(
-            modifier = Modifier
+            modifier = wrapper
                 .fillMaxWidth()
                 .modifyIf(styleValues.background != null) {
                     background(styleValues.background!!)

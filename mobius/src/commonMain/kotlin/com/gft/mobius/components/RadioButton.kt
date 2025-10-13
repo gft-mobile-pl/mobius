@@ -17,6 +17,7 @@ fun RadioButton(
     selected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     style: RadioButtonStyle = Mobius.styles.radioButtonStyle,
@@ -25,6 +26,7 @@ fun RadioButton(
         selected = selected,
         onClick = onClick,
         modifier = modifier,
+        wrapper = wrapper,
         enabled = enabled,
         interactionSource = interactionSource,
         style = style
@@ -35,6 +37,7 @@ fun RadioButton(
 fun ClickableLabelScope.RadioButton(
     selected: Boolean,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     style: RadioButtonStyle = Mobius.styles.radioButtonStyle,
 ) {
@@ -42,6 +45,7 @@ fun ClickableLabelScope.RadioButton(
         selected = selected,
         onClick = null,
         modifier = modifier,
+        wrapper = wrapper,
         enabled = enabled,
         interactionSource = null,
         style = style
@@ -52,7 +56,8 @@ fun ClickableLabelScope.RadioButton(
 private fun RadioButtonImplementation(
     selected: Boolean,
     onClick: (() -> Unit)?,
-    modifier: Modifier = Modifier,
+    modifier: Modifier,
+    wrapper: Modifier,
     enabled: Boolean,
     interactionSource: MutableInteractionSource?,
     style: RadioButtonStyle,
@@ -63,7 +68,7 @@ private fun RadioButtonImplementation(
     CompositionLocalProvider(LocalContentColor provides rippleColor) {
         androidx.compose.material3.RadioButton(
             selected = selected,
-            modifier = Modifier.minimumInteractiveComponentSize() then modifier,
+            modifier = wrapper.minimumInteractiveComponentSize() then modifier,
             onClick = onClick,
             enabled = enabled,
             colors = RadioButtonColors(

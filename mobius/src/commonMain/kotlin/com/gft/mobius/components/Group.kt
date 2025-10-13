@@ -21,6 +21,7 @@ import com.gft.mobius.components.styles.resolve
 @Composable
 fun Group(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: GroupStyle = Mobius.styles.groupStyle,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -31,7 +32,7 @@ fun Group(
         LocalContentStyle provides styleValues
     ) {
         Column(
-            modifier = Modifier
+            modifier = wrapper
                 .fillMaxWidth()
                 .modifyIf(styleValues.shape != null) {
                     clip(styleValues.shape!!)

@@ -20,12 +20,14 @@ import com.gft.mobius.components.styles.resolve
 @Composable
 fun VerticalNavigation(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: VerticalNavigationStyle = Mobius.styles.verticalNavigationStyle,
     content: @Composable VerticalNavigationScope.() -> Unit
 ) {
     val styleValues = style.resolve()
     ContentBuilder(
         modifier = modifier,
+        wrapper = wrapper,
         scrollState = null,
         styleValues = styleValues
     ) { contentModifier ->

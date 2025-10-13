@@ -15,6 +15,7 @@ import com.gft.mobius.components.styles.resolve
 fun IconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: IconButtonStyle = Mobius.styles.iconButtonStyle,
@@ -23,7 +24,7 @@ fun IconButton(
     val styleValues = style.resolve()
     androidx.compose.material3.OutlinedIconButton(
         onClick = onClick,
-        modifier = Modifier.size(styleValues.size) then modifier,
+        modifier = wrapper.size(styleValues.size) then modifier,
         enabled = enabled,
         colors = IconButtonColors(
             containerColor = styleValues.backgroundColor,
@@ -46,6 +47,7 @@ fun IconButton(
 fun FilledIconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: IconButtonStyle = Mobius.styles.filledIconButtonStyle,
@@ -53,6 +55,7 @@ fun FilledIconButton(
 ) = IconButton(
     onClick = onClick,
     modifier = modifier,
+    wrapper = wrapper,
     enabled = enabled,
     interactionSource = interactionSource,
     style = style,
@@ -63,6 +66,7 @@ fun FilledIconButton(
 fun FilledTonalIconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: IconButtonStyle = Mobius.styles.filledTonalIconButtonStyle,
@@ -70,6 +74,7 @@ fun FilledTonalIconButton(
 ) = IconButton(
     onClick = onClick,
     modifier = modifier,
+    wrapper = wrapper,
     enabled = enabled,
     interactionSource = interactionSource,
     style = style,
@@ -80,6 +85,7 @@ fun FilledTonalIconButton(
 fun OutlinedIconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: IconButtonStyle = Mobius.styles.outlinedIconButtonStyle,
@@ -87,6 +93,7 @@ fun OutlinedIconButton(
 ) = IconButton(
     onClick = onClick,
     modifier = modifier,
+    wrapper = wrapper,
     enabled = enabled,
     interactionSource = interactionSource,
     style = style,
@@ -98,6 +105,7 @@ fun IconButton(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: IconToggleButtonStyle = Mobius.styles.iconToggleButtonStyle,
@@ -107,7 +115,7 @@ fun IconButton(
     androidx.compose.material3.OutlinedIconToggleButton(
         checked = checked,
         onCheckedChange = onCheckedChange,
-        modifier = modifier.size(styleValues.size),
+        modifier = wrapper.size(styleValues.size).then(modifier),
         enabled = enabled,
         colors = IconToggleButtonColors(
             containerColor = styleValues.backgroundColor,
@@ -137,6 +145,7 @@ fun FilledIconButton(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: IconToggleButtonStyle = Mobius.styles.filledIconToggleButtonStyle,
@@ -145,6 +154,7 @@ fun FilledIconButton(
     checked = checked,
     onCheckedChange = onCheckedChange,
     modifier = modifier,
+    wrapper = wrapper,
     enabled = enabled,
     interactionSource = interactionSource,
     style = style,
@@ -156,6 +166,7 @@ fun FilledTonalIconButton(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: IconToggleButtonStyle = Mobius.styles.filledTonalIconToggleButtonStyle,
@@ -164,6 +175,7 @@ fun FilledTonalIconButton(
     checked = checked,
     onCheckedChange = onCheckedChange,
     modifier = modifier,
+    wrapper = wrapper,
     enabled = enabled,
     interactionSource = interactionSource,
     style = style,
@@ -175,6 +187,7 @@ fun OutlinedIconButton(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: IconToggleButtonStyle = Mobius.styles.outlinedIconToggleButtonStyle,
@@ -183,6 +196,7 @@ fun OutlinedIconButton(
     checked = checked,
     onCheckedChange = onCheckedChange,
     modifier = modifier,
+    wrapper = wrapper,
     enabled = enabled,
     interactionSource = interactionSource,
     style = style,

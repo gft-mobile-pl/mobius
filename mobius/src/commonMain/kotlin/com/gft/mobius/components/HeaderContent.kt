@@ -15,34 +15,39 @@ open class HeaderContentScope(contentStyle: ContentStyleValues, boxScope: BoxSco
 @Composable
 fun ScreenHeaderScope.Content(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: ContentStyle = Mobius.styles.headerContentStyle,
     content: @Composable HeaderContentScope.() -> Unit,
-) = HeaderContent(modifier, style, content)
+) = HeaderContent(modifier, wrapper, style, content)
 
 @Composable
 fun ScreenContentHeaderScope.Content(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: ContentStyle = Mobius.styles.headerContentStyle,
     content: @Composable HeaderContentScope.() -> Unit,
-) = HeaderContent(modifier, style, content)
+) = HeaderContent(modifier, wrapper, style, content)
 
 @Composable
 fun DialogScreenHeaderScope.Content(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: ContentStyle = Mobius.styles.dialogHeaderContentStyle,
     content: @Composable HeaderContentScope.() -> Unit,
-) = HeaderContent(modifier, style, content)
+) = HeaderContent(modifier, wrapper, style, content)
 
 @Composable
 fun DialogScreenContentHeaderScope.Content(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: ContentStyle = Mobius.styles.dialogHeaderContentStyle,
     content: @Composable HeaderContentScope.() -> Unit,
-) = HeaderContent(modifier, style, content)
+) = HeaderContent(modifier, wrapper, style, content)
 
 @Composable
 private fun HeaderScope.HeaderContent(
     modifier: Modifier,
+    wrapper: Modifier,
     style: ContentStyle,
     content: @Composable HeaderContentScope.() -> Unit,
 ) {
@@ -51,6 +56,7 @@ private fun HeaderScope.HeaderContent(
         modifier = Modifier
             .fillHeaderWidth()
             .then(modifier),
+        wrapper = wrapper,
         scrollState = null,
         styleValues = styleValues,
     ) { contentModifier ->

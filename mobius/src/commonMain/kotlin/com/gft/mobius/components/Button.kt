@@ -27,6 +27,7 @@ import com.gft.mobius.components.styles.resolve
 fun Button(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.buttonStyle,
@@ -38,7 +39,7 @@ fun Button(
 
     androidx.compose.material3.Button(
         onClick = onClick,
-        modifier = Modifier
+        modifier = wrapper
             .modifyIf(backgroundBrush != null) {
                 background(backgroundBrush!!, styleValues.shape)
             }
@@ -84,6 +85,7 @@ fun Button(
 fun OutlinedButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.outlinedButtonStyle,
@@ -91,6 +93,7 @@ fun OutlinedButton(
 ) = Button(
     onClick = onClick,
     modifier = modifier,
+    wrapper = wrapper,
     enabled = enabled,
     interactionSource = interactionSource,
     style = style,
@@ -101,6 +104,7 @@ fun OutlinedButton(
 fun ElevatedButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.elevatedButtonStyle,
@@ -108,6 +112,7 @@ fun ElevatedButton(
 ) = Button(
     onClick = onClick,
     modifier = modifier,
+    wrapper = wrapper,
     enabled = enabled,
     interactionSource = interactionSource,
     style = style,
@@ -118,6 +123,7 @@ fun ElevatedButton(
 fun FilledTonalButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.filledTonalButtonStyle,
@@ -125,6 +131,7 @@ fun FilledTonalButton(
 ) = Button(
     onClick = onClick,
     modifier = modifier,
+    wrapper = wrapper,
     enabled = enabled,
     interactionSource = interactionSource,
     style = style,
@@ -135,6 +142,7 @@ fun FilledTonalButton(
 fun TextButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.textButtonStyle,
@@ -142,6 +150,7 @@ fun TextButton(
 ) = Button(
     onClick = onClick,
     modifier = modifier,
+    wrapper = wrapper,
     enabled = enabled,
     interactionSource = interactionSource,
     style = style,

@@ -30,6 +30,7 @@ interface FooterScope : BoxScope {
 @Composable
 fun ScreenScope.Footer(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: FooterStyle = Mobius.styles.footerStyle,
     content: @Composable ScreenFooterScope.() -> Unit,
 ) {
@@ -38,7 +39,7 @@ fun ScreenScope.Footer(
 
     CompositionLocalProvider(LocalContentColor provides contentColor) {
         Box(
-            modifier = Modifier
+            modifier = wrapper
                 .fillMaxWidth()
                 .modifyIf(styleValues.background != null) {
                     background(styleValues.background!!)
@@ -57,6 +58,7 @@ private fun ScreenFooterScope(boxScope: BoxScope) = object : ScreenFooterScope, 
 @Composable
 fun ScreenContentScope.Footer(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: FooterStyle = Mobius.styles.footerStyle,
     content: @Composable ScreenContentFooterScope.() -> Unit,
 ) {
@@ -72,7 +74,7 @@ fun ScreenContentScope.Footer(
         CompositionLocalProvider(LocalContentColor provides contentColor) {
             Spacer(modifier = Modifier.weight(NEGLIGIBLE_NON_ZERO_WEIGHT))
             Box(
-                modifier = Modifier
+                modifier = wrapper
                     .padding(top = contentStyle.padding.calculateBottomPadding())
                     .fillContentContainerWidth(ignorePadding = true)
                     .modifyIf(styleValues.background != null) {
@@ -93,6 +95,7 @@ private fun ScreenContentFooterScope(boxScope: BoxScope) = object : ScreenConten
 @Composable
 fun DialogScreenScope.Footer(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: FooterStyle = Mobius.styles.dialogFooterStyle,
     content: @Composable DialogScreenFooterScope.() -> Unit,
 ) {
@@ -101,7 +104,7 @@ fun DialogScreenScope.Footer(
 
     CompositionLocalProvider(LocalContentColor provides contentColor) {
         Box(
-            modifier = Modifier
+            modifier = wrapper
                 .fillDialogWidth()
                 .modifyIf(styleValues.background != null) {
                     background(styleValues.background!!)
@@ -120,6 +123,7 @@ private fun DialogScreenFooterScope(boxScope: BoxScope) = object : DialogScreenF
 @Composable
 fun DialogScreenContentScope.Footer(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: FooterStyle = Mobius.styles.dialogFooterStyle,
     content: @Composable DialogScreenContentFooterScope.() -> Unit,
 ) {
@@ -134,7 +138,7 @@ fun DialogScreenContentScope.Footer(
     if (footerVisible.value) {
         CompositionLocalProvider(LocalContentColor provides contentColor) {
             Box(
-                modifier = Modifier
+                modifier = wrapper
                     .padding(top = contentStyle.padding.calculateBottomPadding())
                     .fillContentContainerWidth(ignorePadding = true)
                     .modifyIf(styleValues.background != null) {

@@ -15,6 +15,7 @@ import com.gft.mobius.components.styles.resolve
 fun FloatingActionButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     interactionSource: MutableInteractionSource? = null,
     style: FloatingActionButtonStyle = Mobius.styles.floatingActionButtonStyle,
     text: (@Composable () -> Unit)? = null,
@@ -24,7 +25,7 @@ fun FloatingActionButton(
     val styleValues = style.resolve()
     androidx.compose.material3.ExtendedFloatingActionButton(
         onClick = onClick,
-        modifier = Modifier.sizeIn(
+        modifier = wrapper.sizeIn(
             minWidth = styleValues.collapsedWidth,
             minHeight = styleValues.height,
             maxWidth = if (text != null) Dp.Unspecified else styleValues.collapsedWidth
@@ -60,6 +61,7 @@ fun FloatingActionButton(
 fun BottomAppBarFloatingActionButtonScope.FloatingActionButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     interactionSource: MutableInteractionSource? = null,
     style: FloatingActionButtonStyle = Mobius.styles.bottomAppBarFloatingActionButtonStyle,
     text: (@Composable () -> Unit)? = null,
@@ -69,6 +71,7 @@ fun BottomAppBarFloatingActionButtonScope.FloatingActionButton(
     com.gft.mobius.components.FloatingActionButton(
         onClick = onClick,
         modifier = modifier,
+        wrapper = wrapper,
         interactionSource = interactionSource,
         style = style,
         text = text,

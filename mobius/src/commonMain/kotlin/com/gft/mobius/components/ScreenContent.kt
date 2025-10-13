@@ -21,11 +21,13 @@ open class ScreenContentScope(contentStyle: ContentStyleValues, columnScope: Col
 @Composable
 fun ScreenScope.Content(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     isScrollable: Boolean = true,
     style: ContentStyle = if (isScrollable) Mobius.styles.scrollableContentStyle else Mobius.styles.contentStyle,
     content: @Composable ScreenContentScope.() -> Unit,
 ) = ContentImplementation(
     modifier = modifier,
+    wrapper = wrapper,
     scrollState = if (isScrollable) rememberScrollState() else null,
     style = style,
     content = content
@@ -34,11 +36,13 @@ fun ScreenScope.Content(
 @Composable
 fun ScreenScope.Content(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     scrollState: ScrollState,
     style: ContentStyle = Mobius.styles.scrollableContentStyle,
     content: @Composable ScreenContentScope.() -> Unit,
 ) = ContentImplementation(
     modifier = modifier,
+    wrapper = wrapper,
     scrollState = scrollState,
     style = style,
     content = content
@@ -47,6 +51,7 @@ fun ScreenScope.Content(
 @Composable
 private fun ColumnScope.ContentImplementation(
     modifier: Modifier,
+    wrapper: Modifier,
     scrollState: ScrollState?,
     style: ContentStyle,
     content: @Composable ScreenContentScope.() -> Unit,
@@ -54,6 +59,7 @@ private fun ColumnScope.ContentImplementation(
     val styleValues = style.resolve()
     ContentBuilder(
         modifier = modifier,
+        wrapper = wrapper,
         scrollState = scrollState,
         styleValues = styleValues,
     ) { contentModifier ->

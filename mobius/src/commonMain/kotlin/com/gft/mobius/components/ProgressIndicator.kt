@@ -15,11 +15,12 @@ import com.gft.mobius.components.styles.resolve
 @Composable
 fun LinearProgressIndicator(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: LinearProgressIndicatorStyle = Mobius.styles.linearProgressIndicatorStyle
 ) {
     val styleValues = style.resolve()
     LinearProgressIndicator(
-        modifier = modifier.size(styleValues.width, styleValues.height),
+        modifier = wrapper.size(styleValues.width, styleValues.height).then(modifier),
         color = styleValues.color,
         trackColor = styleValues.trackColor,
         strokeCap = styleValues.strokeCap,
@@ -31,12 +32,13 @@ fun LinearProgressIndicator(
 fun LinearProgressIndicator(
     progress: () -> Float,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     endCap: DrawScope.() -> Unit = LinearProgressIndicator.endCap(),
     style: LinearProgressIndicatorStyle = Mobius.styles.linearProgressIndicatorStyle,
 ) {
     val styleValues = style.resolve()
     LinearProgressIndicator(
-        modifier = modifier.size(styleValues.width, styleValues.height),
+        modifier = wrapper.size(styleValues.width, styleValues.height).then(modifier),
         progress = progress,
         color = styleValues.color,
         trackColor = styleValues.trackColor,
@@ -68,12 +70,13 @@ object LinearProgressIndicator {
 fun CircularProgressIndicator(
     progress: () -> Float,
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: CircularProgressIndicatorStyle = Mobius.styles.circularProgressIndicatorStyle,
 ) {
     val styleValues = style.resolve()
     androidx.compose.material3.CircularProgressIndicator(
         progress = progress,
-        modifier = modifier.size(styleValues.size),
+        modifier = wrapper.size(styleValues.size).then(modifier),
         color = styleValues.color,
         strokeWidth = styleValues.strokeWidth,
         trackColor = styleValues.trackColor,
@@ -85,11 +88,12 @@ fun CircularProgressIndicator(
 @Composable
 fun CircularProgressIndicator(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: CircularProgressIndicatorStyle = Mobius.styles.indeterminateCircularProgressIndicatorStyle,
 ) {
     val styleValues = style.resolve()
     androidx.compose.material3.CircularProgressIndicator(
-        modifier = modifier.size(styleValues.size),
+        modifier = wrapper.size(styleValues.size).then(modifier),
         color = styleValues.color,
         strokeWidth = styleValues.strokeWidth,
         trackColor = styleValues.trackColor,

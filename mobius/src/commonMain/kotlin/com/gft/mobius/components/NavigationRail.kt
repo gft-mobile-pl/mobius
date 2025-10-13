@@ -21,6 +21,7 @@ import com.gft.mobius.components.styles.resolve
 @Composable
 fun NavigationRail(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     header: @Composable (NavigationRailScope.() -> Unit)? = null,
     windowInsets: WindowInsets = WindowInsets.systemBars.only(WindowInsetsSides.Vertical + WindowInsetsSides.Start),
     style: NavigationRailStyle = Mobius.styles.navigationRailStyle,
@@ -28,12 +29,13 @@ fun NavigationRail(
 ) {
     val styleValues = style.resolve()
     androidx.compose.material3.NavigationRail(
-        modifier = modifier
+        modifier = wrapper
             .modifyIf(styleValues.shape != null) {
                 clip(styleValues.shape!!)
             }
             .background(styleValues.backgroundColor)
-            .padding(styleValues.padding),
+            .padding(styleValues.padding)
+            .then(modifier),
         containerColor = Color.Unspecified,
         contentColor = styleValues.contentColor,
         header = header?.let {

@@ -15,34 +15,39 @@ open class FooterContentScope(contentStyle: ContentStyleValues, boxScope: BoxSco
 @Composable
 fun ScreenFooterScope.Content(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: ContentStyle = Mobius.styles.footerContentStyle,
     content: @Composable FooterContentScope.() -> Unit,
-) = FooterContent(modifier, style, content)
+) = FooterContent(modifier, wrapper, style, content)
 
 @Composable
 fun ScreenContentFooterScope.Content(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: ContentStyle = Mobius.styles.footerContentStyle,
     content: @Composable FooterContentScope.() -> Unit,
-) = FooterContent(modifier, style, content)
+) = FooterContent(modifier, wrapper, style, content)
 
 @Composable
 fun DialogScreenFooterScope.Content(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: ContentStyle = Mobius.styles.dialogFooterContentStyle,
     content: @Composable FooterContentScope.() -> Unit,
-) = FooterContent(modifier, style, content)
+) = FooterContent(modifier, wrapper, style, content)
 
 @Composable
 fun DialogScreenContentFooterScope.Content(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: ContentStyle = Mobius.styles.dialogFooterContentStyle,
     content: @Composable FooterContentScope.() -> Unit,
-) = FooterContent(modifier, style, content)
+) = FooterContent(modifier,wrapper, style, content)
 
 @Composable
 private fun FooterScope.FooterContent(
     modifier: Modifier,
+    wrapper: Modifier,
     style: ContentStyle,
     content: @Composable FooterContentScope.() -> Unit,
 ) {
@@ -51,6 +56,7 @@ private fun FooterScope.FooterContent(
         modifier = Modifier
             .fillFooterWidth()
             .then(modifier),
+        wrapper = wrapper,
         scrollState = null,
         styleValues = styleValues,
     ) { contentModifier ->

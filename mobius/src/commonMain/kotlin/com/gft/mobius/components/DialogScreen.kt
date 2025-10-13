@@ -33,6 +33,7 @@ private object FindMaxChildWidthLayoutPhase
 @Composable
 fun DialogScreen(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     minActiveState: Lifecycle.State = Lifecycle.State.RESUMED,
     clearFocusOnClick: Boolean = true,
     style: DialogScreenStyle = Mobius.styles.dialogScreenStyle,
@@ -59,7 +60,7 @@ fun DialogScreen(
             // Pass 2: Measure the content with the width constrained to the width of the widest child
             val placeable = subcompose(MainLayoutPass) {
                 Column(
-                    modifier = Modifier
+                    modifier = wrapper
                         .modifyIf(clearFocusOnClick) { clearFocusOnClick() }
                         .modifyIf(styleValues.shape != null) {
                             clip(styleValues.shape!!)

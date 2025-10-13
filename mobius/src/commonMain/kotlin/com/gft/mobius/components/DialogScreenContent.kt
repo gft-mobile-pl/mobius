@@ -20,6 +20,7 @@ open class DialogScreenContentScope(contentStyle: ContentStyleValues, columnScop
 @Composable
 fun DialogScreenScope.Content(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     isScrollable: Boolean = true,
     style: ContentStyle = if (isScrollable) Mobius.styles.dialogScrollableContentStyle else Mobius.styles.dialogContentStyle,
     content: @Composable DialogScreenContentScope.() -> Unit,
@@ -27,6 +28,7 @@ fun DialogScreenScope.Content(
     modifier = Modifier
         .fillDialogWidth()
         .then(modifier),
+    wrapper = wrapper,
     scrollState = if (isScrollable) rememberScrollState() else null,
     styleValues = style.resolve(),
     content = content
@@ -35,6 +37,7 @@ fun DialogScreenScope.Content(
 @Composable
 fun DialogScreenScope.Content(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     scrollState: ScrollState,
     style: ContentStyle = Mobius.styles.dialogScrollableContentStyle,
     content: @Composable DialogScreenContentScope.() -> Unit,
@@ -42,6 +45,7 @@ fun DialogScreenScope.Content(
     modifier = Modifier
         .fillDialogWidth()
         .then(modifier),
+    wrapper = wrapper,
     scrollState = scrollState,
     styleValues = style.resolve(),
     content = content
@@ -50,6 +54,7 @@ fun DialogScreenScope.Content(
 @Composable
 internal fun DialogScreenScope.Content(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     scrollState: ScrollState?,
     styleValues: ContentStyleValues,
     content: @Composable DialogScreenContentScope.() -> Unit,
@@ -57,6 +62,7 @@ internal fun DialogScreenScope.Content(
     modifier = Modifier
         .fillDialogWidth()
         .then(modifier),
+    wrapper = wrapper,
     scrollState = scrollState,
     styleValues = styleValues,
     content = content
@@ -65,12 +71,14 @@ internal fun DialogScreenScope.Content(
 @Composable
 private fun ColumnScope.ContentImplementation(
     modifier: Modifier,
+    wrapper: Modifier,
     scrollState: ScrollState?,
     styleValues: ContentStyleValues,
     content: @Composable DialogScreenContentScope.() -> Unit,
 ) {
     ContentBuilder(
         modifier = modifier,
+        wrapper = wrapper,
         scrollState = scrollState,
         styleValues = styleValues,
     ) { contentModifier ->

@@ -11,11 +11,12 @@ import com.gft.mobius.components.styles.resolve
 @Composable
 fun HorizontalDivider(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     style: HorizontalDividerStyle = Mobius.styles.horizontalDivider,
 ) {
     val styleValues = style.resolve()
     androidx.compose.material3.HorizontalDivider(
-        modifier = Modifier.padding(styleValues.padding) then modifier,
+        modifier = wrapper.padding(styleValues.padding) then modifier,
         thickness = styleValues.thickness,
         color = styleValues.color
     )

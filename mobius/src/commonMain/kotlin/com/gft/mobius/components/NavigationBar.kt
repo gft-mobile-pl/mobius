@@ -19,18 +19,20 @@ import com.gft.mobius.components.styles.resolve
 @Composable
 fun NavigationBar(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     windowInsets: WindowInsets = WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom),
     style: NavigationBarStyle = Mobius.styles.navigationBarStyle,
     content: @Composable NavigationBarScope.() -> Unit
 ) {
     val styleValues = style.resolve()
     androidx.compose.material3.NavigationBar(
-        modifier = modifier
+        modifier = wrapper
             .modifyIf(styleValues.shape != null) {
                 clip(styleValues.shape!!)
             }
             .background(styleValues.backgroundColor)
-            .padding(styleValues.padding),
+            .padding(styleValues.padding)
+            .then(modifier),
         containerColor = Color.Unspecified,
         contentColor = styleValues.contentColor,
         tonalElevation = styleValues.tonalElevation,

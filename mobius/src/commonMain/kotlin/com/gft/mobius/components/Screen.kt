@@ -24,6 +24,7 @@ import com.gft.mobius.components.styles.resolve
 @Composable
 fun Screen(
     modifier: Modifier = Modifier,
+    wrapper: Modifier = Modifier,
     minActiveState: Lifecycle.State = Lifecycle.State.RESUMED,
     clearFocusOnClick: Boolean = true,
     style: ScreenStyle = Mobius.styles.screenStyle,
@@ -37,7 +38,7 @@ fun Screen(
     ) {
         CompositionLocalProvider(LocalContentColor provides contentColor) {
             Column(
-                modifier = Modifier
+                modifier = wrapper
                     .fillMaxSize()
                     .modifyIf(styleValues.statusBarOverlappingPolicy == NEVER_DISPLAY_BEHIND_SYSTEM_BAR) {
                         statusBarsPadding()

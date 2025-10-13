@@ -27,6 +27,7 @@ import kotlin.math.max
 @Composable
 internal fun ContentBuilder(
     modifier: Modifier,
+    wrapper: Modifier,
     scrollState: ScrollState?,
     styleValues: ContentStyleValues,
     content: @Composable (modifier: Modifier) -> Unit,
@@ -37,7 +38,7 @@ internal fun ContentBuilder(
         LocalContentHeaderVisible provides remember { mutableStateOf(false) },
     ) {
         content(
-            Modifier
+            wrapper
                 .modifyIf(scrollState != null) {
                     verticalScroll(scrollState!!)
                 }
