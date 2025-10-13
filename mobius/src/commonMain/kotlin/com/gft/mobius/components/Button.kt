@@ -23,6 +23,8 @@ import com.gft.mobius.Mobius
 import com.gft.mobius.components.styles.ButtonStyle
 import com.gft.mobius.components.styles.resolve
 
+class ButtonScope(rowScope: RowScope) : RowScope by rowScope
+
 @Composable
 fun Button(
     onClick: () -> Unit,
@@ -31,7 +33,7 @@ fun Button(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.buttonStyle,
-    content: @Composable RowScope.() -> Unit,
+    content: @Composable ButtonScope.() -> Unit,
 ) {
     val styleValues = style.resolve()
     val contentColor = if (enabled) styleValues.contentColor else styleValues.disabledContentColor
@@ -75,7 +77,8 @@ fun Button(
                     alignment = Alignment.CenterHorizontally
                 ),
                 verticalAlignment = Alignment.CenterVertically,
-                content = content
+                content = { ButtonScope(this).content() }
+
             )
         }
     }
@@ -89,7 +92,7 @@ fun OutlinedButton(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.outlinedButtonStyle,
-    content: @Composable RowScope.() -> Unit,
+    content: @Composable ButtonScope.() -> Unit,
 ) = Button(
     onClick = onClick,
     modifier = modifier,
@@ -108,7 +111,7 @@ fun ElevatedButton(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.elevatedButtonStyle,
-    content: @Composable RowScope.() -> Unit,
+    content: @Composable ButtonScope.() -> Unit,
 ) = Button(
     onClick = onClick,
     modifier = modifier,
@@ -127,7 +130,7 @@ fun FilledTonalButton(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.filledTonalButtonStyle,
-    content: @Composable RowScope.() -> Unit,
+    content: @Composable ButtonScope.() -> Unit,
 ) = Button(
     onClick = onClick,
     modifier = modifier,
@@ -146,7 +149,7 @@ fun TextButton(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
     style: ButtonStyle = Mobius.styles.textButtonStyle,
-    content: @Composable RowScope.() -> Unit,
+    content: @Composable ButtonScope.() -> Unit,
 ) = Button(
     onClick = onClick,
     modifier = modifier,
