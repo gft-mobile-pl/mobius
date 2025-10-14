@@ -1,17 +1,19 @@
 package com.gft.mobius.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import com.gft.compose.common.modifyIf
 import com.gft.mobius.Mobius
 import com.gft.mobius.colors.LocalContentColor
 import com.gft.mobius.components.ListItemLayout.AllElements
@@ -19,37 +21,88 @@ import com.gft.mobius.components.ListItemLayout.HeadlineOnly
 import com.gft.mobius.components.ListItemLayout.HeadlineWithOverline
 import com.gft.mobius.components.ListItemLayout.HeadlineWithSupportingText
 import com.gft.mobius.components.styles.ListItemStyle
-import com.gft.mobius.components.styles.ListItemStyle.SideContentAlignment
-import com.gft.mobius.components.styles.ListItemStyle.SideContentVerticalAlignment
+import com.gft.mobius.components.styles.ListItemStyle.ByContentLayout
+import com.gft.mobius.components.styles.ListItemStyle.ContentAlignment
 import com.gft.mobius.components.styles.LocalTextStyle
 import com.gft.mobius.components.styles.resolve
 
 @Composable
-fun ListItem(
-    headlineContent: @Composable () -> Unit,
+fun ContentScope.ListItem(
     modifier: Modifier = Modifier,
-    overlineContent: @Composable (() -> Unit)? = null,
-    supportingContent: @Composable (() -> Unit)? = null,
-    leadingContent: @Composable (() -> Unit)? = null,
-    trailingContent: @Composable (() -> Unit)? = null,
+    wrapper: Modifier = Modifier,
+    headlineContent: @Composable () -> Unit,
+    overlineContent: (@Composable () -> Unit)? = null,
+    supportingContent: (@Composable () -> Unit)? = null,
+    leadingContent: (@Composable () -> Unit)? = null,
+    trailingContent: (@Composable () -> Unit)? = null,
+    ignoreContainerPadding: Boolean = true,
+    style: ListItemStyle = Mobius.styles.listItemStyle
+) = ListItemImplementation(
+    modifier = wrapper
+        .modifyIf(ignoreContainerPadding) {
+            fillContentContainerWidth(ignorePadding = true)
+        }
+        .then(modifier),
+    headlineContent = headlineContent,
+    overlineContent = overlineContent,
+    supportingContent = supportingContent,
+    leadingContent = leadingContent,
+    trailingContent = trailingContent,
+    style = style
+)
+
+@Composable
+fun ListItem(
+    modifier: Modifier = Modifier,
+    headlineContent: @Composable () -> Unit,
+    overlineContent: (@Composable () -> Unit)? = null,
+    supportingContent: (@Composable () -> Unit)? = null,
+    leadingContent: (@Composable () -> Unit)? = null,
+    trailingContent: (@Composable () -> Unit)? = null,
+    style: ListItemStyle = Mobius.styles.listItemStyle
+) = ListItemImplementation(
+    modifier = modifier,
+    headlineContent = headlineContent,
+    overlineContent = overlineContent,
+    supportingContent = supportingContent,
+    leadingContent = leadingContent,
+    trailingContent = trailingContent,
+    style = style
+)
+
+@Composable
+private fun ListItemImplementation(
+    modifier: Modifier = Modifier,
+    headlineContent: @Composable () -> Unit,
+    overlineContent: (@Composable () -> Unit)? = null,
+    supportingContent: (@Composable () -> Unit)? = null,
+    leadingContent: (@Composable () -> Unit)? = null,
+    trailingContent: (@Composable () -> Unit)? = null,
     style: ListItemStyle = Mobius.styles.listItemStyle
 ) {
     val styleValues = style.resolve()
-
-    val listItemType = resolveListItemLayout(supportingContent = supportingContent, overlineContent = overlineContent)
-    val leadingContentAlignment = styleValues.leadingContentAlignment.resolveAlignment(listItemType)
-    val trailingContentAlignment = styleValues.trailingContentAlignment.resolveAlignment(listItemType)
+    val layout = resolveLayout(
+        supportingContent = supportingContent,
+        overlineContent = overlineContent,
+        leadingContent = leadingContent,
+        trailingContent = trailingContent
+    )
+    val minHeight = styleValues.minHeight.resolve(layout)
 
     val styledLeadingContent: @Composable RowScope.() -> Unit = {
+        val alignment = styleValues.leadingContentAlignment.resolve(layout)
         leadingContent?.let {
             Box(
-                Modifier
-                    .padding(styleValues.leadingContentPadding)
-                    .align(leadingContentAlignment.resolveVerticalAlignment())
-                    .padding(leadingContentAlignment.resolvePaddingValues())
+                modifier = Modifier
+                    .modifyIf(alignment == ContentAlignment.CenterWithinMinHeight) {
+                        heightIn(min = minHeight)
+                    }
+                    .padding(styleValues.leadingContentPadding.resolve(layout))
+                    .align(alignment.resolveVerticalAlignment()),
+                contentAlignment = Alignment.Center
             ) {
                 CompositionLocalProvider(
-                    LocalIconSize provides styleValues.leadingIconSize,
+                    LocalIconSize provides styleValues.leadingContentIconSize,
                     LocalContentColor provides styleValues.leadingContentColor,
                     content = leadingContent
                 )
@@ -86,17 +139,21 @@ fun ListItem(
     }
 
     val styledTrailingContent: @Composable RowScope.() -> Unit = {
+        val alignment = styleValues.trailingContentAlignment.resolve(layout)
         trailingContent?.let {
             Box(
-                Modifier
-                    .padding(styleValues.trailingContentPadding)
-                    .align(trailingContentAlignment.resolveVerticalAlignment())
-                    .padding(trailingContentAlignment.resolvePaddingValues())
+                modifier = Modifier
+                    .modifyIf(alignment == ContentAlignment.CenterWithinMinHeight) {
+                        heightIn(min = minHeight)
+                    }
+                    .padding(styleValues.trailingContentPadding.resolve(layout))
+                    .align(alignment.resolveVerticalAlignment()),
+                contentAlignment = Alignment.Center
             ) {
                 CompositionLocalProvider(
-                    LocalTextStyle provides styleValues.trailingTextStyle,
+                    LocalTextStyle provides styleValues.trailingContentTextStyle,
                     LocalContentColor provides styleValues.trailingContentColor,
-                    LocalIconSize provides styleValues.trailingIconSize,
+                    LocalIconSize provides styleValues.trailingContentIconSize,
                     content = trailingContent
                 )
             }
@@ -112,13 +169,22 @@ fun ListItem(
         shadowElevation = styleValues.shadowElevation,
     ) {
         Row(
-            Modifier
+            modifier = Modifier
                 .fillMaxWidth()
-                .padding(styleValues.padding),
-            verticalAlignment = Alignment.CenterVertically,
+                .heightIn(min = minHeight)
         ) {
+            val alignment = styleValues.contentAlignment.resolve(layout)
             styledLeadingContent()
-            Column(Modifier.weight(1f).padding(styleValues.contentPadding)) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .modifyIf(alignment == ContentAlignment.CenterWithinMinHeight) {
+                        heightIn(min = minHeight)
+                    }
+                    .padding(styleValues.contentPadding.resolve(layout))
+                    .align(alignment.resolveVerticalAlignment()),
+                verticalArrangement = Arrangement.Center
+            ) {
                 styledOverlineContent()
                 styledHeadlineContent()
                 styledSupportingContent()
@@ -128,38 +194,49 @@ fun ListItem(
     }
 }
 
-private enum class ListItemLayout {
-    HeadlineOnly,
-    HeadlineWithOverline,
-    HeadlineWithSupportingText,
-    AllElements
+private sealed interface ListItemLayout {
+    val leadingContentPresent: Boolean
+    val trailingContentPresent: Boolean
+
+    data class HeadlineOnly(override val leadingContentPresent: Boolean, override val trailingContentPresent: Boolean) : ListItemLayout
+    data class HeadlineWithOverline(override val leadingContentPresent: Boolean, override val trailingContentPresent: Boolean) : ListItemLayout
+    data class HeadlineWithSupportingText(override val leadingContentPresent: Boolean, override val trailingContentPresent: Boolean) : ListItemLayout
+    data class AllElements(override val leadingContentPresent: Boolean, override val trailingContentPresent: Boolean) : ListItemLayout
 }
 
-private fun resolveListItemLayout(
-    supportingContent: @Composable (() -> Unit)?,
-    overlineContent: @Composable (() -> Unit)?
-) = when {
-    supportingContent != null && overlineContent != null -> AllElements
-    supportingContent != null -> HeadlineWithSupportingText
-    overlineContent != null -> HeadlineWithOverline
-    else -> HeadlineOnly
+private fun resolveLayout(
+    supportingContent: (@Composable () -> Unit)?,
+    overlineContent: (@Composable () -> Unit)?,
+    leadingContent: (@Composable () -> Unit)?,
+    trailingContent: (@Composable () -> Unit)?
+): ListItemLayout {
+    val leadingContentPresent = leadingContent != null
+    val trailingContentPresent = trailingContent != null
+    return when {
+        supportingContent != null && overlineContent != null -> AllElements(leadingContentPresent, trailingContentPresent)
+        supportingContent != null -> HeadlineWithSupportingText(leadingContentPresent, trailingContentPresent)
+        overlineContent != null -> HeadlineWithOverline(leadingContentPresent, trailingContentPresent)
+        else -> HeadlineOnly(leadingContentPresent, trailingContentPresent)
+    }
 }
 
-private fun SideContentAlignment.resolveAlignment(itemType: ListItemLayout) = when (itemType) {
-    HeadlineOnly -> headlineOnly
-    HeadlineWithOverline -> headlineWithOverline
-    HeadlineWithSupportingText -> headlineWithSupportingText
-    AllElements -> allElements
+private fun <T> ByContentLayout<T>.resolve(itemType: ListItemLayout): T = when (itemType) {
+    is AllElements -> allElements
+    is HeadlineOnly -> headlineOnly
+    is HeadlineWithOverline -> headlineWithOverline
+    is HeadlineWithSupportingText -> headlineWithSupportingText
 }
 
-private fun SideContentVerticalAlignment.resolvePaddingValues() =
-    PaddingValues(
-        top = if (this is SideContentVerticalAlignment.Top) this.topPadding else 0.dp,
-        bottom = if (this is SideContentVerticalAlignment.Bottom) this.bottomPadding else 0.dp
-    )
-
-private fun SideContentVerticalAlignment.resolveVerticalAlignment() = when (this) {
-    SideContentVerticalAlignment.Center -> Alignment.CenterVertically
-    is SideContentVerticalAlignment.Top -> Alignment.Top
-    is SideContentVerticalAlignment.Bottom -> Alignment.Bottom
+private fun ContentAlignment.resolveVerticalAlignment() = when (this) {
+    ContentAlignment.Top -> Alignment.Top
+    ContentAlignment.Bottom -> Alignment.Bottom
+    ContentAlignment.Center -> Alignment.CenterVertically
+    ContentAlignment.CenterWithinMinHeight -> Alignment.Top
 }
+
+private fun ListItemStyle.ContentPaddingValues.resolve(layout: ListItemLayout) = PaddingValues(
+    top = top.resolve(layout),
+    bottom = bottom.resolve(layout),
+    start = if (layout.leadingContentPresent) start.withSideContent else start.withoutSideContent,
+    end = if (layout.trailingContentPresent) end.withSideContent else end.withoutSideContent
+)

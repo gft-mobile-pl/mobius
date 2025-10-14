@@ -23,3 +23,17 @@ fun PaddingValues.copy(
         end = end.takeOrElse { calculateEndPadding(layoutDirection) }
     )
 }
+
+@Composable
+fun PaddingValues.copy(
+    vertical: Dp = Dp.Unspecified,
+    horizontal: Dp = Dp.Unspecified
+): PaddingValues {
+    val layoutDirection = LocalLayoutDirection.current
+    return PaddingValues(
+        top = vertical.takeOrElse { calculateTopPadding() },
+        bottom = vertical.takeOrElse { calculateBottomPadding() },
+        start = horizontal.takeOrElse { calculateStartPadding(layoutDirection) },
+        end = horizontal.takeOrElse { calculateEndPadding(layoutDirection) }
+    )
+}
