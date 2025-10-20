@@ -3,6 +3,7 @@ package com.gft.mobius.components.styles
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import com.gft.designsystem.GenerateStyleWrapper
 import com.gft.designsystem.Style
 import com.gft.designsystem.StyleValues
 import com.gft.designsystem.StyleValuesProducer
@@ -41,6 +42,7 @@ interface DatePickerStyleValues : StyleValues {
     val dateFormatter: DatePickerFormatter
 }
 
+@GenerateStyleWrapper
 interface DatePickerStyle : Style {
     val containerColor: Token<Color>
     val titleColor: Token<Color>

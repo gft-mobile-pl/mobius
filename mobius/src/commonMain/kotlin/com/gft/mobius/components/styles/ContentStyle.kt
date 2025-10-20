@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.Dp
 import com.gft.designsystem.GenerateStyleValues
+import com.gft.designsystem.GenerateStyleWrapper
 import com.gft.designsystem.Style
 import com.gft.designsystem.Token
 import com.gft.designsystem.TokenReference
@@ -11,6 +12,7 @@ import com.gft.mobius.Mobius
 import com.gft.mobius.references.MobiusReferenceDimensions
 
 @GenerateStyleValues
+@GenerateStyleWrapper
 interface ContentStyle : Style {
     val padding: Token<PaddingValues>
     val contentAlignment: Token<Alignment>

@@ -3,11 +3,13 @@ package com.gft.mobius.components.styles
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import com.gft.designsystem.GenerateStyleValues
+import com.gft.designsystem.GenerateStyleWrapper
 import com.gft.designsystem.Style
 import com.gft.designsystem.Token
 import com.gft.mobius.Mobius
 
 @GenerateStyleValues
+@GenerateStyleWrapper
 interface TabStyle : Style {
     val selectedContentColor: Token<Color>
     val unselectedContentColor: Token<Color>

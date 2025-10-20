@@ -3,6 +3,7 @@ package com.gft.mobius.components.styles
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import com.gft.designsystem.GenerateStyleValues
+import com.gft.designsystem.GenerateStyleWrapper
 import com.gft.designsystem.Style
 import com.gft.designsystem.Token
 import com.gft.mobius.Mobius
@@ -10,6 +11,7 @@ import com.gft.mobius.components.styles.NavigationBarItemStyle.LabelVisibility
 import com.gft.mobius.components.styles.NavigationBarItemStyle.LabelVisibility.Always
 
 @GenerateStyleValues
+@GenerateStyleWrapper
 interface NavigationBarItemStyle : Style {
     val textStyle: Token<TextStyle>
     val selectedIconColor: Token<Color>

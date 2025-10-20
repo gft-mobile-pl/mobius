@@ -3,6 +3,7 @@ package com.gft.mobius.components.styles
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.text.TextStyle
 import com.gft.designsystem.GenerateStyleValues
+import com.gft.designsystem.GenerateStyleWrapper
 import com.gft.designsystem.Style
 import com.gft.designsystem.Token
 import com.gft.designsystem.TokenReference
@@ -12,6 +13,7 @@ import com.gft.mobius.components.DefaultDatePickerFormatter
 import com.gft.mobius.references.MobiusReferenceDimensions
 
 @GenerateStyleValues
+@GenerateStyleWrapper
 interface DatePickerHeadlineStyle : Style {
     val textStyle: Token<TextStyle>
     val padding: Token<PaddingValues>

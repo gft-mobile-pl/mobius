@@ -3,6 +3,7 @@ package com.gft.mobius.components.styles
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import com.gft.designsystem.GenerateStyleValues
+import com.gft.designsystem.GenerateStyleWrapper
 import com.gft.designsystem.Style
 import com.gft.designsystem.Token
 import com.gft.mobius.Mobius
@@ -13,6 +14,7 @@ import mobius.mobius.generated.resources.ic_switch_thumb_on
 import org.jetbrains.compose.resources.painterResource
 
 @GenerateStyleValues
+@GenerateStyleWrapper
 interface SwitchStyle : Style {
     val checkedThumbColor: Token<Color>
     val checkedPressedThumbColor: Token<Color>

@@ -7,12 +7,14 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.Dp
 import com.gft.designsystem.GenerateStyleValues
+import com.gft.designsystem.GenerateStyleWrapper
 import com.gft.designsystem.Style
 import com.gft.designsystem.Token
 import com.gft.mobius.Mobius
 import com.gft.mobius.references.MobiusReferenceDimensions
 
 @GenerateStyleValues
+@GenerateStyleWrapper
 interface DialogScreenStyle : Style {
     val shape: Token<Shape?>
     val background: Token<Brush?>

@@ -7,6 +7,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.Dp
+import com.gft.designsystem.GenerateStyleWrapper
 import com.gft.designsystem.Style
 import com.gft.designsystem.StyleValues
 import com.gft.designsystem.StyleValuesProducer
@@ -23,6 +24,7 @@ interface DialogButtonsStyleValues : StyleValues {
     val buttonsLayout: ButtonsLayout
 }
 
+@GenerateStyleWrapper
 interface DialogButtonsStyle : Style {
     val padding: Token<PaddingValues>
     val background: Token<Brush?>

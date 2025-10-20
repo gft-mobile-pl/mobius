@@ -5,12 +5,14 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import com.gft.designsystem.GenerateStyleValues
+import com.gft.designsystem.GenerateStyleWrapper
 import com.gft.designsystem.Style
 import com.gft.designsystem.Token
 import com.gft.mobius.Mobius
 import com.gft.mobius.references.MobiusReferenceDimensions
 
 @GenerateStyleValues
+@GenerateStyleWrapper
 interface NavigationRailStyle : Style {
     val shape: Token<Shape?>
     val backgroundColor: Token<Color>

@@ -2,11 +2,13 @@ package com.gft.mobius.components.styles
 
 import androidx.compose.ui.graphics.Color
 import com.gft.designsystem.GenerateStyleValues
+import com.gft.designsystem.GenerateStyleWrapper
 import com.gft.designsystem.Style
 import com.gft.designsystem.Token
 import com.gft.mobius.Mobius
 
 @GenerateStyleValues
+@GenerateStyleWrapper
 interface RadioButtonStyle : Style {
     val selectedColor: Token<Color>
     val unselectedColor: Token<Color>

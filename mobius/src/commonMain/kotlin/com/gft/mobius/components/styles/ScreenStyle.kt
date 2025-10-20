@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import com.gft.designsystem.GenerateStyleValues
+import com.gft.designsystem.GenerateStyleWrapper
 import com.gft.designsystem.Style
 import com.gft.designsystem.Token
 import com.gft.mobius.Mobius
@@ -11,6 +12,7 @@ import com.gft.mobius.components.styles.ScreenStyle.SystemBarOverlappingPolicy
 import com.gft.mobius.components.styles.ScreenStyle.SystemBarOverlappingPolicy.ALLOW_DISPLAYING_BEHIND_SYSTEM_BAR
 
 @GenerateStyleValues
+@GenerateStyleWrapper
 interface ScreenStyle : Style {
     val background: Token<Brush?>
     val contentColor: Token<Color>
