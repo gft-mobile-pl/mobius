@@ -1,12 +1,11 @@
 package com.gft.mobius.components
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import com.gft.designsystem.Token
-import com.gft.designsystem.rememberStyle
 import com.gft.mobius.Mobius
-import com.gft.mobius.components.styles.DefaultTopAppBarStyle
-import com.gft.mobius.components.styles.TopAppBarStyle
+import com.gft.mobius.components.styles.TopAppBarStyleWrapper
 import mobius.example_shared.generated.resources.Res
 import mobius.example_shared.generated.resources.ic_back
 import org.jetbrains.compose.resources.painterResource
@@ -38,14 +37,11 @@ internal fun MobiusPresentationNavigationBarContent(
                 },
             )
         },
-        style = mobiusPresentationNavigationBarStyle()
+        style = remember {
+            object : TopAppBarStyleWrapper({ Mobius.styles.topAppBarStyle }) {
+                override val backgroundColor: Token<Color> = Token { Mobius.colors.primary }
+                override val titleContentColor: Token<Color> = Token { Mobius.colors.onPrimary }
+            }
+        }
     )
-}
-
-@Composable
-fun mobiusPresentationNavigationBarStyle() = rememberStyle(Mobius.styles.topAppBarStyle) {
-    object : TopAppBarStyle by Mobius.styles.topAppBarStyle {
-        override val backgroundColor: Token<Color> = Token { Mobius.colors.primary }
-        override val titleContentColor: Token<Color> = Token { Mobius.colors.onPrimary }
-    }
 }
