@@ -1,9 +1,8 @@
 package com.gft.mobius.components.common
 
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
+import kotlinx.datetime.number
 import toLocalDate
 import toUTCMillis
 
@@ -16,14 +15,11 @@ data class YearMonth(val year: Int, val month: Int) {
     fun toUTCMillis(): Long = LocalDate(year, month, 15).toUTCMillis()
 
     companion object {
-        fun now(): YearMonth {
-            val now = Clock.System.now().toLocalDateTime(TimeZone.UTC).date
-            return YearMonth(now.year, now.monthNumber)
-        }
+        fun now(): YearMonth = of(Clock.System.now().toEpochMilliseconds())
 
         fun of(timeInUTCMilliseconds: Long): YearMonth {
             val date = timeInUTCMilliseconds.toLocalDate()
-            return YearMonth(date.year, date.monthNumber)
+            return YearMonth(date.year, date.month.number)
         }
     }
 }

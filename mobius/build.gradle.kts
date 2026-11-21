@@ -1,66 +1,63 @@
-import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.gradle.jvm.tasks.Jar
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.compose.multiplatform)
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.ksp)
 }
 
 kotlin {
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = Java.jvmTarget
+    android {
+        namespace = "com.gft.mobius"
+        compileSdk {
+            version = release(libs.versions.android.compileSdk.get().toInt()) {
+                minorApiLevel = libs.versions.android.compileSdkMinor.get().toInt()
             }
+        }
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        androidResources { enable = true }
+        compilerOptions {
+            jvmTarget.set(JvmTarget.fromTarget(Java.jvmTarget))
         }
     }
 
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
 
     sourceSets {
-        val commonMain by getting {
+        commonMain {
             kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
             dependencies {
-                implementation(compose.runtime)
-                implementation(compose.ui)
-                implementation(compose.foundation)
-                implementation(compose.components.resources)
-                implementation(compose.material3)
+                implementation(libs.jetbrains.compose.components.resources)
+                implementation(libs.jetbrains.compose.foundation)
+                implementation(libs.jetbrains.compose.material3)
+                implementation(libs.jetbrains.compose.runtime)
+                implementation(libs.jetbrains.compose.ui)
 
-                api(libs.datetime)
+                implementation(libs.androidx.lifecycle.runtime.compose)
+
+                api(libs.kotlinx.datetime)
+
                 implementation(libs.gft.compose)
                 implementation(libs.gft.design.system)
                 implementation(libs.gft.design.system.codegen)
-                implementation(libs.lifecycle.runtime)
             }
         }
     }
 }
 
-android {
-    namespace = "com.gft.mobius"
-    compileSdk = 34
-
-    defaultConfig {
-        minSdk = 26
-    }
-    compileOptions {
-        sourceCompatibility = Java.sourceCompatibility
-        targetCompatibility = Java.targetCompatibility
-    }
-}
-
-compose {
-    kotlinCompilerPlugin.set(Compose.kotlinCompilerPlugin)
-}
-
 dependencies {
     add("kspCommonMainMetadata", libs.gft.design.system.codegen)
+}
+
+tasks.withType<com.google.devtools.ksp.gradle.KspAATask>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
@@ -107,6 +104,6 @@ mavenPublishing {
             developerConnection.set("scm:git:ssh://git@${project.property("libraryRepositoryUrl") as String}.git")
         }
     }
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    publishToMavenCentral()
     signAllPublications()
 }
