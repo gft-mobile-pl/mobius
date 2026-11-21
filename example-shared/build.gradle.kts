@@ -2,23 +2,27 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.compose.multiplatform)
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
+    alias(libs.plugins.kotlin.compose)
 }
 
 kotlin {
-    androidTarget {
-        compilations.all {
-            compileTaskProvider.configure {
-                compilerOptions {
-                    jvmTarget.set(JvmTarget.fromTarget(Java.jvmTarget))
-                }
+    android {
+        namespace = "com.gft.mobius.presentation"
+        compileSdk {
+            version = release(libs.versions.android.compileSdk.get().toInt()) {
+                minorApiLevel = libs.versions.android.compileSdkMinor.get().toInt()
             }
+        }
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        androidResources { enable = true }
+        compilerOptions {
+            jvmTarget.set(JvmTarget.fromTarget(Java.jvmTarget))
         }
     }
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {
@@ -29,49 +33,23 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        commonMain {
             resources.srcDirs("${project(":mobius").projectDir}/src/commonMain/composeResources")
             dependencies {
-                implementation(libs.kotlin.stdlib)
-                implementation(compose.ui)
-                implementation(compose.foundation)
-                implementation(compose.material3)
-                implementation(compose.components.resources)
-                implementation(libs.lifecycle.runtime)
-                implementation(libs.gft.design.system)
-                implementation(libs.gft.compose)
-                implementation(libs.datetime)
                 implementation(project(":mobius"))
-            }
-        }
 
+                implementation(libs.jetbrains.compose.components.resources)
+                implementation(libs.jetbrains.compose.foundation)
+                implementation(libs.jetbrains.compose.material3)
+                implementation(libs.jetbrains.compose.ui)
 
-        androidMain {
-            dependencies {
+                implementation(libs.androidx.lifecycle.runtime.compose)
 
-            }
-        }
+                implementation(libs.kotlinx.datetime)
 
-        iosMain {
-            dependencies {
-
+                implementation(libs.gft.compose)
+                implementation(libs.gft.design.system)
             }
         }
     }
-}
-
-android {
-    namespace = "com.gft.mobius"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 26
-    }
-    compileOptions {
-        sourceCompatibility = Java.sourceCompatibility
-        targetCompatibility = Java.targetCompatibility
-    }
-}
-
-compose {
-    kotlinCompilerPlugin.set(Compose.kotlinCompilerPlugin)
 }

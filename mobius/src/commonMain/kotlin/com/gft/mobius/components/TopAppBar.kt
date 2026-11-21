@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -53,7 +54,7 @@ fun TopAppBar(
     androidx.compose.material3.TopAppBar(
         title = {
             Box(
-                Modifier.fillMaxSize(),
+                Modifier.fillMaxWidth(),
                 contentAlignment = styleValues.titleAlignment,
                 content = { title() }
             )

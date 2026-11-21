@@ -3,6 +3,7 @@ package com.gft.mobius.components
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.RichTooltip
 import androidx.compose.material3.RichTooltipColors
 import androidx.compose.runtime.Composable
@@ -72,7 +73,7 @@ private fun InfoBoxScope.InfoBox(
         RichTooltip(
             modifier = modifier,
             shape = styleValues.shape,
-            caretSize = styleValues.pointerSize,
+            caretShape = TooltipDefaults.caretShape(styleValues.pointerSize),
             colors = RichTooltipColors(
                 containerColor = styleValues.containerColor,
                 contentColor = styleValues.contentColor,

@@ -6,10 +6,15 @@ import androidx.compose.material3.Label
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.CacheDrawScope
 import androidx.compose.ui.draw.DrawResult
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.MeasureScope
+import androidx.compose.ui.window.PopupPositionProvider
 import com.gft.mobius.components.TooltipVisibilityPolicy.OnInteraction
 import com.gft.mobius.components.TooltipVisibilityPolicy.Static
 
@@ -57,12 +62,13 @@ fun TooltipPositioner(
 class TooltipScope @OptIn(ExperimentalMaterial3Api::class) internal constructor(
     internal val scope: androidx.compose.material3.TooltipScope
 ) {
-    fun Modifier.drawPointer(draw: CacheDrawScope.(LayoutCoordinates?) -> DrawResult): Modifier {
-        @OptIn(ExperimentalMaterial3Api::class)
-        return with(scope) {
-            this@drawPointer.drawCaret(draw)
-        }
+    @OptIn(ExperimentalMaterial3Api::class)
+    fun MeasureScope.obtainAnchorBounds(): LayoutCoordinates? = with(scope) {
+        obtainAnchorBounds()
     }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    fun obtainPositionProvider(): PopupPositionProvider = scope.obtainPositionProvider()
 }
 
 @Stable

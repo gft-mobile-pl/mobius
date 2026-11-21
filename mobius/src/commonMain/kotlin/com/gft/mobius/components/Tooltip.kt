@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.PlainTooltip
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,7 +24,7 @@ fun TooltipScope.Tooltip(
     with(scope) {
         PlainTooltip(
             modifier = modifier,
-            caretSize = styleValues.pointerSize,
+            caretShape = TooltipDefaults.caretShape(styleValues.pointerSize),
             shape = styleValues.shape,
             contentColor = styleValues.contentColor,
             containerColor = styleValues.containerColor,
