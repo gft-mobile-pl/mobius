@@ -3,8 +3,9 @@ package com.gft.mobius.components
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 
 @Composable
@@ -14,21 +15,20 @@ fun SwipeToDismissBox(
     modifier: Modifier = Modifier,
     allowSwipeToEnd: Boolean = true,
     allowSwipeToStart: Boolean = true,
-    onDismissed: (SwipeToDismissBoxState) -> Unit,
+    onDismissed: (SwipeToDismissBoxState) -> Unit = {},
     content: @Composable RowScope.() -> Unit,
 ) {
-    LaunchedEffect(controller.currentState) {
-        if (controller.currentState != SwipeToDismissBoxState.Visible) {
-            onDismissed(controller.currentState)
-        }
-    }
+    val currentOnDismissed by rememberUpdatedState(onDismissed)
     androidx.compose.material3.SwipeToDismissBox(
-        state = controller.controller,
+        state = controller.state,
         backgroundContent = backgroundContent,
         modifier = modifier,
         enableDismissFromStartToEnd = allowSwipeToEnd,
         enableDismissFromEndToStart = allowSwipeToStart,
         gesturesEnabled = allowSwipeToStart || allowSwipeToEnd,
+        onDismiss = remember {
+            { value -> currentOnDismissed(value.toState()) }
+        },
         content = content
     )
 }
@@ -36,42 +36,49 @@ fun SwipeToDismissBox(
 @Composable
 fun rememberSwipeToDismissBoxController(
     initialState: SwipeToDismissBoxState = SwipeToDismissBoxState.Visible,
-    stateConfirmationCallback: (SwipeToDismissBoxState) -> Boolean = { true },
     swipeThreshold: (boxWidth: Float) -> Float = { boxWidth -> boxWidth / 3 }
 ): SwipeToDismissBoxController {
-    val controller = androidx.compose.material3.rememberSwipeToDismissBoxState(
+    val state = androidx.compose.material3.rememberSwipeToDismissBoxState(
         initialValue = initialState.toMaterial3(),
-        confirmValueChange = { stateConfirmationCallback(it.toState()) },
         positionalThreshold = swipeThreshold
     )
-    return remember(controller) {
-        SwipeToDismissBoxController(controller)
-    }
+    return remember(state) { SwipeToDismissBoxController(state) }
 }
 
-class SwipeToDismissBoxController(internal val controller: androidx.compose.material3.SwipeToDismissBoxState) {
-    fun requireOffset(): Float = controller.requireOffset()
+class SwipeToDismissBoxController internal constructor(
+    internal val state: androidx.compose.material3.SwipeToDismissBoxState,
+) {
+    fun requireOffset(): Float = state.requireOffset()
 
-    val currentState: SwipeToDismissBoxState
-        get() = controller.currentValue.toState()
+    val currentValue: SwipeToDismissBoxState
+        get() = state.currentValue.toState()
 
-    val targetState: SwipeToDismissBoxState
-        get() = controller.targetValue.toState()
+    val targetValue: SwipeToDismissBoxState
+        get() = state.targetValue.toState()
+
+    val settledValue: SwipeToDismissBoxState
+        get() = state.settledValue.toState()
 
     val swipeProgress: Float
-        get() = controller.progress
+        get() = state.progress
 
     val swipeDirection: SwipeToDismissBoxState
-        get() = controller.dismissDirection.toState()
+        get() = state.dismissDirection.toState()
+
+    suspend fun snapTo(targetValue: SwipeToDismissBoxState) {
+        state.snapTo(targetValue.toMaterial3())
+    }
 
     suspend fun setState(targetValue: SwipeToDismissBoxState, animate: Boolean) =
         if (animate) {
-            controller.dismiss(targetValue.toMaterial3())
+            state.dismiss(targetValue.toMaterial3())
         } else {
-            controller.snapTo(targetValue.toMaterial3())
+            state.snapTo(targetValue.toMaterial3())
         }
 
-    suspend fun reset() = controller.reset()
+    suspend fun dismiss(direction: SwipeToDismissBoxState) {
+        state.dismiss(direction.toMaterial3())
+    }
 }
 
 enum class SwipeToDismissBoxState {
