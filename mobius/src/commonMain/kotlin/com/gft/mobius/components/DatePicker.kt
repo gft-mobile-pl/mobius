@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DatePickerColors
 import androidx.compose.material3.DatePickerDefaults.DatePickerHeadline
 import androidx.compose.material3.DatePickerDefaults.DatePickerTitle
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SelectableDates
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -41,7 +40,6 @@ fun DatePicker(
     style: DatePickerStyle = Mobius.styles.datePickerStyle
 ) {
     val styleValues = style.resolve()
-    @OptIn(ExperimentalMaterial3Api::class)
     androidx.compose.material3.DatePicker(
         state = state.state,
         modifier = modifier,
@@ -74,7 +72,6 @@ fun rememberDatePickerState(
     yearFilter: (year: Int) -> Boolean = { true },
     dateFilter: (LocalDate) -> Boolean = { true },
 ): DatePickerState {
-    @OptIn(ExperimentalMaterial3Api::class)
     val state = androidx.compose.material3.rememberDatePickerState(
         initialSelectedDateMillis = initialSelectedDate?.toUTCMillis(),
         initialDisplayedMonthMillis = initialDisplayedMonth?.toUTCMillis() ?: initialSelectedDate?.toUTCMillis(),
@@ -85,13 +82,11 @@ fun rememberDatePickerState(
             override fun isSelectableDate(utcTimeMillis: Long) = dateFilter(utcTimeMillis.toLocalDate())
         },
     )
-    @OptIn(ExperimentalMaterial3Api::class)
     return remember(state) {
         DatePickerState(state)
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun datePickerColors(
     styleValues: DatePickerStyleValues
@@ -125,36 +120,29 @@ private fun datePickerColors(
 
 @Stable
 class DatePickerState(
-    @OptIn(ExperimentalMaterial3Api::class)
     internal val state: androidx.compose.material3.DatePickerState
 ) {
     var displayedMonth: YearMonth
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return YearMonth.of(state.displayedMonthMillis)
         }
         set(value) {
-            @OptIn(ExperimentalMaterial3Api::class)
             state.displayedMonthMillis = value.toUTCMillis()
         }
 
     var selectedDate: LocalDate?
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.selectedDateMillis?.toLocalDate()
         }
         set(value) {
-            @OptIn(ExperimentalMaterial3Api::class)
             state.selectedDateMillis = value?.toUTCMillis()
         }
 
     var displayMode: DatePicker.DisplayMode
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.displayMode.toDisplayMode()
         }
         set(value) {
-            @OptIn(ExperimentalMaterial3Api::class)
             state.displayMode = value.toMaterial3()
         }
 }
@@ -163,7 +151,6 @@ open class DatePicker {
     enum class DisplayMode {
         Picker, Input;
 
-        @OptIn(ExperimentalMaterial3Api::class)
         internal fun toMaterial3() =
             when (this) {
                 Picker -> androidx.compose.material3.DisplayMode.Picker
@@ -179,7 +166,6 @@ open class DatePicker {
     ) {
         val styleValues = style.resolve()
         ProvideTextStyle(styleValues.textStyle) {
-            @OptIn(ExperimentalMaterial3Api::class)
             DatePickerTitle(
                 modifier = modifier.padding(styleValues.padding),
                 displayMode = displayMode.toMaterial3()
@@ -196,7 +182,6 @@ open class DatePicker {
     ) {
         val styleValues = style.resolve()
         ProvideTextStyle(styleValues.textStyle) {
-            @OptIn(ExperimentalMaterial3Api::class)
             DatePickerHeadline(
                 selectedDateMillis = selectedDate?.toUTCMillis(),
                 displayMode = displayMode.toMaterial3(),
@@ -209,7 +194,6 @@ open class DatePicker {
     companion object : DatePicker()
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 private fun androidx.compose.material3.DisplayMode.toDisplayMode() =
     when (this) {
         androidx.compose.material3.DisplayMode.Picker -> DatePicker.DisplayMode.Picker

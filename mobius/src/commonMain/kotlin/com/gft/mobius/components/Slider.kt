@@ -1,7 +1,6 @@
 package com.gft.mobius.components
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -27,7 +26,6 @@ fun Slider(
     @Suppress("NAME_SHADOWING")
     val interactionSource = interactionSource ?: remember { MutableInteractionSource() }
     val tooltipFormatter = tooltipVisibility.resolveFormatter()
-    @OptIn(ExperimentalMaterial3Api::class)
     androidx.compose.material3.Slider(
         value = value,
         onValueChange = onValueChange,
@@ -85,7 +83,6 @@ fun Slider(
 
     @Suppress("NAME_SHADOWING")
     val interactionSource = interactionSource ?: remember { MutableInteractionSource() }
-    @OptIn(ExperimentalMaterial3Api::class)
     androidx.compose.material3.Slider(
         value = value,
         onValueChange = onValueChange,
@@ -103,24 +100,20 @@ fun Slider(
 
 @Stable
 class SliderState(
-    @OptIn(ExperimentalMaterial3Api::class)
     internal val state: androidx.compose.material3.SliderState,
 ) {
     val value: Float
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.value
         }
 
     val steps: Int
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.steps
         }
 
     val valueRange: ClosedFloatingPointRange<Float>
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.valueRange
         }
 }

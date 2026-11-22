@@ -3,7 +3,6 @@ package com.gft.mobius.components
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DatePickerColors
 import androidx.compose.material3.DateRangePickerDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SelectableDates
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -41,7 +40,6 @@ fun DateRangePicker(
     style: DateRangePickerStyle = Mobius.styles.dateRangePickerStyle
 ) {
     val styleValues = style.resolve()
-    @OptIn(ExperimentalMaterial3Api::class)
     androidx.compose.material3.DateRangePicker(
         state = state.state,
         modifier = modifier,
@@ -75,7 +73,6 @@ fun rememberDateRangePickerState(
     yearFilter: (year: Int) -> Boolean = { true },
     dateFilter: (LocalDate) -> Boolean = { true },
 ): DateRangePickerState {
-    @OptIn(ExperimentalMaterial3Api::class)
     val state = androidx.compose.material3.rememberDateRangePickerState(
         initialSelectedStartDateMillis = initialSelectedStartDate?.toUTCMillis(),
         initialSelectedEndDateMillis = initialSelectedEndDate?.toUTCMillis() ?: initialSelectedStartDate?.toUTCMillis(),
@@ -87,13 +84,11 @@ fun rememberDateRangePickerState(
             override fun isSelectableDate(utcTimeMillis: Long) = dateFilter(utcTimeMillis.toLocalDate())
         },
     )
-    @OptIn(ExperimentalMaterial3Api::class)
     return remember(state) {
         DateRangePickerState(state)
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun datePickerColors(
     styleValues: DateRangePickerStyleValues
@@ -127,26 +122,21 @@ private fun datePickerColors(
 
 @Stable
 class DateRangePickerState(
-    @OptIn(ExperimentalMaterial3Api::class)
     internal val state: androidx.compose.material3.DateRangePickerState
 ) {
     var displayedMonth: YearMonth
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return YearMonth.of(state.displayedMonthMillis)
         }
         set(value) {
-            @OptIn(ExperimentalMaterial3Api::class)
             state.displayedMonthMillis = value.toUTCMillis()
         }
 
     var selectedStartDate: LocalDate?
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.selectedStartDateMillis?.toLocalDate()
         }
         set(value) {
-            @OptIn(ExperimentalMaterial3Api::class)
             state.setSelection(
                 startDateMillis = value?.toUTCMillis(),
                 endDateMillis = state.selectedEndDateMillis
@@ -155,11 +145,9 @@ class DateRangePickerState(
 
     var selectedEndDate: LocalDate?
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.selectedEndDateMillis?.toLocalDate()
         }
         set(value) {
-            @OptIn(ExperimentalMaterial3Api::class)
             state.setSelection(
                 startDateMillis = state.selectedStartDateMillis,
                 endDateMillis = value?.toUTCMillis()
@@ -168,11 +156,9 @@ class DateRangePickerState(
 
     var displayMode: DisplayMode
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.displayMode.toDisplayMode()
         }
         set(value) {
-            @OptIn(ExperimentalMaterial3Api::class)
             state.displayMode = value.toMaterial3()
         }
 }
@@ -181,7 +167,6 @@ open class DateRangePicker {
     enum class DisplayMode {
         Picker, Input;
 
-        @OptIn(ExperimentalMaterial3Api::class)
         internal fun toMaterial3() =
             when (this) {
                 Picker -> androidx.compose.material3.DisplayMode.Picker
@@ -197,7 +182,6 @@ open class DateRangePicker {
     ) {
         val styleValues = style.resolve()
         ProvideTextStyle(styleValues.textStyle) {
-            @OptIn(ExperimentalMaterial3Api::class)
             DateRangePickerDefaults.DateRangePickerTitle(
                 modifier = modifier.padding(styleValues.padding),
                 displayMode = displayMode.toMaterial3()
@@ -215,7 +199,6 @@ open class DateRangePicker {
     ) {
         val styleValues = style.resolve()
         ProvideTextStyle(styleValues.textStyle) {
-            @OptIn(ExperimentalMaterial3Api::class)
             DateRangePickerDefaults.DateRangePickerHeadline(
                 selectedStartDateMillis = selectedStartDate?.toUTCMillis(),
                 selectedEndDateMillis = selectedEndDate?.toUTCMillis(),
@@ -229,7 +212,6 @@ open class DateRangePicker {
     companion object : DateRangePicker()
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 private fun androidx.compose.material3.DisplayMode.toDisplayMode() =
     when (this) {
         androidx.compose.material3.DisplayMode.Picker -> DisplayMode.Picker

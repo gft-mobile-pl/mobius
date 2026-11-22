@@ -3,7 +3,6 @@ package com.gft.mobius.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -78,7 +77,6 @@ private fun FooterScope.DialogButtonsImplementation(
     }
 }
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun FooterScope.ButtonsFlow(
     modifier: Modifier,

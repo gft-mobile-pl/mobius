@@ -1,6 +1,5 @@
 package com.gft.mobius.components
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TimePickerColors
 import androidx.compose.material3.TimePickerDefaults
 import androidx.compose.runtime.Composable
@@ -16,7 +15,6 @@ fun TimePicker(
     style: TimePickerStyle = Mobius.styles.timePickerStyle
 ) {
     val styleValues = style.resolve()
-    @OptIn(ExperimentalMaterial3Api::class)
     androidx.compose.material3.TimePicker(
         state = state.material3State,
         modifier = modifier,
@@ -44,7 +42,6 @@ enum class TimePickerLayoutType {
     Vertical, Horizontal, Sensor;
 
     @Composable
-    @OptIn(ExperimentalMaterial3Api::class)
     internal fun toMaterial3() =
         when (this) {
             Vertical -> androidx.compose.material3.TimePickerLayoutType.Vertical

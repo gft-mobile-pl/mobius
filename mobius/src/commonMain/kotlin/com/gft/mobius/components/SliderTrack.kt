@@ -1,6 +1,5 @@
 package com.gft.mobius.components
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,7 +16,6 @@ fun SliderTrack(
     style: SliderTrackStyle = Mobius.styles.sliderTrackStyle
 ) {
     val styleValues = style.resolve()
-    @OptIn(ExperimentalMaterial3Api::class)
     SliderDefaults.Track(
         sliderState = sliderState.state,
         modifier = modifier,
@@ -36,7 +34,6 @@ fun SliderTrack(
     style: SliderTrackStyle = Mobius.styles.sliderTrackStyle
 ) {
     val styleValues = style.resolve()
-    @OptIn(ExperimentalMaterial3Api::class)
     SliderDefaults.Track(
         rangeSliderState = rangeSliderState.state,
         modifier = modifier,
