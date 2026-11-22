@@ -40,4 +40,17 @@ internal fun MobiusColors.toMaterialDesign(): ColorScheme = ColorScheme(
     surfaceContainerHighest = surfaceContainerHighest,
     surfaceContainerLow = surfaceContainerLow,
     surfaceContainerLowest = surfaceContainerLowest,
+
+    primaryFixed = primaryFixed,
+    primaryFixedDim = primaryFixedDim,
+    onPrimaryFixed = onPrimaryFixed,
+    onPrimaryFixedVariant = onPrimaryFixedVariant,
+    secondaryFixed = secondaryFixed,
+    secondaryFixedDim = secondaryFixedDim,
+    onSecondaryFixed = onSecondaryFixed,
+    onSecondaryFixedVariant = onSecondaryFixedVariant,
+    tertiaryFixed = tertiaryFixed,
+    tertiaryFixedDim = tertiaryFixedDim,
+    onTertiaryFixed = onTertiaryFixed,
+    onTertiaryFixedVariant = onTertiaryFixedVariant,
 )

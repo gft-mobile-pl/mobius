@@ -43,4 +43,17 @@ open class MobiusDarkColors : MobiusColors {
     override val outlineVariant: Color = MobiusReferenceColors.WarmGray30
     override val scrim: Color = MobiusReferenceColors.WarmGray0
     override val shadow: Color = MobiusReferenceColors.WarmGray0
+
+    override val primaryFixed: Color = MobiusReferenceColors.RoyalBlue20
+    override val primaryFixedDim: Color = MobiusReferenceColors.RoyalBlue15
+    override val onPrimaryFixed: Color = MobiusReferenceColors.RoyalBlue100
+    override val onPrimaryFixedVariant: Color = MobiusReferenceColors.RoyalBlue100
+    override val secondaryFixed: Color = MobiusReferenceColors.MidnightBlue40
+    override val secondaryFixedDim: Color = MobiusReferenceColors.MidnightBlue35
+    override val onSecondaryFixed: Color = MobiusReferenceColors.MidnightBlue100
+    override val onSecondaryFixedVariant: Color = MobiusReferenceColors.MidnightBlue100
+    override val tertiaryFixed: Color = MobiusReferenceColors.SkyBlue35
+    override val tertiaryFixedDim: Color = MobiusReferenceColors.SkyBlue30
+    override val onTertiaryFixed: Color = MobiusReferenceColors.SkyBlue100
+    override val onTertiaryFixedVariant: Color = MobiusReferenceColors.SkyBlue100
 }
