@@ -71,7 +71,7 @@ internal fun MobiusTooltipPresentation(
                 }
 
                 InfoBoxPositioner(
-                    positionProvider = InfoBoxPositionProvider.StartOrEnd(),
+                    positionProvider = InfoBoxPositionProvider.startOrEnd(),
                     infoBox = {
                         InfoBox(
                             title = "Button info", message = "This is a button", buttons = listOf(

@@ -210,7 +210,6 @@ private val menuSections = listOf(
             MenuItem("Dialog screen", dialogScreenDestination),
             MenuItem("Dialog screen sizing", dialogScreenSizingDestination),
             MenuItem("PopUp dialog", popUpDialogDestination),
-            MenuItem("Tooltip", tooltipDestination),
         )
     ),
     MenuSection(
@@ -240,6 +239,7 @@ private val menuSections = listOf(
         items = listOf(
             MenuItem("Label", labelDestination),
             MenuItem("Progress indicator", progressIndicatorDestination),
+            MenuItem("Tooltip", tooltipDestination),
         )
     ),
     MenuSection(
