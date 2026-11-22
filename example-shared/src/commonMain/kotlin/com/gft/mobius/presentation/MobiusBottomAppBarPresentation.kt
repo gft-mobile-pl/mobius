@@ -37,10 +37,8 @@ import com.gft.mobius.presentation.BottomAppBarPresentationUsage.WithBottomAppBa
 import mobius.example_shared.generated.resources.Res
 import mobius.example_shared.generated.resources.ic_account
 import mobius.example_shared.generated.resources.ic_back
-import mobius.example_shared.generated.resources.ic_menu
 import mobius.example_shared.generated.resources.ic_notifications
 import mobius.example_shared.generated.resources.ic_settings
-import org.jetbrains.compose.resources.painterResource
 
 private const val menuDestination = "menuDestination"
 private const val sampleDestination = "sampleDestination"

@@ -4,12 +4,10 @@ import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.Stable
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.gft.designsystem.DesignSystem
 import com.gft.designsystem.DesignSystemModules
 import com.gft.designsystem.DesignSystemModulesProvider
-import com.gft.designsystem.ModuleInitialization
 import com.gft.mobius.colors.MobiusColors
 import com.gft.mobius.colors.MobiusLightColors
 import com.gft.mobius.components.styles.DefaultMobiusStyles
