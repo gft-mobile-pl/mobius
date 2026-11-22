@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -12,13 +13,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.gft.mobius.Mobius
 import com.gft.mobius.components.Content
 import com.gft.mobius.components.MobiusPresentationNavigationBar
 import com.gft.mobius.components.Screen
 import com.gft.mobius.components.SwipeToDismissBox
-import com.gft.mobius.components.SwipeToDismissBoxState.Visible
+import com.gft.mobius.components.SwipeToDismissBoxState
 import com.gft.mobius.components.Text
 import com.gft.mobius.components.rememberSwipeToDismissBoxController
 
@@ -28,9 +30,9 @@ internal fun MobiusSwipeToDismissBoxPresentation(
 ) {
     Screen {
         MobiusPresentationNavigationBar(
-                title = "Swipe to dismiss",
-                onBack = onBack,
-            )
+            title = "Swipe to dismiss",
+            onBack = onBack,
+        )
         Content(
             isScrollable = false
         ) {
@@ -53,24 +55,20 @@ internal fun MobiusSwipeToDismissBoxPresentation(
 @Composable
 private fun DismissibleItem(
     item: Int,
-    onDismissed: () -> Unit,
+    onDismissed: (SwipeToDismissBoxState) -> Unit,
 ) {
     val controller = rememberSwipeToDismissBoxController(
-        initialState = Visible,
-        swipeThreshold = { totalDistance -> totalDistance / 2 }
+        initialState = SwipeToDismissBoxState.Visible,
+        swipeThreshold = { boxWidth -> boxWidth / 2 }
     )
     SwipeToDismissBox(
         controller = controller,
         allowSwipeToStart = true,
         allowSwipeToEnd = true,
         backgroundContent = {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Mobius.colors.error)
-            )
+            DismissBackground(direction = controller.swipeDirection)
         },
-        onDismissed = { onDismissed() }
+        onDismissed = onDismissed
     ) {
         Box(
             Modifier
@@ -83,5 +81,31 @@ private fun DismissibleItem(
                 text = "Swipe to dismiss item $item"
             )
         }
+    }
+}
+
+@Composable
+private fun DismissBackground(direction: SwipeToDismissBoxState) {
+    val (backgroundColor, contentColor) = when (direction) {
+        SwipeToDismissBoxState.SwipedToEnd -> Mobius.colors.tertiary to Mobius.colors.onTertiary
+        SwipeToDismissBoxState.SwipedToStart -> Mobius.colors.error to Mobius.colors.onError
+        SwipeToDismissBoxState.Visible -> Color.Transparent to Color.Transparent
+    }
+    val (label, alignment) = when (direction) {
+        SwipeToDismissBoxState.SwipedToEnd -> "Archive" to Alignment.CenterStart
+        SwipeToDismissBoxState.SwipedToStart -> "Delete" to Alignment.CenterEnd
+        SwipeToDismissBoxState.Visible -> "" to Alignment.Center
+    }
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(backgroundColor)
+            .padding(horizontal = 16.dp),
+        contentAlignment = alignment
+    ) {
+        Text(
+            text = label,
+            color = contentColor
+        )
     }
 }
