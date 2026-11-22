@@ -56,6 +56,20 @@ interface MobiusColors : Colors {
     // other
     val scrim: Color
     val shadow: Color
+
+    // fixed light theme colors
+    val primaryFixed: Color
+    val primaryFixedDim: Color
+    val onPrimaryFixed: Color
+    val onPrimaryFixedVariant: Color
+    val secondaryFixed: Color
+    val secondaryFixedDim: Color
+    val onSecondaryFixed: Color
+    val onSecondaryFixedVariant: Color
+    val tertiaryFixed: Color
+    val tertiaryFixedDim: Color
+    val onTertiaryFixed: Color
+    val onTertiaryFixedVariant: Color
 }
 
 @Composable
@@ -81,6 +95,12 @@ fun contentColorFor(color: Color) = with(Mobius.colors) {
         surfaceContainerHighest -> onSurface
         surfaceContainerLow -> onSurface
         surfaceContainerLowest -> onSurface
+        primaryFixed -> onPrimaryFixed
+        primaryFixedDim -> onPrimaryFixed
+        secondaryFixed -> onSecondaryFixed
+        secondaryFixedDim -> onSecondaryFixed
+        tertiaryFixed -> onTertiaryFixed
+        tertiaryFixedDim -> onTertiaryFixed
         else -> Color.Unspecified
     }
 }.takeOrElse {
