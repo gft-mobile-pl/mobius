@@ -2,6 +2,7 @@ package com.gft.mobius.components.styles
 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import com.gft.designsystem.GenerateStyleValues
 import com.gft.designsystem.GenerateStyleWrapper
@@ -20,7 +21,11 @@ interface TopAppBarStyle : Style {
     val navigationIconSize: Token<IconSize>
     val navigationIconContentColor: Token<Color>
     val titleAlignment: Token<Alignment>
+    val titleTextStyle: Token<TextStyle>
     val titleContentColor: Token<Color>
+    val subtitleAlignment: Token<Alignment>
+    val subtitleTextStyle: Token<TextStyle>
+    val subtitleContentColor: Token<Color>
     val actionIconsSize: Token<IconSize>
     val actionIconsContentColor: Token<Color>
 }
@@ -34,7 +39,11 @@ open class DefaultTopAppBarStyle : TopAppBarStyle {
     override val actionIconsSize: Token<IconSize> = Token { IconSize.Medium }
     override val actionIconsContentColor: Token<Color> = Token { Mobius.colors.onSurface }
     override val titleAlignment: Token<Alignment> = Token(Alignment.CenterStart)
+    override val titleTextStyle: Token<TextStyle> = Token { Mobius.typography.titleLarge }
     override val titleContentColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val subtitleAlignment: Token<Alignment> = Token(Alignment.CenterStart)
+    override val subtitleTextStyle: Token<TextStyle> = Token { Mobius.typography.labelMedium }
+    override val subtitleContentColor: Token<Color> = Token { Mobius.colors.onSurface }
 }
 
 open class CenteredTopAppBarStyle : TopAppBarStyle {
@@ -46,5 +55,9 @@ open class CenteredTopAppBarStyle : TopAppBarStyle {
     override val actionIconsSize: Token<IconSize> = Token { IconSize.Medium }
     override val actionIconsContentColor: Token<Color> = Token { Mobius.colors.onSurface }
     override val titleAlignment: Token<Alignment> = Token(Alignment.Center)
+    override val titleTextStyle: Token<TextStyle> = Token { Mobius.typography.titleLarge }
     override val titleContentColor: Token<Color> = Token { Mobius.colors.onSurface }
+    override val subtitleAlignment: Token<Alignment> = Token(Alignment.Center)
+    override val subtitleTextStyle: Token<TextStyle> = Token { Mobius.typography.labelMedium }
+    override val subtitleContentColor: Token<Color> = Token { Mobius.colors.onSurface }
 }

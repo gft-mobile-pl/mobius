@@ -25,6 +25,9 @@ internal fun MobiusPresentationNavigationBarContent(
         title = {
             Text(title)
         },
+        subtitle = {
+            Text("Subtitle")
+        },
         navigationIcon = {
             IconButton(
                 onClick = onBack,
@@ -41,6 +44,7 @@ internal fun MobiusPresentationNavigationBarContent(
             object : TopAppBarStyleWrapper({ Mobius.styles.topAppBarStyle }) {
                 override val backgroundColor: Token<Color> = Token { Mobius.colors.primary }
                 override val titleContentColor: Token<Color> = Token { Mobius.colors.onPrimary }
+                override val subtitleContentColor: Token<Color> = Token { Mobius.colors.onPrimary }
             }
         }
     )
