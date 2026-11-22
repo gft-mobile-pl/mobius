@@ -15,12 +15,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults.enterAlwaysScrollBehavior
 import androidx.compose.material3.TopAppBarDefaults.exitUntilCollapsedScrollBehavior
 import androidx.compose.material3.TopAppBarDefaults.pinnedScrollBehavior
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -38,6 +41,7 @@ import com.gft.mobius.components.styles.resolve
 fun TopAppBar(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
+    subtitle: (@Composable () -> Unit)? = null,
     navigationIcon: @Composable () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {},
     windowInsets: WindowInsets = WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top),
@@ -49,38 +53,87 @@ fun TopAppBar(
     }
 
     val styleValues = style.resolve()
-    androidx.compose.material3.TopAppBar(
-        title = {
-            Box(
-                Modifier.fillMaxWidth(),
-                contentAlignment = styleValues.titleAlignment,
-                content = { title() }
-            )
-        },
-        modifier = modifier.modifierLocalConsumer {
-            scrollContext = LocalTopAppBarScrollContext.current
-        },
-        navigationIcon = {
-            ProvideIconSize(styleValues.navigationIconSize) {
-                navigationIcon()
-            }
-        },
-        actions = {
-            ProvideIconSize(styleValues.actionIconsSize) {
-                actions()
-            }
-        },
-        windowInsets = windowInsets,
-        expandedHeight = styleValues.height,
-        colors = TopAppBarColors(
-            containerColor = styleValues.backgroundColor,
-            scrolledContainerColor = styleValues.scrolledBackgroundColor,
-            navigationIconContentColor = styleValues.navigationIconContentColor,
-            titleContentColor = styleValues.titleContentColor,
-            actionIconContentColor = styleValues.actionIconsContentColor
-        ),
-        scrollBehavior = scrollBehavior
-    )
+    if (subtitle != null) {
+        @OptIn(ExperimentalMaterial3ExpressiveApi::class)
+        androidx.compose.material3.TopAppBar(
+            title = {
+                CompositionLocalProvider(LocalTextStyle provides styleValues.titleTextStyle) {
+                    Box(
+                        Modifier.fillMaxWidth(),
+                        contentAlignment = styleValues.titleAlignment,
+                        content = { title() }
+                    )
+                }
+            },
+            subtitle = {
+                CompositionLocalProvider(LocalTextStyle provides styleValues.subtitleTextStyle) {
+                    Box(
+                        Modifier.fillMaxWidth(),
+                        contentAlignment = styleValues.subtitleAlignment,
+                        content = { subtitle() }
+                    )
+                }
+            },
+            modifier = modifier.modifierLocalConsumer {
+                scrollContext = LocalTopAppBarScrollContext.current
+            },
+            navigationIcon = {
+                ProvideIconSize(styleValues.navigationIconSize) {
+                    navigationIcon()
+                }
+            },
+            actions = {
+                ProvideIconSize(styleValues.actionIconsSize) {
+                    actions()
+                }
+            },
+            windowInsets = windowInsets,
+            expandedHeight = styleValues.height,
+            colors = TopAppBarColors(
+                containerColor = styleValues.backgroundColor,
+                scrolledContainerColor = styleValues.scrolledBackgroundColor,
+                navigationIconContentColor = styleValues.navigationIconContentColor,
+                titleContentColor = styleValues.titleContentColor,
+                subtitleContentColor = styleValues.subtitleContentColor,
+                actionIconContentColor = styleValues.actionIconsContentColor
+            ),
+            scrollBehavior = scrollBehavior
+        )
+    } else {
+        androidx.compose.material3.TopAppBar(
+            title = {
+                Box(
+                    Modifier.fillMaxWidth(),
+                    contentAlignment = styleValues.titleAlignment,
+                    content = { title() }
+                )
+            },
+            modifier = modifier.modifierLocalConsumer {
+                scrollContext = LocalTopAppBarScrollContext.current
+            },
+            navigationIcon = {
+                ProvideIconSize(styleValues.navigationIconSize) {
+                    navigationIcon()
+                }
+            },
+            actions = {
+                ProvideIconSize(styleValues.actionIconsSize) {
+                    actions()
+                }
+            },
+            windowInsets = windowInsets,
+            expandedHeight = styleValues.height,
+            colors = TopAppBarColors(
+                containerColor = styleValues.backgroundColor,
+                scrolledContainerColor = styleValues.scrolledBackgroundColor,
+                navigationIconContentColor = styleValues.navigationIconContentColor,
+                titleContentColor = styleValues.titleContentColor,
+                subtitleContentColor = styleValues.subtitleContentColor,
+                actionIconContentColor = styleValues.actionIconsContentColor
+            ),
+            scrollBehavior = scrollBehavior
+        )
+    }
 
     DisposableEffect(scrollContext) {
         val connection = scrollBehavior?.nestedScrollConnection
@@ -114,7 +167,10 @@ object TopAppBar {
     @Stable
     sealed class ScrollType {
         @Composable
-        internal abstract fun resolveScrollBehavior(state: TopAppBarState, canScroll: () -> Boolean): TopAppBarScrollBehavior
+        internal abstract fun resolveScrollBehavior(
+            state: TopAppBarState,
+            canScroll: () -> Boolean
+        ): TopAppBarScrollBehavior
 
         private data object Pinned : ScrollType() {
             @Composable
