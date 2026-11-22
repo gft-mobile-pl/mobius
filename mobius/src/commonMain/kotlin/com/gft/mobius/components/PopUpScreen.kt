@@ -85,7 +85,7 @@ fun PopUpScreen(
                             top = if (headerVisible || contentVisible) 0.dp else Dp.Unspecified,
                         ),
                         popUpStyleValues = styleValues,
-                        buttons = buttons!!
+                        buttons = buttons
                     )
                 }
             } else null,
