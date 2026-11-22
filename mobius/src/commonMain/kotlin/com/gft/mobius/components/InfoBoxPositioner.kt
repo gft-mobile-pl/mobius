@@ -2,9 +2,9 @@ package com.gft.mobius.components
 
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.foundation.MutatePriority
+import androidx.compose.material3.TooltipAnchorPosition
 import androidx.compose.material3.TooltipBox
-import androidx.compose.material3.TooltipDefaults.rememberPlainTooltipPositionProvider
-import androidx.compose.material3.TooltipDefaults.rememberRichTooltipPositionProvider
+import androidx.compose.material3.TooltipDefaults.rememberTooltipPositionProvider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
@@ -20,7 +20,7 @@ import com.gft.mobius.components.styles.resolve
 fun InfoBoxPositioner(
     infoBox: @Composable InfoBoxScope.() -> Unit,
     modifier: Modifier = Modifier,
-    positionProvider: PopupPositionProvider = InfoBoxPositionProvider.Center(),
+    positionProvider: PopupPositionProvider = InfoBoxPositionProvider.center(),
     state: InfoBoxState = rememberInfoBoxState(),
     focusable: Boolean = true,
     enableUserInput: Boolean = true,
@@ -56,15 +56,15 @@ fun rememberInfoBoxState(
 
 object InfoBoxPositionProvider {
     @Composable
-    fun Center(style: InfoBoxPositionProviderStyle = Mobius.styles.infoBoxPositionProviderStyle): PopupPositionProvider {
+    fun center(style: InfoBoxPositionProviderStyle = Mobius.styles.infoBoxPositionProviderStyle): PopupPositionProvider {
         val styleValues = style.resolve()
-        return rememberPlainTooltipPositionProvider(styleValues.spaceFromContent)
+        return rememberTooltipPositionProvider(TooltipAnchorPosition.Above, styleValues.spaceFromContent)
     }
 
     @Composable
-    fun StartOrEnd(style: InfoBoxPositionProviderStyle = Mobius.styles.infoBoxPositionProviderStyle): PopupPositionProvider {
+    fun startOrEnd(style: InfoBoxPositionProviderStyle = Mobius.styles.infoBoxPositionProviderStyle): PopupPositionProvider {
         val styleValues = style.resolve()
-        return rememberRichTooltipPositionProvider(styleValues.spaceFromContent)
+        return rememberTooltipPositionProvider(TooltipAnchorPosition.Above, styleValues.spaceFromContent)
     }
 }
 
