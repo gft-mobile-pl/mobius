@@ -59,15 +59,13 @@ fun TooltipPositioner(
     )
 }
 
-class TooltipScope @OptIn(ExperimentalMaterial3Api::class) internal constructor(
+class TooltipScope internal constructor(
     internal val scope: androidx.compose.material3.TooltipScope
 ) {
-    @OptIn(ExperimentalMaterial3Api::class)
     fun MeasureScope.obtainAnchorBounds(): LayoutCoordinates? = with(scope) {
         obtainAnchorBounds()
     }
 
-    @OptIn(ExperimentalMaterial3Api::class)
     fun obtainPositionProvider(): PopupPositionProvider = scope.obtainPositionProvider()
 }
 

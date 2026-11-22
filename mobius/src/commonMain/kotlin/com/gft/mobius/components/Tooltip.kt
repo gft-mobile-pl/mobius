@@ -3,7 +3,6 @@ package com.gft.mobius.components
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.PlainTooltip
 import androidx.compose.runtime.Composable
@@ -20,7 +19,6 @@ fun TooltipScope.Tooltip(
     style: TooltipStyle = Mobius.styles.tooltipStyle
 ) {
     val styleValues = style.resolve()
-    @OptIn(ExperimentalMaterial3Api::class)
     with(scope) {
         PlainTooltip(
             modifier = modifier,

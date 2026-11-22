@@ -2,7 +2,6 @@ package com.gft.mobius.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.RichTooltip
 import androidx.compose.material3.RichTooltipColors
@@ -68,7 +67,6 @@ private fun InfoBoxScope.InfoBox(
     actions: (@Composable () -> Unit)? = null,
     styleValues: InfoBoxStyleValues,
 ) {
-    @OptIn(ExperimentalMaterial3Api::class)
     with(scope) {
         RichTooltip(
             modifier = modifier,

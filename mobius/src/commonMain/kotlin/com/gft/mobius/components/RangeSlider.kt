@@ -1,7 +1,6 @@
 package com.gft.mobius.components
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -34,7 +33,6 @@ fun RangeSlider(
     val startTooltipFormatter = startTooltipVisibility.resolveFormatter()
     val endTooltipFormatter = endTooltipVisibility.resolveFormatter()
 
-    @OptIn(ExperimentalMaterial3Api::class)
     androidx.compose.material3.RangeSlider(
         value = value,
         onValueChange = onValueChange,
@@ -110,7 +108,6 @@ fun RangeSlider(
     @Suppress("NAME_SHADOWING")
     val rangeEndInputInteractionSource = rangeEndInputInteractionSource ?: remember { MutableInteractionSource() }
 
-    @OptIn(ExperimentalMaterial3Api::class)
     androidx.compose.material3.RangeSlider(
         value = value,
         onValueChange = onValueChange,
@@ -130,30 +127,25 @@ fun RangeSlider(
 
 @Stable
 class RangeSliderState(
-    @OptIn(ExperimentalMaterial3Api::class)
     internal val state: androidx.compose.material3.RangeSliderState
 ) {
     val activeRangeStart: Float
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.activeRangeStart
         }
 
     val activeRangeEnd: Float
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.activeRangeEnd
         }
 
     val steps: Int
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.steps
         }
 
     val valueRange: ClosedFloatingPointRange<Float>
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.valueRange
         }
 }

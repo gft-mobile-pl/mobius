@@ -2,7 +2,6 @@ package com.gft.mobius.components
 
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.foundation.MutatePriority
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TooltipBox
 import androidx.compose.material3.TooltipDefaults.rememberPlainTooltipPositionProvider
 import androidx.compose.material3.TooltipDefaults.rememberRichTooltipPositionProvider
@@ -28,7 +27,6 @@ fun InfoBoxPositioner(
     content: @Composable () -> Unit
 
 ) {
-    @OptIn(ExperimentalMaterial3Api::class)
     TooltipBox(
         positionProvider = positionProvider,
         tooltip = {
@@ -47,12 +45,10 @@ fun rememberInfoBoxState(
     initialIsVisible: Boolean = false,
     isPersistent: Boolean = false,
 ): InfoBoxState {
-    @OptIn(ExperimentalMaterial3Api::class)
     val state = androidx.compose.material3.rememberTooltipState(
         initialIsVisible = initialIsVisible,
         isPersistent = isPersistent
     )
-    @OptIn(ExperimentalMaterial3Api::class)
     return remember(state) {
         InfoBoxState(state)
     }
@@ -62,64 +58,54 @@ object InfoBoxPositionProvider {
     @Composable
     fun Center(style: InfoBoxPositionProviderStyle = Mobius.styles.infoBoxPositionProviderStyle): PopupPositionProvider {
         val styleValues = style.resolve()
-        @OptIn(ExperimentalMaterial3Api::class)
         return rememberPlainTooltipPositionProvider(styleValues.spaceFromContent)
     }
 
     @Composable
     fun StartOrEnd(style: InfoBoxPositionProviderStyle = Mobius.styles.infoBoxPositionProviderStyle): PopupPositionProvider {
         val styleValues = style.resolve()
-        @OptIn(ExperimentalMaterial3Api::class)
         return rememberRichTooltipPositionProvider(styleValues.spaceFromContent)
     }
 }
 
-class InfoBoxScope @OptIn(ExperimentalMaterial3Api::class) internal constructor(
+class InfoBoxScope internal constructor(
     internal val scope: androidx.compose.material3.TooltipScope
 ) {
-    @OptIn(ExperimentalMaterial3Api::class)
     fun MeasureScope.obtainAnchorBounds(): LayoutCoordinates? = with(scope) {
         obtainAnchorBounds()
     }
 
-    @OptIn(ExperimentalMaterial3Api::class)
     fun obtainPositionProvider(): PopupPositionProvider = scope.obtainPositionProvider()
 }
 
 @Stable
 class InfoBoxState(
-    @OptIn(ExperimentalMaterial3Api::class) internal val state: androidx.compose.material3.TooltipState
+    internal val state: androidx.compose.material3.TooltipState
 ) {
     val transition: MutableTransitionState<Boolean>
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.transition
         }
 
     val isVisible: Boolean
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.isVisible
         }
 
     val isPersistent: Boolean
         get() {
-            @OptIn(ExperimentalMaterial3Api::class)
             return state.isPersistent
         }
 
     suspend fun show(mutatePriority: MutatePriority = MutatePriority.Default) {
-        @OptIn(ExperimentalMaterial3Api::class)
         state.show(mutatePriority)
     }
 
     fun dismiss() {
-        @OptIn(ExperimentalMaterial3Api::class)
         state.dismiss()
     }
 
     fun onDispose() {
-        @OptIn(ExperimentalMaterial3Api::class)
         state.onDispose()
     }
 }
