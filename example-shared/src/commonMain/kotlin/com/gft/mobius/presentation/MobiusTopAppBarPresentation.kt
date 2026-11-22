@@ -39,7 +39,6 @@ import com.gft.mobius.presentation.TopAppBarPresentationUsage.WithTopAppBarScope
 import mobius.example_shared.generated.resources.Res
 import mobius.example_shared.generated.resources.ic_account
 import mobius.example_shared.generated.resources.ic_back
-import mobius.example_shared.generated.resources.ic_menu
 import mobius.example_shared.generated.resources.ic_settings
 
 private const val menuDestination = "menuDestination"
