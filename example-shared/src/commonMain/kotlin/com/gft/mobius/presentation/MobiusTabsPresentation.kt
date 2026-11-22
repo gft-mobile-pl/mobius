@@ -24,6 +24,7 @@ import com.gft.mobius.components.SecondaryTabRow
 import com.gft.mobius.components.Tab
 import com.gft.mobius.components.TabRow
 import com.gft.mobius.components.Text
+import com.gft.mobius.components.styles.TabIndicatorWidth
 import mobius.example_shared.generated.resources.Res
 import mobius.example_shared.generated.resources.ic_delete
 
@@ -203,12 +204,11 @@ internal fun MobiusTabsPresentation(
             TabRow(
                 selectedTabIndex = selectedNoIndicatorTab,
                 containerColor = Mobius.colors.surface,
-                tabIndicator = { selectedTabIndex, tabBounds ->
+                tabIndicator = { selectedTabIndex ->
                     Spacer(
                         Modifier
-                            .tabIndicatorOffset(tabBounds[selectedTabIndex])
+                            .tabIndicatorOffset(selectedTabIndex, TabIndicatorWidth.MatchContent)
                             .height(4.dp)
-                            .matchContentSize(tabBounds[selectedTabIndex])
                             .background(Color.Red)
                     )
                 },
